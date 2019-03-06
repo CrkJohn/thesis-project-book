@@ -24,7 +24,7 @@
 
 \documentclass[
 11pt, % The default document font size, options: 10pt, 11pt, 12pt
-%oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
+oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
 spanish, % ngerman for German
 singlespacing, % Single line spacing, alternatives: onehalfspacing or doublespacing
 %draft, % Uncomment to enable draft mode (no pictures, no links, overfull hboxes indicated)
@@ -55,7 +55,7 @@ headsepline, % Uncomment to get a line under the header
 %----------------------------------------------------------------------------------------
 
 \geometry{
-	paper=a4paper, % Change to letterpaper for US letter
+	paper=letterpaper, % Change to letterpaper for US letter
 	inner=2.5cm, % Inner margin
 	outer=3.8cm, % Outer margin
 	bindingoffset=.5cm, % Binding offset
@@ -126,8 +126,8 @@ headsepline, % Uncomment to get a line under the header
 
 % \large \textit{A thesis submitted in fulfillment of the requirements\\ for the degree of \degreename}\\[0.3cm] % University requirement text
 % \textit{in the}\\[0.4cm]
-\groupname\\\deptname\\[1cm] % Research group name and department name
-\textsc{Bogot\'a, Colombia}\\[2cm]
+\groupname\\\deptname\\[0.5cm] % Research group name and department name
+\textsc{Bogot\'a, Colombia}\\[1cm]
  
 \vfill
 
@@ -162,7 +162,7 @@ headsepline, % Uncomment to get a line under the header
 % \rule[0.5em]{25em}{0.5pt} % This prints a line to write the date
 % \end{declaration}
 
-\cleardoublepage
+% \cleardoublepage
 
 %----------------------------------------------------------------------------------------
 %	QUOTATION PAGE
@@ -297,7 +297,6 @@ headsepline, % Uncomment to get a line under the header
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
 
-% \bibliography{}
 \nocite{*}
 \printbibliography[heading=bibintoc]
 

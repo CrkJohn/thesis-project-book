@@ -341,6 +341,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 \DeclareDocumentCommand{\abstracttitlefont}{}{}
 \newcommand{\byname}{by}
 \newcommand{\abstractname}{Abstract}
+\providecaptionname{spanish}{\byname}{por}
 \providecaptionname{german,ngerman,austrian,naustrian}{\byname}{von}
 \providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish}{\byname}{by}
 \ifbool{consistentlayout}{
@@ -387,7 +388,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 	\begin{center}
 		{\normalsize \MakeUppercase{\univname} \par}% University name in capitals
 		\bigskip
-		{\huge\textit{\abstractname} \par}
+		{\huge\textit{Abstract} \par}
 		\bigskip
 		{\normalsize \facname \par}% Faculty name
 		{\normalsize \deptname \par}% Department name

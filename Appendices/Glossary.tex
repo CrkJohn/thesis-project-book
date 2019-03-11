@@ -1,0 +1,24 @@
+% Reference: https://www.overleaf.com/learn/latex/Glossaries
+
+\newcommand{\glossarydef}[4]{ % label, name, long, description
+    \newglossaryentry{{#1}g}{
+        name={#3},
+        description={#4}
+    }
+
+%%% define the acronym and use the see= option
+    \newglossaryentry{#1}{
+        type=\acronymtype,
+        name={#2},
+        description={#3},
+        first={#3 (#2)\glsadd{{#1}g}}
+        % see=[Glosario:]{{#1}g}
+    }
+}
+
+\glossarydef{nlp}{NLP}{Natural Language Processing}{Rama de la inteligencia artificial que lidia con la interaccion entre computadores y humanos usando el lenguaje natural}
+
+\glossarydef{machinel}{ML}{Machine Learning}{Informalmente ha sido definido como ``El campo de estudio que le da a computadores la habilidad de aprender sin ser explicitamente programados'', este tiene tres tipos de algortimos de aprendizaje: apredizaje supervizado, aprendizaje no--supervizado, y aprendizaje por refuerzo}
+
+\glossarydef{deepl}{DL}{Deep Learning}{Es un subcampo de Machine Learning que se usa algorimos inspirados por la estructura y funcion del cerebro que son llamadas Redes Neuronales Artificiales (\'o Artificial Neural Networks en ingl\'es)}
+

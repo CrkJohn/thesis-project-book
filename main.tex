@@ -43,8 +43,9 @@ headsepline, % Uncomment to get a line under the header
 
 \usepackage{mathpazo} % Use the Palatino font by default
 \usepackage{lipsum}
+\usepackage[acronym, toc]{glossaries}
 
-\usepackage[backend=bibtex,style=authoryear,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+\usepackage[backend=bibtex,style=numeric,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
 
 \addbibresource{references.bib} % The filename of the bibliography
 
@@ -87,6 +88,9 @@ headsepline, % Uncomment to get a line under the header
 \hypersetup{pdfauthor=\authorname} % Set the PDF's author to your name
 \hypersetup{pdfkeywords=\keywordnames} % Set the PDF's keywords to your keywords
 }
+
+\makeglossaries
+\input{Appendices/Glossary.tex}
 
 \begin{document}
 
@@ -274,11 +278,10 @@ headsepline, % Uncomment to get a line under the header
 
 % ----------------------------------------------------------------------------------------
 
-\include{Chapters/Chapter1}
-\include{Chapters/Chapter2} 
-\include{Chapters/Chapter3}
-\include{Chapters/Chapter4} 
-%\include{Chapters/Chapter5} 
+\include{Chapters/Introduction}
+\include{Chapters/Schedule} 
+\include{Chapters/StateOfArt}
+\include{Chapters/Proposal}
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - APPENDICES
@@ -288,10 +291,13 @@ headsepline, % Uncomment to get a line under the header
 
 % Include the appendices of the thesis as separate files from the Appendices folder
 % Uncomment the lines as you write the Appendices
-
-\include{Appendices/AppendixA}
-%\include{Appendices/AppendixB}
+% \include{Appendices/AppendixA}
 %\include{Appendices/AppendixC}
+
+% \glsaddall
+\printglossary[title={Abreviaturas},type=\acronymtype]
+\setglossarystyle{altlistgroup}
+\printglossary[type=main]
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY

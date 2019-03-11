@@ -1,17 +1,18 @@
 % Reference: https://www.overleaf.com/learn/latex/Glossaries
 
 \newcommand{\glossarydef}[4]{ % label, name, long, description
-    \newglossaryentry{{#1}g}{
+    \newglossaryentry{{#1}-g}{
         name={#3},
-        description={#4}
+        description={{\rm #4}}
     }
 
 %%% define the acronym and use the see= option
     \newglossaryentry{#1}{
         type=\acronymtype,
         name={#2},
-        description={#3},
-        first={#3 (#2)\glsadd{{#1}g}}
+        description={{\rm #3}},
+        first={#3 (#2)\glsadd{{#1}-g}},
+        long={#3}
         % see=[Glosario:]{{#1}g}
     }
 }
@@ -22,3 +23,22 @@
 
 \glossarydef{deepl}{DL}{Deep Learning}{Es un subcampo de Machine Learning que se usa algorimos inspirados por la estructura y funcion del cerebro que son llamadas Redes Neuronales Artificiales (\'o Artificial Neural Networks en ingl\'es)}
 
+\glossarydef{dataintegration}{DI}{Data Integration}{Para acceder a múltiples y diversas fuentes de información}
+
+\glossarydef{linkanalisys}{LA}{Link Analysis}{Para visualizar asociaciones y relaciones criminales y terroristas}
+
+\glossarydef{softwareagents}{SA}{Software Agents}{Para el monitoreo, obtención, análisis y actuación sobre la información}
+
+\glossarydef{textmining}{TM}{Text Mining}{Búsqueda sobre terabytes de información en documentos, paginas web y correos electrónicos}
+
+\glossarydef{neuralnetworks}{NN}{Neural Networks}{Para predecir la probabilidad de crímenes y nuevos ataques terroristas}
+
+\glossarydef{mlalgorithms}{MLA}{Machine Learning Algoritms}{Para extraer perfiles de perpetradores y mapas gráficos de crímenes}
+
+\glossarydef{kbs}{KBS}{Knowledge Based Systems}{{\bf Pendiente}}
+
+\glossarydef{ai}{AI}{Artificial Intelligence}{{\bf Pendiente}}
+
+\glossarydef{anomalydetectionsys}{ADS}{Anomaly Detection Systems}{{\bf Pendiente}}
+
+\glossarydef{som}{SOM}{Self-organizing Maps}{{\bf Pendiente}}

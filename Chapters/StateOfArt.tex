@@ -51,7 +51,7 @@ Existen 5 tipos de \gls{kbs}, donde uno de ellos es conocido como \gls{expertsys
 
 Estas reglas pueden resumirse como una colección de condicionales de la forma \textbf{IF/ELSE} que se componen de un \emph{antecedente} y un \emph{consecuente}.
 
-Existen dos tipos de \gls{rulebasedsys}, definidos como \gls{deductivesys} y \gls{reactivesys}, donde el \gls{deductivesys} tiene como objetivo realizar una conclusión en base a los hechos iniciales en la \gls{workingmemory}, por el otro lado se tienen los \gls{reactivesys}, los cuales de igual manera a los \gls{deductivesys}, toman los hechos de la \gls{workingmemory} y realizan sea una acción interactiva con su entorno o bien una modificación de los hechos que se encuentran en la \gls{workingmemory} tal como la adición o eliminación de hechos. Tómese el ejemplo de \ref{eq:rbs-example}, donde AC es aire acondicionado.
+Existen dos tipos de \gls{rulebasedsys}, definidos como \gls{deductivesys} y \gls{reactivesys}, donde el \gls{deductivesys} tiene como objetivo realizar una conclusión en base a los hechos iniciales en la \gls{workingmemory}, por el otro lado se tienen los \gls{reactivesys}, los cuales de igual manera a los \gls{deductivesys}, toman los hechos de la \gls{workingmemory} y realizan sea una acción interactiva con su entorno o bien una modificación de los hechos que se encuentran en la \gls{workingmemory} tal como la adición o eliminación de hechos. Tómese el ejemplo de la ecuación \ref{eq:rbs-example}, donde AC es aire acondicionado.
 
 \begin{equation} \label{eq:rbs-example}
   \left\{ \begin{array}{rl}
@@ -80,12 +80,20 @@ Pendiente
 Pendiente
 
 \subsection{Mapa autoorganizado (\glsentrylong{som})}
-Pendiente
+El objetivo principal de los \gls{som} es de transformar un patrón de entrada de $m$--dimensional en un mapa discreto uni-- o bi--dimensional, donde sus principales características es que es un algoritmo que se basa en \gls{unsupervisedl}, es \gls{feedforward}, es de una sola capa de neuronas y su propósito es de realizar \gls{clustering} y realizar una reducción de dimensionalidad sobre los datos.
+
+Los \gls{som} tienen tres características distintivas:
+\begin{itemize}
+\item {\bf Competencia:} por cada patrón de entrada, las neuronas en la red competirán entre ellas para determinar un ganador.
+\item {\bf Cooperación:} la neurona ganadora determina la ubicación espacial (vecinos) alrededor de donde otras vecinas también se verán estimuladas.
+\item {\bf Adaptación:} la neurona ganadora como también sus vecinas tendrán sus pesos asociados actualizados, y se tiene que los vecinos entre mas cerca estén del ganador, mayor es el grado de adaptación.
+\end{itemize}
+
 \begin{figure}[th]
 \centering
 \includegraphics[scale=0.2]{Figures/som-adaptive-proc.png}
 \decoRule
-\caption[Proceso de adaptación de \glsentrytext{som}]{Proceso de adaptación de \glsentrytext{som}. Tomado de \cite{de2006fundamentals}}
+\caption[Proceso de adaptación de \glsentrytext{som}]{Proceso de adaptación de \glsentrytext{som}, (a) uni--dimensional, (b) bi--dimensional. Tomado de \cite{de2006fundamentals}}
 \label{fig:som-adap-proc}
 \end{figure}
 

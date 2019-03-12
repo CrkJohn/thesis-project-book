@@ -37,15 +37,29 @@ Es el software que realiza tareas asignadas por el usuario de manera autónoma, 
 % ================================================================
 
 \section{Sistemas Basados en Conocimiento (\glsentrylong{kbs})} \label{secKBS}
-Según \cite{sajja2010knowledge}, los \gls{kbs} son uno de los mayores miembros de la familia de \gls{ai}.
+Según \cite{sajja2010knowledge}, los \gls{kbs} son uno de los mayores miembros de la familia de \gls{ai}. El \gls{kbs} consiste de una \gls{knowledgebase} y un programa de búsqueda llamado \gls{inferenceengine} representado en la figura \ref{fig:kbs-arch}. La \gls{knowledgebase} puede ser usado como un repositorio de conocimiento de varias formas.
+
+Existen 5 tipos de \gls{kbs}, donde uno de ellos es conocido como \gls{expertsystems}, donde su uso se da como \gls{rulebasedsys}, donde su \gls{knowledgebase} esta dado como reglas y su \gls{inferenceengine} esta dado por algo llamado \gls{workingmemory}, que representa los hechos que se conocen inicialmente del sistema junto con los hechos que se van dando como inferencia de las reglas.
 
 \begin{figure}[th]
 \centering
 \includegraphics[scale=0.4]{Figures/kbs-architecture.png}
 \decoRule
-\caption[Arquitectura \gls{kbs}]{Arquitectura \gls{kbs}. Tomado de \cite{sajja2010knowledge}}
+\caption[Arquitectura \glsentrytext{kbs}]{Arquitectura \glsentrytext{kbs}. Tomado de \cite{sajja2010knowledge}}
 \label{fig:kbs-arch}
 \end{figure}
+
+Estas reglas pueden resumirse como una colección de condicionales de la forma \textbf{IF/ELSE} que se componen de un \emph{antecedente} y un \emph{consecuente}.
+
+Existen dos tipos de \gls{rulebasedsys}, definidos como \gls{deductivesys} y \gls{reactivesys}, donde el \gls{deductivesys} tiene como objetivo realizar una conclusión en base a los hechos iniciales en la \gls{workingmemory}, por el otro lado se tienen los \gls{reactivesys}, los cuales de igual manera a los \gls{deductivesys}, toman los hechos de la \gls{workingmemory} y realizan sea una acción interactiva con su entorno o bien una modificación de los hechos que se encuentran en la \gls{workingmemory} tal como la adición o eliminación de hechos. Tómese el ejemplo de \ref{eq:rbs-example}, donde AC es aire acondicionado.
+
+\begin{equation} \label{eq:rbs-example}
+  \left\{ \begin{array}{rl}
+            \text{IF x es moderado, THEN y = ajustar AC a bajo} \\
+            \text{IF x es alto, THEN y = ajustar AC a moderado a alto} \\
+            \text{IF x es muy alto, THEN y = ajustar AC a alto} 
+          \end{array} \right.
+\end{equation}
 
 \subsection{Fuzzy Knowledge Based Systems}
 Pendiente
@@ -55,7 +69,7 @@ Pendiente
 \section{Mineria de texto (\glsentrylong{textmining})} \label{secNLP}
 Es un subcampo de Inteligencia Artificial conocida como \glsentrylong{nlp}, en donde las herramientas de minería de datos pueden capturar rasgos críticos del contenido de un documento basado en el análisis de sus características lingüísticas.
 
-La mayoría de los crímenes son electrónicos por naturaleza, por lo que se dejan rastros textuales que investigadores pueden seguir y analizar.Estas se enfocan en el descubrimiento de relaciones en texto no--estructurado y pueden ser aplicados al problema de \emph{búsqueda} y \emph{localizar palabras clave}.
+La mayoría de los crímenes son electrónicos por naturaleza, por lo que se dejan rastros textuales que investigadores pueden seguir y analizar.Estas se enfocan en el descubrimiento de relaciones en texto no--estructurado y pueden ser aplicados al problema de \emph{búsqueda} y \emph{localización de palabras clave}.
 
 % ================================================================
 
@@ -71,7 +85,7 @@ Pendiente
 \centering
 \includegraphics[scale=0.2]{Figures/som-adaptive-proc.png}
 \decoRule
-\caption[Proceso de adaptación de \gls{som}]{Proceso de adaptación de \gls{som}. Tomado de \cite{de2006fundamentals}}
+\caption[Proceso de adaptación de \glsentrytext{som}]{Proceso de adaptación de \glsentrytext{som}. Tomado de \cite{de2006fundamentals}}
 \label{fig:som-adap-proc}
 \end{figure}
 
@@ -79,7 +93,7 @@ Pendiente
 \centering
 \includegraphics[scale=0.3]{Figures/som-example.png}
 \decoRule
-\caption[Ejemplo de uso de \gls{som}]{Ejemplo de uso de \gls{som}. Tomado de \cite{mena2003investigative}}
+\caption[Ejemplo de uso de \glsentrytext{som}]{Ejemplo de uso de \glsentrytext{som}. Tomado de \cite{mena2003investigative}}
 \label{fig:som-example}
 \end{figure}
 

@@ -1,9 +1,51 @@
-% Chapter 4
-
 \chapter{Cronograma} % Main chapter title
 
-\label{Chapter4} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+\label{ch:Schedule} % For referencing the chapter elsewhere, use \ref{Chapter1} 
 
 %----------------------------------------------------------------------------------------
 
-\lipsum[1]
+% \thispagestyle{empty}
+\begin{figure}[h!]
+\begin{tikzpicture}
+  \GanttHeader{\textwidth}{2ex}{5cm}{16}
+  
+  \Task{1}{Entendimiento de \gls{osint}}{0}{5}
+  \Task{2}{Curso de \gls{nlp}}{1}{2}
+  \Task{3}{Investigación del Estado del Arte}{2}{6}
+  \Task{4}{Desarrollo de propuesta}{6}{6}
+  \Task{5}{Implementación y evaluación}{10}{5}
+  \Task{6}{Segundo curso de \gls{nlp}}{8}{5}
+  \Task{7}{Preparación de documento de resultados}{14}{2}
+  \Task{8}{Construcción de póster}{14}{1}
+\end{tikzpicture}
+\caption{Diagrama Gantt de actividades por semana de trabajo}
+\label{fig:gantt}
+\end{figure}
+
+\vspace{1cm}
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|>{\centering\arraybackslash}p{.025\textwidth}|p{.975\textwidth}|} \hline
+  & \textbf{Detalle} \\ \hline
+  {\bf 1} & Entendimiento de \gls{nlp} y proyecto \gls{osint} \\ \hline
+  
+  {\bf 2} & Realización de curso de \gls{nlp} de \gls{udemy} \\ \hline
+  
+  {\bf 3} & Investigación del Estado del Arte \\ \hline
+  
+  {\bf 4} & Desarrollo de la propuesta de investigación \\ \hline
+  
+  {\bf 5} & Desarrollo de la implementación y pruebas \\ \hline
+  
+  {\bf 6} & Realización de curso de \gls{nlp} de National Research University Higher School of Economics
+            de \gls{coursera} \\ \hline
+  
+  {\bf 7} & Preparación final de documento de libro de proyectos y articulo de investigación \\ \hline
+  
+  {\bf 8} & Contracción de póster para presentación en la Vitrina Académica \\ \hline
+\end{tabular}
+\end{center}
+\caption{Detalle de cronograma de actividades}
+\label{table:schedule}
+\end{table}

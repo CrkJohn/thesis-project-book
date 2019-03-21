@@ -1,22 +1,3 @@
-% Reference: https://www.overleaf.com/learn/latex/Glossaries
-
-% \newcommand{\glossarydef}[4]{ % label, name, long, description
-%     \newglossaryentry{{#1}-g}{
-%         name={#3},
-%         description={{\rm #4}}
-%     }
-
-% %%% define the acronym and use the see= option
-%     \newglossaryentry{#1}{
-%         type=\acronymtype,
-%         name={#2},
-%         description={{\rm #3}},
-%         first={#3 (#2)\glsadd{{#1}-g}},
-%         long={#3}
-%         % see=[Glosario:]{{#1}-g}
-%     }
-% }
-
 \newcommand{\glossarydef}[4]{
     \newglossaryentry{#1}{
         text={#2},

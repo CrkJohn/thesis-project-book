@@ -80,7 +80,7 @@ Pendiente
 Pendiente
 
 \subsection{Mapa autoorganizado (\glsentrylong{som})}
-El objetivo principal de los \gls{som} es de transformar un patrón de entrada de $m$--dimensional en un mapa discreto uni-- o bi--dimensional, donde sus principales características es que es un algoritmo que se basa en \gls{unsupervisedl}, es \gls{feedforward}, es de una sola capa de neuronas y su propósito es de realizar \gls{clustering} y realizar una reducción de dimensionalidad sobre los datos.
+El objetivo principal de los \gls{som} es de transformar una patrón de entrada $m$--dimensional en un mapa discreto uni-- o bi--dimensional, donde sus principales características es que es un algoritmo que se basa en \gls{unsupervisedl}, es \gls{feedforward}, es de una sola capa de neuronas donde su propósito es de realizar \gls{clustering} y realizar una reducción de dimensionalidad sobre los datos de una forma topologicamente ordenada.
 
 Los \gls{som} tienen tres características distintivas:
 \begin{itemize}
@@ -88,6 +88,25 @@ Los \gls{som} tienen tres características distintivas:
 \item {\bf Cooperación:} la neurona ganadora determina la ubicación espacial (vecinos) alrededor de donde otras vecinas también se verán estimuladas.
 \item {\bf Adaptación:} la neurona ganadora como también sus vecinas tendrán sus pesos asociados actualizados, y se tiene que los vecinos entre mas cerca estén del ganador, mayor es el grado de adaptación.
 \end{itemize}
+
+El algoritmo de aprendizaje de \gls{som} parte de primero inicializar los pesos de las $o$ neuronas con pesos aleatorios pequeños de una distribución de probabilidad aleatoria o uniforme, donde cada vector de entrada se define como $x = [x_1, \ldots, x_m]^{T} \in \mathbb{R}^{m}$ y la entrada general de $N$ patrones como $\mathbf{X}^{m \times N}$, el vector de pesos de la neurona $i$ es $\mathbf{w}_i = [w_{i1}, \ldots, w_{im}] \in \mathbb{R}^{l \times m}$, con la matriz de pesos $\mathbf{W}^{o \times m}$.
+
+Para alcanzar el objetivo de \emph{competencia}, se realiza por cada patrón de entrada $x_i$ una comparación con cada uno de los pesos de las $o$ neuronas y se establece la de menor distancia respecto $x_i$ (típicamente la distancia Euclidiana), dejando un ganador $winner$, tal como en la ecuación \ref{eq:som-competition}.
+\begin{equation} \label{eq:som-competition}
+  winner = \text{argmin}_j \norm{x_i - w_j} ; j = 1, \ldots,o
+\end{equation}
+
+Luego de establecer la neurona ganadora, se realiza el paso para alcanzar la \emph{cooperación}, que consiste en que por medio de una función kernel $h$ (típicamente una una distribución gaussiana), que permite establecer un área de afectación de las otras neuronas según su ubicación física en el mapa, definidos como $r_{winner}$ y $r_j$ que son la ubicación de la neurona ganadora y la neurona vecina $j$, en el cual el grado de afectación de la neurona vecina depende de la distancia de la que esta de la neurona ganadora, definido en la ecuación \ref{eq:som-cooperation}.
+\begin{equation} \label{eq:som-cooperation}
+  h_{j, winner}(t) = \text{exp}\Bigg(\frac{- \norm{r_j - r_{winner}}^2}{ 2 \sigma(t)^2}\Bigg)
+\end{equation}
+
+Parte importante del proceso de convergencia del \gls{som} es que a medida que avanzan las iteraciones $t$ del algoritmo, se tiene entonces que el área de afectación se va reduciendo a medida como parte del proceso de adaptación, por lo que definimos $\sigma(t) = \sigma_0 \text{exp}(-t / \tau_1)$, donde $\tau_1$ es una constante heurística y $\sigma_0$ la dimensión del mapa \gls{som}.
+
+Finalmente para alcanzar la \emph{adaptación} se realiza una actualización de los pesos de la matriz $\mathbf{W}$ en base a la influencia de área $\sigma(t)$ y de una tasa de aprendizaje $\alpha(t) = \alpha_0 \text{exp}(-t/ \tau_2)$, donde $\tau_2$ es otra constante heurística y $\alpha_0$ es una constante de aprendizaje inicial, que debe ser $0 \le \alpha_0 \le 1$, la actualización se describe por la ecuación \ref{eq:som-adaptation} y el proceso puede ser visto gráficamente en la figura \ref{fig:som-adap-proc}, tanto de forma uni-- como bi--dimensional.
+\begin{equation} \label{eq:som-adaptation}
+  w_j(t+1) = w_j(t) + \alpha(t) h_{j, winner}(t)\Big[x_i-w_j(t)\Big]
+\end{equation}
 
 \begin{figure}[th]
 \centering
@@ -97,11 +116,21 @@ Los \gls{som} tienen tres características distintivas:
 \label{fig:som-adap-proc}
 \end{figure}
 
+Luego de que el algoritmo de aprendizaje termina de realizar las iteraciones, la salida de este es la matriz de pesos $\mathbf{W}$, en la figura \ref{fig:som-impl-example} se puede apreciar una aproximación del algoritmo con un mapa uni--dimensional tratando de aproximar una función sinusoidal con ruido adicionado en un gráfico 2D.
+
+\begin{figure}[th]
+\centering
+\includegraphics[scale=0.5]{Figures/som-implementation-example.png}
+\decoRule
+\caption[Ejemplo de salida de \glsentrytext{som}]{Ejemplo de salida de \glsentrytext{som}. Implementación propia.}
+\label{fig:som-impl-example}
+\end{figure}
+
 \begin{figure}[th]
 \centering
 \includegraphics[scale=0.3]{Figures/som-example.png}
 \decoRule
-\caption[Ejemplo de uso de \glsentrytext{som}]{Ejemplo de uso de \glsentrytext{som}. Tomado de \cite{mena2003investigative}}
+\caption[Ejemplo de uso de \glsentrytext{som} en aplicaciones de perfilado]{Ejemplo de uso de \glsentrytext{som} en aplicaciones de perfilado. Tomado de \cite{mena2003investigative}}
 \label{fig:som-example}
 \end{figure}
 

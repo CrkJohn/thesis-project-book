@@ -44,6 +44,7 @@ headsepline, % Uncomment to get a line under the header
 \usepackage{mathpazo} % Use the Palatino font by default
 \usepackage{lipsum}
 \usepackage[acronym, toc]{glossaries}
+\usepackage{amsmath}
 
 \usepackage[backend=bibtex,style=numeric,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
 
@@ -314,7 +315,8 @@ headsepline, % Uncomment to get a line under the header
 
 %----------------------------------------------------------------------------------------
 
-% Define some commands to keep the formatting separated from the content 
+% Define some commands to keep the formatting separated from the conten
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\keyword}[1]{\textbf{#1}}
 \newcommand{\tabhead}[1]{\textbf{#1}}
 \newcommand{\code}[1]{\texttt{#1}}

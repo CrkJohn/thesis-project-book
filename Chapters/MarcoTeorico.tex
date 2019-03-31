@@ -15,7 +15,7 @@ Para obtener una mejor inteligencia se necesito de mejores tecnologías a las qu
 \item Análisis de vínculos (\'o \gls{linkanalisys} en ingl\'es)
 \item Agentes de software (\'o \gls{softwareagents} en ingl\'es)
 \item Minería de texto (\'o \gls{textmining} en ingl\'es)
-\item Redes neuronales (\'o \gls{neuralnetworks} en ingl\'es)
+\item Redes neuronales (\'o \gls{neuralnetwork} en ingl\'es)
 \item Algoritmos de \glsentrylong{machinel} (\'o \gls{mlalgorithms} en ingl\'es)
 \end{itemize}
 
@@ -33,6 +33,38 @@ Es el software que realiza tareas asignadas por el usuario de manera autónoma, 
 \item \textbf{Conocimiento:} Pueden usar reglas programadas, o pueden aprender reglas nuevas (véase \ref{sec:KBS}).
 \item \textbf{Habilidades de comunicación:} Reportar a humanos e interactuar con otros agentes.
 \end{itemize}
+
+% ================================================================
+\section{Mineria de datos (\glsentrylong{datamining})} \label{sec:datamining}
+Según \cite{tan2005introduction}, la minería de datos se define como el proceso de descubrir información útil en repositorios grandes de datos. Las técnicas de minería de datos son desplegadas para limpiar grandes bases de datos para encontrar patrones nuevos y útiles que podrían permanecer desconocidos de lo contrario. También ofrecen capacidades para predecir la salida de observaciones futuras, tales como predecir si un cliente nuevo gastara mas de \$100 en una tienda.
+
+No todas las tareas de descubrimiento de información son considerados como \gls{datamining}. Por ejemplo, realizar una consulta de campos individuales usando un sistema de base de datos o encontrar una pagina web por medio de una búsqueda en Internet son tareas relacionadas con \emph{adquisición de información}.
+
+\subsection{Mineria de texto (\glsentrylong{textmining})} \label{subsec:NLP}
+Es un subcampo de Inteligencia Artificial conocida como \glsentrylong{nlp}, en donde las herramientas de minería de datos pueden capturar rasgos críticos del contenido de un documento basado en el análisis de sus características lingüísticas.
+
+La mayoría de los crímenes son electrónicos por naturaleza, por lo que se dejan rastros textuales que investigadores pueden seguir y analizar. Estas se enfocan en el descubrimiento de relaciones en texto no--estructurado y pueden ser aplicados al problema de \emph{búsqueda} y \emph{localización de palabras clave}.
+
+\subsection{Clasificación} \label{subsec:clasification}
+Clasificación es la tarea de asignarle una de varias categorías predefinidas a objetos, y es una tarea que tiene una variedad extensa de aplicaciones. Ejemplos de esto se encuentran la detección de correos no deseados en mensajes de e--mails basándose del encabezado o el cuerpo del mensaje, categorización de células benignas de malignas basándose en los resultados de escaneados MRI o incluso la clasificación de galaxias basado en su forma.
+
+Definido formalmente, clasificación es la tarea de aprender una función objetivo $f$ que mapea cada conjunto de atributos $x$ a una clase predefinida de etiquetas $y$.
+
+La función objetivo también se define informalmente como un \emph{modelo de clasificación}.
+
+\subsubsection{Metodologías de clasificación} \label{subsubsec:classmethods}
+Existen muchos métodos para la clasificación de datos no--estructurados, entre los descritos aquí están:
+\begin{itemize}
+\item Clasificador basados en reglas (véase \ref{sec:KBS})
+\item Redes neuronales artificiales (véase \ref{sec:ANN})
+\item Maquinas de soporte vectorial (véase \ref{sec:SVM})
+\item Clasificador de Na\"{\i}ve Bayes (véase \ref{subsec:naivebayes})
+\end{itemize}
+
+\subsection{Clustering} \label{subsec:clustering}
+El análisis de clusters agrupa objetos de datos basándose únicamente en la información encontrada en los datos que describen los objetos y sus relaciones. El objetivo es que objetos dentro de un grupo sean similares (o relacionados) el uno al otro, y que sean diferentes (o sin relación) a objetos en otros grupos. Entre mayor sea la similitud dentro de un grupo y entre mayor sea la diferencia entre grupos, sera mejor o mas distintivo el clustering.
+
+Los métodos de clustering se hacen referencia comúnmente en \gls{machinel} como métodos no--supervisados, los cuales se describirán en \ref{sec:ML}. Un método de estos se describe en \ref{subsec:SOM} conocidos como mapas autoorganizados.
 
 % ================================================================
 
@@ -64,26 +96,18 @@ Existen dos tipos de \gls{rulebasedsys}, definidos como \gls{deductivesys} y \gl
 \subsection{Fuzzy Knowledge Based Systems}
 Pendiente
 
-% ================================================================
-\section{Mineria de datos (\glsentrylong{datamining})} \label{sec:datamining}
-Según \cite{tan2005introduction}, la minería de datos se define como el proceso de descubrir información útil en repositorios grandes de datos. Las técnicas de minería de datos son desplegadas para limpiar grandes bases de datos para encontrar patrones nuevos y útiles que podrían permanecer desconocidos de lo contrario. También ofrecen capacidades para predecir la salida de observaciones futuras, tales como predecir si un cliente nuevo gastara mas de \$100 en una tienda.
-
-No todas las tareas de descubrimiento de información son considerados como \gls{datamining}. Por ejemplo, realizar una consulta de campos individuales usando un sistema de base de datos o encontrar una pagina web por medio de una búsqueda en Internet son tareas relacionadas con \emph{adquisición de información}.
-
-\subsection{Mineria de texto (\glsentrylong{textmining})} \label{subsec:NLP}
-Es un subcampo de Inteligencia Artificial conocida como \glsentrylong{nlp}, en donde las herramientas de minería de datos pueden capturar rasgos críticos del contenido de un documento basado en el análisis de sus características lingüísticas.
-
-La mayoría de los crímenes son electrónicos por naturaleza, por lo que se dejan rastros textuales que investigadores pueden seguir y analizar. Estas se enfocan en el descubrimiento de relaciones en texto no--estructurado y pueden ser aplicados al problema de \emph{búsqueda} y \emph{localización de palabras clave}.
 
 % ================================================================
 
-\section{Redes Neuronales (\glsentrylong{neuralnetworks})} \label{sec:NN}
-Pendiente
+\section{Redes Neuronales Artificiales (\glsentrylong{neuralnetwork})} \label{sec:ANN}
+El estudio de redes neuronales artificiales fue inspirado por los intentos de simular los sistemas biológicos de neuronas. El cerebro humano se compone principalmente de células nerviosas llamadas \emph{neuronas}, enlazados con otras neuronas por medio de hebras de fibra llamados \emph{axones}. Los axones son usados para transmitir impulsos nerviosos de una neurona a otra cada vez que las neuronas son estimuladas. Una neurona esta conectada a axones de otras neuronas por medio de \emph{dendritas}, las cuales son extensiones desde el cuerpo de la neurona. El punto de contacto entre una dendrita y un axón se llama una \emph{sinapsis}. Los neurólogos han descubierto que el cerebro humano aprende por medio de cambiar la fuerza de la conexión sináptica entre las neuronas a través de estimulación repetitiva por el mismo impulso.
+
+De manera análoga a la estructura del cerebro humano, una \gls{neuralnetwork} se compone de una estructura interconectada de nodos y vínculos directos.
 
 \subsection{Sistemas de Detección de Anomalías (\glsentrylong{anomalydetectionsys})}
 Pendiente
 
-\subsection{Mapa autoorganizado (\glsentrylong{som})}
+\subsection{Mapa autoorganizado (\glsentrylong{som})} \label{subsec:SOM}
 El objetivo principal de los \gls{som} es de transformar una patrón de entrada $m$--dimensional en un mapa discreto uni-- o bi--dimensional, donde sus principales características es que es un algoritmo que se basa en \gls{unsupervisedl}, es \gls{feedforward}, es de una sola capa de neuronas donde su propósito es de realizar \gls{clustering} y realizar una reducción de dimensionalidad sobre los datos de una forma topologicamente ordenada.
 
 Los \gls{som} tienen tres características distintivas:
@@ -137,6 +161,45 @@ Luego de que el algoritmo de aprendizaje termina de realizar las iteraciones, la
 \caption[Ejemplo de uso de \glsentrytext{som} en aplicaciones de perfilado]{Ejemplo de uso de \glsentrytext{som} en aplicaciones de perfilado. Tomado de \cite{mena2003investigative}}
 \label{fig:som-example}
 \end{figure}
+
+% ================================================================
+
+\section{Maquina de soporte vectorial (\glsentrylong{svm})} \label{sec:SVM}
+La \gls{svm} es una técnica de clasificación que tiene sus raíces en la teoría de aprendizaje estadístico que ha mostrado resultados empíricos prometedores en muchas aplicaciones practicas, desde reconocimiento de dígitos escritos a mano a categorización de texto. \gls{svm} también funciona muy bien con datos de alta dimensionalidad. Otra aspecto destacable de esta aproximación es que representa la frontera de decisión usando un subconjunto de las muestras de entrenamiento, conocidos como los \emph{support vectors}.
+
+\subsection{Maximum Margin Hyperplanes}
+Se puede entender a los \gls{mmh} como hiper-planos que ayudan a separar datos en un hiper-espacio y que poseen un margen de decisión entre los datos, como ejemplo tómese la figura \ref{fig:svm-hyperplanes}, donde el hiper-plano $B_1$ tiene un margen de decisión mas grande que el hiper-plano $B_2$.
+
+\begin{figure}[th]
+\centering
+\includegraphics[scale=0.3]{Figures/svm-hyperplanes.png}
+\decoRule
+\caption[\glsentryname{mmh}]{\glsentryname{mmh}. Tomado de \cite{tan2005introduction}}
+\label{fig:svm-hyperplanes}
+\end{figure}
+
+Finalmente, el objetivo final de los \gls{svm} es la búsqueda de un hiper-plano con el mayor margen de decisión. Existen dos tipos de \gls{svm}, el lineal y el no--lineal. El lineal realiza la separación de los datos con su hiper-plano a partir de los datos de entrada en su espacio vectorial original, mientras que el no--lineal consta de realizar una transformación de los espacios de los datos de entrada a uno en que sea linealmente separable (véase como ejemplo la figura \ref{fig:svm-nonlinear-transforms}), sin embargo al realizar la transformación, el algoritmo de \gls{svm} se ve afectado por la dimensionalidad de la entrada, por lo que existe lo que se conoce como la función \emph{kernel} para remediarlo.
+
+\begin{figure}[th]
+\centering
+\includegraphics[scale=0.25]{Figures/svm-nonlinear-transform.png}
+\decoRule
+\caption[Transformación de espacios en \glsentrylong{svm}]{Transformación de espacios en \glsentrylong{svm}. Tomado de \cite{tan2005introduction}}
+\label{fig:svm-nonlinear-transforms}
+\end{figure}
+
+\subsection{Función Kernel}
+La función polinomial de similaridad, $K$, la cual es computada en el espacio original de los datos de entrada, se le conoce como la \textbf{función Kernel}. En principio se asegura que la función kernel puede ser expresada siempre como el producto punto entre dos vectores de entrada en algún espacio de alta dimensionalidad, la función de kernel también tiene la particularidad de que el computo de los productos punto con la función son considerablemente mas barato computacionalmente que realizar la transformación de espacios, dejando de lado tener que realizar la transformación de espacios, acelerando la tarea de clasificación.
+
+% ================================================================
+
+\section{Clasificadores Bayesianos} \label{sec:bayes}
+\subsection{Teorema de Bayes} \label{subsec:bayestheo}
+Pendiente
+
+\subsection{Clasificador Na\"{\i}ve Bayes} \label{subsec:naivebayes}
+Pendiente
+
 
 % ================================================================
 

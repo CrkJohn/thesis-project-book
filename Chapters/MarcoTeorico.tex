@@ -194,12 +194,38 @@ La función polinomial de similaridad, $K$, la cual es computada en el espacio o
 % ================================================================
 
 \section{Clasificadores Bayesianos} \label{sec:bayes}
+En muchas aplicaciones de relaciones entre el conjunto de atributos y la etiqueta es no--determinista. Es decir, la etiqueta de clase de un dato de un conjunto de prueba no puede ser determinado con certeza a pesar de ser un atributo idéntico a los atributos de entrenamiento. Esto puede ser producto de que los datos poseen ruido o la presencia de ciertos factores que afectan la clasificación pero no son incluidos en el análisis. Para esto es crucial el teorema de Bayes, el cual es un principio estadístico que combina el conocimiento previo de las clases con la nueva evidencia que se obtiene de los datos.
+
 \subsection{Teorema de Bayes} \label{subsec:bayestheo}
-Pendiente
+El teorema de Bayes dice que para un par de variables aleatorias $X$ y $Y$ y que $P(X=x | Y=y)$ la probabilidad de que la variable $X$ tome el valor $x$ dado que el valor de la variable $Y$ es $y$, se tiene la ecuación \ref{eq:bayestheo}.
+\begin{equation} \label{eq:bayestheo}
+  P(Y | X) = \frac{P(X | Y) P(Y)}{P(X)}
+\end{equation}
+
+\subsubsection{Usando el teorema de Bayes para clasificación}
+Para denotar el problema de clasificación desde una perspectiva estadística se define a $X$ como el conjunto de atributos y $Y$ como el conjunto de etiquetas de clase. Si la etiqueta de clase tiene una relación no--determinista con los atributos, entonces se pueden tomar a $X$ y a $Y$ como variables aleatorias y capturar su relación probabilística con $P(Y|X)$, conocida como la probabilidad posterior para $Y$, dada su probabilidad previa $P(Y)$.
+
+Durante la fase de entrenamiento, es necesario aprender las probabilidades posteriores $P(Y|X)$ para cualquier combinación de $X$ y $Y$ basándose en la información recolectada de los datos de entrenamiento.
+
+Dado que lo que se quiere realizar es una clasificación que represente la probabilidad de que dado un valor de $X=x$ este relacionado con que $Y=y$, se puede reconocer primero que $X$ se mantiene constante para lo que son los datos de entrenamiento, y que lo desconocido sea la clasificación $Y=y$ con probabilidad $P(Y|X)$, al conocer esta probabilidad, un valor de prueba $X'$ puede ser clasificado por medio de encontrar la clase $Y'$ que maximice la probabilidad posterior $P(Y'|X')$.
+
 
 \subsection{Clasificador Na\"{\i}ve Bayes} \label{subsec:naivebayes}
-Pendiente
+Un clasificador de Na\"{\i}ve Bayes estima la probabilidad condicional de las clases por medio de suponer que los atributos son condicionalmente independientes, dado la etiqueta de clasificación $y$. La suposición de independencia condicional se puede dar por la ecuación \ref{eq:bayes-conditional-independence}.
 
+\begin{equation} \label{eq:bayes-conditional-independence}
+  P(X|Y=y) = \prod_{i=1}^{d} P(X_i|Y=y)
+\end{equation}
+
+Donde cada conjunto de atributos $X=\{ X_1, \ldots, X_d \}$ que consiste de $d$ atributos.
+\subsubsection{Como funciona el clasificador Na\"{\i}ve Bayes}
+Con la suposición de independencia condicional, en vez de computar la probabilidad condicional de clases para cada combinación de $X$, solo se debe realizar para establecer la probabilidad condicional de cada $X_i$, dado $Y$.
+
+Para clasificar un dato de prueba, el clasificador computa la probabilidad posterior para cada clase $Y$ como se muestra en la ecuación \ref{eq:bayes-classifier}.
+
+\begin{equation} \label{eq:bayes-classifier}
+  P(Y|X) = \frac{P(Y) \prod_{i=1}^{d}P(X_i|Y)}{P(X)}
+\end{equation}
 
 % ================================================================
 

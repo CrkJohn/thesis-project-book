@@ -73,7 +73,7 @@ Según \cite{sajja2010knowledge}, los \gls{kbs} son uno de los mayores miembros 
 
 Existen 5 tipos de \gls{kbs}, donde uno de ellos es conocido como \gls{expertsystems}, usados como \gls{rulebasedsys}, donde su \gls{knowledgebase} esta dado como reglas y el \gls{inferenceengine} esta dado por algo llamado \gls{workingmemory}, que representa los hechos que se conocen inicialmente del sistema junto con los hechos que se van dando como inferencia de las reglas.
 
-\begin{figure}[th]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.4]{Figures/kbs-architecture.png}
 \decoRule
@@ -136,7 +136,7 @@ Finalmente para alcanzar la \emph{adaptación} se realiza una actualización de 
   w_j(t+1) = w_j(t) + \alpha(t) h_{j, winner}(t)\Big[x_i-w_j(t)\Big]
 \end{equation}
 
-\begin{figure}[th]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.2]{Figures/som-adaptive-proc.png}
 \decoRule
@@ -146,7 +146,7 @@ Finalmente para alcanzar la \emph{adaptación} se realiza una actualización de 
 
 Luego de que el algoritmo de aprendizaje termina de realizar las iteraciones, la salida de este es la matriz de pesos $\mathbf{W}$, en la figura \ref{fig:som-impl-example} se puede apreciar una aproximación del algoritmo con un mapa uni--dimensional tratando de aproximar una función sinusoidal con ruido adicionado en un gráfico 2D.
 
-\begin{figure}[th]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{Figures/som-implementation-example.png}
 \decoRule
@@ -154,7 +154,7 @@ Luego de que el algoritmo de aprendizaje termina de realizar las iteraciones, la
 \label{fig:som-impl-example}
 \end{figure}
 
-\begin{figure}[th]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.3]{Figures/som-example.png}
 \decoRule
@@ -165,12 +165,12 @@ Luego de que el algoritmo de aprendizaje termina de realizar las iteraciones, la
 % ================================================================
 
 \section{Maquina de soporte vectorial (\glsentrylong{svm})} \label{sec:SVM}
-La \gls{svm} es una técnica de clasificación que tiene sus raíces en la teoría de aprendizaje estadístico que ha mostrado resultados empíricos prometedores en muchas aplicaciones practicas, desde reconocimiento de dígitos escritos a mano a categorización de texto. \gls{svm} también funciona muy bien con datos de alta dimensionalidad. Otro aspecto destacable de esta aproximación es que representa la frontera de decisión usando un subconjunto de las muestras de entrenamiento, conocidos como los \emph{support vectors}.
+gls{svm} es una técnica de clasificación que tiene sus raíces en la teoría de aprendizaje estadístico que ha mostrado resultados empíricos prometedores en muchas aplicaciones practicas, desde reconocimiento de dígitos escritos a mano a categorización de texto. \gls{svm} también funciona muy bien con datos de alta dimensionalidad. Otro aspecto destacable de esta aproximación es que representa la frontera de decisión usando un subconjunto de las muestras de entrenamiento, conocidos como los \emph{support vectors}.
 
 \subsection{Maximum Margin Hyperplanes}
 Se puede entender a los \gls{mmh} como hiper-planos que ayudan a separar datos en un hiper-espacio y que poseen un margen de decisión entre los datos, como ejemplo tómese la figura \ref{fig:svm-hyperplanes}, donde el hiper-plano $B_1$ tiene un margen de decisión mas grande que el hiper-plano $B_2$.
 
-\begin{figure}[th]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.3]{Figures/svm-hyperplanes.png}
 \decoRule
@@ -180,7 +180,7 @@ Se puede entender a los \gls{mmh} como hiper-planos que ayudan a separar datos e
 
 Finalmente, el objetivo final de los \gls{svm} es la búsqueda de un hiper-plano con el mayor margen de decisión. Existen dos tipos de \gls{svm}, el lineal y el no--lineal. El lineal realiza la separación de los datos con su hiper-plano a partir de los datos de entrada en su espacio vectorial original, mientras que el no--lineal consta de realizar una transformación de los espacios de los datos de entrada a uno en que sea linealmente separable (véase como ejemplo la figura \ref{fig:svm-nonlinear-transforms}), sin embargo al realizar la transformación, el algoritmo de \gls{svm} se ve afectado por la dimensionalidad de la entrada, por lo que existe lo que se conoce como la función \emph{kernel} para remediarlo.
 
-\begin{figure}[th]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.25]{Figures/svm-nonlinear-transform.png}
 \decoRule

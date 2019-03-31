@@ -36,7 +36,7 @@ Es el software que realiza tareas asignadas por el usuario de manera autónoma, 
 
 % ================================================================
 \section{Mineria de datos (\glsentrylong{datamining})} \label{sec:datamining}
-Según \cite{tan2005introduction}, la minería de datos se define como el proceso de descubrir información útil en repositorios grandes de datos. Las técnicas de minería de datos son desplegadas para limpiar grandes bases de datos para encontrar patrones nuevos y útiles que podrían permanecer desconocidos de lo contrario. También ofrecen capacidades para predecir la salida de observaciones futuras, tales como predecir si un cliente nuevo gastara mas de \$100 en una tienda.
+Según \cite{tan2005introduction}, la minería de datos se define como el proceso de descubrir información útil en repositorios grandes de datos. Las técnicas de minería de datos son desplegadas para limpiar grandes bases de datos para encontrar patrones nuevos y útiles que de lo contrario podrían permanecer desconocidos. También ofrecen capacidades para predecir la salida de observaciones futuras, tales como predecir si un cliente nuevo gastara mas de \$100 en una tienda.
 
 No todas las tareas de descubrimiento de información son considerados como \gls{datamining}. Por ejemplo, realizar una consulta de campos individuales usando un sistema de base de datos o encontrar una pagina web por medio de una búsqueda en Internet son tareas relacionadas con \emph{adquisición de información}.
 
@@ -55,7 +55,7 @@ La función objetivo también se define informalmente como un \emph{modelo de cl
 \subsubsection{Metodologías de clasificación} \label{subsubsec:classmethods}
 Existen muchos métodos para la clasificación de datos no--estructurados, entre los descritos aquí están:
 \begin{itemize}
-\item Clasificador basados en reglas (véase \ref{sec:KBS})
+\item Clasificador basado en reglas (véase \ref{sec:KBS})
 \item Redes neuronales artificiales (véase \ref{sec:ANN})
 \item Maquinas de soporte vectorial (véase \ref{sec:SVM})
 \item Clasificador de Na\"{\i}ve Bayes (véase \ref{subsec:naivebayes})
@@ -71,7 +71,7 @@ Los métodos de clustering se hacen referencia comúnmente en \gls{machinel} com
 \section{Sistemas Basados en Conocimiento (\glsentrylong{kbs})} \label{sec:KBS}
 Según \cite{sajja2010knowledge}, los \gls{kbs} son uno de los mayores miembros de la familia de \gls{ai}. El \gls{kbs} consiste de una \gls{knowledgebase} y un programa de búsqueda llamado \gls{inferenceengine} representado en la figura \ref{fig:kbs-arch}. La \gls{knowledgebase} puede ser usado como un repositorio de conocimiento de varias formas.
 
-Existen 5 tipos de \gls{kbs}, donde uno de ellos es conocido como \gls{expertsystems}, donde su uso se da como \gls{rulebasedsys}, donde su \gls{knowledgebase} esta dado como reglas y su \gls{inferenceengine} esta dado por algo llamado \gls{workingmemory}, que representa los hechos que se conocen inicialmente del sistema junto con los hechos que se van dando como inferencia de las reglas.
+Existen 5 tipos de \gls{kbs}, donde uno de ellos es conocido como \gls{expertsystems}, usados como \gls{rulebasedsys}, donde su \gls{knowledgebase} esta dado como reglas y el \gls{inferenceengine} esta dado por algo llamado \gls{workingmemory}, que representa los hechos que se conocen inicialmente del sistema junto con los hechos que se van dando como inferencia de las reglas.
 
 \begin{figure}[th]
 \centering
@@ -100,7 +100,7 @@ Pendiente
 % ================================================================
 
 \section{Redes Neuronales Artificiales (\glsentrylong{neuralnetwork})} \label{sec:ANN}
-El estudio de redes neuronales artificiales fue inspirado por los intentos de simular los sistemas biológicos de neuronas. El cerebro humano se compone principalmente de células nerviosas llamadas \emph{neuronas}, enlazados con otras neuronas por medio de hebras de fibra llamados \emph{axones}. Los axones son usados para transmitir impulsos nerviosos de una neurona a otra cada vez que las neuronas son estimuladas. Una neurona esta conectada a axones de otras neuronas por medio de \emph{dendritas}, las cuales son extensiones desde el cuerpo de la neurona. El punto de contacto entre una dendrita y un axón se llama una \emph{sinapsis}. Los neurólogos han descubierto que el cerebro humano aprende por medio de cambiar la fuerza de la conexión sináptica entre las neuronas a través de estimulación repetitiva por el mismo impulso.
+El estudio de redes neuronales artificiales fue inspirado por los intentos de simular los sistemas biológicos de neuronas. El cerebro humano se compone principalmente de células nerviosas llamadas \emph{neuronas}, enlazadas con otras neuronas por medio de hebras de fibra conocidas como \emph{axones}. Los axones son usados para transmitir impulsos nerviosos de una neurona a otra cada vez que las neuronas son estimuladas. Una neurona esta conectada a axones de otras neuronas por medio de \emph{dendritas}, las cuales son extensiones desde el cuerpo de la neurona. El punto de contacto entre una dendrita y un axón se conoce como \emph{sinapsis}. Los neurólogos han descubierto que el cerebro humano aprende por medio de cambiar la fuerza de la conexión sináptica entre las neuronas a través de estimulación repetitiva por el mismo impulso.
 
 De manera análoga a la estructura del cerebro humano, una \gls{neuralnetwork} se compone de una estructura interconectada de nodos y vínculos directos.
 
@@ -108,7 +108,7 @@ De manera análoga a la estructura del cerebro humano, una \gls{neuralnetwork} s
 Pendiente
 
 \subsection{Mapa autoorganizado (\glsentrylong{som})} \label{subsec:SOM}
-El objetivo principal de los \gls{som} es de transformar una patrón de entrada $m$--dimensional en un mapa discreto uni-- o bi--dimensional, donde sus principales características es que es un algoritmo que se basa en \gls{unsupervisedl}, es \gls{feedforward}, es de una sola capa de neuronas donde su propósito es de realizar \gls{clustering} y realizar una reducción de dimensionalidad sobre los datos de una forma topologicamente ordenada.
+El objetivo principal de los \gls{som} es de transformar una patrón de entrada $m$--dimensional en un mapa discreto uni-- o bi--dimensional, donde sus principales características es que es un algoritmo que se basa en \gls{unsupervisedl}, es \gls{feedforward}, tiene una sola capa de neuronas donde su propósito es realizar \gls{clustering} y una reducción de dimensionalidad sobre los datos de una forma topologicamente ordenada.
 
 Los \gls{som} tienen tres características distintivas:
 \begin{itemize}
@@ -165,7 +165,7 @@ Luego de que el algoritmo de aprendizaje termina de realizar las iteraciones, la
 % ================================================================
 
 \section{Maquina de soporte vectorial (\glsentrylong{svm})} \label{sec:SVM}
-La \gls{svm} es una técnica de clasificación que tiene sus raíces en la teoría de aprendizaje estadístico que ha mostrado resultados empíricos prometedores en muchas aplicaciones practicas, desde reconocimiento de dígitos escritos a mano a categorización de texto. \gls{svm} también funciona muy bien con datos de alta dimensionalidad. Otra aspecto destacable de esta aproximación es que representa la frontera de decisión usando un subconjunto de las muestras de entrenamiento, conocidos como los \emph{support vectors}.
+La \gls{svm} es una técnica de clasificación que tiene sus raíces en la teoría de aprendizaje estadístico que ha mostrado resultados empíricos prometedores en muchas aplicaciones practicas, desde reconocimiento de dígitos escritos a mano a categorización de texto. \gls{svm} también funciona muy bien con datos de alta dimensionalidad. Otro aspecto destacable de esta aproximación es que representa la frontera de decisión usando un subconjunto de las muestras de entrenamiento, conocidos como los \emph{support vectors}.
 
 \subsection{Maximum Margin Hyperplanes}
 Se puede entender a los \gls{mmh} como hiper-planos que ayudan a separar datos en un hiper-espacio y que poseen un margen de decisión entre los datos, como ejemplo tómese la figura \ref{fig:svm-hyperplanes}, donde el hiper-plano $B_1$ tiene un margen de decisión mas grande que el hiper-plano $B_2$.
@@ -189,21 +189,21 @@ Finalmente, el objetivo final de los \gls{svm} es la búsqueda de un hiper-plano
 \end{figure}
 
 \subsection{Función Kernel}
-La función polinomial de similaridad, $K$, la cual es computada en el espacio original de los datos de entrada, se le conoce como la \textbf{función Kernel}. En principio se asegura que la función kernel puede ser expresada siempre como el producto punto entre dos vectores de entrada en algún espacio de alta dimensionalidad, la función de kernel también tiene la particularidad de que el computo de los productos punto con la función son considerablemente mas barato computacionalmente que realizar la transformación de espacios, dejando de lado tener que realizar la transformación de espacios, acelerando la tarea de clasificación.
+La función polinomial de similaridad, $K$, la cual es calculada en el espacio original de los datos de entrada, se le conoce como la \textbf{función Kernel}. En principio se asegura que la función kernel puede ser expresada siempre como el producto punto entre dos vectores de entrada en algún espacio de alta dimensionalidad, la función de kernel también tiene la particularidad de que el computo de los productos punto con la función toman considerablemente menos tiempo que realizar la transformación de espacios, dejando de lado la transformación, acelerando la tarea de clasificación.
 
 % ================================================================
 
 \section{Clasificadores Bayesianos} \label{sec:bayes}
-En muchas aplicaciones de relaciones entre el conjunto de atributos y la etiqueta es no--determinista. Es decir, la etiqueta de clase de un dato de un conjunto de prueba no puede ser determinado con certeza a pesar de ser un atributo idéntico a los atributos de entrenamiento. Esto puede ser producto de que los datos poseen ruido o la presencia de ciertos factores que afectan la clasificación pero no son incluidos en el análisis. Para esto es crucial el teorema de Bayes, el cual es un principio estadístico que combina el conocimiento previo de las clases con la nueva evidencia que se obtiene de los datos.
+En muchas aplicaciones de relaciones entre el conjunto de atributos y la etiqueta es no--determinante. Es decir, la etiqueta de clase de un dato de un conjunto de prueba no puede ser determinado con certeza a pesar de ser un atributo idéntico a los atributos de entrenamiento. Esto puede ser producto de que los datos poseen ruido o la presencia de ciertos factores que afectan la clasificación pero no son incluidos en el análisis. Para esto es crucial el teorema de Bayes, el cual es un principio estadístico que combina el conocimiento previo de las clases con la nueva evidencia que se obtiene de los datos.
 
 \subsection{Teorema de Bayes} \label{subsec:bayestheo}
-El teorema de Bayes dice que para un par de variables aleatorias $X$ y $Y$ y que $P(X=x | Y=y)$ la probabilidad de que la variable $X$ tome el valor $x$ dado que el valor de la variable $Y$ es $y$, se tiene la ecuación \ref{eq:bayestheo}.
+El teorema de Bayes dice que para un par de variables aleatorias $X$ y $Y$ y que $P(X=x | Y=y)$ la probabilidad de que la variable $X$ tome el valor $x$ dado que el valor de la variable $Y$ es $y$. Se tiene entonces la ecuación \ref{eq:bayestheo}.
 \begin{equation} \label{eq:bayestheo}
   P(Y | X) = \frac{P(X | Y) P(Y)}{P(X)}
 \end{equation}
 
 \subsubsection{Usando el teorema de Bayes para clasificación}
-Para denotar el problema de clasificación desde una perspectiva estadística se define a $X$ como el conjunto de atributos y $Y$ como el conjunto de etiquetas de clase. Si la etiqueta de clase tiene una relación no--determinista con los atributos, entonces se pueden tomar a $X$ y a $Y$ como variables aleatorias y capturar su relación probabilística con $P(Y|X)$, conocida como la probabilidad posterior para $Y$, dada su probabilidad previa $P(Y)$.
+Para denotar el problema de clasificación desde una perspectiva estadística se define a $X$ como el conjunto de atributos y $Y$ como el conjunto de etiquetas de clase. Si la etiqueta de clase tiene una relación no--determinante con los atributos, entonces se pueden tomar a $X$ y a $Y$ como variables aleatorias y capturar su relación probabilística con $P(Y|X)$, conocida como la probabilidad posterior para $Y$, dada su probabilidad previa $P(Y)$.
 
 Durante la fase de entrenamiento, es necesario aprender las probabilidades posteriores $P(Y|X)$ para cualquier combinación de $X$ y $Y$ basándose en la información recolectada de los datos de entrenamiento.
 

@@ -35,6 +35,26 @@ Es el software que realiza tareas asignadas por el usuario de manera autónoma, 
 \end{itemize}
 
 % ================================================================
+
+\section{Aprendizaje de maquina (\glsentrylong{machinel})} \label{sec:ML}
+De acuerdo con \cite{murphymachinel}, se define como un conjunto de métodos que pueden ser detectar patrones automáticamente en datos, y luego usar los patrones descubiertos para predecir los datos futuros, o realizar otra clase de toma de decisiones con un grado de incertidumbre, por tal motivo es necesario el uso de teoría de probabilidad, que puede ser aplicada a cualquier tipo de problema que involucra cualquier tipo de incertidumbre.
+
+\subsection{Tipos de \glsentrylong{machinel}}
+\gls{machinel} esta usualmente dividida principalmente en dos tipos. El método predictivo o bien \textbf{aprendizaje supervisado} (\gls{supervisedl}), donde el objetivo es aprender un mapeo de las entradas $\mathbf{x}$ a las salidas $y$, dado un conjunto de etiquetas de pares de entrada--salida $D = \{(\mathbf{x}_i, y_i)\}_{i=1}^{N}$. $D$ se le llama el conjunto de entrenamiento y $N$ es el numero de muestras de entrenamiento.
+
+En la forma mas sencilla, cada entrada de entrenamiento $\mathbf{x}_i$ es un vector $D$--dimensional de números, a estos se le llaman \emph{características} o \emph{atributos}.
+
+De manera similar la forma de la salida puede ser en principio cualquier cosa, pero la mayoría de métodos asumen que $y_i$ es una variable \emph{categórica} o \emph{nominal} de algún conjunto finito, $y_i \in \{1,\ldots,C\}$, o que $y_i$ es un escalar real, $y_i \in \mathbb{R}$. Cuando la variable $y_i$ es categórica, al problema se le reconoce como \textbf{clasificación} o \textbf{reconocimiento de patrones}, y cuando es un valor real se le conoce como un problema de \textbf{regresión}.
+
+El segundo tipo principal de \gls{machinel} es el descriptivo o \textbf{aprendizaje no--supervisado} (\gls{unsupervisedl}), en este solo están disponibles los datos de entrada $D = \{\mathbf{x}_i\}_{i=1}^{N}$, y la meta es encontrar ``patrones interesantes'' en los datos. Este es un problema mucho menos definido, debido a que no se conocen los tipos de patrones que se quieren encontrar, y no hay una métrica obvia de error (no como aprendizaje supervisado en la que se puede comparar nuestra predicción de $y$ para un $\mathbf{x}$ con el valor observado).
+
+Un tercer tipo de aprendizaje de maquina es conocido como \textbf{\gls{reinforcedl}}, el cual es un tipo menos usado. Este es útil cuando se quiere aprender como actuar o comportarse cuando se recibe una recompensa ocasional o una señal de castigo.
+
+\subsection{Sistemas de Detección de Anomalías (\glsentrylong{anomalydetectionsys})}
+Pendiente
+
+
+% ================================================================
 \section{Mineria de datos (\glsentrylong{datamining})} \label{sec:datamining}
 Según \cite{tan2005introduction}, la minería de datos se define como el proceso de descubrir información útil en repositorios grandes de datos. Las técnicas de minería de datos son desplegadas para limpiar grandes bases de datos para encontrar patrones nuevos y útiles que de lo contrario podrían permanecer desconocidos. También ofrecen capacidades para predecir la salida de observaciones futuras, tales como predecir si un cliente nuevo gastara mas de \$100 en una tienda.
 
@@ -103,9 +123,6 @@ Pendiente
 El estudio de redes neuronales artificiales fue inspirado por los intentos de simular los sistemas biológicos de neuronas. El cerebro humano se compone principalmente de células nerviosas llamadas \emph{neuronas}, enlazadas con otras neuronas por medio de hebras de fibra conocidas como \emph{axones}. Los axones son usados para transmitir impulsos nerviosos de una neurona a otra cada vez que las neuronas son estimuladas. Una neurona esta conectada a axones de otras neuronas por medio de \emph{dendritas}, las cuales son extensiones desde el cuerpo de la neurona. El punto de contacto entre una dendrita y un axón se conoce como \emph{sinapsis}. Los neurólogos han descubierto que el cerebro humano aprende por medio de cambiar la fuerza de la conexión sináptica entre las neuronas a través de estimulación repetitiva por el mismo impulso.
 
 De manera análoga a la estructura del cerebro humano, una \gls{neuralnetwork} se compone de una estructura interconectada de nodos y vínculos directos.
-
-\subsection{Sistemas de Detección de Anomalías (\glsentrylong{anomalydetectionsys})}
-Pendiente
 
 \subsection{Mapa autoorganizado (\glsentrylong{som})} \label{subsec:SOM}
 El objetivo principal de los \gls{som} es de transformar una patrón de entrada $m$--dimensional en un mapa discreto uni-- o bi--dimensional, donde sus principales características es que es un algoritmo que se basa en \gls{unsupervisedl}, es \gls{feedforward}, tiene una sola capa de neuronas donde su propósito es realizar \gls{clustering} y una reducción de dimensionalidad sobre los datos de una forma topologicamente ordenada.
@@ -227,7 +244,3 @@ Para clasificar un dato de prueba, el clasificador computa la probabilidad poste
   P(Y|X) = \frac{P(Y) \prod_{i=1}^{d}P(X_i|Y)}{P(X)}
 \end{equation}
 
-% ================================================================
-
-\section{Aprendizaje de maquina (\glsentrylong{machinel})} \label{sec:ML}
-Pendiente

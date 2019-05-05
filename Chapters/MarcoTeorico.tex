@@ -51,8 +51,29 @@ El segundo tipo principal de \gls{machinel} es el descriptivo o \textbf{aprendiz
 Un tercer tipo de aprendizaje de maquina es conocido como \textbf{\gls{reinforcedl}}, el cual es un tipo menos usado. Este es útil cuando se quiere aprender como actuar o comportarse cuando se recibe una recompensa ocasional o una señal de castigo.
 
 \subsection{Sistemas de Detección de Anomalías (\glsentrylong{anomalydetectionsys})}
-\todo{Pendiente}
+Existen diferentes aproximaciones para los sistemas de anomalías, sin embargo una similitud entre todos estos sistemas es que se intenta realiza una \emph{detección de desviaciones}, y su tarea es detectar los datos \emph{atípicos} en un sistema \cite{tan2005introduction}.
 
+Uno de los que se pueden encontrar en la literatura son los sistemas de detección de anomalías basados en realizar un estimado probabilístico con alguna distribución de probabilidad de donde para una serie de características $m$ se trata de estimar una distribución gaussiana $X \sim \mathcal{N}(\mu, \sigma^2)$ que tiene media $\mu$ y varianza $\sigma^2$ por cada característica, por lo que existirán $m$ diferentes distribuciones .
+
+Para estimar cada una las medias y variaciones de cada característica $j$, $\mu$ se estima con la \equationref{eq:anomaly-mu} y $\sigma^2$ se estima con la \equationref{eq:anomaly-sigma}.
+
+\begin{equation} \label{eq:anomaly-mu}
+  \mu_j = \frac{1}{m} \sum_{i=1}^{m} x_j^{(i)}
+\end{equation}
+
+\begin{equation} \label{eq:anomaly-sigma}
+  \sigma_j^2 = \frac{1}{m} \sum_{i=1}^{m} (x_j^{(i)} - \mu_j)^2
+\end{equation}
+
+De donde para calcular la probabilidad de que una muestra se trata de una anomalía se calcula la probabilidad $p(x)$, luego de que fueron estimadas las distribuciones de cada característica del conjunto de entrenamiento, por lo que se define un $\epsilon$ de manera heurística, de forma que se determina que una muestra anómala si $p(x) < \epsilon$, la \equationref{eq:anomaly-prob} representa cual es la probabilidad de una muestra $x$ con una distribución gaussiana.
+
+\begin{equation} \label{eq:anomaly-prob}
+  p(x) = \prod_{j=1}^{n}p(x_j, \mu_j, \sigma_j^2) = \prod_{j=1}^{n} \frac{1}{\sqrt{2\pi}\sigma} \text{exp}\Bigg( - \frac{(x_j-\mu_j)^2}{2\sigma_j^2}\Bigg)
+\end{equation}
+
+Si el modelo esta dando como resultado muchos falsos positivos, lo que se debe hacer es reducir $\sigma$.
+
+Este método de sistemas de detección de anomalía también es brevemente tratada en \cite{osint} con una representación de hiper-planos, que es equivalente con este descrito.
 
 % ================================================================
 \section{Mineria de datos (\glsentrylong{datamining})} \label{sec:datamining}
@@ -113,10 +134,6 @@ Existen dos tipos de \gls{rulebasedsys}, definidos como \gls{deductivesys} y \gl
           \end{array} \right.
 \end{equation}
 
-\subsection{Fuzzy Knowledge Based Systems}
-\todo{Pendiente}
-
-
 % ================================================================
 
 \section{Redes Neuronales Artificiales (\glsentrylong{neuralnetwork})} \label{sec:ANN}
@@ -163,7 +180,7 @@ Finalmente para alcanzar la \emph{adaptación} se realiza una actualización de 
 
 Luego de que el algoritmo de aprendizaje termina de realizar las iteraciones, la salida de este es la matriz de pesos $\mathbf{W}$, en la \figureref{fig:som-impl-example} se puede apreciar una aproximación del algoritmo con un mapa uni--dimensional tratando de aproximar una función sinusoidal con ruido adicionado en un gráfico 2D.
 
-\todo{agregar texto que describa la figura \ref{fig:som-example}}
+En la \figureref{fig:som-example} se puede ver una aplicacion de los \gls{som}, en donde se realiza una clusterizacion de casos de homicidios donde los parametros son caracteristicas de los homicidios, segun \cite{mena2003investigative} este resultado da una buena aproximacion para sospechar de que estos son cometidos por personas distintas o si bien estan siendo perpetrados por un mismo individuo o grupo.
 
 \begin{figure}[H]
 \centering

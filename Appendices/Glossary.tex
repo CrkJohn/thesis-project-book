@@ -12,6 +12,7 @@
 \newcommand{\simpleglossarydef}[3]{
     \newglossaryentry{#1}{
         name={{\rm #2}},
+        long={#2},
         first={{\rm\sl#2\rm}},
         description={{\rm #3}}
     }
@@ -57,7 +58,7 @@
 
 \glossarydef{svm}{SVM}{Support Vector Machine}{{\bf Pendiente}}
 
-\glossarydef{bow}{BOW}{Bag of Words}{{\bf Pendiente}}
+\glossarydef{bow}{BoW}{Bag of Words}{{\bf Pendiente}}
 
 \glossarydef{tfidf}{TF-IDF}{Term Frequency - Inverse Document Frequency}{{\bf Pendiente}}
 
@@ -88,5 +89,7 @@
 \simpleglossarydef{mmh}{Maximum Margin Hyperplanes}{Hiperplanos que permiten separar datos en espacios de alta dimensionalidad con un margen asociado para separarlos.}
 
 \glossarydef{lstm}{LSTM}{Long Short Term Memory}{{\bf Pendiente}}
+
+\simpleglossarydef{namedent}{Named Entities}{{\bf Pendiente}}
 
 \simpleglossarydef{starspace}{StarSpace}{{\bf Pendiente}}

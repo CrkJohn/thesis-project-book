@@ -46,6 +46,7 @@ headsepline, % Uncomment to get a line under the header
 \usepackage[acronym, toc]{glossaries}
 \usepackage{amsmath}
 \usepackage{float}
+\usepackage{todonotes}
 
 \usepackage[backend=bibtex,style=numeric,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
 
@@ -317,6 +318,11 @@ headsepline, % Uncomment to get a line under the header
 %----------------------------------------------------------------------------------------
 
 % Define some commands to keep the formatting separated from the conten
+
+\newcommand{\figureref}[1]{\mbox{Figura~\ref{#1}}}
+\newcommand{\tableref}[1]{\mbox{Cuadro~\ref{#1}}}
+\newcommand{\equationref}[1]{\mbox{Ecuación~\ref{#1}}}
+
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\keyword}[1]{\textbf{#1}}
 \newcommand{\tabhead}[1]{\textbf{#1}}

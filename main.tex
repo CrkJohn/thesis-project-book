@@ -45,8 +45,16 @@ headsepline, % Uncomment to get a line under the header
 \usepackage{lipsum}
 \usepackage[acronym, toc]{glossaries}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{float}
 \usepackage{todonotes}
+\usepackage{bm}
+\usepackage{subfigure}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{booktabs}
 
 \usepackage[backend=bibtex,style=numeric,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
 
@@ -332,8 +340,15 @@ In english.... \todo{Escribir abstract en ingles}
 \newcommand{\file}[1]{\texttt{\bfseries#1}}
 \newcommand{\option}[1]{\texttt{\itshape#1}}
 
+\newlength{\figwidth}
+\setlength{\figwidth}{26pc}
+\newlength{\notationgap}
+\setlength{\notationgap}{1pc}
+
 % ----------------------------------------------------------------------------------------
 
+\input{math_commands.tex} % para definir una notacion
+\include{Chapters/Notation}
 \include{Chapters/Introduction}
 \include{Chapters/Schedule}
 \include{Chapters/Achievements}

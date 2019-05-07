@@ -339,9 +339,9 @@ KOMA-script documentation for details.}]{fancyhdr}
 
 \DeclareDocumentCommand{\abstractauthorfont}{}{}
 \DeclareDocumentCommand{\abstracttitlefont}{}{}
-\newcommand{\byname}{by}
+\newcommand{\byname}{por}
+\newcommand{\bynameenglish}{by}
 \newcommand{\abstractname}{Abstract}
-\providecaptionname{spanish}{\byname}{por}
 \providecaptionname{german,ngerman,austrian,naustrian}{\byname}{von}
 \providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish}{\byname}{by}
 \ifbool{consistentlayout}{
@@ -360,7 +360,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 		#1%added to be able to have abstract more than one page long
 		\thispagestyle{plain}
 		\begin{center}
-			{\normalsize \MakeUppercase{\univname} \par}% University name in capitals
+			{\normalsize \uppercase{\univname} \par}% University name in capitals
 			\bigskip
 			{\huge\textit{\abstractname} \par}
 			\bigskip
@@ -386,7 +386,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 	#1%added to be able to have abstract more than one page long
 	\thispagestyle{empty}
 	\begin{center}
-		{\normalsize \MakeUppercase{\univname} \par}% University name in capitals
+		{\normalsize \uppercase{\univname} \par}% University name in capitals
 		\bigskip
 		{\huge\textit{Abstract} \par}
 		\bigskip
@@ -397,7 +397,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 		\bigskip
 		{\normalsize\bfseries \@title \par}% Thesis title
 		\medskip
-		{\normalsize \byname{} \authorname \par}% Author name
+		{\normalsize \bynameenglish{} \authorname \par}% Author name
 		\bigskip
 	\end{center}
 }

@@ -83,7 +83,7 @@ Para realizar el preprocesamiento de cada texto se hacen los siguientes pasos:
 
 Luego se realiza un conteo de todas la palabras presentes dentro del corpus de donde se sacan las $N$ primeras palabras para incluirlas en el \gls{bow}.
 
-Luego de esto se generan las etiquetas (\'o \emph{tags} en ingles) que se toman directamente de los textos de entrenamiento, de estos también se les realiza un conteo, que servirán para la predicción de las etiquetas según el contenido del texto.
+Luego de esto se generan las etiquetas (o \emph{tags} en ingles) que se toman directamente de los textos de entrenamiento, de estos también se les realiza un conteo, que servirán para la predicción de las etiquetas según el contenido del texto.
 
 \subsubsection{Conversión de textos a vectores}
 Para realizar la conversión de textos a vectores y así poder representar un texto como un vector se procede a primera realizar una generación de identificadores para cada palabra de manera como se describió en el inicio de la \sectionref{sec:twitter-prediction}.
@@ -99,6 +99,13 @@ Para la generación de los conjuntos se toman las sumatorias generadas de cada t
 
 \subsubsection{Clasificador de regresión logística}
 \todo[inline]{Pendiente}
+La regresion logistica hace parte de uno de los algoritmos mas importantes en \gls{ai}, esta consiste en procesar la entrada de un modelo, que para el caso actual es lineal, que se procesa con una serie de hiper-parámetros que se denominara $\vtheta$ y la entrada del modelo como $\vx$. Se tiene que al realizar una regresión con este modelo se calcula $\vtheta^{\top} \vx$, que da como resultado un valor en $\R$ con rango $(-\infty, \infty)$. La regresión logística simbolizada como $\sigma(x)$ es una función que para una entrada $x$ se tenga un rango de $(0, 1)$, la \equationref{eq:logits-formula} define la función.
+
+\begin{equation} \label{eq:logits-formula}
+  \sigma(x) = \frac{1} {1 + \exp(-x)}
+\end{equation}
+
+Equivalentemente, la regresión logística con modelos lineales se calculan como $\sigma(\vtheta^{\top} \vx)$ ...
 
 \subsubsection{Multiclasificador de One VS Rest}
 \todo[inline]{Pendiente: incluir arquitectura de solución en la \figureref{fig:model1-arch}}

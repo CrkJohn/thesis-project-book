@@ -233,24 +233,24 @@ La función polinomial de similaridad, $K$, la cual es calculada en el espacio o
 En muchas aplicaciones de relaciones entre el conjunto de atributos y la etiqueta es no--determinante. Es decir, la etiqueta de clase de un dato de un conjunto de prueba no puede ser determinado con certeza a pesar de ser un atributo idéntico a los atributos de entrenamiento. Esto puede ser producto de que los datos poseen ruido o la presencia de ciertos factores que afectan la clasificación pero no son incluidos en el análisis. Para esto es crucial el teorema de Bayes, el cual es un principio estadístico que combina el conocimiento previo de las clases con la nueva evidencia que se obtiene de los datos.
 
 \subsection{Teorema de Bayes} \label{subsec:bayestheo}
-El teorema de Bayes dice que para un par de variables aleatorias $\rx$ e $\ry$, donde $p(\rx=x | \ry=y)$ es la probabilidad de que la variable $\rx$ tome el valor $x$ dado que el valor de la variable $\ry$ es $y$. Se tiene entonces la \equationref{eq:bayestheo}.
+El teorema de Bayes dice que para un par de variables aleatorias $\rx$ e $\ry$, donde $P(\rx=x | \ry=y)$ es la probabilidad de que la variable $\rx$ tome el valor $x$ dado que el valor de la variable $\ry$ es $y$. Se tiene entonces la \equationref{eq:bayestheo}.
 \begin{equation} \label{eq:bayestheo}
-  p(\ry | \rx) = \frac{p(\rx | \ry) p(\ry)}{p(\rx)}
+  P(\ry | \rx) = \frac{P(\rx | \ry) P(\ry)}{P(\rx)}
 \end{equation}
 
 \subsubsection{Usando el teorema de Bayes para clasificación}
-Para denotar el problema de clasificación desde una perspectiva estadística se define a $\rx$ como el conjunto de atributos y $\ry$ como el conjunto de etiquetas de clase. Si la etiqueta de clase tiene una relación no--determinante con los atributos, entonces se pueden tomar a $\rx$ y a $\ry$ como variables aleatorias y capturar su relación probabilística con $p(\ry|\rx)$, conocida como la probabilidad posterior para $\ry$, dada su probabilidad previa $p(\ry)$.
+Para denotar el problema de clasificación desde una perspectiva estadística se define a $\rx$ como el conjunto de atributos y $\ry$ como el conjunto de etiquetas de clase. Si la etiqueta de clase tiene una relación no--determinante con los atributos, entonces se pueden tomar a $\rx$ y a $\ry$ como variables aleatorias y capturar su relación probabilística con $P(\ry|\rx)$, conocida como la probabilidad posterior para $\ry$, dada su probabilidad previa $P(\ry)$.
 
-Durante la fase de entrenamiento, es necesario aprender las probabilidades posteriores $p(\ry|\rx)$ para cualquier combinación de $\rx$ y $\ry$ basándose en la información recolectada de los datos de entrenamiento.
+Durante la fase de entrenamiento, es necesario aprender las probabilidades posteriores $P(\ry|\rx)$ para cualquier combinación de $\rx$ y $\ry$ basándose en la información recolectada de los datos de entrenamiento.
 
-Dado que lo que se quiere realizar es una clasificación que represente la probabilidad de que dado un valor de $\rx=x$ este relacionado con que $\ry=y$, se puede reconocer primero que $\rx$ se mantiene constante para lo que son los datos de entrenamiento, y que lo desconocido sea la clasificación $\ry=y$ con probabilidad $p(\ry|\rx)$, al conocer esta probabilidad, un valor de prueba $\rx'$ puede ser clasificado por medio de encontrar la clase $\ry'$ que maximice la probabilidad posterior $p(\ry'|\rx')$.
+Dado que lo que se quiere realizar es una clasificación que represente la probabilidad de que dado un valor de $\rx=x$ este relacionado con que $\ry=y$, se puede reconocer primero que $\rx$ se mantiene constante para lo que son los datos de entrenamiento, y que lo desconocido sea la clasificación $\ry=y$ con probabilidad $P(\ry|\rx)$, al conocer esta probabilidad, un valor de prueba $\rx'$ puede ser clasificado por medio de encontrar la clase $\ry'$ que maximice la probabilidad posterior $P(\ry'|\rx')$.
 
 
 \subsection{Clasificador Na\"{\i}ve Bayes} \label{subsec:naivebayes}
 Un clasificador de Na\"{\i}ve Bayes estima la probabilidad condicional de las clases por medio de suponer que los atributos son condicionalmente independientes, dado la etiqueta de clasificación $y$. La suposición de independencia condicional se puede dar por la \equationref{eq:bayes-conditional-independence}.
 
 \begin{equation} \label{eq:bayes-conditional-independence}
-  p(\rx|\ry=y) = \prod_{i=1}^{d} p(\rx_i|\ry=y)
+  P(\rx|\ry=y) = \prod_{i=1}^{d} P(\rx_i|\ry=y)
 \end{equation}
 
 Donde cada conjunto de atributos $X=\{ X_1, \ldots, X_d \}$ que consiste de $d$ atributos.
@@ -260,6 +260,6 @@ Con la suposición de independencia condicional, en vez de computar la probabili
 Para clasificar un dato de prueba, el clasificador computa la probabilidad posterior para cada clase $Y$ como se muestra en la \equationref{eq:bayes-classifier}.
 
 \begin{equation} \label{eq:bayes-classifier}
-  p(\ry|\rx) = \frac{p(\ry) \prod_{i=1}^{d}p(X_i|\ry)}{p(\rx)}
+  P(\ry|\rx) = \frac{P(\ry) \prod_{i=1}^{d}P(X_i|\ry)}{P(\rx)}
 \end{equation}
 

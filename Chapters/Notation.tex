@@ -30,9 +30,9 @@ $\displaystyle \mI_n$ & Matriz identidad con $n$ filas y $n$ columnas\\
 $\displaystyle \mI$ & Matriz identidad con dimensionalidad implícita por el contexto\\
 $\displaystyle \ve^{(i)}$ & Vector estándar base $[0,\dots,0,1,0,\dots,0]$ con un 1 en la posición $i$\\
 % $\displaystyle \text{diag}(\va)$ & A square, diagonal matrix with diagonal entries given by $\va$\\
-$\displaystyle \ra$ & A scalar random variable\\
-$\displaystyle \rva$ & A vector-valued random variable\\
-$\displaystyle \rmA$ & A matrix-valued random variable\\
+$\displaystyle \ra$ & Una variable aleatoria real\\
+$\displaystyle \rva$ & Un vector de variables aleatorias\\
+$\displaystyle \rmA$ & Una matriz de variables aleatorias\\
 \end{tabular}
 \egroup
 \index{Scalar}
@@ -43,25 +43,26 @@ $\displaystyle \rmA$ & A matrix-valued random variable\\
 
 \vspace{\notationgap}
 \begin{minipage}{\textwidth}
-\centerline{\bf Sets and Graphs}
+\centerline{\bf Conjuntos y Grafos}
 \bgroup
 \def\arraystretch{1.5}
 \begin{tabular}{cp{3.25in}}
-$\displaystyle \sA$ & A set\\
-$\displaystyle \R$ & The set of real numbers \\
+$\displaystyle \sA$ & Un conjunto\\
+$\displaystyle \R$ & El conjunto de números reales \\
+$\displaystyle \Nat$ & El conjunto de números naturales \\
 % NOTE: do not use \R^+, because it is ambiguous whether:
 % - It includes 0
 % - It includes only real numbers, or also infinity.
 % We usually do not include infinity, so we may explicitly write
 % [0, \infty) to include 0
 % (0, \infty) to not include 0
-$\displaystyle \{0, 1\}$ & The set containing 0 and 1 \\
-$\displaystyle \{0, 1, \dots, n \}$ & The set of all integers between $0$ and $n$\\
-$\displaystyle [a, b]$ & The real interval including $a$ and $b$\\
-$\displaystyle (a, b]$ & The real interval excluding $a$ but including $b$\\
-$\displaystyle \sA \backslash \sB$ & Set subtraction, i.e., the set containing the elements of $\sA$ that are not in $\sB$\\
-$\displaystyle \gG$ & A graph\\
-$\displaystyle \parents_\gG(\ervx_i)$ & The parents of $\ervx_i$ in $\gG$
+$\displaystyle \{0, 1\}$ & El conjunto que contiene al 0 y el 1 \\
+$\displaystyle \{0, 1, \dots, n \}$ & El conjunto que contiene todos lo números entre $0$ y $n$\\
+$\displaystyle [a, b]$ & El intervalo real que incluye $a$ y $b$\\
+$\displaystyle (a, b]$ & El intervalo real que no incluye $a$ pero si $b$ \\
+$\displaystyle \sA \backslash \sB$ & Substracción de conjuntos, e.g., el conjunto que contiene los elementos de  $\sA$ que no están en $\sB$\\
+$\displaystyle \gG$ & Un grafo\\
+$\displaystyle \parents_\gG(\ervx_i)$ & El padre de $\ervx_i$ en $\gG$
 \end{tabular}
 \egroup
 \index{Scalar}
@@ -74,33 +75,33 @@ $\displaystyle \parents_\gG(\ervx_i)$ & The parents of $\ervx_i$ in $\gG$
 
 \vspace{\notationgap}
 \begin{minipage}{\textwidth}
-\centerline{\bf Indexing}
+\centerline{\bf Índices}
 \bgroup
 \def\arraystretch{1.5}
 \begin{tabular}{cp{3.25in}}
-$\displaystyle \eva_i$ & Element $i$ of vector $\va$, with indexing starting at 1 \\
-$\displaystyle \eva_{-i}$ & All elements of vector $\va$ except for element $i$ \\
-$\displaystyle \emA_{i,j}$ & Element $i, j$ of matrix $\mA$ \\
-$\displaystyle \mA_{i, :}$ & Row $i$ of matrix $\mA$ \\
-$\displaystyle \mA_{:, i}$ & Column $i$ of matrix $\mA$ \\
+$\displaystyle \eva_i$ & Elemento $i$ del vector $\va$, con índice empezando en 1\\
+$\displaystyle \eva_{-i}$ & Todos los elementos del vector $\va$ a excepción del elemento $i$ \\
+$\displaystyle \emA_{i,j}$ & Elemento $i, j$ de la matriz $\mA$ \\
+$\displaystyle \mA_{i, :}$ & Fila $i$ de la matriz $\mA$ \\
+$\displaystyle \mA_{:, i}$ & Columna $i$ de la matriz $\mA$ \\
 % $\displaystyle \etA_{i, j, k}$ & Element $(i, j, k)$ of a 3-D tensor $\tA$\\
 % $\displaystyle \tA_{:, :, i}$ & 2-D slice of a 3-D tensor\\
-$\displaystyle \erva_i$ & Element $i$ of the random vector $\rva$ \\
+$\displaystyle \erva_i$ & Elemento $i$ del vector aleatorio $\rva$ \\
 \end{tabular}
 \egroup
 \end{minipage}
 
 \vspace{\notationgap}
 \begin{minipage}{\textwidth}
-\centerline{\bf Linear Algebra Operations}
+\centerline{\bf Operaciones de Álgebra Lineal}
 \bgroup
 \def\arraystretch{1.5}
 \begin{tabular}{cp{3.25in}}
-$\displaystyle \mA^\top$ & Transpose of matrix $\mA$ \\
-$\displaystyle \mA^+$ & Moore-Penrose pseudoinverse of $\mA$\\
-$\displaystyle \mA \odot \mB $ & Element-wise (Hadamard) product of $\mA$ and $\mB$ \\
+$\displaystyle \mA^\top$ & Traspuesta de la matriz $\mA$ \\
+% $\displaystyle \mA^+$ & Moore-Penrose pseudoinverse of $\mA$\\
+% $\displaystyle \mA \odot \mB $ & Element-wise (Hadamard) product of $\mA$ and $\mB$ \\
 % Wikipedia uses \circ for element-wise multiplication but this could be confused with function composition
-$\displaystyle \mathrm{det}(\mA)$ & Determinant of $\mA$ \\
+$\displaystyle \mathrm{det}(\mA)$ & Determinante de la matriz $\mA$ \\
 \end{tabular}
 \egroup
 \index{Transpose}
@@ -111,22 +112,22 @@ $\displaystyle \mathrm{det}(\mA)$ & Determinant of $\mA$ \\
 
 \vspace{\notationgap}
 \begin{minipage}{\textwidth}
-\centerline{\bf Calculus}
+\centerline{\bf Calculo}
 \bgroup
 \def\arraystretch{1.5}
 \begin{tabular}{cp{3.25in}}
 % NOTE: the [2ex] on the next line adds extra height to that row of the table.
 % Without that command, the fraction on the first line is too tall and collides
 % with the fraction on the second line.
-$\displaystyle\frac{d y} {d x}$ & Derivative of $y$ with respect to $x$\\ [2ex]
-$\displaystyle \frac{\partial y} {\partial x} $ & Partial derivative of $y$ with respect to $x$ \\
-$\displaystyle \nabla_\vx y $ & Gradient of $y$ with respect to $\vx$ \\
-$\displaystyle \nabla_\mX y $ & Matrix derivatives of $y$ with respect to $\mX$ \\
+$\displaystyle\frac{d y} {d x}$ & Derivada de $y$ con respecto a  $x$\\ [2ex]
+$\displaystyle \frac{\partial y} {\partial x} $ & Derivada parcial de $y$ con respecto a $x$ \\
+$\displaystyle \nabla_\vx y $ & Gradiente de $y$ con respecto a $\vx$ \\
+$\displaystyle \nabla_\mX y $ & Matriz de derivadas de $y$ con respecto a $\mX$ \\
 % $\displaystyle \nabla_\tX y $ & Tensor containing derivatives of $y$ with respect to $\tX$ \\
-$\displaystyle \frac{\partial f}{\partial \vx} $ & Jacobian matrix $\mJ \in \R^{m\times n}$ of $f: \R^n \rightarrow \R^m$\\
-$\displaystyle \nabla_\vx^2 f(\vx)\text{ or }\mH( f)(\vx)$ & The Hessian matrix of $f$ at input point $\vx$\\
-$\displaystyle \int f(\vx) d\vx $ & Definite integral over the entire domain of $\vx$ \\
-$\displaystyle \int_\sS f(\vx) d\vx$ & Definite integral with respect to $\vx$ over the set $\sS$ \\
+% $\displaystyle \frac{\partial f}{\partial \vx} $ & Jacobian matrix $\mJ \in \R^{m\times n}$ of $f: \R^n \rightarrow \R^m$\\
+% $\displaystyle \nabla_\vx^2 f(\vx)\text{ or }\mH( f)(\vx)$ & The Hessian matrix of $f$ at input point $\vx$\\
+$\displaystyle \int f(\vx) d\vx $ & Integral definida sobre un dominio entero $\vx$ \\
+$\displaystyle \int_\sS f(\vx) d\vx$ & Integral definida con respecto a $\vx$ sobre el conjunto $\sS$ \\
 \end{tabular}
 \egroup
 \index{Derivative}
@@ -137,23 +138,22 @@ $\displaystyle \int_\sS f(\vx) d\vx$ & Definite integral with respect to $\vx$ o
 
 \vspace{\notationgap}
 \begin{minipage}{\textwidth}
-\centerline{\bf Probability and Information Theory}
+\centerline{\bf Teoría de Probabilidad e Información}
 \bgroup
 \def\arraystretch{1.5}
 \begin{tabular}{cp{3.25in}}
-$\displaystyle \ra \bot \rb$ & The random variables $\ra$ and $\rb$ are independent\\
-$\displaystyle \ra \bot \rb \mid \rc $ & They are conditionally independent given $\rc$\\
-$\displaystyle P(\ra)$ & A probability distribution over a discrete variable\\
-$\displaystyle p(\ra)$ & A probability distribution over a continuous variable, or over
-a variable whose type has not been specified\\
-$\displaystyle \ra \sim P$ & Random variable $\ra$ has distribution $P$\\% so thing on left of \sim should always be a random variable, with name beginning with \r
-$\displaystyle  \E_{\rx\sim P} [ f(x) ]\text{ or } \E f(x)$ & Expectation of $f(x)$ with respect to $P(\rx)$ \\
-$\displaystyle \Var(f(x)) $ &  Variance of $f(x)$ under $P(\rx)$ \\
-$\displaystyle \Cov(f(x),g(x)) $ & Covariance of $f(x)$ and $g(x)$ under $P(\rx)$\\
-$\displaystyle H(\rx) $ & Shannon entropy of the random variable $\rx$\\
-$\displaystyle \KL ( P \Vert Q ) $ & Kullback-Leibler divergence of P and Q \\
-$\displaystyle \mathcal{N} ( \vx ; \vmu , \mSigma)$ & Gaussian distribution %
-over $\vx$ with mean $\vmu$ and covariance $\mSigma$ \\
+$\displaystyle \ra \bot \rb$ & Las variables aleatorias $\ra$ y $\rb$ son independientes\\
+$\displaystyle \ra \bot \rb \mid \rc $ & Son condicionalmente independientes dado $\rc$\\
+$\displaystyle P(\ra)$ & Una distribución de probabilidad de una variable aleatoria discreta\\
+$\displaystyle p(\ra)$ & Una distribución de probabilidad de una variable aleatoria continua\\
+$\displaystyle \ra \sim P$ & La variable aleatoria $\ra$ tiene distribución $P$\\% so thing on left of \sim should always be a random variable, with name beginning with \r
+% $\displaystyle  \E_{\rx\sim P} [ f(x) ]\text{ or } \E f(x)$ & Expectation of $f(x)$ with respect to $P(\rx)$ \\
+% $\displaystyle \Var(f(x)) $ &  Variance of $f(x)$ under $P(\rx)$ \\
+% $\displaystyle \Cov(f(x),g(x)) $ & Covariance of $f(x)$ and $g(x)$ under $P(\rx)$\\
+% $\displaystyle H(\rx) $ & Shannon entropy of the random variable $\rx$\\
+% $\displaystyle \KL ( P \Vert Q ) $ & Kullback-Leibler divergence of P and Q \\
+$\displaystyle \mathcal{N} ( \vx ; \vmu , \sigma^2)$ & Distribución gaussiana %
+sobre $\vx$ con media $\vmu$ y varianza $\sigma^2$ \\
 \end{tabular}
 \egroup
 \index{Independence}
@@ -166,7 +166,7 @@ over $\vx$ with mean $\vmu$ and covariance $\mSigma$ \\
 
 \vspace{\notationgap}
 \begin{minipage}{\textwidth}
-\centerline{\bf Functions}
+\centerline{\bf Funciones}
 \bgroup
 \def\arraystretch{1.5}
 \begin{tabular}{cp{3.25in}}

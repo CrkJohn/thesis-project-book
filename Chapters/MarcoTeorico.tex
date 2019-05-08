@@ -7,16 +7,16 @@
 
 La Web contiene una gran cantidad de opiniones respecto a productos, políticos, y mucho mas, expresado en forma de noticias, sitios de opinión, reseñas en tiendas online, redes sociales. Como resultado, el problema de ``Minería de opinión'' ha obtenido una atención creciente en las ultimas dos décadas y es un factor decisivo para las nuevas organizaciones (como es mencionado en \cite{Popescu2007}). De esto mismo partimos que el análisis de textos para extraer el significado y demás componentes extraíbles del texto componen un factor que debe considerarse al momento de realizar decisiones, de manera que los avances hechos hasta ahora tienen como meta una aplicación practica de lo que se conoce como \glsentrylong{nlp}.
 
-Luego de los ataques terroristas del 11 de Septiembre de 2001 en Estados Unidos, se realizaron fuertes criticas respecto a la inteligencia, donde el director del FBI~\emph{Robert~S.~Mueller} indico que el principal problema que la agencia tuvo fue que se enfocaba demasiado en lidiar con el crimen luego de que fue cometido y ponía muy poco énfasis en prevenirlo (adaptado de \cite{mena2003investigative}). Es por esto que el uso de \gls{nlp} para temas de seguridad como también de metodologías de \glsentrylong{machinel} y \glsentrylong{deepl} han sido ampliamente utilizadas en ámbito de seguridad luego de estos eventos.
+Luego de los ataques terroristas del 11 de Septiembre de 2001 en Estados Unidos, se realizaron fuertes criticas respecto a la inteligencia, donde el director del FBI llamado \mbox{\emph{Robert~S.~Mueller}} indico que el principal problema que la agencia tuvo fue que se enfocaba demasiado en lidiar con el crimen luego de que fue cometido y ponía muy poco énfasis en prevenirlo (adaptado de \cite{mena2003investigative}). Es por esto que el uso de \gls{nlp} para temas de seguridad como también de metodologías de \glsentrylong{machinel} y \glsentrylong{deepl} han sido ampliamente utilizadas en ámbito de seguridad luego de estos eventos.
 
 Para obtener una mejor inteligencia se necesito de mejores tecnologías a las que se tenían entonces (véase \cite[p\'ag 2]{mena2003investigative}):
 \begin{itemize}
-\item Integración de datos (\'o \gls{dataintegration} en ingl\'es)
-\item Análisis de vínculos (\'o \gls{linkanalisys} en ingl\'es)
-\item Agentes de software (\'o \gls{softwareagents} en ingl\'es)
-\item Minería de texto (\'o \gls{textmining} en ingl\'es)
-\item Redes neuronales (\'o \gls{neuralnetwork} en ingl\'es)
-\item Algoritmos de \glsentrylong{machinel} (\'o \gls{mlalgorithms} en ingl\'es)
+\item Integración de datos (\'o \gls{dataintegration} en ingles)
+\item Análisis de vínculos (\'o \gls{linkanalisys} en ingles)
+\item Agentes de software (\'o \gls{softwareagents} en ingles)
+\item Minería de texto (\'o \gls{textmining} en ingles)
+\item Redes neuronales (\'o \gls{neuralnetwork} en ingles)
+\item Algoritmos de \glsentrylong{machinel} (\'o \gls{mlalgorithms} en ingles)
 \end{itemize}
 
 % ================================================================
@@ -40,13 +40,13 @@ Es el software que realiza tareas asignadas por el usuario de manera autónoma, 
 De acuerdo con \cite{murphymachinel}, se define como un conjunto de métodos que pueden detectar patrones automáticamente en datos, y luego usar los patrones descubiertos para predecir los datos futuros, o realizar otra clase de toma de decisiones con un grado de incertidumbre, por tal motivo es necesario el uso de teoría de probabilidad, que puede ser aplicada a cualquier tipo de problema que involucra incertidumbre.
 
 \subsection{Tipos de \glsentrylong{machinel}}
-\gls{machinel} esta principalmente dividida en dos tipos. El método predictivo o bien \textbf{aprendizaje supervisado} (\gls{supervisedl}), donde el objetivo es aprender un mapeo de las entradas $\mathbf{x}$ a las salidas $y$, dado un conjunto de pares de etiquetas de entrada--salida $D = \{(\mathbf{x}_i, y_i)\}_{i=1}^{N}$. $D$ se le llama el conjunto de entrenamiento y $N$ es el numero de muestras de entrenamiento.
+\gls{machinel} esta principalmente dividida en dos tipos. El método predictivo o bien \textbf{aprendizaje supervisado} (\gls{supervisedl}), donde el objetivo es aprender un mapeo de las entradas $\vx$ a las salidas $y$, dado un conjunto de pares de etiquetas de entrada--salida $D = \{(\vx_i, y_i)\}_{i=1}^{N}$. $D$ se le llama el conjunto de entrenamiento y $N$ es el numero de muestras de entrenamiento.
 
-En la forma mas sencilla, cada entrada de entrenamiento $\mathbf{x}_i$ es un vector $D$--dimensional de números, a estos se le llaman \emph{características} o \emph{atributos}.
+En la forma mas sencilla, cada entrada de entrenamiento $\vx_i$ es un vector $D$--dimensional de números, a estos se le llaman \emph{características} o \emph{atributos}.
 
-De manera similar la forma de la salida puede ser en principio cualquier cosa, pero la mayoría de métodos asumen que $y_i$ es una variable \emph{categórica} o \emph{nominal} de algún conjunto finito, $y_i \in \{1,\ldots,C\}$, o que $y_i$ es un escalar real, $y_i \in \mathbb{R}$. Cuando la variable $y_i$ es categórica, al problema se le reconoce como \textbf{clasificación} o \textbf{reconocimiento de patrones}, y cuando es un valor real se le conoce como un problema de \textbf{regresión}.
+De manera similar la forma de la salida puede ser en principio cualquier cosa, pero la mayoría de métodos asumen que $y_i$ es una variable \emph{categórica} o \emph{nominal} de algún conjunto finito, $y_i \in \{1,\ldots,C\}$, o que $y_i$ es un escalar real, $y_i \in \R$. Cuando la variable $y_i$ es categórica, al problema se le reconoce como \textbf{clasificación} o \textbf{reconocimiento de patrones}, y cuando es un valor real se le conoce como un problema de \textbf{regresión}.
 
-El segundo tipo principal de \gls{machinel} es el descriptivo o \textbf{aprendizaje no--supervisado} (\gls{unsupervisedl}), en este solo están disponibles los datos de entrada $D = \{\mathbf{x}_i\}_{i=1}^{N}$, y la meta es encontrar ``patrones interesantes'' en los datos. Este es un problema mucho menos definido, debido a que no se conocen los tipos de patrones que se quieren encontrar, y no hay una métrica obvia de error (no como aprendizaje supervisado en la que se puede comparar nuestra predicción de $y$ para un $\mathbf{x}$ con el valor observado).
+El segundo tipo principal de \gls{machinel} es el descriptivo o \textbf{aprendizaje no--supervisado} (\gls{unsupervisedl}), en este solo están disponibles los datos de entrada $D = \{\vx_i\}_{i=1}^{N}$, y la meta es encontrar ``patrones interesantes'' en los datos. Este es un problema mucho menos definido, debido a que no se conocen los tipos de patrones que se quieren encontrar, y no hay una métrica obvia de error (no como aprendizaje supervisado en la que se puede comparar nuestra predicción de $y$ para un $\vx$ con el valor observado).
 
 Un tercer tipo de aprendizaje de maquina es conocido como \textbf{\gls{reinforcedl}}, el cual es un tipo menos usado. Este es útil cuando se quiere aprender como actuar o comportarse cuando se recibe una recompensa ocasional o una señal de castigo.
 
@@ -76,12 +76,12 @@ Si el modelo esta dando como resultado muchos falsos positivos, lo que se debe h
 Este método de sistemas de detección de anomalía también es brevemente tratada en \cite{osint} con una representación de hiper-planos, que es equivalente con este descrito.
 
 % ================================================================
-\section{Mineria de datos (\glsentrylong{datamining})} \label{sec:datamining}
+\section{Minería de datos (\glsentrylong{datamining})} \label{sec:datamining}
 Según \cite{tan2005introduction}, la minería de datos se define como el proceso de descubrir información útil en repositorios grandes de datos. Las técnicas de minería de datos son desplegadas para limpiar grandes bases de datos para encontrar patrones nuevos y útiles que de lo contrario podrían permanecer desconocidos. También ofrecen capacidades para predecir la salida de observaciones futuras, tales como predecir si un cliente nuevo gastara mas de \$100 en una tienda.
 
 No todas las tareas de descubrimiento de información son considerados como \gls{datamining}. Por ejemplo, realizar una consulta de campos individuales usando un sistema de base de datos o encontrar una pagina web por medio de una búsqueda en Internet son tareas relacionadas con \emph{adquisición de información}.
 
-\subsection{Mineria de texto (\glsentrylong{textmining})} \label{subsec:NLP}
+\subsection{Minería de texto (\glsentrylong{textmining})} \label{subsec:NLP}
 Es un subcampo de Inteligencia Artificial conocida como \glsentrylong{nlp}, en donde las herramientas de minería de datos pueden capturar rasgos críticos del contenido de un documento basado en el análisis de sus características lingüísticas.
 
 La mayoría de los crímenes son electrónicos por naturaleza, por lo que se dejan rastros textuales que investigadores pueden seguir y analizar. Estas se enfocan en el descubrimiento de relaciones en texto no--estructurado y pueden ser aplicados al problema de \emph{búsqueda} y \emph{localización de palabras clave}.
@@ -142,7 +142,7 @@ El estudio de redes neuronales artificiales fue inspirado por los intentos de si
 De manera análoga a la estructura del cerebro humano, una \gls{neuralnetwork} se compone de una estructura interconectada de nodos y vínculos directos.
 
 \subsection{Mapa autoorganizado (\glsentrylong{som})} \label{subsec:SOM}
-El objetivo principal de los \gls{som} es de transformar una patrón de entrada $m$--dimensional en un mapa discreto uni-- o bi--dimensional, donde sus principales características es que es un algoritmo que se basa en \gls{unsupervisedl}, es \gls{feedforward}, tiene una sola capa de neuronas donde su propósito es realizar \gls{clustering} y una reducción de dimensionalidad sobre los datos de una forma topologicamente ordenada.
+El objetivo principal de los \gls{som} es de transformar una patrón de entrada $m$--dimensional en un mapa discreto uni-- o bi--dimensional, donde sus principales características es que es un algoritmo que se basa en \gls{unsupervisedl}, es \gls{feedforward}, tiene una sola capa de neuronas donde su propósito es realizar \gls{clustering} y una reducción de dimensionalidad sobre los datos de una forma topológicamente ordenada.
 
 Los \gls{som} tienen tres características distintivas:
 \begin{itemize}
@@ -151,7 +151,7 @@ Los \gls{som} tienen tres características distintivas:
 \item {\bf Adaptación:} la neurona ganadora como también sus vecinas tendrán sus pesos asociados actualizados, y se tiene que los vecinos entre mas cerca estén del ganador, mayor es el grado de adaptación.
 \end{itemize}
 
-El algoritmo de aprendizaje de \gls{som} parte de primero inicializar los pesos de las $o$ neuronas con pesos aleatorios pequeños de una distribución de probabilidad aleatoria o uniforme, donde cada vector de entrada se define como $x = [x_1, \ldots, x_m]^{T} \in \mathbb{R}^{m}$ y la entrada general de $N$ patrones como $\mathbf{X}^{m \times N}$, el vector de pesos de la neurona $i$ es $\mathbf{w}_i = [w_{i1}, \ldots, w_{im}] \in \mathbb{R}^{1 \times m}$, con la matriz de pesos $\mathbf{W}^{o \times m}$.
+El algoritmo de aprendizaje de \gls{som} parte de primero inicializar los pesos de las $o$ neuronas con pesos aleatorios pequeños de una distribución de probabilidad aleatoria o uniforme, donde cada vector de entrada se define como $\vx = [x_1, \ldots, x_m]^{\top} \in \R^{m}$ y la entrada general de $N$ patrones como $\mX^{m \times N}$, el vector de pesos de la neurona $i$ es $\vw_i = [w_{i1}, \ldots, w_{im}] \in \R^{1 \times m}$, con la matriz de pesos $\mW^{o \times m}$.
 
 Para alcanzar el objetivo de \emph{competencia}, se realiza por cada patrón de entrada $x_i$ una comparación con cada uno de los pesos de las $o$ neuronas y se establece la de menor distancia respecto $x_i$ (típicamente la distancia Euclidiana), dejando un ganador $winner$, tal como en la \equationref{eq:som-competition}.
 \begin{equation} \label{eq:som-competition}
@@ -165,9 +165,9 @@ Luego de establecer la neurona ganadora, se realiza el paso para alcanzar la \em
 
 Parte importante del proceso de convergencia del \gls{som} es que a medida que avanzan las iteraciones $t$ del algoritmo el área de afectación se va reduciendo como parte del proceso de adaptación, por lo que definimos $\sigma(t) = \sigma_0 \text{exp}(-t / \tau_1)$, donde $\tau_1$ es una constante heurística y $\sigma_0$ la dimensión del mapa \gls{som}.
 
-Finalmente para alcanzar la \emph{adaptación} se realiza una actualización de los pesos de la matriz $\mathbf{W}$ en base a la influencia de área $\sigma(t)$ y de una tasa de aprendizaje $\alpha(t) = \alpha_0 \text{exp}(-t/ \tau_2)$, donde $\tau_2$ es otra constante heurística y $\alpha_0$ es una constante de aprendizaje inicial, que debe ser $0 \le \alpha_0 \le 1$, la actualización se describe por la \equationref{eq:som-adaptation} y el proceso puede ser visto gráficamente en la \figureref{fig:som-adap-proc}, tanto de forma uni-- como bi--dimensional.
+Finalmente para alcanzar la \emph{adaptación} se realiza una actualización de los pesos de la matriz $\mW$ en base a la influencia de área $\sigma(t)$ y de una tasa de aprendizaje $\lr(t) = \lr_0 \text{exp}(-t/ \tau_2)$, donde $\tau_2$ es otra constante heurística y $\lr_0$ es una constante de aprendizaje inicial, que debe ser $0 \le \lr_0 \le 1$, la actualización se describe por la \equationref{eq:som-adaptation} y el proceso puede ser visto gráficamente en la \figureref{fig:som-adap-proc}, tanto de forma uni-- como bi--dimensional.
 \begin{equation} \label{eq:som-adaptation}
-  w_j(t+1) = w_j(t) + \alpha(t) h_{j, winner}(t)\Big[x_i-w_j(t)\Big]
+  w_j(t+1) = w_j(t) + \lr(t) h_{j, winner}(t)\Big[x_i-w_j(t)\Big]
 \end{equation}
 
 \begin{figure}[H]
@@ -178,9 +178,9 @@ Finalmente para alcanzar la \emph{adaptación} se realiza una actualización de 
 \label{fig:som-adap-proc}
 \end{figure}
 
-Luego de que el algoritmo de aprendizaje termina de realizar las iteraciones, la salida de este es la matriz de pesos $\mathbf{W}$, en la \figureref{fig:som-impl-example} se puede apreciar una aproximación del algoritmo con un mapa uni--dimensional tratando de aproximar una función sinusoidal con ruido adicionado en un gráfico 2D.
+Luego de que el algoritmo de aprendizaje termina de realizar las iteraciones, la salida de este es la matriz de pesos $\mW$, en la \figureref{fig:som-impl-example} se puede apreciar una aproximación del algoritmo con un mapa uni--dimensional tratando de aproximar una función sinusoidal con ruido adicionado en un gráfico 2D.
 
-En la \figureref{fig:som-example} se puede ver una aplicacion de los \gls{som}, en donde se realiza una clusterizacion de casos de homicidios donde los parametros son caracteristicas de los homicidios, segun \cite{mena2003investigative} este resultado da una buena aproximacion para sospechar de que estos son cometidos por personas distintas o si bien estan siendo perpetrados por un mismo individuo o grupo.
+En la \figureref{fig:som-example} se puede ver una aplicación de los \gls{som}, en donde se realiza una clusterizacion de casos de homicidios donde los parametros son características de los homicidios, según \cite{mena2003investigative} este resultado da una buena aproximación para sospechar de que estos son cometidos por personas distintas o si bien están siendo perpetrados por un mismo individuo o grupo.
 
 \begin{figure}[H]
 \centering
@@ -233,33 +233,33 @@ La función polinomial de similaridad, $K$, la cual es calculada en el espacio o
 En muchas aplicaciones de relaciones entre el conjunto de atributos y la etiqueta es no--determinante. Es decir, la etiqueta de clase de un dato de un conjunto de prueba no puede ser determinado con certeza a pesar de ser un atributo idéntico a los atributos de entrenamiento. Esto puede ser producto de que los datos poseen ruido o la presencia de ciertos factores que afectan la clasificación pero no son incluidos en el análisis. Para esto es crucial el teorema de Bayes, el cual es un principio estadístico que combina el conocimiento previo de las clases con la nueva evidencia que se obtiene de los datos.
 
 \subsection{Teorema de Bayes} \label{subsec:bayestheo}
-El teorema de Bayes dice que para un par de variables aleatorias $X$ y $Y$ y que $P(X=x | Y=y)$ la probabilidad de que la variable $X$ tome el valor $x$ dado que el valor de la variable $Y$ es $y$. Se tiene entonces la \equationref{eq:bayestheo}.
+El teorema de Bayes dice que para un par de variables aleatorias $\rx$ e $\ry$, donde $p(\rx=x | \ry=y)$ es la probabilidad de que la variable $\rx$ tome el valor $x$ dado que el valor de la variable $\ry$ es $y$. Se tiene entonces la \equationref{eq:bayestheo}.
 \begin{equation} \label{eq:bayestheo}
-  P(Y | X) = \frac{P(X | Y) P(Y)}{P(X)}
+  p(\ry | \rx) = \frac{p(\rx | \ry) p(\ry)}{p(\rx)}
 \end{equation}
 
 \subsubsection{Usando el teorema de Bayes para clasificación}
-Para denotar el problema de clasificación desde una perspectiva estadística se define a $X$ como el conjunto de atributos y $Y$ como el conjunto de etiquetas de clase. Si la etiqueta de clase tiene una relación no--determinante con los atributos, entonces se pueden tomar a $X$ y a $Y$ como variables aleatorias y capturar su relación probabilística con $P(Y|X)$, conocida como la probabilidad posterior para $Y$, dada su probabilidad previa $P(Y)$.
+Para denotar el problema de clasificación desde una perspectiva estadística se define a $\rx$ como el conjunto de atributos y $\ry$ como el conjunto de etiquetas de clase. Si la etiqueta de clase tiene una relación no--determinante con los atributos, entonces se pueden tomar a $\rx$ y a $\ry$ como variables aleatorias y capturar su relación probabilística con $p(\ry|\rx)$, conocida como la probabilidad posterior para $\ry$, dada su probabilidad previa $p(\ry)$.
 
-Durante la fase de entrenamiento, es necesario aprender las probabilidades posteriores $P(Y|X)$ para cualquier combinación de $X$ y $Y$ basándose en la información recolectada de los datos de entrenamiento.
+Durante la fase de entrenamiento, es necesario aprender las probabilidades posteriores $p(\ry|\rx)$ para cualquier combinación de $\rx$ y $\ry$ basándose en la información recolectada de los datos de entrenamiento.
 
-Dado que lo que se quiere realizar es una clasificación que represente la probabilidad de que dado un valor de $X=x$ este relacionado con que $Y=y$, se puede reconocer primero que $X$ se mantiene constante para lo que son los datos de entrenamiento, y que lo desconocido sea la clasificación $Y=y$ con probabilidad $P(Y|X)$, al conocer esta probabilidad, un valor de prueba $X'$ puede ser clasificado por medio de encontrar la clase $Y'$ que maximice la probabilidad posterior $P(Y'|X')$.
+Dado que lo que se quiere realizar es una clasificación que represente la probabilidad de que dado un valor de $\rx=x$ este relacionado con que $\ry=y$, se puede reconocer primero que $\rx$ se mantiene constante para lo que son los datos de entrenamiento, y que lo desconocido sea la clasificación $\ry=y$ con probabilidad $p(\ry|\rx)$, al conocer esta probabilidad, un valor de prueba $\rx'$ puede ser clasificado por medio de encontrar la clase $\ry'$ que maximice la probabilidad posterior $p(\ry'|\rx')$.
 
 
 \subsection{Clasificador Na\"{\i}ve Bayes} \label{subsec:naivebayes}
 Un clasificador de Na\"{\i}ve Bayes estima la probabilidad condicional de las clases por medio de suponer que los atributos son condicionalmente independientes, dado la etiqueta de clasificación $y$. La suposición de independencia condicional se puede dar por la \equationref{eq:bayes-conditional-independence}.
 
 \begin{equation} \label{eq:bayes-conditional-independence}
-  P(X|Y=y) = \prod_{i=1}^{d} P(X_i|Y=y)
+  p(\rx|\ry=y) = \prod_{i=1}^{d} p(\rx_i|\ry=y)
 \end{equation}
 
 Donde cada conjunto de atributos $X=\{ X_1, \ldots, X_d \}$ que consiste de $d$ atributos.
 \subsubsection{Como funciona el clasificador Na\"{\i}ve Bayes}
-Con la suposición de independencia condicional, en vez de computar la probabilidad condicional de clases para cada combinación de $X$, solo se debe realizar para establecer la probabilidad condicional de cada $X_i$, dado $Y$.
+Con la suposición de independencia condicional, en vez de computar la probabilidad condicional de clases para cada combinación de $X$, solo se debe realizar para establecer la probabilidad condicional de cada $X_i$, dado $\ry$.
 
 Para clasificar un dato de prueba, el clasificador computa la probabilidad posterior para cada clase $Y$ como se muestra en la \equationref{eq:bayes-classifier}.
 
 \begin{equation} \label{eq:bayes-classifier}
-  P(Y|X) = \frac{P(Y) \prod_{i=1}^{d}P(X_i|Y)}{P(X)}
+  p(\ry|\rx) = \frac{p(\ry) \prod_{i=1}^{d}p(X_i|\ry)}{p(\rx)}
 \end{equation}
 

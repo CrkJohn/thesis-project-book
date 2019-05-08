@@ -29,16 +29,16 @@ Como parte de la propuesta se proponen \nmodels modelos para tratar diferentes a
 \label{fig:proposal-arch}
 \end{figure}
 
-\subsection{Predicción de etiquetas de Twitter con modelos lineales} \label{sec:twitter-prediction}
+\subsection{Modelo 1: Predicción de etiquetas de Twitter con modelos lineales} \label{sec:twitter-prediction}
 En Twitter, las publicaciones que se realizan tienen la posibilidad de incluir menciones de temas de tendencia por el conocido \emph{hashtag}, escrito como \texttt{\#Tema}, y tiene la gran utilidad de realizar una mención explicita del tema que se quiere tratar y donde además la tarea de encontrar textos directamente relacionados con un tema son fácilmente localizables.
 
 Así mismo, en la literatura de \gls{nlp} es muy común el uso de diferentes representaciones de palabras o conjuntos de palabras. Una representación de palabras típicas es por medio de los \gls{bow}, donde se establece un diccionario de palabras de tamaño $N$, y donde cada palabra tiene un vector que lo representa. A cada palabra se le asigna un identificador único en ese diccionario, por lo que existiría una traducción de palabra a identificador y una secuencia de palabras para poder ser recuperado por medio del índice, como se muestra en la \equationref{eq:bow-repr1} y la \equationref{eq:bow-repr2}.
 \begin{equation} \label{eq:bow-repr1}
-  \text{word2idx} = \Big\{(\text{word}_i, i) : \forall i \in [1, \ldots, N] \Big\}
+  \text{word2idx} = \Big\{(\text{word}_i, i) : \forall i \in \{1, \ldots, N\} \Big\}
 \end{equation}
 
 \begin{equation} \label{eq:bow-repr2}
-  \text{idx2word} = \Big[\text{word}_i\Big], \forall i \in [1, \ldots, N]
+  \text{idx2word} = \Big[\text{word}_i\Big], \forall i \in \{1, \ldots, N\}
 \end{equation}
 
 Otra representación común en \gls{nlp} es la de \gls{tfidf}, que se divide en dos partes, expresadas en las \equationref{eq:tf-repr}, la \equationref{eq:idf-repr} y la composición de ambas en la \equationref{eq:tfidf-repr}, $D$ es el corpus de palabras. Este consiste en penalizar palabras que ocurren mucho en un documento pero no mucho en el corpus o bien de penalizar la palabras que se repiten poco en un documento pero se repiten mucho en el corpus, por lo que un punto medio entre ambos es recompensado.
@@ -88,7 +88,11 @@ Luego de esto se generan las etiquetas (\'o \emph{tags} en ingles) que se toman 
 \subsubsection{Conversión de textos a vectores}
 Para realizar la conversión de textos a vectores y así poder representar un texto como un vector se procede a primera realizar una generación de identificadores para cada palabra de manera como se describió en el inicio de la \sectionref{sec:twitter-prediction}.
 
-La manera en que se representa un texto en forma de vector es por medio de la sumatoria de los vectores que representan cada palabra.
+La manera en que se representa un texto en forma de vector $\vs$ es por medio de la sumatoria de los vectores que representan cada palabra como se representa en la \equationref{eq:bow-word-vector-sum}, recuérdese que $\ve^{(i)}$ es un vector con un $1$ en la posición $i$ y ceros en el resto del vector.
+
+\begin{equation} \label{eq:bow-word-vector-sum}
+  \vs = \mathlarger{\mathlarger{\sum}}_{(\text{word}, i) \in \text{word2idx}} \ve^{(i)}, \text{word} \in d
+\end{equation}
 
 \subsubsection{Generación del conjunto de entrenamiento, validación y pruebas}
 Para la generación de los conjuntos se toman las sumatorias generadas de cada tweet en su forma de vector y se coloca en una matriz de $\mT^{m \times N}$, donde $m$ son el numero de muestras de Twitter y $N$ el tamaño del Corpus.
@@ -109,11 +113,11 @@ Para la generación de los conjuntos se toman las sumatorias generadas de cada t
 
 %----------------------------------------------------------------------------------------
 
-\subsection{Reconocimiento de \glsentrylong{namedent} con redes \glsentrylong{lstm}}
+\subsection{Modelo 2: Reconocimiento de \glsentrylong{namedent} con redes \glsentrylong{lstm}}
 \todo{Pendiente} Bla
 \todo{incluir diagramas de pagina de Google}
 
-\subsection{Búsqueda de tweets relacionados con \emph{embeddings} de StarSpace}
+\subsection{Modelo 3: Búsqueda de tweets relacionados con \emph{embeddings} de StarSpace}
 \todo{Pendiente} Bla
 
 

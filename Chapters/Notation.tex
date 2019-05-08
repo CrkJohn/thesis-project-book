@@ -9,7 +9,6 @@
 \vspace{\notationgap}
 % Need to use minipage to keep title of table on same page as table
 {\begin{center} \large Esta notación es una adaptación de la presentada en \cite{deeplearning}.\end{center}}
-\todo{Incluir solo la notación usada}
 
 \begin{minipage}{\textwidth}
 % This is a hack to put a little title over the table
@@ -170,17 +169,16 @@ sobre $\vx$ con media $\vmu$ y varianza $\sigma^2$ \\
 \bgroup
 \def\arraystretch{1.5}
 \begin{tabular}{cp{0.7\textwidth}}
-$\displaystyle f: \sA \rightarrow \sB$ & The function $f$ with domain $\sA$ and range $\sB$\\
-$\displaystyle f \circ g $ & Composition of the functions $f$ and $g$ \\
-  $\displaystyle f(\vx ; \vtheta) $ & A function of $\vx$ parametrized by $\vtheta$.
-  (Sometimes we write $f(\vx)$ and omit the argument $\vtheta$ to lighten notation) \\
-$\displaystyle \log x$ & Natural logarithm of $x$ \\
-$\displaystyle \sigma(x)$ & Logistic sigmoid, $\displaystyle \frac{1} {1 + \exp(-x)}$ \\
-$\displaystyle \zeta(x)$ & Softplus, $\log(1 + \exp(x))$ \\
-$\displaystyle || \vx ||_p $ & $\normlp$ norm of $\vx$ \\
-$\displaystyle || \vx || $ & $\normltwo$ norm of $\vx$ \\
-$\displaystyle x^+$ & Positive part of $x$, i.e., $\max(0,x)$\\
-$\displaystyle \1_\mathrm{condition}$ & is 1 if the condition is true, 0 otherwise\\
+$\displaystyle f: \sA \rightarrow \sB$ & La función $f$ con dominio $\sA$ y rango $\sB$\\
+$\displaystyle f \circ g $ & Composición de las funciones $f$ y $g$ \\
+  $\displaystyle f(\vx ; \vtheta) $ & Una función de $\vx$ parametrizado por $\vtheta$. \\
+$\displaystyle \log x$ & Logaritmo natural de $x$ \\
+% $\displaystyle \sigma(x)$ & Logistic sigmoid, $\displaystyle \frac{1} {1 + \exp(-x)}$ \\
+% $\displaystyle \zeta(x)$ & Softplus, $\log(1 + \exp(x))$ \\
+$\displaystyle \| \vx \|_p $ & $\normlp$--norma de $\vx$ \\
+$\displaystyle \| \vx \| $ & $\normltwo$--norma de $\vx$ \\
+$\displaystyle x^+$ & Parte positiva de $x$, e.g., $\max(0,x)$\\
+$\displaystyle \1_\mathrm{condition}$ & Es 1 si \texttt{condition} es verdadero, 0 de lo contrario\\
 \end{tabular}
 \egroup
 \index{Sigmoid}
@@ -197,16 +195,16 @@ $\displaystyle \1_\mathrm{condition}$ & is 1 if the condition is true, 0 otherwi
 
 \vspace{\notationgap}
 \begin{minipage}{\textwidth}
-\centerline{\bf Datasets and Distributions}
+\centerline{\bf Datasets}
 \bgroup
 \def\arraystretch{1.5}
 \begin{tabular}{cp{0.7\textwidth}}
-$\displaystyle \pdata$ & The data generating distribution\\
-$\displaystyle \ptrain$ & The empirical distribution defined by the training set\\
-$\displaystyle \sX$ & A set of training examples\\
-$\displaystyle \vx^{(i)}$ & The $i$-th example (input) from a dataset\\
-$\displaystyle y^{(i)}\text{ or }\vy^{(i)}$ & The target associated with $\vx^{(i)}$ for supervised learning\\
-$\displaystyle \mX$ & The $m \times n$ matrix with input example $\vx^{(i)}$ in row $\mX_{i,:}$\\
+% $\displaystyle \pdata$ & The data generating distribution\\
+% $\displaystyle \ptrain$ & The empirical distribution defined by the training set\\
+$\displaystyle \sX$ & Un conjunto de muestras de entrenamiento\\
+$\displaystyle \vx^{(i)}$ & La $i$-\'esima muestra (entrada) de un Dataset\\
+$\displaystyle y^{(i)}\text{ or }\vy^{(i)}$ & El objetivo asociado con $\vx^{(i)}$ para aprendizaje supervisado\\
+$\displaystyle \mX$ & La matriz de $m \times n$ con muestra de entrada $\vx^{(i)}$ en la fila $\mX_{i,:}$\\
 \end{tabular}
 \egroup
 \end{minipage}

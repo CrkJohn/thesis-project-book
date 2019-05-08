@@ -15,15 +15,15 @@ La propuesta consta de a aplicación de modelos de \glsentrytext{nlp} para el de
 \todo{Pendiente}
 
 \section{Adquisición de datos (Data acquisition)}
-\todo{Pendiente}
+\todo[inline]{Incluir proceso de recolección por el API de Twitter o usando los datasets que estan en Archive}
 
 \section{Modelamiento (Modelling)}
 Como parte de la propuesta se proponen \nmodels modelos para tratar diferentes aspectos en perfilado de donde se representan los diferentes modelos en la \figureref{fig:proposal-arch}.
 
 \begin{figure}[H]
   \centering
-  \missingfigure{Hacer la arquitectura en yEd}
-% \includegraphics[scale=0.5]{Figures/som-implementation-example.png}
+  % \missingfigure{Hacer la arquitectura en yEd}
+  \includegraphics[width=\textwidth]{Figures/general-architecture.pdf}
 \decoRule
 \caption[Arquitectura de propuesta]{Arquitectura de propuesta.}
 \label{fig:proposal-arch}
@@ -91,13 +91,21 @@ Para realizar la conversión de textos a vectores y así poder representar un te
 La manera en que se representa un texto en forma de vector es por medio de la sumatoria de los vectores que representan cada palabra.
 
 \subsubsection{Generación del conjunto de entrenamiento, validación y pruebas}
-Para la generación de los conjuntos se toman las sumatorias generadas de cada tweet en su forma de vector y se coloca en una matriz de $T^{m \times N}$, donde $m$ son el numero de muestras de Twitter y $N$ el tamaño del Corpus.
+Para la generación de los conjuntos se toman las sumatorias generadas de cada tweet en su forma de vector y se coloca en una matriz de $\mT^{m \times N}$, donde $m$ son el numero de muestras de Twitter y $N$ el tamaño del Corpus.
 
 \subsubsection{Clasificador de regresión logística}
-\todo{Pendiente} Bla
+\todo[inline]{Pendiente}
 
 \subsubsection{Multiclasificador de One VS Rest}
-\todo{Pendiente} Bla
+\todo[inline]{Pendiente: incluir arquitectura de solución en la \figureref{fig:model1-arch}}
+\begin{figure}[H]
+  \centering
+  \missingfigure{Hacer la arquitectura en yEd}
+  % \includegraphics[width=\textwidth]{Figures/general-architecture.pdf}
+\decoRule
+\caption[Arquitectura de Modelo 1]{Arquitectura de Modelo 1.}
+\label{fig:model1-arch}
+\end{figure}
 
 %----------------------------------------------------------------------------------------
 

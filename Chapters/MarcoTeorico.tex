@@ -96,10 +96,10 @@ La función objetivo también se define informalmente como un \emph{modelo de cl
 \subsubsection{Metodologías de clasificación} \label{subsubsec:classmethods}
 Existen muchos métodos para la clasificación de datos no--estructurados, entre los descritos aquí están:
 \begin{itemize}
-\item Clasificador basado en reglas (véase \ref{sec:KBS})
-\item Redes neuronales artificiales (véase \ref{sec:ANN})
-\item Maquinas de soporte vectorial (véase \ref{sec:SVM})
-\item Clasificador de Na\"{\i}ve Bayes (véase \ref{subsec:naivebayes})
+\item Clasificador basado en reglas (véase la \sectionref{sec:KBS})
+\item Redes neuronales artificiales (véase la \sectionref{sec:ANN})
+\item Maquinas de soporte vectorial (véase la \sectionref{sec:SVM})
+\item Clasificador de Na\"{\i}ve Bayes (véase la \sectionref{subsec:naivebayes})
 \end{itemize}
 
 \subsection{Clustering} \label{subsec:clustering}
@@ -153,12 +153,12 @@ Los \gls{som} tienen tres características distintivas:
 
 El algoritmo de aprendizaje de \gls{som} parte de primero inicializar los pesos de las $o$ neuronas con pesos aleatorios pequeños de una distribución de probabilidad aleatoria o uniforme, donde cada vector de entrada se define como $\vx = [x_1, \ldots, x_m]^{\top} \in \R^{m}$ y la entrada general de $N$ patrones como $\mX^{m \times N}$, el vector de pesos de la neurona $i$ es $\vw_i = [w_{i1}, \ldots, w_{im}] \in \R^{1 \times m}$, con la matriz de pesos $\mW^{o \times m}$.
 
-Para alcanzar el objetivo de \emph{competencia}, se realiza por cada patrón de entrada $x_i$ una comparación con cada uno de los pesos de las $o$ neuronas y se establece la de menor distancia respecto $x_i$ (típicamente la distancia Euclidiana), dejando un ganador $winner$, tal como en la \equationref{eq:som-competition}.
+Para alcanzar el objetivo de \emph{competencia}, se realiza por cada patrón de entrada $x_i$ una comparación con cada uno de los pesos de las $o$ neuronas y se establece la de menor distancia $\norm{x_i}_p$ (típicamente la distancia Euclidiana o equivalentemente la norma $\normltwo$ e.g. $p = 2$), dejando un ganador $winner$, tal como en la \equationref{eq:som-competition}.
 \begin{equation} \label{eq:som-competition}
-  winner = \text{argmin}_j \norm{x_i - w_j} ; j = 1, \ldots,o
+  winner = \text{argmin}_j \norm{x_i - w_j}_p ; j = 1, \ldots,o
 \end{equation}
 
-Luego de establecer la neurona ganadora, se realiza el paso para alcanzar la \emph{cooperación}, que consiste en que por medio de una función kernel $h$ (típicamente una una distribución gaussiana), que permite establecer un área de afectación de las otras neuronas según su ubicación física en el mapa, definidos como $r_{winner}$ y $r_j$ que son la ubicación de la neurona ganadora y la neurona vecina $j$, en el cual el grado de afectación de la neurona vecina depende de la distancia de la que esta de la neurona ganadora, definido en la \equationref{eq:som-cooperation}.
+Luego de establecer la neurona ganadora, se realiza el paso para alcanzar la \emph{cooperación}, que consiste en que por medio de una función kernel $h$ (típicamente una una distribución gaussiana), que permite establecer un área de afectación de las otras neuronas según su ubicación física en el mapa, definidos como $r_{winner}$ y $r_j$ que son la ubicación de la neurona ganadora y la neurona vecina $j$, en el cual el grado de afectación de la neurona vecina depende de la distancia $\normltwo$ de la que esta de la neurona ganadora, definido en la \equationref{eq:som-cooperation}.
 \begin{equation} \label{eq:som-cooperation}
   h_{j, winner}(t) = \text{exp}\Bigg(\frac{- \norm{r_j - r_{winner}}^2}{ 2 \sigma(t)^2}\Bigg)
 \end{equation}
@@ -250,16 +250,16 @@ Dado que lo que se quiere realizar es una clasificación que represente la proba
 Un clasificador de Na\"{\i}ve Bayes estima la probabilidad condicional de las clases por medio de suponer que los atributos son condicionalmente independientes, dado la etiqueta de clasificación $y$. La suposición de independencia condicional se puede dar por la \equationref{eq:bayes-conditional-independence}.
 
 \begin{equation} \label{eq:bayes-conditional-independence}
-  P(\rx|\ry=y) = \prod_{i=1}^{d} P(\rx_i|\ry=y)
+  P(X|\ry=y) = \prod_{i=1}^{d} P(\rx_i|\ry=y)
 \end{equation}
 
-Donde cada conjunto de atributos $X=\{ X_1, \ldots, X_d \}$ que consiste de $d$ atributos.
+Donde cada conjunto de atributos $X=\{ \rx_1, \ldots, \rx_d \}$ que consiste de $d$ atributos.
 \subsubsection{Como funciona el clasificador Na\"{\i}ve Bayes}
-Con la suposición de independencia condicional, en vez de computar la probabilidad condicional de clases para cada combinación de $X$, solo se debe realizar para establecer la probabilidad condicional de cada $X_i$, dado $\ry$.
+Con la suposición de independencia condicional, en vez de computar la probabilidad condicional de clases para cada combinación de $X$, solo se debe realizar para establecer la probabilidad condicional de cada $\rx_i$, dado $\ry$.
 
-Para clasificar un dato de prueba, el clasificador computa la probabilidad posterior para cada clase $Y$ como se muestra en la \equationref{eq:bayes-classifier}.
+Para clasificar un dato de prueba, el clasificador computa la probabilidad posterior para cada clase $\ry$ como se muestra en la \equationref{eq:bayes-classifier}.
 
 \begin{equation} \label{eq:bayes-classifier}
-  P(\ry|\rx) = \frac{P(\ry) \prod_{i=1}^{d}P(X_i|\ry)}{P(\rx)}
+  P(\ry|\rx) = \frac{P(\ry) \prod_{i=1}^{d}P(\rx_i|\ry)}{P(\rx)}
 \end{equation}
 

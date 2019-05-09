@@ -321,10 +321,6 @@ In english.... \todo{Escribir abstract en ingles}
 %	THESIS CONTENT - CHAPTERS
 %----------------------------------------------------------------------------------------
 
-\mainmatter % Begin numeric (1,2,3...) page numbering
-
-\pagestyle{thesis} % Return the page headers back to the "thesis" style
-
 % Include the chapters of the thesis as separate files from the Chapters folder
 % Uncomment the lines as you write the chapters
 
@@ -353,6 +349,8 @@ In english.... \todo{Escribir abstract en ingles}
 
 \input{math_commands.tex} % para definir una notacion
 \include{Chapters/Notation}
+\mainmatter % Begin numeric (1,2,3...) page numbering
+\pagestyle{thesis} % Return the page headers back to the "thesis" style
 \include{Chapters/Introduction}
 \include{Chapters/Schedule}
 \include{Chapters/Achievements}

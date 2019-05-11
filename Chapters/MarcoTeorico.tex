@@ -178,22 +178,36 @@ Finalmente para alcanzar la \emph{adaptación} se realiza una actualización de 
 \label{fig:som-adap-proc}
 \end{figure}
 
-Luego de que el algoritmo de aprendizaje termina de realizar las iteraciones, la salida de este es la matriz de pesos $\mW$, en la \figureref{fig:som-impl-example} se puede apreciar una aproximación del algoritmo con un mapa uni--dimensional tratando de aproximar una función sinusoidal con ruido adicionado en un gráfico 2D.
+Luego de que el algoritmo de aprendizaje termina de realizar las iteraciones, la salida de este es la matriz de pesos $\mW$, en la \figureref{fig:som-impl-example} se puede apreciar una aproximación del algoritmo con un mapa uni--dimensional tratando de aproximar una función sinusoidal con ruido adicionado en un gráfico 2D. Adicionalmente pueden verse los efectos de \gls{bias} y \gls{overfitting} con diferentes cantidades de neuronas.
 
 En la \figureref{fig:som-example} se puede ver una aplicación de los \gls{som}, en donde se realiza una clusterizacion de casos de homicidios donde los parametros son características de los homicidios, según \cite{mena2003investigative} este resultado da una buena aproximación para sospechar de que estos son cometidos por personas distintas o si bien están siendo perpetrados por un mismo individuo o grupo.
 
 \todo{Cambiar grafica por otra, polar?}
+
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{Figures/som-implementation-example.png}
+\includegraphics[width=\textwidth]{Figures/som-implementation-example50.png}
 \decoRule
-\caption[Ejemplo de salida de \glsentrytext{som} uni-dimensional]{Ejemplo de salida de \glsentrytext{som} uni-dimensional. Implementación propia.}
+\caption[Ejemplo de salida de \glsentrytext{som} uni-dimensional]{Ejemplo de salida de \glsentrytext{som} uni-dimensional con 50 neuronas. Implementación propia.}
 \label{fig:som-impl-example}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.3]{Figures/som-example.png}
+\begin{tabular}{ccc}
+\includegraphics[width=0.32\textwidth]{Figures/som-implementation-example10.png} & %
+\includegraphics[width=0.32\textwidth]{Figures/som-implementation-example25.png} & %
+\includegraphics[width=0.32\textwidth]{Figures/som-implementation-example100.png} \\
+  (a) & (b) & (c) \\ [1em]
+\end{tabular}
+\decoRule
+\caption[Comparación de salidas de \glsentrytext{som} uni-dimensional]{Comparación de salidas de \glsentrytext{som} uni-dimensional con (a) 10 neuronas (b) 25 neuronas y (c) 100 neuronas. Implementación propia.}
+\label{fig:som-impl-example-fitting}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/som-example.png}
 \decoRule
 \caption[Ejemplo de uso de \glsentrytext{som} en aplicaciones de perfilado]{Ejemplo de uso de \glsentrytext{som} en aplicaciones de perfilado. Tomado de \cite{mena2003investigative}}
 \label{fig:som-example}

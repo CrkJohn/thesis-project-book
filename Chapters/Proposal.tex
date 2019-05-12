@@ -109,10 +109,16 @@ Equivalentemente, la regresión logística con modelos lineales se calculan como
 
 \begin{figure}[H]
   \centering
-  \missingfigure{Poner grafica de sigmoide}
-  % \includegraphics[width=\textwidth]{Figures/general-architecture.pdf}
+  \begin{tikzpicture}
+    \begin{axis}[ 
+      xlabel=$x$,
+      ylabel={$\sigma(x)$}
+      ] 
+      \addplot {1 / (1+exp(-x))}; 
+    \end{axis}
+  \end{tikzpicture}
 \decoRule
-\caption[Función sigmoide]{Función sigmoide.}
+\caption[Gráfica de función sigmoide]{Gráfica de función sigmoide.}
 \label{fig:logits-example}
 \end{figure}
 
@@ -144,13 +150,13 @@ El uso de la regresión logística se puede llevar a cabo para normalizar los re
 %----------------------------------------------------------------------------------------
 
 \subsection{Modelo 2: Reconocimiento de \glsentrylong{namedent} con redes \glsentrylong{lstm}}
-\todo{Pendiente} Bla
-\todo{incluir diagramas de pagina de Google}
+\todo[inline]{Pendiente}
+\todo[inline]{incluir diagramas de pagina de Google}
 
 \subsection{Modelo 3: Búsqueda de tweets relacionados con \emph{embeddings} de \mbox{StarSpace}}
-\todo{Pendiente} Bla
+\todo[inline]{Pendiente}
 
 
 \section{Despliegue (Deployment)}
-\todo{Pendiente}
+\todo[inline]{Pendiente}
 \lipsum{1}

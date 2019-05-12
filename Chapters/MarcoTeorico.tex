@@ -155,7 +155,7 @@ El algoritmo de aprendizaje de \gls{som} parte de primero inicializar los pesos 
 
 Para alcanzar el objetivo de \emph{competencia}, se realiza por cada patrón de entrada $x_i$ una comparación con cada uno de los pesos de las $o$ neuronas y se establece la de menor distancia $\norm{x_i}_p$ (típicamente la distancia Euclidiana o equivalentemente la norma $\normltwo$ e.g. $p = 2$), dejando un ganador $winner$, tal como en la \equationref{eq:som-competition}.
 \begin{equation} \label{eq:som-competition}
-  winner = \text{argmin}_j \norm{x_i - w_j}_p ; j = 1, \ldots,o
+  winner = \text{arg min}_j \norm{x_i - w_j}_p ; j = 1, \ldots,o
 \end{equation}
 
 Luego de establecer la neurona ganadora, se realiza el paso para alcanzar la \emph{cooperación}, que consiste en que por medio de una función kernel $h$ (típicamente una una distribución gaussiana), que permite establecer un área de afectación de las otras neuronas según su ubicación física en el mapa, definidos como $r_{winner}$ y $r_j$ que son la ubicación de la neurona ganadora y la neurona vecina $j$, en el cual el grado de afectación de la neurona vecina depende de la distancia $\normltwo$ de la que esta de la neurona ganadora, definido en la \equationref{eq:som-cooperation}.
@@ -172,7 +172,7 @@ Finalmente para alcanzar la \emph{adaptación} se realiza una actualización de 
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.2]{Figures/som-adaptive-proc.png}
+\includegraphics[width=0.75\textwidth]{Figures/som-adaptive-proc.pdf}
 \decoRule
 \caption[Proceso de adaptación de \glsentrytext{som}]{Proceso de adaptación de \glsentrytext{som}, (a) uni--dimensional, (b) bi--dimensional. Tomado de \cite{de2006fundamentals}}
 \label{fig:som-adap-proc}
@@ -221,7 +221,7 @@ Se puede entender a los \gls{mmh} como hiper-planos que ayudan a separar datos e
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.3]{Figures/svm-hyperplanes.png}
+\includegraphics[width=0.7\textwidth]{Figures/svm-hyperplanes.pdf}
 \decoRule
 \caption[\glsentryname{mmh}]{\glsentryname{mmh}. Tomado de \cite{tan2005introduction}}
 \label{fig:svm-hyperplanes}
@@ -231,7 +231,7 @@ Finalmente, el objetivo final de los \gls{svm} es la búsqueda de un hiper-plano
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.25]{Figures/svm-nonlinear-transform.png}
+\includegraphics[width=0.95\textwidth]{Figures/svm-nonlinear-transform.pdf}
 \decoRule
 \caption[Transformación de espacios en \glsentrylong{svm}]{Transformación de espacios en \glsentrylong{svm}. Tomado de \cite{tan2005introduction}}
 \label{fig:svm-nonlinear-transforms}

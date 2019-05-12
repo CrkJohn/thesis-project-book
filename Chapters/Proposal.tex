@@ -98,7 +98,6 @@ La manera en que se representa un texto en forma de vector $\vs$ es por medio de
 Para la generación de los conjuntos se toman las sumatorias generadas de cada tweet en su forma de vector y se coloca en una matriz de $\mT^{m \times N}$, donde $m$ son el numero de muestras de Twitter y $N$ el tamaño del Corpus.
 
 \subsubsection{Clasificador de regresión logística}
-\todo[inline]{Pendiente}
 La regresion logistica hace parte de uno de los algoritmos mas importantes en \gls{ai}, esta consiste en procesar la entrada de un modelo, que para el caso actual es lineal, que se procesa con una serie de hiper-parámetros que se denominara $\vtheta$ y la entrada del modelo como $\vx$. Se tiene que al realizar una regresión con este modelo se calcula $\vtheta^{\top} \vx$, que da como resultado un valor en $\R$ con rango indefinido. La regresión logística simbolizada como $\sigma(x)$, conocida como la función \emph{sigmoide} que es una función que para una entrada $x$ de dominio $(-\infty, \infty)$ se tenga un rango de $(0, 1)$, la \equationref{eq:logits-formula} define la función.
 
 \begin{equation} \label{eq:logits-formula}
@@ -125,7 +124,7 @@ Equivalentemente, la regresión logística con modelos lineales se calculan como
 \subsubsection{Multiclasificador de One VS Rest}
 La multiclasificacion como es brevemente introducido en la \sectionref{sec:ML}, permite realizar una clasificación en $C$ clases con una entrada $\vx$. El multiclasificador de \emph{One VS Rest} realiza la clasificación por medio de distinguir la separación de una muestra $\vx_i$ en una clase $c \in \{1, \ldots, C\}$ respecto al resto de muestras, de forma que se calcula la pertenencia de la muestra $i$-\'esima en esa clase con un estimador $\vtheta_c$. De los resultados dados por cada estimador se estima cual es el $k$-\'esimo estimador que da el máximo valor, de donde se estima finalmente que la clase $k$ es donde pertenece la muestra.
 
-El uso de la regresión logística se puede llevar a cabo para normalizar los resultados de los estimadores $\vtheta$, de donde el proceso para calcular el estimador consta de realizar un proceso de gradiente descendente, que utiliza como función de costo la \equationref{eq:ovr-reg-l2costfunc} para uso de regularización con $\normltwo$ y la \equationref{eq:ovr-reg-l1costfunc} para el uso de $\normlone$.
+El uso de la regresión logística se puede llevar a cabo para normalizar los resultados de los estimadores $\vtheta$, de donde el proceso para calcular el estimador consta de realizar un proceso de gradiente descendente, que utiliza como función de costo la \equationref{eq:ovr-reg-l2costfunc} para uso de regularización con $\normltwo$ y la \equationref{eq:ovr-reg-l1costfunc} para el uso de $\normlone$, basadas del manual de \cite{sklearn_api}.
 
 \begin{equation} \label{eq:ovr-reg-l2costfunc}
   \min_{\vtheta, c} \frac{1}{2}\vtheta^{\top} \vtheta + C \sum_{i=1}^n \log(\exp(- y_i (\mX_i^{\top} \vtheta + c)) + 1)
@@ -135,13 +134,22 @@ El uso de la regresión logística se puede llevar a cabo para normalizar los re
   \min_{\vtheta, c} \norm{\vtheta}_1 + C \sum_{i=1}^n \log(\exp(- y_i (\mX_i^{\top} \vtheta + c)) + 1)
 \end{equation}
 
-% En el caso para realizar una multiclasificaci\'on, la regresion logistica solo puede realizar una clasificacion binaria, esto es que para una entrada $\vx$, esta solo puede realizar una clasificacion con salidas $y \in \{0, 1\}$. Debido a esta restriccion, existen una metodologia de multiclasificacion llamada \emph{One VS Rest}, que permite utilizar la regresion logistica y realiza la multiclasificacion por medio de crear $n$ estimadores que 
+En el caso para realizar una multiclasificaci\'on, la regresión logística solo puede realizar una clasificación binaria, esto es que para una entrada $\vx$, esta solo puede realizar una clasificación con salidas $y \in [0, 1]$. Debido a esta restricción, existen una metodología de multiclasificacion llamada \emph{One VS Rest}, que permite utilizar la regresión logística y realiza la multiclasificacion por medio de crear $n$ estimadores que permiten estimar una de las $C$ clases respecto al resto de la entrada, por cada una de las entradas se estima cual es la clase con mayor valor en la regresión logística individual y se escoge, la \figureref{fig:ovr-algo} representa una versión simplificada del proceso.
+
+\begin{figure}[H]
+  \centering
+  % \missingfigure{Hacer la arquitectura en yEd}
+  \includegraphics[width=0.5\textwidth]{Figures/one-vs-rest.pdf}
+\decoRule
+\caption[Algoritmo de One VS Rest]{Algoritmo de One VS Rest.}
+\label{fig:ovr-algo}
+\end{figure}
 
 \todo[inline]{Pendiente: incluir arquitectura de solución en la \figureref{fig:model1-arch}}
 \begin{figure}[H]
   \centering
   \missingfigure{Hacer la arquitectura en yEd}
-  % \includegraphics[width=\textwidth]{Figures/general-architecture.pdf}
+  % \includegraphics[width=0.5\textwidth]{Figures/one-vs-rest.pdf}
 \decoRule
 \caption[Arquitectura de Modelo 1]{Arquitectura de Modelo 1.}
 \label{fig:model1-arch}

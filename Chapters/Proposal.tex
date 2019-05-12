@@ -127,11 +127,11 @@ La multiclasificacion como es brevemente introducido en la \sectionref{sec:ML}, 
 El uso de la regresión logística se puede llevar a cabo para normalizar los resultados de los estimadores $\vtheta$, de donde el proceso para calcular el estimador consta de realizar un proceso de gradiente descendente, que utiliza como función de costo la \equationref{eq:ovr-reg-l2costfunc} para uso de regularización con $\normltwo$ y la \equationref{eq:ovr-reg-l1costfunc} para el uso de $\normlone$, basadas del manual de \cite{sklearn_api}.
 
 \begin{equation} \label{eq:ovr-reg-l2costfunc}
-  \min_{\vtheta, c} \frac{1}{2}\vtheta^{\top} \vtheta + C \sum_{i=1}^n \log(\exp(- y_i (\mX_i^{\top} \vtheta + c)) + 1)
+  \min_{\vtheta, c} \frac{1}{2}\vtheta^{\top} \vtheta + C \sum_{i=1}^n \sigma(y_i (\mX_i^{\top} \vtheta + c))
 \end{equation}
 
 \begin{equation} \label{eq:ovr-reg-l1costfunc}
-  \min_{\vtheta, c} \norm{\vtheta}_1 + C \sum_{i=1}^n \log(\exp(- y_i (\mX_i^{\top} \vtheta + c)) + 1)
+  \min_{\vtheta, c} \norm{\vtheta}_1 + C \sum_{i=1}^n \sigma(y_i (\mX_i^{\top} \vtheta + c))
 \end{equation}
 
 En el caso para realizar una multiclasificaci\'on, la regresión logística solo puede realizar una clasificación binaria, esto es que para una entrada $\vx$, esta solo puede realizar una clasificación con salidas $y \in [0, 1]$. Debido a esta restricción, existen una metodología de multiclasificacion llamada \emph{One VS Rest}, que permite utilizar la regresión logística y realiza la multiclasificacion por medio de crear $n$ estimadores que permiten estimar una de las $C$ clases respecto al resto de la entrada, por cada una de las entradas se estima cual es la clase con mayor valor en la regresión logística individual y se escoge, la \figureref{fig:ovr-algo} representa una versión simplificada del proceso.

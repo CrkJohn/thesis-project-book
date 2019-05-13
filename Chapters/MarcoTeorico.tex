@@ -68,7 +68,7 @@ Para estimar cada una las medias y variaciones de cada característica $j$, $\mu
 De donde para calcular la probabilidad de que una muestra se trata de una anomalía se calcula la probabilidad $p(x)$, luego de que fueron estimadas las distribuciones de cada característica del conjunto de entrenamiento, por lo que se define un $\epsilon$ de manera heurística, de forma que se determina que una muestra anómala si $p(x) < \epsilon$, la \equationref{eq:anomaly-prob} representa cual es la probabilidad de una muestra $x$ con una distribución gaussiana.
 
 \begin{equation} \label{eq:anomaly-prob}
-  p(x) = \prod_{j=1}^{n}p(x_j, \mu_j, \sigma_j^2) = \prod_{j=1}^{n} \frac{1}{\sqrt{2\pi}\sigma} \text{exp}\Bigg( - \frac{(x_j-\mu_j)^2}{2\sigma_j^2}\Bigg)
+  p(x) = \prod_{j=1}^{n}p(x_j, \mu_j, \sigma_j^2) = \prod_{j=1}^{n} \frac{1}{\sqrt{2\pi}\sigma_j} \text{exp}\Bigg( - \frac{(x_j-\mu_j)^2}{2\sigma_j^2}\Bigg)
 \end{equation}
 
 Si el modelo esta dando como resultado muchos falsos positivos, lo que se debe hacer es reducir $\sigma$.

@@ -159,8 +159,16 @@ En el caso para realizar una multiclasificaci\'on, la regresión logística solo
 
 \subsection{Modelo 2: Reconocimiento de \glsentrylong{namedent} con redes \glsentrylong{lstm}}
 \todo[inline]{Pendiente}
+Igual que en el modelo presentado en la \sectionref{sec:twitter-prediction}, en Twitter como en cualquier otra red social se presentan en sus textos muchas veces la mención de las llamadas \gls{namedent}, son objetos del mundo real, tales como personas, ubicaciones, organizaciones, productos, entre otros que pueden ser denotados con nombre propio, y pueden ser abstractos o tener una existencia física.
 
+En consecuencia, este modelo tiene como propósito reconocer \gls{namedent} que puedan dar una mejor aproximación a entender el contexto de conversaciones en masa de cibercriminales identificados o bien realizar una identificación de quienes son en base de cuales son los temas que tienden a mencionar mas habitualmente.
 
+\subsubsection{Redes neuronales recurrentes (\glsentrylong{rnn})}
+Este tipo de redes tiene la característica de recordar salidas y entradas pasadas de datos, de forma que decisiones futuras respecto a una clasificación pueden tener una mejor forma de basarse. Las redes neuronales (\glspl{neuralnetwork}) típicamente no pueden hacer estas operaciones ya que no tienen incorporada la habilidad de forma que recuerden entradas y salidas pasadas, sino que se les realiza un entrenamiento de una información de entrada y de salida que se conoce con anticipación, de forma que su salida solo se concentra en su entrada inmediata de datos.
+
+Por este motivo, las \glspl{rnn} poseen una gran ventaja en situaciones puntuales, tales como el caso expuesto al inicio de esta sección, sin embargo, el modelo clásico de \gls{rnn} es como la arquitectura presentada en la \figureref{fig:rnn-classic} no provee resultados significativos debido a limitantes respecto al nivel de recordación que tienen originalmente.
+
+Por esto mismo, en la literatura se puede encontrar usualmente el uso de las redes \gls{lstm}, las cuales proveen por medio de una arquitectura mas compleja la posibilidad de tener recordación de largo y corto plazo, como se muestra en la \figureref{fig:lstm-classic}.
 \begin{figure}[H]
   \centering
   % \missingfigure{Hacer la arquitectura en yEd}

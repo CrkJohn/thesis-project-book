@@ -1,5 +1,7 @@
 set -e
 
+./clean.sh
+
 pdflatex main
 bibtex main
 # makeindex main

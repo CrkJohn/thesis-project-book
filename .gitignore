@@ -333,3 +333,4 @@ TSWLatexianTemp*
 .nfs*
 
 # End of https://www.gitignore.io/api/latex,linux,emacs
+.sync

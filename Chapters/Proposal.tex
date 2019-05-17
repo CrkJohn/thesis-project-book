@@ -134,7 +134,7 @@ El uso de la regresión logística se puede llevar a cabo para normalizar los re
   \min_{\vtheta, c} \norm{\vtheta}_1 + C \sum_{i=1}^n \log(\exp(- y_i (\mX_i^{\top} \vtheta + c)) + 1)
 \end{equation}
 
-En el caso para realizar una multiclasificaci\'on, la regresión logística solo puede realizar una clasificación binaria, esto es que para una entrada $\vx$, esta solo puede realizar una clasificación con salidas $y \in [0, 1]$. Debido a esta restricción, existen una metodología de multiclasificacion llamada \emph{One VS Rest}, que permite utilizar la regresión logística y realiza la multiclasificacion por medio de crear $n$ estimadores que permiten estimar una de las $C$ clases respecto al resto de la entrada, por cada una de las entradas se estima cual es la clase con mayor valor en la regresión logística individual y se escoge, la \figureref{fig:ovr-algo} representa una versión simplificada del proceso.
+En el caso para realizar una multiclasificaci\'on, la regresión logística solo puede realizar una clasificación binaria, esto es que para una entrada $\vx$, esta solo puede realizar una clasificación con salidas $y \in [0, 1]$. Debido a esta restricción, existen una metodología de multiclasificacion llamada \emph{One VS Rest}, que permite utilizar la regresión logística y realiza la multiclasificacion por medio de crear $n$ estimadores que permiten estimar cada una de las $C$ clases respecto al resto de la entrada, por cada una de los estimadores se estima cual es la clase con mayor valor en la regresión logística individual de ese estimador, la \figureref{fig:ovr-algo} representa una versión simplificada del proceso.
 
 \begin{figure}[H]
   \centering
@@ -159,7 +159,25 @@ En el caso para realizar una multiclasificaci\'on, la regresión logística solo
 
 \subsection{Modelo 2: Reconocimiento de \glsentrylong{namedent} con redes \glsentrylong{lstm}}
 \todo[inline]{Pendiente}
-\todo[inline]{incluir diagramas de pagina de Google}
+
+
+\begin{figure}[H]
+  \centering
+  % \missingfigure{Hacer la arquitectura en yEd}
+  \includegraphics[width=0.8\textwidth]{Figures/LSTM3-SimpleRNN.png}
+\decoRule
+\caption[Red \glsentrytext{rnn} clásica]{Red \glsentrytext{rnn} clásica. Tomado de \cite{understanding-lstm}.}
+\label{fig:rnn-classic}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  % \missingfigure{Hacer la arquitectura en yEd}
+  \includegraphics[width=0.8\textwidth]{Figures/LSTM3-chain.png}
+\decoRule
+\caption[Red \glsentrytext{lstm} clásica]{Red \glsentrytext{lstm} clásica. Tomado de \cite{understanding-lstm}.}
+\label{fig:lstm-classic}
+\end{figure}
 
 \subsection{Modelo 3: Búsqueda de tweets relacionados con \emph{embeddings} de \mbox{StarSpace}}
 \todo[inline]{Pendiente}

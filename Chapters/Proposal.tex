@@ -104,14 +104,14 @@ La regresion logistica hace parte de uno de los algoritmos mas importantes en \g
   \sigma(x) = \frac{1} {1 + \exp(-x)}
 \end{equation}
 
-Equivalentemente, la regresión logística con modelos lineales se calculan como $\sigma(\vtheta^{\top} \vx)$ y permite realizar un suavizado de la regresión de forma mitiga parte de los problemas de \gls{overfitting} y \gls{bias}, como se muestra en la \figureref{fig:logits-example}.
+Equivalentemente, la regresión logística con modelos lineales se calculan como $\sigmoid(\vtheta^{\top} \vx)$ y permite realizar un suavizado de la regresión de forma mitiga parte de los problemas de \gls{overfitting} y \gls{bias}, como se muestra en la \figureref{fig:logits-example}.
 
 \begin{figure}[H]
   \centering
   \begin{tikzpicture}
     \begin{axis}[ 
       xlabel=$x$,
-      ylabel={$\sigma(x)$}
+      ylabel={$\sigmoid(x)$}
       ] 
       \addplot {1 / (1+exp(-x))}; 
     \end{axis}
@@ -121,27 +121,27 @@ Equivalentemente, la regresión logística con modelos lineales se calculan como
 \label{fig:logits-example}
 \end{figure}
 
-\subsubsection{Multiclasificador de One VS Rest}
-La multiclasificacion como es brevemente introducido en la \sectionref{sec:ML}, permite realizar una clasificación en $C$ clases con una entrada $\vx$. El multiclasificador de \emph{One VS Rest} realiza la clasificación por medio de distinguir la separación de una muestra $\vx_i$ en una clase $c \in \{1, \ldots, C\}$ respecto al resto de muestras, de forma que se calcula la pertenencia de la muestra $i$-\'esima en esa clase con un estimador $\vtheta_c$. De los resultados dados por cada estimador se estima cual es el $k$-\'esimo estimador que da el máximo valor, de donde se estima finalmente que la clase $k$ es donde pertenece la muestra.
+\subsubsection{Multiclasificador de One vs Rest}
+La multiclasificacion como es brevemente introducido en la \sectionref{sec:ML}, permite realizar una clasificación en $C$ clases con una entrada $\vx$. El multiclasificador de \emph{One vs Rest} realiza la clasificación por medio de distinguir la separación de una muestra $\vx_i$ en una clase $c \in \{1, \ldots, C\}$ respecto al resto de muestras, de forma que se calcula la pertenencia de la muestra $i$-\'esima en esa clase con un estimador $\vtheta_c$. De los resultados dados por cada estimador se estima cual es el $k$-\'esimo estimador que da el máximo valor, de donde se estima finalmente que la clase $k$ es donde pertenece la muestra.
 
-El uso de la regresión logística se puede llevar a cabo para normalizar los resultados de los estimadores $\vtheta$, de donde el proceso para calcular el estimador consta de realizar un proceso de gradiente descendente, que utiliza como función de costo la \equationref{eq:ovr-reg-l2costfunc} para uso de regularización con $\normltwo$ y la \equationref{eq:ovr-reg-l1costfunc} para el uso de $\normlone$, basadas del manual de \cite{sklearn_api}.
+El uso de la regresión logística se puede llevar a cabo para normalizar los resultados de los estimadores $\vtheta$, de donde el proceso para calcular el estimador consta de realizar un proceso de gradiente descendente, que utiliza como función de costo la \equationref{eq:ovr-reg-l2costfunc} para uso de regularización con $\normltwo$ y la \equationref{eq:ovr-reg-l1costfunc} para el uso de $\normlone$, basadas del manual de \cite{sklearn_api}. La función $\softplus$ es la función \emph{softplus}.
 
 \begin{equation} \label{eq:ovr-reg-l2costfunc}
-  \min_{\vtheta, c} \frac{1}{2}\vtheta^{\top} \vtheta + C \sum_{i=1}^n \log(\exp(- y_i (\mX_i^{\top} \vtheta + c)) + 1)
+  \min_{\vtheta, c} \frac{1}{2}\vtheta^{\top} \vtheta + C \sum_{i=1}^n \softplus(- y_i (\mX_i^{\top} \vtheta + c))
 \end{equation}
 
 \begin{equation} \label{eq:ovr-reg-l1costfunc}
-  \min_{\vtheta, c} \norm{\vtheta}_1 + C \sum_{i=1}^n \log(\exp(- y_i (\mX_i^{\top} \vtheta + c)) + 1)
+  \min_{\vtheta, c} \norm{\vtheta}_1 + C \sum_{i=1}^n \softplus(- y_i (\mX_i^{\top} \vtheta + c))
 \end{equation}
 
-En el caso para realizar una multiclasificaci\'on, la regresión logística solo puede realizar una clasificación binaria, esto es que para una entrada $\vx$, esta solo puede realizar una clasificación con salidas $y \in [0, 1]$. Debido a esta restricción, existen una metodología de multiclasificacion llamada \emph{One VS Rest}, que permite utilizar la regresión logística y realiza la multiclasificacion por medio de crear $n$ estimadores que permiten estimar cada una de las $C$ clases respecto al resto de la entrada, por cada una de los estimadores se estima cual es la clase con mayor valor en la regresión logística individual de ese estimador, la \figureref{fig:ovr-algo} representa una versión simplificada del proceso.
+En el caso para realizar una multiclasificaci\'on, la regresión logística solo puede realizar una clasificación binaria, esto es que para una entrada $\vx$, esta solo puede realizar una clasificación con salidas $y \in [0, 1]$. Debido a esta restricción, existen una metodología de multiclasificacion llamada \emph{One vs Rest}, que permite utilizar la regresión logística y realiza la multiclasificacion por medio de crear $n$ estimadores que permiten estimar cada una de las $C$ clases respecto al resto de la entrada, por cada una de los estimadores se estima cual es la clase con mayor valor en la regresión logística individual de ese estimador, la \figureref{fig:ovr-algo} representa una versión simplificada del proceso.
 
 \begin{figure}[H]
   \centering
   % \missingfigure{Hacer la arquitectura en yEd}
   \includegraphics[width=0.5\textwidth]{Figures/one-vs-rest.pdf}
 \decoRule
-\caption[Algoritmo de One VS Rest]{Algoritmo de One VS Rest.}
+\caption[Algoritmo de One vs Rest]{Algoritmo de One vs Rest. Elaboración propia.}
 \label{fig:ovr-algo}
 \end{figure}
 
@@ -159,20 +159,34 @@ En el caso para realizar una multiclasificaci\'on, la regresión logística solo
 
 \subsection{Modelo 2: Reconocimiento de \glsentrylong{namedent} con redes \glsentrylong{lstm}}
 \todo[inline]{Pendiente}
-Igual que en el modelo presentado en la \sectionref{sec:twitter-prediction}, en Twitter como en cualquier otra red social se presentan en sus textos muchas veces la mención de las llamadas \gls{namedent}, son objetos del mundo real, tales como personas, ubicaciones, organizaciones, productos, entre otros que pueden ser denotados con nombre propio, y pueden ser abstractos o tener una existencia física.
+Igual que en el modelo presentado en la \sectionref{sec:twitter-prediction}, en Twitter como en cualquier otra red social se presentan en sus textos muchas veces la mención de las llamadas \gls{namedent}. Son objetos del mundo real, tales como personas, ubicaciones, organizaciones, productos, entre otros que pueden ser denotados con nombre propio, y pueden ser abstractos o tener una existencia física.
 
 En consecuencia, este modelo tiene como propósito reconocer \gls{namedent} que puedan dar una mejor aproximación a entender el contexto de conversaciones en masa de cibercriminales identificados o bien realizar una identificación de quienes son en base de cuales son los temas que tienden a mencionar mas habitualmente.
 
-\subsubsection{Redes neuronales recurrentes (\glsentrylong{rnn})}
+\subsubsection{Redes neuronales recurrentes (\glsentrylong{rnn}s)}
 Este tipo de redes tiene la característica de recordar salidas y entradas pasadas de datos, de forma que decisiones futuras respecto a una clasificación pueden tener una mejor forma de basarse. Las redes neuronales (\glspl{neuralnetwork}) típicamente no pueden hacer estas operaciones ya que no tienen incorporada la habilidad de forma que recuerden entradas y salidas pasadas, sino que se les realiza un entrenamiento de una información de entrada y de salida que se conoce con anticipación, de forma que su salida solo se concentra en su entrada inmediata de datos.
 
-Por este motivo, las \glspl{rnn} poseen una gran ventaja en situaciones puntuales, tales como el caso expuesto al inicio de esta sección, sin embargo, el modelo clásico de \gls{rnn} es como la arquitectura presentada en la \figureref{fig:rnn-classic} no provee resultados significativos debido a limitantes respecto al nivel de recordación que tienen originalmente.
+Por este motivo, las \glspl{rnn} poseen una gran ventaja en situaciones puntuales, tales como el caso expuesto al inicio de esta sección, sin embargo, el modelo clásico de \gls{rnn} es como la arquitectura presentada en la \figureref{fig:rnn-classic}, esta no provee resultados significativos debido a limitantes respecto al nivel de recordación que tienen originalmente.
 
-Por esto mismo, en la literatura se puede encontrar usualmente el uso de las redes \gls{lstm}, las cuales proveen por medio de una arquitectura mas compleja la posibilidad de tener recordación de largo y corto plazo, como se muestra en la \figureref{fig:lstm-classic}.
+La naturaleza recurrente de estas redes viene del hecho de representarse como redes donde su salida hace parte de la entrada a la siguiente iteración de la red, tal como se aprecia en la \figureref{fig:rnn-classic-simple}.
+
 \begin{figure}[H]
   \centering
   % \missingfigure{Hacer la arquitectura en yEd}
-  \includegraphics[width=0.8\textwidth]{Figures/LSTM3-SimpleRNN.png}
+  \includegraphics[width=0.8\textwidth]{Figures/RNN-unrolled.png}
+\decoRule
+\caption[Red \glsentrytext{rnn} simplificada]{Red \glsentrytext{rnn} simplificada. Tomado de \cite{understanding-lstm}.}
+\label{fig:rnn-classic-simple}
+\end{figure}
+
+\subsubsection{Redes neuronales \glsentrylong{lstm}}
+En la literatura se puede encontrar usualmente el uso de las redes \gls{lstm}, las cuales proveen por medio de una arquitectura mas compleja la posibilidad de tener recordación de largo y corto plazo, como se muestra en la \figureref{fig:lstm-classic}. Para que estas redes tengan la característica de tener recordación es necesario de una celda de memoria, donde esta es la entrada para la siguiente iteración de la red, junto con la entrada de datos a la red.
+
+Téngase en cuenta que la arquitectura presentada en esta sección hace referencia a la implementación de \gls{lstm} mas utilizada, sin embargo existen muchas mas variaciones de esta con diferentes propiedades que son deseables en diferentes situaciones.
+\begin{figure}[H]
+  \centering
+  % \missingfigure{Hacer la arquitectura en yEd}
+  \includegraphics[width=0.9\textwidth]{Figures/LSTM3-SimpleRNN.png}
 \decoRule
 \caption[Red \glsentrytext{rnn} clásica]{Red \glsentrytext{rnn} clásica. Tomado de \cite{understanding-lstm}.}
 \label{fig:rnn-classic}
@@ -181,10 +195,51 @@ Por esto mismo, en la literatura se puede encontrar usualmente el uso de las red
 \begin{figure}[H]
   \centering
   % \missingfigure{Hacer la arquitectura en yEd}
-  \includegraphics[width=0.8\textwidth]{Figures/LSTM3-chain.png}
+  \includegraphics[width=0.9\textwidth]{Figures/LSTM3-chain.png}
 \decoRule
 \caption[Red \glsentrytext{lstm} clásica]{Red \glsentrytext{lstm} clásica. Tomado de \cite{understanding-lstm}.}
 \label{fig:lstm-classic}
+\end{figure}
+
+\subsubsection{Redes neuronales \glsentrylong{bilstm}}
+En la tarea de etiquetado de secuencias de texto las \gls{bilstm} tienen acceso a muestras de entrada tanto de futuro como de pasado por una cierta cantidad de tiempo. El uso de esta característica se puede aprovechar a favor ir a estados en el futuro (por medio de estados hacia adelante) y hacia el pasado (por estados hacia atrás) para un momento particular en el tiempo \cite{Huang2015}.
+
+Con el fin de que la red sea bidireccional es necesario de una celda de memoria para el caso de desplazarse hacia adelante, y una para desplazarse hacia atrás.
+
+\subsubsection{Reconocimiento de \glsentrylong{namedent}}
+Para el reconocimiento de \gls{namedent} tómese como ejemplo el \tableref{table:namedent-example}, donde las etiquetas asignadas corresponden al reconocimiento correspondiente de cada entidad.
+Las etiquetas de respuesta son \emph{Otro} (\textsc{O}) o una de estas: \emph{Persona} (\textsc{PER}), \emph{Ubicación} (\textsc{LOC}), \emph{Organización} (\textsc{ORG}) y \emph{Misceláneo} (\textsc{MISC}), donde las partes de etiqueta \textsc{B-} y \textsc{I-} corresponden al inicio de una palabra o una posición intermedia de la entidad.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{l|llllll} 
+  \textbf{Texto}    & Ian   & Goodfellow & trabaja & para & Google & Brain \\
+  \textbf{Etiqueta} & B-PER & I-PER      & O       & O    & B-ORG  & I-ORG
+\end{tabular}
+\\ [1em]
+\decoRule
+\caption{Ejemplo de reconocimiento de \glsentrylong{namedent}.}
+\label{table:namedent-example}
+\end{table}
+
+La tarea de etiquetado visto para una \gls{lstm} y una \gls{bilstm} puede ser visto en la \figureref{fig:lstm-arch} y la \figureref{fig:bilstm-arch}.
+
+\begin{figure}[H]
+  \centering
+  % \missingfigure{Hacer la arquitectura en yEd}
+  \includegraphics[width=0.6\textwidth]{Figures/lstm-arch.pdf}
+\decoRule
+\caption[Etiquetado con una \glsentrytext{lstm}]{Etiquetado con una \glsentrytext{lstm}. Tomado de \cite{Huang2015}.}
+\label{fig:lstm-arch}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  % \missingfigure{Hacer la arquitectura en yEd}
+  \includegraphics[width=0.6\textwidth]{Figures/bilstm-arch.pdf}
+\decoRule
+\caption[Etiquetado con una \glsentrytext{bilstm}]{Etiquetado con una \glsentrytext{bilstm}. Tomado de \cite{Huang2015}.}
+\label{fig:bilstm-arch}
 \end{figure}
 
 \subsection{Modelo 3: Búsqueda de tweets relacionados con \emph{embeddings} de \mbox{StarSpace}}

@@ -1,7 +1,7 @@
 \newcommand{\glossarydef}[4]{
     \newglossaryentry{#1}{
         text={\textsc{#2}},
-        long={\mbox{#3}},
+        long={#3},
         name={\textsl{\glsentrylong{#1}}\, \textsc{(}\glsentrytext{#1}\/\textsc{)}},
         first={\glsentryname{#1}},
         firstplural={\textsl{\glsentrylong{#1}\glspluralsuffix}\, (\textsc{\glsentrytext{#1}\glspluralsuffix})},
@@ -11,7 +11,7 @@
 
 \newcommand{\simpleglossarydef}[3]{
     \newglossaryentry{#1}{
-        name={{\rm #2}},
+        name={#2},
         long={#2},
         first={{\rm\sl#2\rm}},
         description={{\rm #3}}
@@ -88,9 +88,11 @@
 
 \simpleglossarydef{mmh}{Maximum Margin Hyperplanes}{Hiperplanos que permiten separar datos en espacios de alta dimensionalidad con un margen asociado para separarlos}
 
-\glossarydef{lstm}{LSTM}{Long Short Term Memory}{Memoria Largo y Corto Plazo, son un tipo de redes neuronales recurrentes que son capaces de aprender dependencias de largo plazo}
+\glossarydef{lstm}{LSTM}{Long Short Term Memory}{Red neuronal recurrent que tiene memoria Largo y Corto Plazo, son un tipo de redes neuronales recurrentes que son capaces de aprender dependencias de largo plazo}
 
-\glossarydef{rnn}{RNN}{Recurrent Neural Network}{{\bf Pendiente}}
+\glossarydef{bilstm}{Bi-LSTM}{Bidirectional Long Short Term Memory}{Red neuronal LSTM bidireccional, que permite el uso de secuencias de palabras futuras y pasadas para una mejor clasificacion de la actual}
+
+\glossarydef{rnn}{RNN}{Recurrent Neural Network}{Redes que recuerdan salidas y entradas pasadas de datos, de forma que decisiones futuras respecto a una clasificación pueden tener un mejor resultado}
 
 \simpleglossarydef{namedent}{Named Entities}{Son típicamente palabras que denotan personas particulares u organizaciones, pero no son sustantivos}
 

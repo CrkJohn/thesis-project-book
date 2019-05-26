@@ -1,10 +1,10 @@
 \newcommand{\glossarydef}[4]{
     \newglossaryentry{#1}{
-        text={\textsc{#2}},
+        text={\mbox{\textsc{#2}}},
         long={#3},
-        name={\textsl{\glsentrylong{#1}}\, \textsc{(}\glsentrytext{#1}\/\textsc{)}},
+        name={\textsl{\glsentrylong{#1}}\, \mbox{\textsc{(}\glsentrytext{#1}\/\textsc{)}}},
         first={\glsentryname{#1}},
-        firstplural={\textsl{\glsentrylong{#1}\glspluralsuffix}\, (\textsc{\glsentrytext{#1}\glspluralsuffix})},
+        firstplural={\textsl{\glsentrylong{#1}\glspluralsuffix}\, \mbox{(\textsc{\glsentrytext{#1}\glspluralsuffix})}},
         description={{\rm #4}}
     }
 }

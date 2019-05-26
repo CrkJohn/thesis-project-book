@@ -7,7 +7,7 @@
 
 %----------------------------------------------------------------------------------------
 
-\newcommand{\nmodels}{$n$ \todo{?`cuantos modelos?}}
+\newcommand{\nmodels}{{3 }}
 
 La propuesta consta de a aplicación de modelos de \glsentrytext{nlp} para el desarrollo de labores de inteligencia en escenarios de ciberterrorismo por medio de \nmodels modelos, pensados para el análisis de texto en redes sociales como Twitter en aras de realizar un perfilado de ciber-criminales potenciales, esto por medio de \gls{nlp}, de donde se parte varias metodologías que hacen uso de tecnologías \mbox{Estado-del-Arte}.
 
@@ -28,6 +28,10 @@ Como parte de la propuesta se proponen \nmodels modelos para tratar diferentes a
 \caption[Arquitectura de propuesta]{Arquitectura de propuesta.}
 \label{fig:proposal-arch}
 \end{figure}
+
+% ================================================================
+% ================================================================
+% ================================================================
 
 \subsection{Modelo 1: Predicción de etiquetas de Twitter con modelos lineales} \label{sec:twitter-prediction}
 En Twitter, las publicaciones que se realizan tienen la posibilidad de incluir menciones de temas de tendencia por el conocido \emph{hashtag}, escrito como \texttt{\#Tema}, y tiene la gran utilidad de realizar una mención explicita del tema que se quiere tratar y donde además la tarea de encontrar textos directamente relacionados con un tema son fácilmente localizables.
@@ -121,10 +125,11 @@ Equivalentemente, la regresión logística con modelos lineales se calculan como
 \label{fig:logits-example}
 \end{figure}
 
+
 \subsubsection{Multiclasificador de One vs Rest}
 La multiclasificacion como es brevemente introducido en la \sectionref{sec:ML}, permite realizar una clasificación en $C$ clases con una entrada $\vx$. El multiclasificador de \emph{One vs Rest} realiza la clasificación por medio de distinguir la separación de una muestra $\vx_i$ en una clase $c \in \{1, \ldots, C\}$ respecto al resto de muestras, de forma que se calcula la pertenencia de la muestra $i$-\'esima en esa clase con un estimador $\vtheta_c$. De los resultados dados por cada estimador se estima cual es el $k$-\'esimo estimador que da el máximo valor, de donde se estima finalmente que la clase $k$ es donde pertenece la muestra.
 
-El uso de la regresión logística se puede llevar a cabo para normalizar los resultados de los estimadores $\vtheta$, de donde el proceso para calcular el estimador consta de realizar un proceso de gradiente descendente, que utiliza como función de costo la \equationref{eq:ovr-reg-l2costfunc} para uso de regularización con $\normltwo$ y la \equationref{eq:ovr-reg-l1costfunc} para el uso de $\normlone$, basadas del manual de \cite{sklearn_api}. La función $\softplus$ es la función \emph{softplus}.
+El uso de la regresión logística se puede llevar a cabo para normalizar los resultados de los estimadores $\vtheta$, de donde el proceso para calcular el estimador consta de realizar un proceso de gradiente descendente, que utiliza como función de costo la \equationref{eq:ovr-reg-l2costfunc} para uso de regularización con $\normltwo$ y la \equationref{eq:ovr-reg-l1costfunc} para el uso de $\normlone$, basadas del manual de \cite{sklearn_api}. La función $\softplus$ es la función \emph{softplus} (vease la \sectionref{cha:notation}).
 
 \begin{equation} \label{eq:ovr-reg-l2costfunc}
   \min_{\vtheta, c} \frac{1}{2}\vtheta^{\top} \vtheta + C \sum_{i=1}^n \softplus(- y_i (\mX_i^{\top} \vtheta + c))
@@ -141,21 +146,48 @@ En el caso para realizar una multiclasificaci\'on, la regresión logística solo
   % \missingfigure{Hacer la arquitectura en yEd}
   \includegraphics[width=0.5\textwidth]{Figures/one-vs-rest.pdf}
 \decoRule
-\caption[Algoritmo de One vs Rest]{Algoritmo de One vs Rest. Elaboración propia.}
+\caption[Algoritmo de One vs Rest]{Algoritmo de One vs Rest.}
 \label{fig:ovr-algo}
 \end{figure}
 
-\todo[inline]{Pendiente: incluir arquitectura de solución en la \figureref{fig:model1-arch}}
+La manera en que se entrena cada estimador $i \in \{1, \ldots, C\}$ es por medio de optimizar el valor de la función de predicción $\hat{y}(\vx, \vtheta_i)$, $\vx \in \sX$ (\equationref{eq:linear-regression-training}), como se muestra en la \equationref{eq:linear-regression-estimation}, $y$ es el valor verdadero de la estimación y $\theta_0$ se le conoce como el \emph{bias} del modelo.
+
+\begin{equation} \label{eq:linear-regression-training}
+  \hat{y}(\vx, \vtheta) = \vtheta^{\top} \vx = \theta_0 + \theta_1 x_1 + \cdots + \theta_n x_n
+\end{equation}
+
+\begin{equation} \label{eq:linear-regression-estimation}
+  \vtheta_i = \text{arg m\'{\i}n}_{\vtheta_i} | \hat{y}(\vx, \vtheta_i) - y|
+\end{equation}
+
+Luego de haberse entrenado cada estimador con sus valores óptimos, se puede realizar la predicción de las clases a las que pertenece una entrada $\vx$ con la \equationref{eq:ovr-prediction}.
+
+\begin{equation} \label{eq:ovr-prediction}
+  c = \text{arg max}_i \, \sigmoid(\hat{y(\vx, \vtheta_i)})
+\end{equation}
+
+\subsubsection{Predicción de hashtags}
+El uso que se le puede dar a todo lo mencionado anteriormente en esta sección es de predecir etiquetas de Twitter típicas de terrorismo a partir del texto que se encuentra en el tweet con ayuda de alguna de las representaciones de \gls{bow} o \gls{tfidf}, tal como se muestra en el ejemplo de la \figureref{fig:tweet-prediction}.
+
 \begin{figure}[H]
   \centering
-  \missingfigure{Hacer la arquitectura en yEd}
-  % \includegraphics[width=0.5\textwidth]{Figures/one-vs-rest.pdf}
-\decoRule
-\caption[Arquitectura de Modelo 1]{Arquitectura de Modelo 1.}
-\label{fig:model1-arch}
+  \begin{tabular}{p{0.46\textwidth} p{0.05\textwidth} p{0.46\textwidth}}
+    ``Really excited to add @plaidavenger to my deathlist along with Italy and @Plaid\_Obama after receiving that information.'' & $\mathlarger{\mathlarger{\mathlarger{\Rightarrow}}}$ & \textbf{\#deathlist, \#KillEveryone, \#ISIS}
+  \end{tabular}
+  \decoRule
+  \caption[Prediccion de hashtags con modelos lineales]{Prediccion de hashtags con modelos lineales.}
+  \label{fig:tweet-prediction}
 \end{figure}
 
-%----------------------------------------------------------------------------------------
+De manera que se determinan los $C$ hashtags de los datos de entrenamiento $\sX$ para luego poder realizar la prediccion de los hashtags a partir un texto de entrada $d$ que luego se convierte a representacion \gls{bow} o \gls{tfidf} para pasarlo por los $C$ estimadores del \emph{One vs Rest} y estimar las etiquetas predecidas recuperandolas como la \equationref{eq:ovr-inverse-transform} de manera de diccionario indexado por el numero de la clase $i \in \{1, \ldots, C\}$ como llave y el hashtag como el valor.
+
+\begin{equation} \label{eq:ovr-inverse-transform}
+    \{(i, h)\} \,;\, h \in \text{hashtags}
+\end{equation}
+
+% ================================================================
+% ================================================================
+% ================================================================
 
 \subsection{Modelo 2: Reconocimiento de \glsentrylong{namedent} con redes \glsentrylong{lstm}}
 \todo[inline]{Pendiente}
@@ -241,6 +273,10 @@ La tarea de etiquetado visto para una \gls{lstm} y una \gls{bilstm} puede ser vi
 \caption[Etiquetado con una \glsentrytext{bilstm}]{Etiquetado con una \glsentrytext{bilstm}. Tomado de \cite{Huang2015}.}
 \label{fig:bilstm-arch}
 \end{figure}
+
+% ================================================================
+% ================================================================
+% ================================================================
 
 \subsection{Modelo 3: Búsqueda de tweets relacionados con \emph{embeddings} de \mbox{StarSpace}}
 \todo[inline]{Pendiente}

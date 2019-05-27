@@ -334,7 +334,7 @@ Sin embargo, durante el entrenamiento no necesitamos una predicción, sino una f
     \end{axis}
   \end{tikzpicture}
 \decoRule
-\caption{Gráficas de cross-entropy (azul) si $y = 1$ (rojo) si $y = 0$.}
+\caption[Gráficas de cross-entropy]{Gráficas de cross-entropy (azul) si $y = 1$ (rojo) si $y = 0$.}
 \label{fig:cross-entropy-y1}
 \end{figure}
 
@@ -353,8 +353,94 @@ Para realizar el entrenamiento con esta función de perdida se realiza una optim
 % ================================================================
 
 \subsection{Modelo 3: Búsqueda de tweets relacionados con \emph{embeddings} de \mbox{StarSpace}}
-\todo[inline]{Pendiente}
+En este modelo, la intención es que a partir de una colección de textos guardados en una base de datos se puedan obtener los $k$ textos mas similares a un texto de consulta $q$, de manera que se encuentren los textos de mayor similaridad en cuanto a las palabras usadas por medio del uso de \emph{embeddings}.
 
+\subsubsection{?`Que son y como se usan los embeddings?}
+Un \emph{embedding} se puede entender como vectores $n$--dimensionales que representan palabras dentro de un diccionario, para los modelos previamente vistos \gls{bow} y \gls{tfidf} se pueden entender como \emph{embeddings}, sin embargo para la aplicación en este modelo, es necesario otro \emph{embedding} que permita encontrar la similaridad entre palabras de forma que palabras que tengan un significado parecido tengan una distancia menor que si se comparara con una palabra que fuera antónima, de forma que $\mathrm{dist}(\vp_{\mathrm{asombroso}}, \vp_{\mathrm{genial}}) \gg \mathrm{dist}(\vp_{\mathrm{asombroso}}, \vp_{\mathrm{terrible}})$, donde $\mathrm{dist}$ típicamente seria la distancia de similaridad coseno (\equationref{eq:cosine-similarity}).
+
+\begin{equation} \label{eq:cosine-similarity}
+  \mathrm{similaridad}(a, b) = \cos(\theta) = \frac{\vp_a \times \vp_b}{\norm{\vp_a} \norm{\vp_b}} \,,\, a, b \in d
+\end{equation}
+
+Ejemplos de uso popular en la industria son de \emph{embeddings} previamente entrenados estan \emph{GloVe} \cite{pennington2014glove}, \emph{word2vec} \cite{Mikolov2014}, \emph{fastText} \cite{joulin2016fasttext}, entre muchos otros.
+
+\subsubsection{Calculo de vectores de varias palabras}
+Una adición a las ventajas dados por estos \emph{embeddings} es la capacidad de representar textos completos por medio de obtener la representación de cada termino $t \in d$ por medio de obtener el promedio los vectores representativos de cada palabra (\equationref{eq:embeddings-sum}).
+
+\begin{equation} \label{eq:embeddings-sum}
+  \vs = \frac{1}{|d|} \sum_{t \in d} \vp_{t}
+\end{equation}
+
+\subsubsection{Evaluación de similaridad entre textos}
+Nos podemos imaginar que usando un buen \emph{embedding} la similaridad coseno entre frases duplicadas\footnote{Entiéndase a una frase duplicada como textos que sean equivalentes ``semánticamente'' pero no necesariamente iguales sintácticamente} va a ser menor que para las frases aleatorias que generemos. Sobretodo que para cada par de frases duplicadas podemos generar $R$ ejemplos de frases negativas y encontrar la posición del texto duplicado correcto.
+
+Sin embargo, no es buena idea considerar que el primer candidato sera siempre el primer resultado que dio la mayor similaridad, por lo que se tomara como una lista ordenada y formular una métrica de comparación. Podemos tomar a $K$ como un numero razonable de mejores elementos y $N$ el numero de consultas (tamaño de la muestra).
+
+\paragraph{Hits@K}
+La primera métrica que se usaría seria el numero de ``hits'' correctos para algún $K$, vea la \equationref{eq:hits-k}.
+
+\begin{equation} \label{eq:hits-k}
+  \mathrm{Hits@K} = \frac{1}{N} \sum_{i=1}^{N} [\mathrm{dup}_i \in \mathrm{topK}(q_i)]
+\end{equation}
+Donde $q_i$ es la $i$--\'esima consulta, $\mathrm{dup_i}$ es su duplicado y $\mathrm{topK}(q_i)$ son los $K$ elementos mas similares provistos por nuestro modelo donde $[\mathrm{condition}]$ obtiene valor de $1$ si la condición es verdadera y $0$ de lo contrario.
+
+\paragraph{DCG@K}
+La segunda métrica es conocida como \emph{Discounted cumulative gain} (versión simplificada), dada por la \equationref{eq:dcg-k}.
+
+\begin{equation} \label{eq:dcg-k}
+  \mathrm{DCG@K} = \frac{1}{N} \sum_{i=1}^{N} \frac{1}{\log_2(1+\mathrm{rank}_{\mathrm{dup}_i})} [\mathrm{rank}_{\mathrm{dup}_i} \le K]
+\end{equation}
+
+Donde $\mathrm{rank}_{\mathrm{dup}_i}$ es la posición del duplicado en la lista ordenada de frases mas cercanas al texto de la consulta $q_i$. De acuerdo a esta métrica, el modelo obtiene una mayor recompensa por una posición mas alta de la respuesta correcta. Si la respuesta no aparece en $\mathrm{topK}$ en absoluto, entonces la recompensa es $0$.
+
+\subsubsection{\glsentrylong{starspace}}
+\gls{starspace} \cite{starspace} es un modelo neuronal de propósito general para el aprendizaje eficiente de \emph{embedding} de entidades para resolver una gran variedad de problemas, entre estas están:
+\begin{itemize}
+\item Aprendizaje de \emph{embeddings} a nivel de palabras, frases y documentos.
+\item Obtención de información: ``ranking'' de conjuntos de entidades/documentos u objetos.
+\item Clasificación de textos.
+\item Aprendizaje de similaridad de textos
+\item Entre otras ...
+\end{itemize}
+
+\paragraph{?`Como funciona y cual es la principal diferencia con \emph{word2vec}?}
+\gls{starspace} puede ser entrenado específicamente para algunas tareas. En contraste con \emph{word2vec}, el cual intenta entrenar \emph{embeddings} similares para palabras en contextos similares, \gls{starspace} usa \emph{embeddings} para las frases completas (tal como la suma de los \emph{embeddings} para palabras y frases). A pesar de que se obtienen \emph{embeddings} en ambos casos como resultado del entrenamiento. Los \emph{embeddings} de \gls{starspace} son entrenados usando datos supervisados.
+
+\subsubsection{Uso de \emph{embeddings} creados con \glsentrylong{starspace}}
+En este caso, \gls{starspace} debería usar dos tipos de pares de secuencias para el entrenamiento: ``positivas'' y ``negativas''. Las muestras ``positivas'' son extraídas del conjunto de entrenamiento $\train$ (duplicados, alta similaridad) y las muestras ``negativas'' que son generadas aleatoriamente (se asume que tienen una baja similaridad).
+
+De forma que se pueda usar \gls{starspace} es necesario primero compilar el código fuente provisto del repositorio de código de GitHub\footnote{\href{https://github.com/facebookresearch/StarSpace}{https://github.com/facebookresearch/StarSpace}} (Solo funciona MacOS o Linux). Se puede clonar el codigo fuente por medio de introducir los  comandos en la Terminal de la \figureref{fig:starspace-terminal-compilation}.
+
+\begin{figure}[ht]
+\centering
+\begin{Verbatim}[numbers=left,numbersep=2pt]
+git clone https://github.com/facebookresearch/Starspace.git
+cd Starspace
+make
+\end{Verbatim}
+\caption{Ejemplo en compilación de \glsentrylong{starspace} en la Terminal.} 
+\label{fig:starspace-terminal-compilation}
+\end{figure}
+
+Para luego ejecutarlo con diferentes parámetros de entrada y un conjunto de entrenamiento en un archivo \texttt{.tsv}, como se muestra en la \figureref{fig:starspace-terminal-execution}.
+
+\begin{figure}[ht]
+\centering
+\begin{Verbatim}[fontsize=\footnotesize,numbers=left,numbersep=2pt]
+starspace train -trainFile prepared_train.tsv -model modelSaveFile \
+  -trainMode 3 -adagrad 1 -ngrams 1 -epoch 5 -dim 100 \
+  -similarity cosine -minCount 2 -verbose 1 -fileFormat labelDoc \
+  -negSearchLimit 10 -lr 0.05
+\end{Verbatim}
+\caption{Ejemplo en compilación de \glsentrylong{starspace} en la Terminal.} 
+\label{fig:starspace-terminal-execution}
+\end{figure}
+
+Donde se ejecuta a \gls{starspace} en modo de entrenamiento, tiene el archivo de entrenamiento como \texttt{prepared\_train.tsv}, el modo de entrenamiento para exploración de similaridad de textos (\texttt{-trainMode 3}), uso de optimización \textsc{Adagrad} (\texttt{-adagrad 1}), con n-gramas de tamaño $1$ (\texttt{-nrams 1}), $5$ iteraciones (\texttt{-epoch 5}), vectores resultantes en $\R^{100}$ (\texttt{-dim 100}), uso de similaridad coseno (\texttt{-similarity cosine}), conteo mínimo de $2$ términos (útil si no se quieren obtener \emph{embeddings} de palabras extremadamente raras, \texttt{-minCount 2}), numero mínimo de ejemplos negativos como $10$ usado durante el entrenamiento (\texttt{-negSearchLimit 10}) y una tasa de aprendizaje de $0.05$ (\texttt{-lr 0.05}).
+
+Luego de esto el resultado es un archivo de \emph{embeddings}, donde cada linea esta compuesta de una palabra y los $100$ números que componen al vector de esa palabra.
+
+Estos \emph{embeddings} resultantes permiten luego realizar la obtención de los $k$ textos mas similares a un tweet de consulta $q_i$ obtenido de \emph{pool} de textos obtenidos de Twitter de fuentes relevantes de forma que se encuentren textos relacionados el perfilado de individuos que tuvieran relación con grupos terroristas.
 
 \section{Despliegue (Deployment)}
 \todo[inline]{Pendiente}

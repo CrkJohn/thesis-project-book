@@ -153,21 +153,21 @@ Los \gls{som} tienen tres características distintivas:
 
 El algoritmo de aprendizaje de \gls{som} parte de primero inicializar los pesos de las $o$ neuronas con pesos aleatorios pequeños de una distribución de probabilidad aleatoria o uniforme, donde cada vector de entrada se define como $\vx = [x_1, \ldots, x_m]^{\top} \in \R^{m}$ y la entrada general de $N$ patrones como $\mX^{m \times N}$, el vector de pesos de la neurona $i$ es $\vw_i = [w_{i1}, \ldots, w_{im}] \in \R^{1 \times m}$, con la matriz de pesos $\mW^{o \times m}$.
 
-Para alcanzar el objetivo de \emph{competencia}, se realiza por cada patrón de entrada $x_i$ una comparación con cada uno de los pesos de las $o$ neuronas y se establece la de menor distancia $\norm{x_i}_p$ (típicamente la distancia Euclidiana o equivalentemente la norma $\normltwo$ e.g. $p = 2$), dejando un ganador $winner$, tal como en la \equationref{eq:som-competition}.
+Para alcanzar el objetivo de \emph{competencia}, se realiza por cada patrón de entrada $x_i$ una comparación con cada uno de los pesos de las $o$ neuronas y se establece la de menor distancia $\norm{x_i}_p$ (típicamente la distancia Euclidiana o equivalentemente la norma $\normltwo$ e.g. $p = 2$), dejando un ganador $\mathrm{winner}$, tal como en la \equationref{eq:som-competition}.
 \begin{equation} \label{eq:som-competition}
-  winner = \text{arg min}_j \norm{x_i - w_j}_p ; j = 1, \ldots,o
+  \mathrm{winner} = \text{arg min}_j \norm{x_i - w_j}_p ; j = 1, \ldots,o
 \end{equation}
 
-Luego de establecer la neurona ganadora, se realiza el paso para alcanzar la \emph{cooperación}, que consiste en que por medio de una función kernel $h$ (típicamente una una distribución gaussiana), que permite establecer un área de afectación de las otras neuronas según su ubicación física en el mapa, definidos como $r_{winner}$ y $r_j$ que son la ubicación de la neurona ganadora y la neurona vecina $j$, en el cual el grado de afectación de la neurona vecina depende de la distancia $\normltwo$ de la que esta de la neurona ganadora, definido en la \equationref{eq:som-cooperation}.
+Luego de establecer la neurona ganadora, se realiza el paso para alcanzar la \emph{cooperación}, que consiste en que por medio de una función kernel $h$ (típicamente una una distribución gaussiana), que permite establecer un área de afectación de las otras neuronas según su ubicación física en el mapa, definidos como $r_{\mathrm{winner}}$ y $r_j$ que son la ubicación de la neurona ganadora y la neurona vecina $j$, en el cual el grado de afectación de la neurona vecina depende de la distancia $\normltwo$ de la que esta de la neurona ganadora, definido en la \equationref{eq:som-cooperation}.
 \begin{equation} \label{eq:som-cooperation}
-  h_{j, winner}(t) = \exp\Bigg(\frac{- \norm{r_j - r_{winner}}^2}{ 2 \sigma(t)^2}\Bigg)
+  h_{j, \mathrm{winner}}(t) = \exp\Bigg(\frac{- \norm{r_j - r_{\mathrm{winner}}}^2}{ 2 \sigma(t)^2}\Bigg)
 \end{equation}
 
 Parte importante del proceso de convergencia del \gls{som} es que a medida que avanzan las iteraciones $t$ del algoritmo el área de afectación se va reduciendo como parte del proceso de adaptación, por lo que definimos $\sigma(t) = \sigma_0 \exp(-t / \tau_1)$, donde $\tau_1$ es una constante heurística y $\sigma_0$ la dimensión del mapa \gls{som}.
 
 Finalmente para alcanzar la \emph{adaptación} se realiza una actualización de los pesos de la matriz $\mW$ en base a la influencia de área $\sigma(t)$ y de una tasa de aprendizaje $\lr(t) = \lr_0 \exp(-t/ \tau_2)$, donde $\tau_2$ es otra constante heurística y $\lr_0$ es una constante de aprendizaje inicial, que debe ser $0 \le \lr_0 \le 1$, la actualización se describe por la \equationref{eq:som-adaptation} y el proceso puede ser visto gráficamente en la \figureref{fig:som-adap-proc}, tanto de forma uni-- como bi--dimensional.
 \begin{equation} \label{eq:som-adaptation}
-  w_j(t+1) = w_j(t) + \lr(t) h_{j, winner}(t)\Big[x_i-w_j(t)\Big]
+  w_j(t+1) = w_j(t) + \lr(t) h_{j, \mathrm{winner}}(t)\Big[x_i-w_j(t)\Big]
 \end{equation}
 
 \begin{figure}[H]

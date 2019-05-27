@@ -50,14 +50,14 @@ En este punto podrá crear la aplicación y generar los tokens de autorización,
 
 Esta petición de datos se realiza por medio de una consulta \texttt{GET} donde la URI provee los datos como los codigos de autorización.
 
-Dentro del directorio de software de este proyecto se incluye un programa que permite la obtención de tweets con todos meta-datos ofrecidos por la plataforma, de manera que obtiene tweets con temas relacionados especificados en un archivo de texto externo.
+Dentro del directorio de Software de este proyecto se incluye un programa que permite la obtención de tweets con todos meta-datos ofrecidos por la plataforma, de manera que obtiene tweets con temas relacionados especificados en un archivo de texto externo.
 
 \subsection{Obtención de datos con datasets públicos en Archive}
 Otra posibilidad de obtener datos en una plataforma abierta es la de la pagina web de \textsc{Archive}\footnote{\href{https://archive.org/search.php?query=collection\%3Atwitterstream\&sort=-publicdate\&page=2}{https://archive.org/search.php?query=collection\%3Atwitterstream\&sort=-publicdate\&page=2}}.
 
 En esta plataforma se puede descargar meses de contenido obtenido de cualquier origen en Twitter en el tiempo de un mes, aunque este información no fue obtenida con niveles altos de precisión, es decir, no se obtuvieron todos los tweets que ocurrieron ese mes ni tampoco fueron obtenidos en un ambiente de alta disponibilidad, por lo que no todos los tweets en ese instante fueron recolectados.
 
-Una forma recomendada de obtener los datos es por medio de \emph{torrents}, que permite una descarga fiable del contenido comprimido de ese mes\footnote{Cada mes pesa aproximadamente 50GB} ya que además provee de comprobación de integridad y descarga de secciones de los archivos corruptas. Un motor de torrents Open-Source es el de qBittorrent\footnote{\href{https://www.qbittorrent.org/}{https://www.qbittorrent.org/}}, y tiene implementaciones en Windows, MacOS y Linux.
+Una forma recomendada de obtener los datos es por medio de \emph{torrents}, que permite una descarga fiable del contenido comprimido de ese mes\footnote{Cada mes pesa aproximadamente 50GB} ya que además provee comprobación de integridad y descarga de secciones de los archivos corruptas. Un motor de torrents Open Source es el de qBittorrent\footnote{\href{https://www.qbittorrent.org/}{https://www.qbittorrent.org/}}, y tiene implementaciones en Windows, MacOS y Linux.
 
 Luego de haber descargado todo el archivo comprimido de tweets se puede proceder a descomprimirlo, de donde se encontraran archivos comprimidos mas pequeños divididos por día del mes, sin embargo téngase en cuenta que descomprimir estos archivos puede llegar a pesar 500GB, por lo que una alternativa mas conveniente es de realizar un filtrado de los datos relevantes que se necesiten de manera individual por cada uno de esos archivos, de esta forma solo se tendría la información requerida, en vez de ruido. Para esto existe una aplicación incluida en la carpeta de Software de este proyecto con un posible uso, donde también se hace uso de \cite{Tange2011a} para el procesamiento mas eficiente.
 

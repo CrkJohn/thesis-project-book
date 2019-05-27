@@ -29,7 +29,7 @@ Finalmente, metodologías de análisis de textos a partir de fuentes abiertas, t
 % ================================================================
 % ================================================================
 
-\section{Adquisición de datos (Data acquisition)}
+\section{Adquisición de datos (Data acquisition)} \label{sec:data-acquisition}
 Para esta labor de adquisición de datos, la intención es de recolectar datos de diversas fuentes, sin embargo para el alcance del proyecto se proponen dos metodologías de obtención de información de fuentes abiertas.
 
 \subsection{Obtención de datos con API de Twitter}
@@ -493,6 +493,10 @@ Luego de esto el resultado es un archivo de \emph{embeddings}, donde cada linea 
 
 Estos \emph{embeddings} resultantes permiten luego realizar la obtención de los $k$ textos mas similares a un tweet de consulta $q_i$ obtenido de \emph{pool} de textos obtenidos de Twitter de fuentes relevantes de forma que se encuentren textos relacionados el perfilado de individuos que tuvieran relación con grupos terroristas.
 
+% ================================================================
+% ================================================================
+% ================================================================
+
 \section{Despliegue (Deployment)}
-\todo[inline]{Pendiente}
-\lipsum[1]
+A la fecha, los productos disponibles para el despliegue son el primer modelo propuesto (\sectionref{sec:twitter-prediction}), una implementación del meta-modelo \gls{som} (\sectionref{subsec:SOM}) y la implementación de la recolección de información de tweets (\sectionref{sec:data-acquisition}).
+

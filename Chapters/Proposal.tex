@@ -129,7 +129,7 @@ Equivalentemente, la regresión logística con modelos lineales se calculan como
 \subsubsection{Multiclasificador de One vs Rest}
 La multiclasificacion como es brevemente introducido en la \sectionref{sec:ML}, permite realizar una clasificación en $C$ clases con una entrada $\vx$. El multiclasificador de \emph{One vs Rest} realiza la clasificación por medio de distinguir la separación de una muestra $\vx_i$ en una clase $c \in \{1, \ldots, C\}$ respecto al resto de muestras, de forma que se calcula la pertenencia de la muestra $i$-\'esima en esa clase con un estimador $\vtheta_c$. De los resultados dados por cada estimador se estima cual es el $k$-\'esimo estimador que da el máximo valor, de donde se estima finalmente que la clase $k$ es donde pertenece la muestra.
 
-El uso de la regresión logística se puede llevar a cabo para normalizar los resultados de los estimadores $\vtheta$, de donde el proceso para calcular el estimador consta de realizar un proceso de gradiente descendente, que utiliza como función de costo la \equationref{eq:ovr-reg-l2costfunc} para uso de regularización con $\normltwo$ y la \equationref{eq:ovr-reg-l1costfunc} para el uso de $\normlone$, basadas del manual de \cite{sklearn_api}. La función $\softplus$ es la función \emph{softplus} (vease la \sectionref{cha:notation}).
+El uso de la regresión logística se puede llevar a cabo para normalizar los resultados de los estimadores $\vtheta$, de donde el proceso para calcular el estimador consta de realizar un proceso de gradiente descendente, que utiliza como función de costo la \equationref{eq:ovr-reg-l2costfunc} para uso de regularización con $\normltwo$ y la \equationref{eq:ovr-reg-l1costfunc} para el uso de $\normlone$, basadas del manual de \cite{sklearn_api}. La función $\softplus$ es la función \emph{softplus} (véase la Notación).
 
 \begin{equation} \label{eq:ovr-reg-l2costfunc}
   \min_{\vtheta, c} \frac{1}{2}\vtheta^{\top} \vtheta + C \sum_{i=1}^n \softplus(- y_i (\mX_i^{\top} \vtheta + c))
@@ -157,13 +157,13 @@ La manera en que se entrena cada estimador $i \in \{1, \ldots, C\}$ es por medio
 \end{equation}
 
 \begin{equation} \label{eq:linear-regression-estimation}
-  \vtheta_i = \text{arg m\'{\i}n}_{\vtheta_i} | \hat{y}(\vx, \vtheta_i) - y|
+  \vtheta_i = \argmin_{\vtheta_i} | \hat{y}(\vx, \vtheta_i) - y|
 \end{equation}
 
 Luego de haberse entrenado cada estimador con sus valores óptimos, se puede realizar la predicción de las clases a las que pertenece una entrada $\vx$ con la \equationref{eq:ovr-prediction}.
 
 \begin{equation} \label{eq:ovr-prediction}
-  c = \text{arg max}_i \, \sigmoid(\hat{y(\vx, \vtheta_i)})
+  c = \argmax_i \, \sigmoid(\hat{y(\vx, \vtheta_i)})
 \end{equation}
 
 \subsubsection{Predicción de hashtags}
@@ -175,7 +175,7 @@ El uso que se le puede dar a todo lo mencionado anteriormente en esta sección e
     ``Really excited to add @plaidavenger to my deathlist along with Italy and @Plaid\_Obama after receiving that information.'' & $\mathlarger{\mathlarger{\mathlarger{\Rightarrow}}}$ & \textbf{\#deathlist, \#KillEveryone, \#ISIS}
   \end{tabular}
   \decoRule
-  \caption[Prediccion de hashtags con modelos lineales]{Prediccion de hashtags con modelos lineales.}
+  \caption{Predicción de hashtags con modelos lineales.}
   \label{fig:tweet-prediction}
 \end{figure}
 
@@ -190,7 +190,6 @@ De manera que se determinan los $C$ hashtags de los datos de entrenamiento $\sX$
 % ================================================================
 
 \subsection{Modelo 2: Reconocimiento de \glsentrylong{namedent} con redes \glsentrylong{lstm}}
-\todo[inline]{Pendiente}
 Igual que en el modelo presentado en la \sectionref{sec:twitter-prediction}, en Twitter como en cualquier otra red social se presentan en sus textos muchas veces la mención de las llamadas \gls{namedent}. Son objetos del mundo real, tales como personas, ubicaciones, organizaciones, productos, entre otros que pueden ser denotados con nombre propio, y pueden ser abstractos o tener una existencia física.
 
 En consecuencia, este modelo tiene como propósito reconocer \gls{namedent} que puedan dar una mejor aproximación a entender el contexto de conversaciones en masa de cibercriminales identificados o bien realizar una identificación de quienes son en base de cuales son los temas que tienden a mencionar mas habitualmente.
@@ -240,18 +239,18 @@ Con el fin de que la red sea bidireccional es necesario de una celda de memoria 
 
 \subsubsection{Reconocimiento de \glsentrylong{namedent}}
 Para el reconocimiento de \gls{namedent} tómese como ejemplo el \tableref{table:namedent-example}, donde las etiquetas asignadas corresponden al reconocimiento correspondiente de cada entidad.
-Las etiquetas de respuesta son \emph{Otro} (\textsc{O}) o una de estas: \emph{Persona} (\textsc{PER}), \emph{Ubicación} (\textsc{LOC}), \emph{Organización} (\textsc{ORG}) y \emph{Misceláneo} (\textsc{MISC}), donde las partes de etiqueta \textsc{B-} y \textsc{I-} corresponden al inicio de una palabra o una posición intermedia de la entidad.
+Las etiquetas (tags) de respuesta son \emph{Otro} (\textsc{O}) o una de estas: \emph{Persona} (\textsc{PER}), \emph{Ubicación} (\textsc{LOC}), \emph{Organización} (\textsc{ORG}) y \emph{Misceláneo} (\textsc{MISC}), donde las partes de etiqueta \textsc{B-} y \textsc{I-} corresponden al inicio de una palabra o una posición intermedia de la entidad.
 
 \begin{table}[H]
-\centering
-\begin{tabular}{l|llllll} 
-  \textbf{Texto}    & Ian   & Goodfellow & trabaja & para & Google & Brain \\
-  \textbf{Etiqueta} & B-PER & I-PER      & O       & O    & B-ORG  & I-ORG
-\end{tabular}
-\\ [1em]
-\decoRule
-\caption{Ejemplo de reconocimiento de \glsentrylong{namedent}.}
-\label{table:namedent-example}
+  \centering
+  \begin{tabular}{l|lllllll}
+    \textbf{Texto}    & Donald   & Trump & es & presidente & de & Estados & Unidos \\
+    \textbf{Etiqueta} & B-PER    & I-PER & O  & O          & O  & B-ORG   & I-ORG
+  \end{tabular}
+  \\ [1em]
+  \decoRule
+  \caption{Ejemplo de reconocimiento de \glsentrylong{namedent}.}
+  \label{table:namedent-example}
 \end{table}
 
 La tarea de etiquetado visto para una \gls{lstm} y una \gls{bilstm} puede ser visto en la \figureref{fig:lstm-arch} y la \figureref{fig:bilstm-arch}.
@@ -273,6 +272,81 @@ La tarea de etiquetado visto para una \gls{lstm} y una \gls{bilstm} puede ser vi
 \caption[Etiquetado con una \glsentrytext{bilstm}]{Etiquetado con una \glsentrytext{bilstm}. Tomado de \cite{Huang2015}.}
 \label{fig:bilstm-arch}
 \end{figure}
+
+% ================================================================
+
+\subsubsection{Entrenamiento de \glsentrylong{bilstm}}
+El entrenamiento de las redes \gls{bilstm} se empieza de manera similar a la descrita en la \sectionref{sec:twitter-prediction} con el procedimiento de asignar un identificador a cada \emph{token} y a cada \emph{tag} como en la \equationref{eq:lstm-token2id} y la \equationref{eq:lstm-tag2id}, donde $N$ es el numero de tokens y $T$ el numero de tags. De manera que el conjunto de entrenamiento $\sX$ consta de tuplas $(\text{token}, \text{tag})$, de donde se agregan dos tipos especiales de tokens \texttt{<PAD>} y \texttt{<UNK>}, que representan relleno y algo desconocido respectivamente.
+
+\begin{equation} \label{eq:lstm-token2id}
+  \text{token2id} = \Big\{(\text{token}_i, i) : \forall i \in \{1, \ldots, N\} \Big\}
+\end{equation}
+
+\begin{equation} \label{eq:lstm-tag2id}
+  \text{tag2id} = \Big\{(\text{tag}_i, i) : \forall i \in \{1, \ldots, T\} \Big\}
+\end{equation}
+
+\paragraph{Generación de \textsc{Batches} para las redes \textsc{Bi-LSTM}}
+Las redes neuronales son comúnmente entrenadas por grupos (o \emph{batches} en ingles) de entrada. Eso significa que las actualizaciones de los pesos dentro de la red se basan en secuencias en cada instante de tiempo. Pero estas secuencias dentro de un batch deben tener la misma longitud, así que estas se rellenaran con una etiqueta de relleno \texttt{<PAD>}. También es buena idea proveer la red con la longitud de las secuencias, para que así pueda saltarse computaciones innecesarias de las partes de relleno. A las partes de relleno se le asigna un tag de \texttt{O}.
+
+\paragraph{Construcción de capas de la red neuronal}
+Para esta construcción se procede a generar una matriz de \emph{embeddings} aleatorios, que en el caso de \gls{tensorflow} son tensores aleatorios y se establecen las células de procesamiento \emph{forward} y \emph{backward} con valores de marginalización $\xi$ (valor establecido heurísticamente) que es una forma de regularización importante en redes neuronales, de donde se especifica la probabilidad de retención de los valores de la iteración anterior.
+
+La salida de las celdas de \emph{forward} y \emph{backward} serán dos tensores $\tF$ y $\tB$, que se concatenan en un tensor $\tO$.
+
+\paragraph{Computación de predicciones}
+Se computa la función $\softmax$ sobre $\tO$ para convertir las entradas en una forma de probabilidad, de forma que se estan calculando las probabilidades de cada una de las entradas para luego calcular cuales son las entrada de mayor probabilidad, estimando así la predicción $P$, como se muestra en la \equationref{eq:bilstm-pred}.
+
+\begin{equation} \label{eq:bilstm-pred}
+  P = \argmax_i (\softmax(\sigmoid(\tO_i)))
+\end{equation}
+
+Sin embargo, durante el entrenamiento no necesitamos una predicción, sino una función de perdida (o \emph{loss} en ingles), que se calcula como se muestra en la \equationref{eq:cross-entropy-loss}, y en la \figureref{fig:cross-entropy-y1}, donde $\hat{y}$ es la predicción y $y$ es el valor verdadero.
+
+\begin{equation} \label{eq:cross-entropy-loss}
+  \gamma(\hat{y}, y) = -{(y\log(\hat{y}) + (1 - y)\log(1 - \hat{y}))}
+\end{equation}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      axis lines = left,
+      xlabel = $x$,
+      ylabel = {$\gamma(x)$},
+      ]
+      % Below the red parabola is defined
+      \addplot [
+      domain=-0.1:1.1, 
+      samples=100, 
+      color=red,
+      ]
+      {-ln(1-x)};
+      \addlegendentry{$-\log(1-x)$}
+      % Here the blue parabloa is defined
+      \addplot [
+      domain=-0.1:1.1, 
+      samples=100, 
+      color=blue,
+      ]
+      {-ln(x)};
+      \addlegendentry{$-\log(x)$}
+    \end{axis}
+  \end{tikzpicture}
+\decoRule
+\caption{Gráficas de cross-entropy (azul) si $y = 1$ (rojo) si $y = 0$.}
+\label{fig:cross-entropy-y1}
+\end{figure}
+
+De manera que si se calcula una predicción de $\num{1e-8}$ cuando el valor verdadero es $1$, dará como resultado un valor alto de perdida (e.g. $\gamma(\num{1e-8}, 1) \approx \num{18.42}$).
+
+Se calcula un tensor de perdida $\tL$ con $\softmax(\gamma(\sigmoid(\tO)))$, para luego calcular la media $\mu_{\tL}$ del tensor $\tL$. Y se pasa por una tensor mascara $\tM$ (\equationref{eq:bilstm-mask-tensor}) que multiplica por $\tL$, donde $\train$ es el batch de entrenamiento. Entiéndase al tensor $\tM$ como el tensor que representa las posiciones que no son \texttt{<PAD>} con valor de $1$ y valor $0$ si lo son dentro del batch.
+
+\begin{equation} \label{eq:bilstm-mask-tensor}
+  \tM = \sum_{i \in \{1, \ldots, |\train|\}} \ve_{\mathrm{tag_i = \mathrm{PAD}}}^{(i)}
+\end{equation}
+
+Para realizar el entrenamiento con esta función de perdida se realiza una optimización (el optimizador estocástico \textsc{Adam} \cite{Kingma2014} es una opción eficiente) con una tasa de aprendizaje $\alpha$.
 
 % ================================================================
 % ================================================================

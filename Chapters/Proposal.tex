@@ -413,11 +413,13 @@ De forma que se pueda usar \gls{starspace} es necesario primero compilar el cód
 
 \begin{figure}[ht]
 \centering
-\begin{Verbatim}[numbers=left,numbersep=2pt]
+\begin{minipage}{0.9\textwidth}
+\begin{Verbatim}[fontsize=\footnotesize,numbers=left,numbersep=2pt]
 git clone https://github.com/facebookresearch/Starspace.git
 cd Starspace
 make
 \end{Verbatim}
+\end{minipage}
 \caption{Ejemplo en compilación de \glsentrylong{starspace} en la Terminal.} 
 \label{fig:starspace-terminal-compilation}
 \end{figure}
@@ -426,13 +428,15 @@ Para luego ejecutarlo con diferentes parámetros de entrada y un conjunto de ent
 
 \begin{figure}[ht]
 \centering
+\begin{minipage}{0.9\textwidth}
 \begin{Verbatim}[fontsize=\footnotesize,numbers=left,numbersep=2pt]
 starspace train -trainFile prepared_train.tsv -model modelSaveFile \
   -trainMode 3 -adagrad 1 -ngrams 1 -epoch 5 -dim 100 \
   -similarity cosine -minCount 2 -verbose 1 -fileFormat labelDoc \
   -negSearchLimit 10 -lr 0.05
 \end{Verbatim}
-\caption{Ejemplo en compilación de \glsentrylong{starspace} en la Terminal.} 
+\end{minipage}
+\caption{Ejemplo en ejecución de \glsentrylong{starspace} en la Terminal.} 
 \label{fig:starspace-terminal-execution}
 \end{figure}
 

@@ -4,63 +4,71 @@
 
 %----------------------------------------------------------------------------------------
 
-\todo{Rependiente}
 % \thispagestyle{empty}
+\setcounter{taskcounter}{0}
 \begin{figure}[h!]
-\begin{tikzpicture}
-  \GanttHeader{\textwidth}{2ex}{5cm}{16}
-  
-  \Task{1}{Entendimiento de \glsentrytext{osint}}{0}{5}
-  \Task{2}{Estudio de literatura de \gls{nlp}}{1}{2}
-  \Task{3}{Investigación Estado del Arte}{2}{6}
-  \Task{4}{Desarrollo de propuesta}{6}{6}
-  \Task{5}{Implementación y evaluación}{10}{5}
-  \Task{6}{Profundización literatura de \gls{nlp}}{8}{5}
-  \Task{7}{Preparación de documento de resultados}{14}{2}
-  \Task{8}{Construcción de póster}{14}{1}
-\end{tikzpicture}
-\caption{Diagrama Gantt de actividades de 1\textsuperscript{er} periodo}
-\label{fig:gantt1}
+  \begin{tikzpicture}
+    \GanttHeader{\textwidth}{2ex}{5cm}{16}
+    \Taske{0}{5}{Entendimiento de \glsentrytext{osint}}
+    \Taske{1}{9}{Estudio de literatura de \gls{nlp}}
+    \Taske{2}{6}{Investigación del Estado del Arte}
+    \Taske{6}{9}{Desarrollo de propuesta}
+    \Taske{6}{9}{Implementación de software}
+    \Taske{8}{6}{Profundización literatura de \gls{nlp}}
+    \Taske{14}{2}{Preparación de documentos}
+  \end{tikzpicture}
+  \caption{Diagrama Gantt de actividades de 1\textsuperscript{er} periodo}
+  \label{fig:gantt1}
 \end{figure}
 
+
+\setcounter{taskcounter}{0}
 \begin{figure}[h!]
-\begin{tikzpicture}
-  \GanttHeader{\textwidth}{2ex}{5cm}{16}
-  \Task{1}{Prueba prueba prueba prueba}{0}{5}
-  \Task{2}{Prueba prueba prueba prueba}{1}{2}
-  \Task{3}{Prueba prueba prueba prueba}{2}{6}
-  \Task{4}{Prueba prueba prueba prueba}{6}{6}
-  \Task{5}{Prueba prueba prueba prueba}{10}{5}
-  \Task{6}{Prueba prueba prueba prueba}{8}{5}
-  \Task{7}{Prueba prueba prueba prueba}{14}{2}
-  \Task{8}{Prueba prueba prueba prueba}{14}{1}
-\end{tikzpicture}
-\caption{Diagrama Gantt de actividades de 2\textsuperscript{do} periodo}
-\label{fig:gantt2}
+  \begin{tikzpicture}
+    \GanttHeader{\textwidth}{2ex}{5cm}{16}
+
+    \Taske{0}{3}{Terminación de software P1}
+    \Taske{0}{8}{Profundización en \gls{nlp}}
+    \Taske{3}{3}{Desarrollo de técnicas de \glsentrytext{osint}}
+    \Taske{6}{3}{Visualización de métodos}
+    \Taske{9}{3}{Desarrollo de métodos adicionales}
+    \Taske{12}{3}{Pruebas de concepto}
+    \Taske{14}{2}{Documentación de documentos}
+  \end{tikzpicture}
+  \caption{Diagrama Gantt de actividades de 2\textsuperscript{do} periodo (Planeado)}
+  \label{fig:gantt2}
 \end{figure}
 
 \vspace{1cm}
 
+\newcounter{tablecountone}
+\newcounter{tablecounttwo}
+\setcounter{tablecountone}{1}
+\setcounter{tablecounttwo}{0}
+\newcommand{\rowt}[1]{\addtocounter{tablecounttwo}{1}{\thetablecountone.\thetablecounttwo} & {#1.} \\ \hline}
+\newcommand{\tablenextlevel}{\addtocounter{tablecountone}{1}\setcounter{tablecounttwo}{0}}
+
 \begin{table}[h!]
 \begin{center}
-\begin{tabular}{|>{\centering\arraybackslash}p{.025\textwidth}|p{.975\textwidth}|} \hline
-  & \textbf{Detalle} \\ \hline
-  {\bf 1} & Entendimiento de \gls{nlp} y proyecto \gls{osint} \\ \hline
+\begin{tabular}{|c p{.975\textwidth}|} \hline
+  \textbf{\#} & \textbf{Descripción} \\ \hline \hline
   
-  {\bf 2} & Estudo de la litaratura \\ \hline
-  
-  {\bf 3} & Investigación del Estado del Arte \\ \hline
-  
-  {\bf 4} & Desarrollo de la propuesta de investigación \\ \hline
-  
-  {\bf 5} & Desarrollo de la implementación y pruebas \\ \hline
-  
-  {\bf 6} & Realización de curso de \gls{nlp} de National Research University Higher School of Economics
-            de \gls{coursera} \\ \hline
-  
-  {\bf 7} & Preparación final de documento de libro de proyectos y articulo de investigación \\ \hline
-  
-  {\bf 8} & Construcción de póster para presentación en la Vitrina Académica \\ \hline
+  \rowt{Entendimiento proyecto de \gls{osint}}
+  \rowt{Estudio de la literatura de \gls{nlp}}
+  \rowt{Investigación del Estado del Arte}
+  \rowt{Desarrollo de la propuesta de investigación}
+  \rowt{Desarrollo de la implementación y pruebas}
+  \rowt{Realización de curso de \gls{nlp} de \emph{National Research University Higher School of Economics} en \gls{coursera}}
+  \rowt{Preparación final de documento de libro de proyectos del primer periodo}
+  % ================ SEGUNDO PERIODO ================
+  \tablenextlevel
+  \rowt{Terminación y mejora de software desarrollado en el primer periodo}
+  \rowt{Periodización de metodologías aplicadas de \gls{nlp}}
+  \rowt{Desarrollo de nuevas técnicas para la obtención de información de fuentes \glsentrytext{osint} como también de identificar nuevas fuentes de información que tengan que ver con terroristas}
+  \rowt{Desarrollo de un \emph{dashboard} detallado que ayuden al agente de seguridad realizar sus labores}
+  \rowt{Desarrollo de métodos adicionales para el perfilamiento de cibercriminales}
+  \rowt{Realizar pruebas demostrativas que permitan visualizar la obtención de información de las fuentes abiertas en tiempo real}
+  \rowt{Documentación final de los documentos entregables}
 \end{tabular}
 \end{center}
 \caption{Detalle de cronograma de actividades}

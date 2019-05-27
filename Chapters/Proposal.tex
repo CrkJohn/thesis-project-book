@@ -210,7 +210,7 @@ La manera en que se entrena cada estimador $i \in \{1, \ldots, C\}$ es por medio
 Luego de haberse entrenado cada estimador con sus valores óptimos, se puede realizar la predicción de las clases a las que pertenece una entrada $\vx$ con la \equationref{eq:ovr-prediction}.
 
 \begin{equation} \label{eq:ovr-prediction}
-  c = \argmax_i \, \sigmoid(\hat{y(\vx, \vtheta_i)})
+  c = \argmax_i \, \sigmoid(\hat{y}(\vx, \vtheta_i))
 \end{equation}
 
 \subsubsection{Predicción de hashtags}

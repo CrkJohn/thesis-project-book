@@ -4,4 +4,16 @@
 
 %----------------------------------------------------------------------------------------
 
-\lipsum
+Dentro de la literatura se encuentran diversos métodos específicamente para el perfilamiento de cibercriminales, como también métodos genéricos para el análisis de la información, aquí se exponen varios trabajos relacionados con estas tareas.
+
+En \cite{Portnoff2017} se propone un método de análisis automático de forums del bajo mundo. Ellos usan procesamiento de lenguaje natural y \glsentrylong{machinel} para generación de información de alto nivel sobre foros del bajo mundo, primero identificando publicaciones que involucran transacciones y luego extrayendo los productos y precios. También demuestran como un analista puede usar estas metodologías automatizadas para investigar otras categorías de productos y transacciones.
+
+En \cite{Zou2013} se introducen embeddings de palabras bilingües, es decir, representaciones de palabras asociadas entre dos lenguajes en el contexto de modelos de lenguaje neuronal. Ellos proponen un metodo para el aprendizaje de un gran corpus sin etiquetas. Estos nuevos embeddings mejoran significativamente en similaridad semántica.
+
+En \cite{Lau2014} desarrollan un método de minería de redes de cibercriminales poco supervisado para facilitar la forensia de cibercrimenes. El método propuesto es un modelo generativo probabilístico por un algoritmo de muestreo sensible al contexto y muestran un mejora significativa respecto a un método con \emph{Latent Dirichlet Allocation} \textsc{(LDA)} y otro método basado en \glspl{svm}.
+
+En \cite{som-vis-categories} se realiza una visualización de categorías sacadas de Wikipedia de forma que se muestran sus relaciones con ayuda del meta-modelo \gls{som}, ayudando así realizar una reducción de los espacios de búsqueda. Por medio de la selección de una neurona especifica era posible la obtención de categorías conceptualmente similares. La evaluación de las activaciones de neuronas individuales indicaban que formaban patrones de forma coherente que podrían ser útiles en la construcción de interfaces de usuario para la navegación sobre estructuras categóricas.
+
+En \cite{Benjamin2016} exploran diversas técnicas computacionales para realizar el \gls{clustering} de grupos de lenguajes con la categorización de participantes de foros de cibercriminales. Ellos hacen uso de un modelo de red neuronal de lenguaje para generar representaciones de vectores de tamaño fijo de mensajes publicados por los participantes de los foros. Ellos afirman que sus resultados muestran que Vectores de párrafos superan a las aproximaciones tradicionales de frecuencia de n--gramas para generar embeddings de documentos que son útiles en la clusterizacion de cibercriminales en grupos de lenguajes.
+
+En \cite{Garcia-Plaza2008} realizan clusterizaci\'on de documentos HTML con lógica difusa, de donde describen que en los resultados experimentales muestran una mejora significativa respecto a modelos de espacio vectorial con funciones tradicionales de pesado de parámetros en un dataset estándar de pruebas.

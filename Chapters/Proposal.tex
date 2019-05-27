@@ -11,11 +11,58 @@
 
 La propuesta consta de a aplicación de modelos de \glsentrytext{nlp} para el desarrollo de labores de inteligencia en escenarios de ciberterrorismo por medio de \nmodels modelos, pensados para el análisis de texto en redes sociales como Twitter en aras de realizar un perfilado de ciber-criminales potenciales, esto por medio de \gls{nlp}, de donde se parte varias metodologías que hacen uso de tecnologías \mbox{Estado-del-Arte}.
 
+Para esto se realiza el ciclo \gls{crisp-dm}, de donde se encuentran las fases de (se tomaron cuatro de las seis fases):
+\begin{enumerate}
+\item Business understanding
+\item Data acquisition
+\item Modelling
+\item Deployment
+\end{enumerate}
+
 \section{Entendimiento del negocio (Business understanding)}
-\todo{Pendiente}
+En el proceso de perfilado una tarea muy importante se basa en la búsqueda de pistas (como diversos ejemplos dados en \cite{mena2003investigative}), por lo que la mayor parte de este proceso confiere de tratar de encontrar patrones que confieran algún tipo de relación entre lo que es un actor y una acción, si bien no necesariamente de forma directa. Es por esto que técnicas como las que se encuentran en la minería de texto confieren una posibilidad de realizar muchas de estas labores, tales como el \gls{clustering} de elementos, como el caso de la \figureref{fig:som-example} en la \sectionref{subsec:SOM}.
+
+La necesidad cae en las agencias de seguridad que requieren de estar constantemente buscando posibles relaciones entre ataques pasados o futuros, y por tanto nuevas herramientas que permitan obtener nuevas habilidades en la esta labor son esenciales.
+
+Finalmente, metodologías de análisis de textos a partir de fuentes abiertas, tales como en \cite{osint}, permitirían no solo obtener la información, sino que es necesario tener una forma de analizarla e incluso predecir relaciones a partir del contenido que no es explícitamente dicho.
+
+% ================================================================
+% ================================================================
 
 \section{Adquisición de datos (Data acquisition)}
-\todo[inline]{Incluir proceso de recolección por el API de Twitter o usando los datasets que estan en Archive}
+Para esta labor de adquisición de datos, la intención es de recolectar datos de diversas fuentes, sin embargo para el alcance del proyecto se proponen dos metodologías de obtención de información de fuentes abiertas.
+
+\subsection{Obtención de datos con API de Twitter}
+Twitter permite el acceso de datos de su plataforma por medio de códigos de autorización provistos en ella, que luego son usados para obtener la información con criterios definidos por el usuario.
+
+\subsubsection{Petición de autorización en Twitter}
+Para realizar una petición de datos de acceso a la plataforma es necesario crear una ``App'' por medio de visitar la pagina de Administración de aplicaciones (o \emph{Application~Management} en ingles). Se necesita una cuenta de Twitter previamente creada.
+
+Luego se procede a crear la App, para esto sera necesario proveer información respecto a que se hará con la aplicación y que datos requerirá esta. En este proceso es importante tener en cuenta que debido al uso masivo de información dentro de Twitter, este ha puesto restricciones al acceso por temas de privacidad e influencia, es por esto que el proceso para pedir autorización de crear una nueva aplicación debe incluir la mayor cantidad de información que provea la intención del uso. Luego de llevar a cabo la solicitud luego de aproximadamente un día le sera notificado si fue autorizado para utilizar la plataforma.
+
+En este punto podrá crear la aplicación y generar los tokens de autorización, de los cuales requerirá de:
+\begin{itemize}
+\item \texttt{CONSUMER\_KEY}
+\item \texttt{CONSUMER\_SECRET}
+\item \texttt{ACCESS\_TOKEN}
+\item \texttt{ACCESS\_SECRET}
+\end{itemize}
+
+Esta petición de datos se realiza por medio de una consulta \texttt{GET} donde la URI provee los datos como los codigos de autorización.
+
+Dentro del directorio de software de este proyecto se incluye un programa que permite la obtención de tweets con todos meta-datos ofrecidos por la plataforma, de manera que obtiene tweets con temas relacionados especificados en un archivo de texto externo.
+
+\subsection{Obtención de datos con datasets públicos en Archive}
+Otra posibilidad de obtener datos en una plataforma abierta es la de la pagina web de \textsc{Archive}\footnote{\href{https://archive.org/search.php?query=collection\%3Atwitterstream\&sort=-publicdate\&page=2}{https://archive.org/search.php?query=collection\%3Atwitterstream\&sort=-publicdate\&page=2}}.
+
+En esta plataforma se puede descargar meses de contenido obtenido de cualquier origen en Twitter en el tiempo de un mes, aunque este información no fue obtenida con niveles altos de precisión, es decir, no se obtuvieron todos los tweets que ocurrieron ese mes ni tampoco fueron obtenidos en un ambiente de alta disponibilidad, por lo que no todos los tweets en ese instante fueron recolectados.
+
+Una forma recomendada de obtener los datos es por medio de \emph{torrents}, que permite una descarga fiable del contenido comprimido de ese mes\footnote{Cada mes pesa aproximadamente 50GB} ya que además provee de comprobación de integridad y descarga de secciones de los archivos corruptas. Un motor de torrents Open-Source es el de qBittorrent\footnote{\href{https://www.qbittorrent.org/}{https://www.qbittorrent.org/}}, y tiene implementaciones en Windows, MacOS y Linux.
+
+Luego de haber descargado todo el archivo comprimido de tweets se puede proceder a descomprimirlo, de donde se encontraran archivos comprimidos mas pequeños divididos por día del mes, sin embargo téngase en cuenta que descomprimir estos archivos puede llegar a pesar 500GB, por lo que una alternativa mas conveniente es de realizar un filtrado de los datos relevantes que se necesiten de manera individual por cada uno de esos archivos, de esta forma solo se tendría la información requerida, en vez de ruido. Para esto existe una aplicación incluida en la carpeta de Software de este proyecto con un posible uso, donde también se hace uso de \cite{Tange2011a} para el procesamiento mas eficiente.
+
+% ================================================================
+% ================================================================
 
 \section{Modelamiento (Modelling)}
 Como parte de la propuesta se proponen \nmodels modelos para tratar diferentes aspectos en perfilado de donde se representan los diferentes modelos en la \figureref{fig:proposal-arch}.
@@ -440,7 +487,7 @@ starspace train -trainFile prepared_train.tsv -model modelSaveFile \
 \label{fig:starspace-terminal-execution}
 \end{figure}
 
-Donde se ejecuta a \gls{starspace} en modo de entrenamiento, tiene el archivo de entrenamiento como \texttt{prepared\_train.tsv}, el modo de entrenamiento para exploración de similaridad de textos (\texttt{-trainMode 3}), uso de optimización \textsc{Adagrad} (\texttt{-adagrad 1}), con n-gramas de tamaño $1$ (\texttt{-nrams 1}), $5$ iteraciones (\texttt{-epoch 5}), vectores resultantes en $\R^{100}$ (\texttt{-dim 100}), uso de similaridad coseno (\texttt{-similarity cosine}), conteo mínimo de $2$ términos (útil si no se quieren obtener \emph{embeddings} de palabras extremadamente raras, \texttt{-minCount 2}), numero mínimo de ejemplos negativos como $10$ usado durante el entrenamiento (\texttt{-negSearchLimit 10}) y una tasa de aprendizaje de $0.05$ (\texttt{-lr 0.05}).
+Donde se ejecuta a \gls{starspace} en modo de entrenamiento, tiene el archivo de entrenamiento (\texttt{prepared\_train.tsv}), el modo de entrenamiento para exploración de similaridad de textos (\texttt{-trainMode 3}), uso de optimización \textsc{Adagrad} (\texttt{-adagrad 1}), con n-gramas de tamaño $1$ (\texttt{-nrams 1}), $5$ iteraciones (\texttt{-epoch 5}), vectores resultantes en $\R^{100}$ (\texttt{-dim 100}), uso de similaridad coseno (\texttt{-similarity cosine}), conteo mínimo de $2$ términos (útil si no se quieren obtener \emph{embeddings} de palabras extremadamente raras, \texttt{-minCount 2}), numero mínimo de ejemplos negativos como $10$ usado durante el entrenamiento (\texttt{-negSearchLimit 10}) y una tasa de aprendizaje de $0.05$ (\texttt{-lr 0.05}).
 
 Luego de esto el resultado es un archivo de \emph{embeddings}, donde cada linea esta compuesta de una palabra y los $100$ números que componen al vector de esa palabra.
 
@@ -448,4 +495,4 @@ Estos \emph{embeddings} resultantes permiten luego realizar la obtención de los
 
 \section{Despliegue (Deployment)}
 \todo[inline]{Pendiente}
-\lipsum{1}
+\lipsum[1]

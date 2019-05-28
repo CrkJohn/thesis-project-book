@@ -1,8 +1,18 @@
-\chapter{Conclusiones y trabajo futuro} % Main chapter title
+\chapter{Conclusiones y trabajos futuros}
 
-\label{chap:conclusions} % For referencing the chapter elsewhere, use \ref{Chapter1}
-\todo[inline]{3 conclusiones}
-\todo[inline]{2 trabajos futuros}
-\todo{Agregar propuesta de modelo 4: Uso de SOM con embeddings de StarSpace}
-\todo{Hablar de trabajo futuro con \cite{madsen2019visualizing}}
-\lipsum
+\label{chap:conclusions}
+
+\section{Conclusiones}
+\begin{itemize}
+\item Se investigaron diferentes metodologías de \gls{nlp} y \gls{datascience} para la tarea de perfilado de cibercriminales por medio de información de fuentes abiertas.
+\item Es necesario probar las metodologías propuestas con información obtenida de fuentes abiertas que este validada de forma que el entrenamiento de ellos sean efectivos en la tarea.
+\item Se logro un obtener una vista amplia de las posibles aplicaciones de \gls{nlp} aplicados a contextos de ciber espacio.
+\end{itemize}
+
+\section{Trabajos futuros}
+\begin{itemize}
+\item Utilizar el meta-modelo de \gls{som} (\sectionref{subsec:SOM}) como un cuarto modelo para el clustering de textos representados con embeddings pre-entrenados o generados con \gls{starspace}.
+\item Utilizar metodologías de visualización de las redes \gls{bilstm} como la visualización expuesta en \cite{madsen2019visualizing} con el fin de depurar su ejecución.
+\item Desarrollo de un \emph{dashboard} para la ayuda de visualización de un agente de seguridad del estado a desempeñar su tarea de perfilado de cibercriminales.
+\item Desarrollo de técnicas avanzadas de obtención de información de redes sociales, tanto de redes sociales populares como impopulares, de manera similar al desarrollado con \gls{osint} en \cite{osint}.
+\end{itemize}

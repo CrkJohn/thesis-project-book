@@ -1,6 +1,6 @@
 set -e
 
-./clean.sh
+sh clean.sh
 
 pdflatex main
 bibtex main

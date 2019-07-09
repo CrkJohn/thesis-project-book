@@ -246,10 +246,6 @@ En consecuencia, este modelo tiene como propósito reconocer \gls{namedent} que 
 \todo[inline]{Despues de este parrafo por favor colocar un parrafo pequeño que describa la pregunta de data science que este modelo resuelve, por ejeemplo ¿Cual(es) es(son) lo(s) named entities identificado(s) en un twet?}
 
 \subsubsection{Redes neuronales recurrentes (\glsentrylong{rnn}s)}
-Este tipo de redes tiene la característica de recordar salidas y entradas pasadas de datos, de forma que decisiones futuras respecto a una clasificación pueden tener una mejor forma de basarse. Las redes neuronales (\glspl{neuralnetwork}) típicamente no pueden hacer estas operaciones ya que no tienen incorporada la habilidad de forma que recuerden entradas y salidas pasadas, sino que se les realiza un entrenamiento de una información de entrada y de salida que se conoce con anticipación, de forma que su salida solo se concentra en su entrada inmediata de datos.
-
-Por este motivo, las \glspl{rnn} poseen una gran ventaja en situaciones puntuales, tales como el caso expuesto al inicio de esta sección, sin embargo, el modelo clásico de \gls{rnn} es como la arquitectura presentada en la \figureref{fig:rnn-classic}, esta no provee resultados significativos debido a limitantes respecto al nivel de recordación que tienen originalmente.
-
 La naturaleza recurrente de estas redes viene del hecho de representarse como redes donde su salida hace parte de la entrada a la siguiente iteración de la red, tal como se aprecia en la \figureref{fig:rnn-classic-simple}.
 
 \begin{figure}[H]
@@ -261,8 +257,12 @@ La naturaleza recurrente de estas redes viene del hecho de representarse como re
 \label{fig:rnn-classic-simple}
 \end{figure}
 
+Este tipo de redes tiene la característica de recordar salidas y entradas pasadas de datos, de forma que decisiones futuras respecto a una clasificación pueden tener una mejor forma de basarse\todo{ajustar la redaccion de esta frase}. Las redes neuronales (\glspl{neuralnetwork}) típicamente no pueden hacer estas operaciones ya que no tienen incorporada la habilidad de recordar entradas y salidas pasadas, sino que se realiza un entrenamiento con información de entrada y de salida que se conoce con anticipación, de forma que su salida solo se concentra en su entrada inmediata de datos.
+
+Por este motivo, las \glspl{rnn} poseen una gran ventaja en situaciones puntuales, tales como el caso expuesto al inicio de esta sección (\gls{namedent}), sin embargo, el modelo clásico de \gls{rnn} es como la arquitectura presentada en la \figureref{fig:rnn-classic}, esta no provee resultados significativos debido a limitantes respecto al nivel de recordación que tienen originalmente.\todo[inline]{creo que hay que ajustar este parrafo porque primero se dice que las RNN son muy buenas y traen grandes ventajas por su capacidad de recordación y luego se termina diciendo que no provee resultados significativos. Por favor ajustar para que sea mas objetivo y no se vea la contradicción}
+
 \subsubsection{Redes neuronales \glsentrylong{lstm}}
-En la literatura se puede encontrar usualmente el uso de las redes \gls{lstm}, las cuales proveen por medio de una arquitectura mas compleja la posibilidad de tener recordación de largo y corto plazo, como se muestra en la \figureref{fig:lstm-classic}. Para que estas redes tengan la característica de tener recordación es necesario de una celda de memoria, donde esta es la entrada para la siguiente iteración de la red, junto con la entrada de datos a la red.
+En la literatura se puede encontrar usualmente el uso de las redes \gls{lstm}, las cuales proveen por medio de una arquitectura mas compleja la posibilidad de tener recordación de largo y corto plazo\todo{Colocar cual es la diferencia con respecto a las RNN, las unas son de corto y las otras de mediano/largo plazo?}, como se muestra en la \figureref{fig:lstm-classic}. Para que estas redes tengan la característica de tener recordación es necesario de una celda de memoria\todo{indicar por favor cual es la celda de memoria (cuales son las funciones, componentes, modulos que la representan) en la figura 6.7}, donde esta es la entrada para la siguiente iteración de la red, junto con la entrada de datos a la red.
 
 Téngase en cuenta que la arquitectura presentada en esta sección hace referencia a la implementación de \gls{lstm} mas utilizada, sin embargo existen muchas mas variaciones de esta con diferentes propiedades que son deseables en diferentes situaciones.
 \begin{figure}[H]
@@ -284,13 +284,13 @@ Téngase en cuenta que la arquitectura presentada en esta sección hace referenc
 \end{figure}
 
 \subsubsection{Redes neuronales \glsentrylong{bilstm}}
-En la tarea de etiquetado de secuencias de texto las \gls{bilstm} tienen acceso a muestras de entrada tanto de futuro como de pasado por una cierta cantidad de tiempo. El uso de esta característica se puede aprovechar a favor ir a estados en el futuro (por medio de estados hacia adelante) y hacia el pasado (por estados hacia atrás) para un momento particular en el tiempo \cite{Huang2015}.
+En la tarea de etiquetado de secuencias de texto las \gls{bilstm} tienen acceso a muestras de entrada tanto de pasado, presente y futuro por una cierta cantidad de tiempo. El uso de esta característica se puede aprovechar para ir a estados en el futuro (por medio de estados hacia adelante) y en el pasado (por medio de estados hacia atrás) para un momento particular en el tiempo \cite{Huang2015}.
 
 Con el fin de que la red sea bidireccional es necesario de una celda de memoria para el caso de desplazarse hacia adelante, y una para desplazarse hacia atrás.
 
 \subsubsection{Reconocimiento de \glsentrylong{namedent}}
 Para el reconocimiento de \gls{namedent} tómese como ejemplo el \tableref{table:namedent-example}, donde las etiquetas asignadas corresponden al reconocimiento correspondiente de cada entidad.
-Las etiquetas (tags) de respuesta son \emph{Otro} (\textsc{O}) o una de estas: \emph{Persona} (\textsc{PER}), \emph{Ubicación} (\textsc{LOC}), \emph{Organización} (\textsc{ORG}) y \emph{Misceláneo} (\textsc{MISC}), donde las partes de etiqueta \textsc{B-} y \textsc{I-} corresponden al inicio de una palabra o una posición intermedia de la entidad.
+Las etiquetas (tags) de respuesta son \emph{Otro} (\textsc{O}) o una de estas: \emph{Persona} (\textsc{PER}), \emph{Ubicación} (\textsc{LOC}), \emph{Organización} (\textsc{ORG}) y \emph{Misceláneo} (\textsc{MISC}), donde las partes de etiqueta \textsc{B-} y \textsc{I-} corresponden a una palabra que se encuentra en la primera posición (\textsl{Beginning}) o en una posición intermedia (\textsl{Intermediate}).
 
 \begin{table}[H]
   \centering
@@ -304,7 +304,7 @@ Las etiquetas (tags) de respuesta son \emph{Otro} (\textsc{O}) o una de estas: \
   \label{table:namedent-example}
 \end{table}
 
-La tarea de etiquetado visto para una \gls{lstm} y una \gls{bilstm} puede ser visto en la \figureref{fig:lstm-arch} y la \figureref{fig:bilstm-arch}.
+La tarea de etiquetado para una \gls{lstm} y una \gls{bilstm} esta representada en la \figureref{fig:lstm-arch} y la \figureref{fig:bilstm-arch}.
 
 \begin{figure}[H]
   \centering
@@ -324,10 +324,12 @@ La tarea de etiquetado visto para una \gls{lstm} y una \gls{bilstm} puede ser vi
 \label{fig:bilstm-arch}
 \end{figure}
 
+\todo[inline]{Por favor explicar que ventaja tiene hacerlo con una BI-LSTM en lugar de una LSTM normal. En el caso de las figuras 6.8 y 6.9 los outputs son los mismos. ¿Este modelo (contribucion del pgr) se desarrollo finalmente como LSTM o BI-LSTM?}
+
 % ================================================================
 
 \subsubsection{Entrenamiento de \glsentrylong{bilstm}}
-El entrenamiento de las redes \gls{bilstm} se empieza de manera similar a la descrita en la \sectionref{sec:twitter-prediction} con el procedimiento de asignar un identificador a cada \emph{token} y a cada \emph{tag} como en la \equationref{eq:lstm-token2id} y la \equationref{eq:lstm-tag2id}, donde $N$ es el numero de tokens y $T$ el numero de tags. De manera que el conjunto de entrenamiento $\sX$ consta de tuplas $(\text{token}, \text{tag})$, de donde se agregan dos tipos especiales de tokens \texttt{<PAD>} y \texttt{<UNK>}, que representan relleno y algo desconocido respectivamente.
+El entrenamiento de las redes \gls{bilstm} se empieza de manera similar a la descrita en la \sectionref{sec:twitter-prediction} con el procedimiento de asignar un identificador a cada \emph{token}\todo{Que es un token en este contexto? en la Seccion 6.3.1 no se mencionan tokens en ninguna parte} y a cada \emph{tag} como en la \equationref{eq:lstm-token2id} y la \equationref{eq:lstm-tag2id}, donde $N$ es el numero de tokens y $T$ el numero de tags. De manera que el conjunto de entrenamiento $\sX$ consta de tuplas $(\text{token}, \text{tag})$\todo{¿sería entonces un conjunto de tuplas (token, tag), que pueden ser: (<PAD>, tag1), (<UNK>, tag2)? No me queda claro que los tokens hagan parte del conjunto de datos de entrenamiento}, de donde se agregan dos tipos especiales de tokens\todo{Solo habrian estos 2 tipos de tokens?} \texttt{<PAD>} y \texttt{<UNK>}, que representan relleno y algo desconocido respectivamente.
 
 \begin{equation} \label{eq:lstm-token2id}
   \text{token2id} = \Big\{(\text{token}_i, i) : \forall i \in \{1, \ldots, N\} \Big\}
@@ -341,12 +343,12 @@ El entrenamiento de las redes \gls{bilstm} se empieza de manera similar a la des
 Las redes neuronales son comúnmente entrenadas por grupos (o \emph{batches} en ingles) de entrada. Eso significa que las actualizaciones de los pesos dentro de la red se basan en secuencias en cada instante de tiempo. Pero estas secuencias dentro de un batch deben tener la misma longitud, así que estas se rellenaran con una etiqueta de relleno \texttt{<PAD>}. También es buena idea proveer la red con la longitud de las secuencias, para que así pueda saltarse computaciones innecesarias de las partes de relleno. A las partes de relleno se le asigna un tag de \texttt{O}.
 
 \paragraph{Construcción de capas de la red neuronal}
-Para esta construcción se procede a generar una matriz de \emph{embeddings} aleatorios, que en el caso de \gls{tensorflow} son tensores aleatorios y se establecen las células de procesamiento \emph{forward} y \emph{backward} con valores de marginalización $\xi$ (valor establecido heurísticamente) que es una forma de regularización importante en redes neuronales, de donde se especifica la probabilidad de retención de los valores de la iteración anterior.
+Para esta construcción se procede a generar una matriz de \emph{embeddings} aleatorios, que en el caso de \gls{tensorflow} son tensores aleatorios y se establecen las células de procesamiento \emph{forward} y \emph{backward} con valores de marginalización\todo{por favor colocar que utilidad tienen estos valores de marginalizacion} $\xi$ (valor establecido heurísticamente) que es una forma de regularización importante en redes neuronales, de donde se especifica la probabilidad de retención\todo{es decir que la memoria depende de la probabilidad de retencion?} de los valores de la iteración anterior.
 
-La salida de las celdas de \emph{forward} y \emph{backward} serán dos tensores $\tF$ y $\tB$, que se concatenan en un tensor $\tO$.
+La salida de las celdas de \emph{forward} y \emph{backward} serán dos tensores $\tF$ y $\tB$, que se concatenan en un tensor $\tO$.\todo{esto se puede representar de manera visual?}
 
 \paragraph{Computación de predicciones}
-Se computa la función $\softmax$ sobre $\tO$ para convertir las entradas en una forma de probabilidad, de forma que se estan calculando las probabilidades de cada una de las entradas para luego calcular cuales son las entrada de mayor probabilidad, estimando así la predicción $P$, como se muestra en la \equationref{eq:bilstm-pred}.
+Se computa la función $\softmax$\todo{por favor explicar que hace la funcion softmax} sobre $\tO$ para convertir las entradas en una forma de probabilidad, de forma que se estan calculando las probabilidades de cada una de las entradas para luego calcular cuales son las entrada de mayor probabilidad, estimando así la predicción $P$, como se muestra en la \equationref{eq:bilstm-pred}.
 
 \begin{equation} \label{eq:bilstm-pred}
   P = \argmax_i (\softmax(\sigmoid(\tO_i)))
@@ -391,13 +393,13 @@ Sin embargo, durante el entrenamiento no necesitamos una predicción, sino una f
 
 De manera que si se calcula una predicción de $\num{1e-8}$ cuando el valor verdadero es $1$, dará como resultado un valor alto de perdida (e.g. $\gamma(\num{1e-8}, 1) \approx \num{18.42}$).
 
-Se calcula un tensor de perdida $\tL$ con $\softmax(\gamma(\sigmoid(\tO)))$, para luego calcular la media $\mu_{\tL}$ del tensor $\tL$. Y se pasa por una tensor mascara $\tM$ (\equationref{eq:bilstm-mask-tensor}) que multiplica por $\tL$, donde $\train$ es el batch de entrenamiento. Entiéndase al tensor $\tM$ como el tensor que representa las posiciones que no son \texttt{<PAD>} con valor de $1$ y valor $0$ si lo son dentro del batch.
+Se calcula un tensor de perdida $\tL$ con $\softmax(\gamma(\sigmoid(\tO)))$, para luego calcular la media $\mu_{\tL}$ del tensor $\tL$. Y se pasa por una tensor mascara\todo{por favr explicar cual es la utilidad de este tensor mascara?} $\tM$ (\equationref{eq:bilstm-mask-tensor}) que multiplica por $\tL$, donde $\train$ es el batch de entrenamiento. Entiéndase al tensor $\tM$ como el tensor que representa las posiciones que no son \texttt{<PAD>} con valor de $1$ y valor $0$ si lo son dentro del batch.
 
 \begin{equation} \label{eq:bilstm-mask-tensor}
   \tM = \sum_{i \in \{1, \ldots, |\train|\}} \ve_{\mathrm{tag_i = \mathrm{PAD}}}^{(i)}
 \end{equation}
 
-Para realizar el entrenamiento con esta función de perdida se realiza una optimización (el optimizador estocástico \textsc{Adam} \cite{Kingma2014} es una opción eficiente) con una tasa de aprendizaje $\alpha$.
+Para realizar el entrenamiento con esta función de perdida se realiza una optimización (el optimizador estocástico \textsc{Adam} \cite{Kingma2014} es una opción eficiente\todo{explicar brevemente porque es eficiente?}) con una tasa de aprendizaje $\alpha$.
 
 % ================================================================
 % ================================================================
@@ -406,17 +408,19 @@ Para realizar el entrenamiento con esta función de perdida se realiza una optim
 \subsection{Modelo 3: Búsqueda de tweets relacionados con \emph{embeddings} de \mbox{StarSpace}}
 En este modelo, la intención es que a partir de una colección de textos guardados en una base de datos se puedan obtener los $k$ textos mas similares a un texto de consulta $q$, de manera que se encuentren los textos de mayor similaridad en cuanto a las palabras usadas por medio del uso de \emph{embeddings}.
 
+\todo[inline]{Por favor colocar aqui debajo un parrafo breve que represente la pregunta de data science que resuelve este modelo}
+
 \subsubsection{?`Que son y como se usan los embeddings?}
-Un \emph{embedding} se puede entender como vectores $n$--dimensionales que representan palabras dentro de un diccionario, para los modelos previamente vistos \gls{bow} y \gls{tfidf} se pueden entender como \emph{embeddings}, sin embargo para la aplicación en este modelo, es necesario otro \emph{embedding} que permita encontrar la similaridad entre palabras de forma que palabras que tengan un significado parecido tengan una distancia menor que si se comparara con una palabra que fuera antónima, de forma que $\mathrm{dist}(\vp_{\mathrm{asombroso}}, \vp_{\mathrm{genial}}) \gg \mathrm{dist}(\vp_{\mathrm{asombroso}}, \vp_{\mathrm{terrible}})$, donde $\mathrm{dist}$ típicamente seria la distancia de similaridad coseno (\equationref{eq:cosine-similarity}).
+Los \emph{embeddings} se pueden entender como vectores $n$--dimensionales que representan palabras dentro de un diccionario. Los modelos previamente vistos \gls{bow} y \gls{tfidf} se pueden entender como \emph{embeddings}, sin embargo para la aplicación en este modelo, es necesario otro \emph{embedding} que permita encontrar la similaridad entre palabras de forma que palabras que tengan un significado parecido tengan una distancia menor que si se comparara con una palabra que fuera antónima, de forma que $\mathrm{dist}(\vp_{\mathrm{asombroso}}, \vp_{\mathrm{genial}}) \gg \mathrm{dist}(\vp_{\mathrm{asombroso}}, \vp_{\mathrm{terrible}})$, donde $\mathrm{dist}$ típicamente seria la distancia de similaridad coseno (\equationref{eq:cosine-similarity}).
 
 \begin{equation} \label{eq:cosine-similarity}
   \mathrm{similaridad}(a, b) = \cos(\theta) = \frac{\vp_a \times \vp_b}{\norm{\vp_a} \norm{\vp_b}} \,,\, a, b \in d
 \end{equation}
 
-Ejemplos de uso popular en la industria son de \emph{embeddings} previamente entrenados estan \emph{GloVe} \cite{pennington2014glove}, \emph{word2vec} \cite{Mikolov2014}, \emph{fastText} \cite{joulin2016fasttext}, entre muchos otros.
+Dentro de los ejemplos de uso popular de \textit{embeddings} están \emph{GloVe} \cite{pennington2014glove}, \emph{word2vec} \cite{Mikolov2014}, \emph{fastText} \cite{joulin2016fasttext}, entre muchos otros.
 
 \subsubsection{Calculo de vectores de varias palabras}
-Una adición a las ventajas dados por estos \emph{embeddings} es la capacidad de representar textos completos por medio de obtener la representación de cada termino $t \in d$ por medio de obtener el promedio los vectores representativos de cada palabra (\equationref{eq:embeddings-sum}).
+Una adición a las ventajas dadas por estos \emph{embeddings} es la capacidad de representar textos completos por medio de obtener la representación de cada termino (palabra) $t \in d$ y posteriormente calcular el promedio $\vs$ (\equationref{eq:embeddings-sum}).
 
 \begin{equation} \label{eq:embeddings-sum}
   \vs = \frac{1}{|d|} \sum_{t \in d} \vp_{t}
@@ -425,17 +429,17 @@ Una adición a las ventajas dados por estos \emph{embeddings} es la capacidad de
 \subsubsection{Evaluación de similaridad entre textos}
 Nos podemos imaginar que usando un buen \emph{embedding} la similaridad coseno entre frases duplicadas\footnote{Entiéndase a una frase duplicada como textos que sean equivalentes ``semánticamente'' pero no necesariamente iguales sintácticamente} va a ser menor que para las frases aleatorias que generemos. Sobretodo que para cada par de frases duplicadas podemos generar $R$ ejemplos de frases negativas y encontrar la posición del texto duplicado correcto.
 
-Sin embargo, no es buena idea considerar que el primer candidato sera siempre el primer resultado que dio la mayor similaridad, por lo que se tomara como una lista ordenada y formular una métrica de comparación. Podemos tomar a $K$ como un numero razonable de mejores elementos y $N$ el numero de consultas (tamaño de la muestra).
+Sin embargo, no es buena idea considerar que el primer candidato sera siempre el primer resultado que dio la mayor similaridad, por lo que se tomara como una lista ordenada y se formulará una métrica de comparación. Podemos tomar a $K$ como un numero razonable de mejores elementos y $N$ el numero de consultas (tamaño de la muestra).
 
-\paragraph{Hits@K}
-La primera métrica que se usaría seria el numero de ``hits'' correctos para algún $K$, vea la \equationref{eq:hits-k}.
+\paragraph{Métrica Hits@K}
+La primera métrica que se usaría seria el numero de ``hits''\todo{que significa un hit correcto?} correctos para algún $K$, vea la \equationref{eq:hits-k}.
 
 \begin{equation} \label{eq:hits-k}
   \mathrm{Hits@K} = \frac{1}{N} \sum_{i=1}^{N} [\mathrm{dup}_i \in \mathrm{topK}(q_i)]
 \end{equation}
-Donde $q_i$ es la $i$--\'esima consulta, $\mathrm{dup_i}$ es su duplicado y $\mathrm{topK}(q_i)$ son los $K$ elementos mas similares provistos por nuestro modelo donde $[\mathrm{condition}]$ obtiene valor de $1$ si la condición es verdadera y $0$ de lo contrario.
+Donde $q_i$ es la $i$--\'esima consulta, $\mathrm{dup_i}$ es su duplicado y $\mathrm{topK}(q_i)$ son los $K$ elementos mas similares provistos por nuestro modelo donde $[\mathrm{dup}_i \in \mathrm{topK}(q_i)]$ obtiene valor de $1$ si la condición que el duplicado este dentro de los $K$ elementos es verdadera y $0$ de lo contrario\footnote{A esta notación se le conoce como el paréntesis de Iverson (o \textsl{Iverson bracket} en inglés) \href{https://en.wikipedia.org/wiki/Iverson\_bracket}{wikipedia.org/wiki/Iverson\_bracket}}.
 
-\paragraph{DCG@K}
+\paragraph{Métrica DCG@K}
 La segunda métrica es conocida como \emph{Discounted cumulative gain} (versión simplificada), dada por la \equationref{eq:dcg-k}.
 
 \begin{equation} \label{eq:dcg-k}
@@ -455,7 +459,7 @@ Donde $\mathrm{rank}_{\mathrm{dup}_i}$ es la posición del duplicado en la lista
 \end{itemize}
 
 \paragraph{?`Como funciona y cual es la principal diferencia con \emph{word2vec}?}
-\gls{starspace} puede ser entrenado específicamente para algunas tareas. En contraste con \emph{word2vec}, el cual intenta entrenar \emph{embeddings} similares para palabras en contextos similares, \gls{starspace} usa \emph{embeddings} para las frases completas (tal como la suma de los \emph{embeddings} para palabras y frases). A pesar de que se obtienen \emph{embeddings} en ambos casos como resultado del entrenamiento. Los \emph{embeddings} de \gls{starspace} son entrenados usando datos supervisados.
+\gls{starspace} puede ser entrenado específicamente para algunas tareas. En contraste con \emph{word2vec}, el cual intenta entrenar \emph{embeddings} similares para palabras en contextos similares, \gls{starspace} usa \emph{embeddings} para las frases completas (tal como la suma de los \emph{embeddings} para palabras y frases). A pesar de que se obtienen \emph{embeddings} en ambos casos como resultado del entrenamiento, los \emph{embeddings} de \gls{starspace} son entrenados usando datos supervisados.\todo{que ventaja hay en que el entrenamiento sea con datos supervisados?}
 
 \subsubsection{Uso de \emph{embeddings} creados con \glsentrylong{starspace}}
 En este caso, \gls{starspace} debería usar dos tipos de pares de secuencias para el entrenamiento: ``positivas'' y ``negativas''. Las muestras ``positivas'' son extraídas del conjunto de entrenamiento $\train$ (duplicados, alta similaridad) y las muestras ``negativas'' que son generadas aleatoriamente (se asume que tienen una baja similaridad).
@@ -491,11 +495,11 @@ starspace train -trainFile prepared_train.tsv -model modelSaveFile \
 \label{fig:starspace-terminal-execution}
 \end{figure}
 
-Donde se ejecuta a \gls{starspace} en modo de entrenamiento, tiene el archivo de entrenamiento (\texttt{prepared\_train.tsv}), el modo de entrenamiento para exploración de similaridad de textos (\texttt{-trainMode 3}), uso de optimización \textsc{Adagrad} (\texttt{-adagrad 1}), con n-gramas de tamaño $1$ (\texttt{-nrams 1}), $5$ iteraciones (\texttt{-epoch 5}), vectores resultantes en $\R^{100}$ (\texttt{-dim 100}), uso de similaridad coseno (\texttt{-similarity cosine}), conteo mínimo de $2$ términos (útil si no se quieren obtener \emph{embeddings} de palabras extremadamente raras, \texttt{-minCount 2}), numero mínimo de ejemplos negativos como $10$ usado durante el entrenamiento (\texttt{-negSearchLimit 10}) y una tasa de aprendizaje de $0.05$ (\texttt{-lr 0.05}).
+Donde se ejecuta a \gls{starspace} en modo de entrenamiento, tiene el archivo de entrenamiento (\texttt{prepared\_train.tsv})\todo{son datos etiquetados?}, el modo de entrenamiento para exploración de similaridad de textos (\texttt{-trainMode 3}), uso de optimización \textsc{Adagrad} (\texttt{-adagrad 1}), con n-gramas de tamaño $1$ (\texttt{-nrams 1}), $5$ iteraciones (\texttt{-epoch 5}), vectores resultantes en $\R^{100}$ (\texttt{-dim 100}), uso de similaridad coseno (\texttt{-similarity cosine}), conteo mínimo de $2$ términos (útil si no se quieren obtener \emph{embeddings} de palabras extremadamente raras, \texttt{-minCount 2}), numero mínimo de ejemplos negativos como $10$ usado durante el entrenamiento (\texttt{-negSearchLimit 10}) y una tasa de aprendizaje de $0.05$ (\texttt{-lr 0.05}).
 
 Luego de esto el resultado es un archivo de \emph{embeddings}, donde cada linea esta compuesta de una palabra y los $100$ números que componen al vector de esa palabra.
 
-Estos \emph{embeddings} resultantes permiten luego realizar la obtención de los $k$ textos mas similares a un tweet de consulta $q_i$ obtenido de \emph{pool} de textos obtenidos de Twitter de fuentes relevantes de forma que se encuentren textos relacionados el perfilado de individuos que tuvieran relación con grupos terroristas.
+Estos \emph{embeddings} resultantes permiten luego realizar la obtención de los $k$ textos mas similares a un tweet de consulta $q_i$ obtenido de \emph{pool} de textos obtenidos de Twitter de fuentes relevantes de forma que se encuentren textos relacionados a individuos que tuvieran relación con grupos terroristas.
 
 % ================================================================
 % ================================================================

@@ -2,7 +2,7 @@
     \newglossaryentry{#1}{
         text={\mbox{\textsc{#2}}},
         long={#3},
-        name={\textsl{\glsentrylong{#1}}\, \mbox{\textsc{(}\glsentrytext{#1}\/\textsc{)}}},
+        name={#3\, \mbox{\textsc{(#2)}}},
         first={\glsentryname{#1}},
         firstplural={\textsl{\glsentrylong{#1}\glspluralsuffix}\, \mbox{(\textsc{\glsentrytext{#1}\glspluralsuffix})}},
         description={{\rm #4}}
@@ -13,10 +13,14 @@
     \newglossaryentry{#1}{
         name={#2},
         long={#2},
-        first={{\rm\sl#2\rm}},
+        first={\textsl{#2}},
         description={{\rm #3}}
     }
 }
+
+% Permite que los terminos del glosario sean en cursiva tipo 'slanted'
+\let\glsentrylongnostyle\glsentrylong
+\renewcommand{\glsentrylong}[1]{\textsl{\glsentrylongnostyle{#1}}}
 
 \glossarydef{nlp}{NLP}{Natural Language Processing}{Rama de la inteligencia artificial que lidia con la interacción entre computadores y humanos usando el lenguaje natural}
 

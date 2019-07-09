@@ -40,7 +40,7 @@ Es el software que realiza tareas asignadas por el usuario de manera autónoma, 
 De acuerdo con \cite{murphymachinel}, se define como un conjunto de métodos que pueden detectar patrones automáticamente en datos, y luego usar los patrones descubiertos para predecir los datos futuros, o realizar otra clase de toma de decisiones con un grado de incertidumbre, por tal motivo es necesario el uso de teoría de probabilidad, que puede ser aplicada a cualquier tipo de problema que involucra incertidumbre.
 
 \subsection{Tipos de \glsentrylong{machinel}}
-\gls{machinel} esta principalmente dividida en dos tipos. El método predictivo o bien \textbf{aprendizaje supervisado} (\gls{supervisedl}), donde el objetivo es aprender un mapeo de las entradas $\vx$ a las salidas $y$, dado un conjunto de pares de etiquetas de entrada--salida $D = \{(\vx_i, y_i)\}_{i=1}^{N}$. $D$ se le llama el conjunto de entrenamiento y $N$ es el numero de muestras de entrenamiento.
+\gls{machinel} esta principalmente dividida en tres tipos. El método predictivo o bien \textbf{aprendizaje supervisado} (\gls{supervisedl}), donde el objetivo es aprender un mapeo de las entradas $\vx$ a las salidas $y$, dado un conjunto de pares de etiquetas de entrada--salida $D = \{(\vx_i, y_i)\}_{i=1}^{N}$. $D$ se le llama el conjunto de entrenamiento y $N$ es el numero de muestras de entrenamiento.
 
 En la forma mas sencilla, cada entrada de entrenamiento $\vx_i$ es un vector $D$--dimensional de números, a estos se le llaman \emph{características} o \emph{atributos}.
 
@@ -110,15 +110,16 @@ Los métodos de clustering se hacen referencia comúnmente en \gls{machinel} com
 % ================================================================
 
 \section{Sistemas Basados en Conocimiento (\glsentrylong{kbs})} \label{sec:KBS}
+\todo[inline]{Explicar bien en que consiste la base de conocimiento y el motor de inferencia}
 Según \cite{sajja2010knowledge}, los \gls{kbs} son uno de los mayores miembros de la familia de \gls{ai}. El \gls{kbs} consiste de una \gls{knowledgebase} y un programa de búsqueda llamado \gls{inferenceengine} representado en la \figureref{fig:kbs-arch}. La \gls{knowledgebase} puede ser usado como un repositorio de conocimiento de varias formas.
 
-Existen 5 tipos de \gls{kbs}, donde uno de ellos es conocido como \gls{expertsystems}, usados como \gls{rulebasedsys}, donde su \gls{knowledgebase} esta dado como reglas y el \gls{inferenceengine} esta dado por algo llamado \gls{workingmemory}, que representa los hechos que se conocen inicialmente del sistema junto con los hechos que se van dando como inferencia de las reglas.
+Existen 5 tipos de \gls{kbs}\todo{Explicar brevemente cada uno de los 5 tipos}, donde uno de ellos es conocido como \gls{expertsystems}, usados como \gls{rulebasedsys}, donde su \gls{knowledgebase} esta dado como reglas y el \gls{inferenceengine} esta dado por algo llamado \gls{workingmemory}, que representa los hechos que se conocen inicialmente del sistema junto con los nuevos hechos que se van dando como inferencia de las reglas.
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.4]{Figures/kbs-architecture.png}
 \decoRule
-\caption[Arquitectura \glsentrytext{kbs}]{Arquitectura \glsentrytext{kbs}. Tomado de \cite{sajja2010knowledge}}
+\caption[Arquitectura \glsentrytext{kbs}]{Arquitectura \glsentrytext{kbs}. Tomado de \cite{sajja2010knowledge} \todo[inline]{Explicar esta figura: Que significa explanation/reasoning, self-learning y User Interface}}
 \label{fig:kbs-arch}
 \end{figure}
 
@@ -137,11 +138,12 @@ Existen dos tipos de \gls{rulebasedsys}, definidos como \gls{deductivesys} y \gl
 % ================================================================
 
 \section{Redes Neuronales Artificiales (\glsentrylong{neuralnetwork})} \label{sec:ANN}
-El estudio de redes neuronales artificiales fue inspirado por los intentos de simular los sistemas biológicos de neuronas. El cerebro humano se compone principalmente de células nerviosas llamadas \emph{neuronas}, enlazadas con otras neuronas por medio de hebras de fibra conocidas como \emph{axones}. Los axones son usados para transmitir impulsos nerviosos de una neurona a otra cada vez que las neuronas son estimuladas. Una neurona esta conectada a axones de otras neuronas por medio de \emph{dendritas}, las cuales son extensiones desde el cuerpo de la neurona. El punto de contacto entre una dendrita y un axón se conoce como \emph{sinapsis}. Los neurólogos han descubierto que el cerebro humano aprende por medio de cambiar la fuerza de la conexión sináptica entre las neuronas a través de estimulación repetitiva por el mismo impulso.
+El estudio de redes neuronales artificiales (\glsentrytext{neuralnetwork}) fue inspirado por los intentos de simular los sistemas biológicos de neuronas. El cerebro humano se compone principalmente de células nerviosas llamadas \emph{neuronas}, enlazadas con otras neuronas por medio de hebras de fibra conocidas como \emph{axones}. Los axones son usados para transmitir impulsos nerviosos de una neurona a otra cada vez que las neuronas son estimuladas. Una neurona esta conectada a axones de otras neuronas por medio de \emph{dendritas}, las cuales son extensiones desde el cuerpo de la neurona. El punto de contacto entre una dendrita y un axón se conoce como \emph{sinapsis}. Los neurólogos han descubierto que el cerebro humano aprende por medio de cambiar la fuerza de la conexión sináptica entre las neuronas a través de estimulación repetitiva por el mismo impulso.
 
 De manera análoga a la estructura del cerebro humano, una \gls{neuralnetwork} se compone de una estructura interconectada de nodos y vínculos directos.
 
 \subsection{Mapa autoorganizado (\glsentrylong{som})} \label{subsec:SOM}
+\todo[inline]{Hacer una transición mas suave del párrafo anterior a este para introducir los SOM como un modelo que utiliza redes neuronales}
 El objetivo principal de los \gls{som} es de transformar una patrón de entrada $m$--dimensional en un mapa discreto uni-- o bi--dimensional, donde sus principales características es que es un algoritmo que se basa en \gls{unsupervisedl}, es \gls{feedforward}, tiene una sola capa de neuronas donde su propósito es realizar \gls{clustering} y una reducción de dimensionalidad sobre los datos de una forma topológicamente ordenada.
 
 Los \gls{som} tienen tres características distintivas:
@@ -178,7 +180,7 @@ Finalmente para alcanzar la \emph{adaptación} se realiza una actualización de 
 \label{fig:som-adap-proc}
 \end{figure}
 
-Luego de que el algoritmo de aprendizaje termina de realizar las iteraciones, la salida de este es la matriz de pesos $\mW$, en la \figureref{fig:som-impl-example} se puede apreciar una aproximación del algoritmo con un mapa uni--dimensional tratando de aproximar una función polar con ruido adicionado en un gráfico 2D. Adicionalmente pueden verse los efectos de \gls{bias} y \gls{overfitting} con diferentes cantidades de neuronas en la \figureref{fig:som-impl-example-fitting}.
+Luego de que el algoritmo de aprendizaje termina de realizar las iteraciones, la salida de este es la matriz de pesos $\mW$. En la \figureref{fig:som-impl-example} se puede apreciar una aproximación del algoritmo con un mapa uni--dimensional tratando de aproximar una función polar con ruido adicionado en un gráfico 2D. Adicionalmente pueden verse los efectos de \gls{bias} y \gls{overfitting}\todo{explicar brevemente que son estos dos} con diferentes cantidades de neuronas en la \figureref{fig:som-impl-example-fitting}.
 
 En la \figureref{fig:som-example} se puede ver una aplicación de los \gls{som}, en donde se realiza una clusterizacion de casos de homicidios donde los parámetros son características de los homicidios, según \cite{mena2003investigative} este resultado da una buena aproximación para sospechar de que estos son cometidos por personas distintas o si bien están siendo perpetrados por un mismo individuo o grupo.
 
@@ -227,7 +229,7 @@ Se puede entender a los \gls{mmh} como hiper-planos que ayudan a separar datos e
 \label{fig:svm-hyperplanes}
 \end{figure}
 
-Finalmente, el objetivo final de los \gls{svm} es la búsqueda de un hiper-plano con el mayor margen de decisión. Existen dos tipos de \gls{svm}, el lineal y el no--lineal. El lineal realiza la separación de los datos con su hiper-plano a partir de los datos de entrada en su espacio vectorial original, mientras que el no--lineal consta de realizar una transformación de los espacios de los datos de entrada a uno en que sea linealmente separable (véase como ejemplo la \figureref{fig:svm-nonlinear-transforms}), sin embargo al realizar la transformación, el algoritmo de \gls{svm} se ve afectado por la dimensionalidad de la entrada, por lo que existe lo que se conoce como la función \emph{kernel} para remediarlo.
+Finalmente, el objetivo final de los \gls{svm} es la búsqueda de un hiper-plano con el mayor margen de decisión. Existen dos tipos de \gls{svm}, el lineal y el no--lineal. El lineal realiza la separación de los datos con su hiper-plano a partir de los datos de entrada en su espacio vectorial original, mientras que el no--lineal consta de realizar una transformación de los espacios de los datos de entrada a uno en que sea linealmente separable (véase como ejemplo la \figureref{fig:svm-nonlinear-transforms}), sin embargo al realizar la transformación, el algoritmo de \gls{svm} se ve afectado por la dimensionalidad de la entrada\todo{explicar por que la dimensionalidad es un problema o puede llegar a serlo}, por lo que existe lo que se conoce como la función \emph{kernel} para remediarlo.
 
 \begin{figure}[H]
 \centering
@@ -243,6 +245,7 @@ La función polinomial de similaridad, $K$, la cual es calculada en el espacio o
 % ================================================================
 
 \section{Clasificadores Bayesianos} \label{sec:bayes}
+\todo[inline]{mejorar redacción por que no se entiende}
 En muchas aplicaciones de relaciones entre el conjunto de atributos y la etiqueta es no--determinante. Es decir, la etiqueta de clase de un dato de un conjunto de prueba no puede ser determinado con certeza a pesar de ser un atributo idéntico a los atributos de entrenamiento. Esto puede ser producto de que los datos poseen ruido o la presencia de ciertos factores que afectan la clasificación pero no son incluidos en el análisis. Para esto es crucial el teorema de Bayes, el cual es un principio estadístico que combina el conocimiento previo de las clases con la nueva evidencia que se obtiene de los datos.
 
 \subsection{Teorema de Bayes} \label{subsec:bayestheo}
@@ -266,7 +269,7 @@ Un clasificador de Na\"{\i}ve Bayes estima la probabilidad condicional de las cl
   P(\sX\mid\ry=y) = \prod_{i=1}^{d} P(\rx_i\mid\ry=y)
 \end{equation}
 
-Donde cada conjunto de atributos $\sX=\{ x_1, \ldots, x_d \}$ que consiste de $d$ atributos.
+Donde cada conjunto de atributos $\sX=\{ x_1, \ldots, x_d \}$ consiste de $d$ atributos.
 \subsubsection{Como funciona el clasificador Na\"{\i}ve Bayes}
 Con la suposición de independencia condicional, en vez de computar la probabilidad condicional de clases para cada combinación de $\sX$, solo se debe realizar para establecer la probabilidad condicional de cada $x_i$, dado $\ry$.
 

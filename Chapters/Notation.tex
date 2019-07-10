@@ -28,7 +28,7 @@ $\displaystyle \tA$ & Un tensor\\
 $\displaystyle \mI_n$ & Matriz identidad con $n$ filas y $n$ columnas\\
 $\displaystyle \mI$ & Matriz identidad con dimensionalidad implícita por el contexto\\
 $\displaystyle \ve^{(i)}$ & Vector estándar base $[0,\dots,0,1,0,\dots,0]$ con un 1 en la posición $i$\\
-% $\displaystyle \text{diag}(\va)$ & A square, diagonal matrix with diagonal entries given by $\va$\\
+$\displaystyle \mathrm{diag}(\va)$ & Una matriz diagonal cuadrada con entradas diagonales dadas por $\va$\\
 $\displaystyle \ra$ & Una variable aleatoria real\\
 $\displaystyle \rva$ & Un vector de variables aleatorias\\
 $\displaystyle \rmA$ & Una matriz de variables aleatorias\\
@@ -83,8 +83,8 @@ $\displaystyle \eva_{-i}$ & Todos los elementos del vector $\va$ a excepción de
 $\displaystyle \emA_{i,j}$ & Elemento $i, j$ de la matriz $\mA$ \\
 $\displaystyle \mA_{i, :}$ & Fila $i$ de la matriz $\mA$ \\
 $\displaystyle \mA_{:, i}$ & Columna $i$ de la matriz $\mA$ \\
-% $\displaystyle \etA_{i, j, k}$ & Element $(i, j, k)$ of a 3-D tensor $\tA$\\
-% $\displaystyle \tA_{:, :, i}$ & 2-D slice of a 3-D tensor\\
+$\displaystyle \etA_{i, j, k}$ & Elemento $(i, j, k)$ de un tensor $\tA$ 3-D\\
+$\displaystyle \tA_{:, :, i}$ & Corte 2-D de un tensor 3-D\\
 $\displaystyle \erva_i$ & Elemento $i$ del vector aleatorio $\rva$ \\
 \end{tabular}
 \egroup
@@ -123,6 +123,7 @@ $\displaystyle \frac{\partial y} {\partial x} $ & Derivada parcial de $y$ con re
 $\displaystyle \nabla_\vx y $ & Gradiente de $y$ con respecto a $\vx$ \\
 $\displaystyle \nabla_\mX y $ & Matriz de derivadas de $y$ con respecto a $\mX$ \\
 % $\displaystyle \nabla_\tX y $ & Tensor containing derivatives of $y$ with respect to $\tX$ \\
+$\displaystyle \nabla_\tX y $ & Tensor que contiene derivadas de $y$ con respecto a $\tX$ \\
 % $\displaystyle \frac{\partial f}{\partial \vx} $ & Jacobian matrix $\mJ \in \R^{m\times n}$ of $f: \R^n \rightarrow \R^m$\\
 % $\displaystyle \nabla_\vx^2 f(\vx)\text{ or }\mH( f)(\vx)$ & The Hessian matrix of $f$ at input point $\vx$\\
 $\displaystyle \int f(\vx) d\vx $ & Integral definida sobre un dominio entero $\vx$ \\
@@ -147,8 +148,9 @@ $\displaystyle P(\ra)$ & Una distribución de probabilidad de una variable aleat
 $\displaystyle p(\ra)$ & Una distribución de probabilidad de una variable aleatoria continua\\
 $\displaystyle \ra \sim P$ & La variable aleatoria $\ra$ tiene distribución $P$\\% so thing on left of \sim should always be a random variable, with name beginning with \r
 % $\displaystyle  \E_{\rx\sim P} [ f(x) ]\text{ or } \E f(x)$ & Expectation of $f(x)$ with respect to $P(\rx)$ \\
-% $\displaystyle \Var(f(x)) $ &  Variance of $f(x)$ under $P(\rx)$ \\
+$\displaystyle \Var(f(x)) $ &  Varianza de $f(x)$ sobre $P(\rx)$ \\
 % $\displaystyle \Cov(f(x),g(x)) $ & Covariance of $f(x)$ and $g(x)$ under $P(\rx)$\\
+$\displaystyle \Cov(f(x),g(x)) $ & Covarianza de $f(x)$ y $g(x)$ sobre $P(\rx)$\\
 % $\displaystyle H(\rx) $ & Shannon entropy of the random variable $\rx$\\
 % $\displaystyle \KL ( P \Vert Q ) $ & Kullback-Leibler divergence of P and Q \\
 $\displaystyle \mathcal{N} ( \vx ; \vmu , \vsigma^2)$ & Distribución gaussiana %
@@ -202,8 +204,8 @@ $\displaystyle [\mathrm{condition}]$  & Es 1 si $\mathrm{condition} \in \sB$ es 
 \bgroup
 \def\arraystretch{1.5}
 \begin{tabular}{>{\centering}m{0.15\textwidth} p{0.7\textwidth}}
-% $\displaystyle \pdata$ & The data generating distribution\\
-% $\displaystyle \ptrain$ & The empirical distribution defined by the training set\\
+$\displaystyle \pdata$ & La distribución generadora de datos\\
+$\displaystyle \ptrain$ & La distribución empírica definida por el conjunto de entrenamiento\\
 $\displaystyle \sX$ & Un conjunto de muestras de entrenamiento\\
 $\displaystyle \vx^{(i)}$ & La $i$-\'esima muestra (entrada) de un Dataset\\
 $\displaystyle y^{(i)}\text{ or }\vy^{(i)}$ & El objetivo asociado con $\vx^{(i)}$ para aprendizaje supervisado\\

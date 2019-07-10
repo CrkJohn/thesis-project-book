@@ -83,7 +83,9 @@ Como parte de la propuesta se proponen \nmodels modelos para tratar diferentes n
 \subsection{Modelo 1: Predicción de etiquetas de Twitter con modelos lineales} \label{sec:twitter-prediction}
 En Twitter, las publicaciones que se realizan tienen la posibilidad de incluir menciones de temas de tendencia por el conocido \emph{hashtag}, escrito como \texttt{\#Tema}, y tiene la gran utilidad de realizar una mención explicita del tema que se quiere tratar y además facilita la tarea de encontrar textos directamente relacionados con un tema.
 
-\todo[inline]{Antes de empezar este parrafo por favor colocar un parrafo pequeño que indique de manera explicita la pregunta de data science que se esta ressolviendo, por ejemplo ¿Cual(es) es(son) el (los) hashtag(s) de un tweet?}
+% \todo[inline]{Antes de empezar este parrafo por favor colocar un parrafo pequeño que indique de manera explicita la pregunta de data science que se esta ressolviendo, por ejemplo ¿Cual(es) es(son) el (los) hashtag(s) de un tweet?}
+
+Lo que se intenta solucionar con este modelo es de predecir que \emph{hashtags} deberían estar presentes en un tweet basado en la combinación de palabras que se encuentran dentro. Para esto se propone un modelo lineal que usa regresión logística y realizar una multi-clasificación con las clases siendo los \emph{hashtags} basándose del texto. Esto esta pensado con el propósito de ayudar al agente de inteligencia a identificar a que posibles tendencias pertenece un tweets de manera que pueda reconocer si es de un tema relevante para la seguridad.
 
 Así mismo, en la literatura de \gls{nlp} es muy común el uso de diferentes representaciones de palabras o conjuntos de palabras. Una representación de palabras típicas son los \gls{bow}, donde se establece un diccionario de palabras de tamaño $N$, y donde cada palabra tiene un vector que la representa. A cada palabra se le asigna un identificador único (vector) en ese diccionario, por lo que existiría una traducción de palabra a vector y cada palabra puede ser recuperada por medio del índice, como se muestra en la \equationref{eq:bow-repr1} y la \equationref{eq:bow-repr2}.
 \begin{equation} \label{eq:bow-repr1}
@@ -94,7 +96,9 @@ Así mismo, en la literatura de \gls{nlp} es muy común el uso de diferentes rep
   \text{idx2word} = \Big[\text{word}_i\Big], \forall i \in \{1, \ldots, N\}
 \end{equation}
 
-Otra representación común en \gls{nlp} es la de \gls{tfidf}, que se divide en dos partes, expresadas en la \equationref{eq:tf-repr}, la \equationref{eq:idf-repr} y la composición de ambas en la \equationref{eq:tfidf-repr}, donde $D$ es el corpus\todo{explicar que es el corpus} de palabras. Este consiste en penalizar palabras que ocurren mucho en un documento pero no mucho en el corpus o bien de penalizar la palabras que se repiten poco en un documento pero se repiten mucho en el corpus, por lo que un punto medio entre ambos es recompensado.
+El lugar de donde son tomadas la palabras para representar al \gls{bow} están contenidas en un conjunto de palabras conocido como el \gls{corpus} de palabras, de esa misma manera también es posible tener \gls{corpus} de otros elementos como sentencias de texto (mas de una palabra compuesta), letras individuales, entre otras.
+
+Otra representación común en \gls{nlp} es la de \gls{tfidf}, que se divide en dos partes, expresadas en la \equationref{eq:tf-repr}, la \equationref{eq:idf-repr} y la composición de ambas en la \equationref{eq:tfidf-repr}, donde $D$ es el \gls{corpus} de palabras. Este es un peso asignado consiste en penalizar palabras que ocurren mucho en un documento pero no mucho en el \gls{corpus} o bien de penalizar la palabras que se repiten poco en un documento pero se repiten mucho en el \gls{corpus}, por lo que un punto medio entre ambos es recompensado.
 
 \begin{equation} \label{eq:tf-repr}
   \text{tf}(t,d) = \text{Frecuencia del termino (o n--grama) } t \text{ en el documento } d
@@ -123,8 +127,8 @@ Existen diferentes variaciones para representar el conteo de términos \textbf{t
   \text{tf-idf}(t, d, D) = \text{tf}(t, d) \cdot \text{idf}(t, D)
 \end{equation}
 
-\subsubsection{Creación del Corpus de palabras}
-Debido a que los textos que se encuentran en Twitter no tienen forma estructurada es necesario realizar un preprocesamiento de cada post recolectado para luego contar la frecuencia de cada palabra dentro del corpus y así establecer las primeras $N$ palabras mas usadas que van a componer el corpus de palabras.
+\subsubsection{Creación del \glsentrylong{corpus} de palabras}
+Debido a que los textos que se encuentran en Twitter no tienen forma estructurada es necesario realizar un preprocesamiento de cada post recolectado para luego contar la frecuencia de cada palabra dentro del \gls{corpus} y así establecer las primeras $N$ palabras mas usadas que van a componer el \gls{corpus} de palabras.
 
 Para realizar el preprocesamiento de cada texto se hacen los siguientes pasos:
 \begin{enumerate}
@@ -134,21 +138,21 @@ Para realizar el preprocesamiento de cada texto se hacen los siguientes pasos:
 \item Remover todas las \emph{stopwords}, que son palabras que no añaden ningún valor semántico al texto \\ (e.g. \mbox{``las palabras son una forma de expresarnos'' $\rightarrow$ ``palabras forma expresarnos''})
 \end{enumerate}
 
-Luego se realiza un conteo de todas la palabras presentes dentro del corpus de donde se sacan las $N$ primeras palabras \todo{Como se define N? explicar por favor} para incluirlas en el \gls{bow}.
+Luego se realiza un conteo de todas la palabras presentes dentro del \gls{corpus} de donde se sacan las $N$ primeras palabras \todo{Como se define N? explicar por favor} para incluirlas en el \gls{bow}.
 
 Luego de esto se generan las etiquetas\todo{etiquetas por palabra o por tweet?} (o \emph{tags} en ingles) que se toman directamente de los textos de entrenamiento, de estos también se les realiza un conteo, que servirán para la predicción de las etiquetas según el contenido del texto.\todo{Se realiza un conteo al texto de entrenamiento?}
 
 \subsubsection{Conversión de textos a vectores}
 Para realizar la conversión de textos a vectores y así poder representar un texto como un vector se procede a primera realizar una generación de identificadores para cada palabra de manera como se describió en el inicio de la \sectionref{sec:twitter-prediction}.
 
-La manera en que se representa un texto en forma de vector $\vs$ es por medio de la sumatoria de los vectores que representan cada palabra como se representa en la \equationref{eq:bow-word-vector-sum}, recuérdese que $\ve^{(i)}$ es un vector con un $1$ en la posición $i$ y ceros en el resto del vector.
+La manera en que se representa un texto en forma de vector $\vs$ es por medio de la sumatoria de los vectores que representan cada palabra como se representa en la \equationref{eq:bow-word-vector-sum}, recuérdese que $\ve^{(i)}$ es un vector con un $1$ en la posición $i$ y ceros en el resto de posiciones.
 
 \begin{equation} \label{eq:bow-word-vector-sum}
   \vs = \mathlarger{\mathlarger{\sum}}_{(\text{word}, i) \in \text{word2idx}} \ve^{(i)}, \text{word} \in d
 \end{equation}
 
 \subsubsection{Generación del conjunto de entrenamiento, validación y pruebas}
-Para la generación de los conjuntos\todo{cada conjunto debería tener un tamaño diferente, cierto? por favor explicar como se generan esos conjuntos} se toman las sumatorias generadas de cada tweet en su forma de vector y se coloca en una matriz de $\mT^{m \times N}$, donde $m$ son el numero de muestras de Twitter y $N$ el tamaño del Corpus.\todo{porque m y N?}
+Para la generación de los conjuntos\todo{cada conjunto debería tener un tamaño diferente, cierto? por favor explicar como se generan esos conjuntos} se toman las sumatorias generadas de cada tweet en su forma de vector y se coloca en una matriz de $\mT^{m \times N}$, donde $m$ son el numero de muestras de Twitter y $N$ el tamaño del \gls{corpus}.\todo{porque m y N?}
 
 \subsubsection{Clasificador de regresión logística}
 La regresion logistica hace parte de uno de los algoritmos mas importantes en \gls{ai}, esta consiste en procesar la entrada de un modelo, que para el caso actual es lineal, que se procesa con una serie de hiper-parámetros que se denominara $\vtheta$ y la entrada del modelo como $\vx$. Se tiene que al realizar una regresión con este modelo se calcula $\vtheta^{\top} \vx$, que da como resultado un valor en $\R$ con rango indefinido. La regresión logística simbolizada como $\sigma(x)$, conocida como la función \emph{sigmoide} que es una función que para una entrada $x$ de dominio $(-\infty, \infty)$ se tiene un rango de $(0, 1)$. La \equationref{eq:logits-formula} define la función \emph{sigmoide}.
@@ -178,17 +182,17 @@ Equivalentemente, la regresión logística con modelos lineales se calculan como
 \subsubsection{Multiclasificador de One vs Rest}
 La multiclasificacion como es brevemente introducido en la \sectionref{sec:ML}, permite realizar una clasificación en $C$ clases con una entrada $\vx$. El multiclasificador de \emph{One vs Rest} realiza la clasificación por medio de distinguir la separación de una muestra $\vx_i$ en una clase $c \in \{1, \ldots, C\}$ respecto al resto de muestras, de forma que se calcula la pertenencia de la muestra $i$-\'esima en esa clase con un estimador $\vtheta_c$. De los resultados dados por cada estimador\todo{habria uno por cada clase?  por favor agregar esto para mejorar la descripción si es el caso} se estima cual es el $k$-\'esimo estimador que da el máximo valor, de donde se estima finalmente que la clase $k$ es donde pertenece la muestra.
 
-El uso de la regresión logística se puede llevar a cabo para normalizar los resultados de los estimadores $\vtheta$, de donde el proceso para calcular el estimador consta de realizar un proceso de gradiente descendente, que utiliza como función de costo la \equationref{eq:ovr-reg-l2costfunc} para uso de regularización con $\normltwo$ y la \equationref{eq:ovr-reg-l1costfunc} para el uso de $\normlone$, basadas del manual de \cite{sklearn_api}. La función $\softplus$ es la función \emph{softplus} (véase la Notación).
+El uso de la regresión logística se puede llevar a cabo para normalizar los resultados de los estimadores $\vtheta$, de donde el proceso para calcular el estimador consta de realizar un proceso de gradiente descendiente, que utiliza como función de costo $J: \R^n \rightarrow \R$ la \equationref{eq:ovr-reg-l2costfunc} para uso de regularización con $\normltwo$ y la \equationref{eq:ovr-reg-l1costfunc} para el uso de $\normlone$, según lo descrito en el manual de \cite{sklearn_api}. En ambas ecuaciones el resultado de optimizar la función de costo da como resultado el estimado final $\hat{\vtheta}$ el cual es el estimado del modelo. La función $\softplus$ es la función \emph{softplus} (véase la Notación).
 
 \begin{equation} \label{eq:ovr-reg-l2costfunc}
-  \min_{\vtheta, c} \frac{1}{2}\vtheta^{\top} \vtheta + C \sum_{i=1}^n \softplus(- y_i (\mX_i^{\top} \vtheta + c))
-\end{equation}\todo{a esta ecauacion le falta el otro lado de la ecuación, es igual a que?}
+  \hat{\vtheta} = \argmin_{\vtheta} J(\vtheta) = \argmin_{\vtheta} \frac{1}{2}\norm{\vtheta}_2 + C \sum_{i=1}^n \softplus(- y_i (\mX_i^{\top} \vtheta))
+\end{equation}
 
 \begin{equation} \label{eq:ovr-reg-l1costfunc}
-  \min_{\vtheta, c} \norm{\vtheta}_1 + C \sum_{i=1}^n \softplus(- y_i (\mX_i^{\top} \vtheta + c))
-\end{equation}\todo{a esta ecauacion le falta el otro lado de la ecuación, es igual a que?}
+  \hat{\vtheta} = \argmin_{\vtheta} J(\vtheta) = \argmin_{\vtheta} \norm{\vtheta}_1 + C \sum_{i=1}^n \softplus(- y_i (\mX_i^{\top} \vtheta))
+\end{equation}
 
-En el caso para realizar una multiclasificaci\'on, la regresión logística solo puede realizar una clasificación binaria, esto es que para una entrada $\vx$, esta solo puede realizar una clasificación con salidas $y \in [0, 1]$. Debido a esta restricción, existen una metodología de multiclasificacion llamada \emph{One vs Rest}, que permite utilizar la regresión logística y realiza la multiclasificacion por medio de crear $n$ estimadores que permiten estimar cada una de las $C$ clases respecto al resto de la entrada, por cada una de los estimadores se estima cual es la clase con mayor valor en la regresión logística individual de ese estimador, la \figureref{fig:ovr-algo} representa una versión simplificada del proceso.\todo{esto creo que esta repetido con el parrafo anterior. Queda redundante volver a explicar en que consiste one vs rest. Por favor incorporar al parrafo anterior para mejorar la explicacion de lo que es one vs rest y dejar la imagen que esta muy diciente}
+En el caso para realizar una multi-clasificación, la regresión logística solo puede realizar una clasificación binaria, esto es que para una entrada $\vx$, esta solo puede realizar una clasificación con salidas $y \in [0, 1]$. Debido a esta restricción, existen una metodología de multiclasificacion llamada \emph{One vs Rest}, que permite utilizar la regresión logística y realiza la multiclasificacion por medio de crear $n$ estimadores que permiten estimar cada una de las $C$ clases respecto al resto de la entrada, por cada una de los estimadores se estima cual es la clase con mayor valor en la regresión logística individual de ese estimador, la \figureref{fig:ovr-algo} representa una versión simplificada del proceso.\todo{esto creo que esta repetido con el parrafo anterior. Queda redundante volver a explicar en que consiste one vs rest. Por favor incorporar al parrafo anterior para mejorar la explicacion de lo que es one vs rest y dejar la imagen que esta muy diciente}
 
 \begin{figure}[H]
   \centering

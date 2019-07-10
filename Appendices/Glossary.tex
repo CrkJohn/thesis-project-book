@@ -3,9 +3,9 @@
         text={\mbox{\textsc{#2}}},
         long={#3},
         name={#3\, \mbox{\textsc{(#2)}}},
-        first={\glsentryname{#1}},
+        first={\textsl{#3}\, \mbox{\textsc{(#2)}}},
         firstplural={\textsl{\glsentrylong{#1}\glspluralsuffix}\, \mbox{(\textsc{\glsentrytext{#1}\glspluralsuffix})}},
-        description={{\rm #4}}
+        description={#4}
     }
 }
 
@@ -14,7 +14,7 @@
         name={#2},
         long={#2},
         first={\textsl{#2}},
-        description={{\rm #3}}
+        description={#3}
     }
 }
 
@@ -111,3 +111,5 @@
 \simpleglossarydef{tensorflow}{TensorFlow}{TensorFlow es una plataforma de codigo abierto para machine learning. Tiene un ecosistema comprensible y flexible de herramientas, librerias y recursos de la comunidad que le permite a investigadores impulsar el estado del arte en machine learning y desarrolladores puede construir y desplegar facilmente aplicaciones con Machine Learning incorporado}
 
 \glossarydef{crisp-dm}{CRISP-DM}{Cross Industry Standard Process for Data Mining}{Proporciona una descripción normalizada del ciclo de vida de un proyecto estándar de análisis de datos. El modelo CRISP-DM cubre las fases de un proyecto, sus tareas respectivas, y las relaciones entre estas tareas}
+
+\simpleglossarydef{corpus}{Corpus}{Es un conjunto grande y estructurado de textos, compuesto principalmente por documentos que contienen terminos (palabras) ordenados}

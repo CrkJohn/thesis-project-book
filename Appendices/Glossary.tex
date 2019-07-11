@@ -13,6 +13,7 @@
     \newglossaryentry{#1}{
         name={#2},
         long={#2},
+        text={\textsl{#2}},
         first={\textsl{#2}},
         description={#3}
     }
@@ -48,7 +49,7 @@
 
 \simpleglossarydef{datamining}{Data Mining}{Proceso de descubrir automáticamente información útil en repositorios grandes de datos}
 
-\glossarydef{neuralnetwork}{ANN}{Artificial Neural Network}{Para predecir la probabilidad de crímenes y nuevos ataques terroristas}
+\glossarydef{ann}{ANN}{Artificial Neural Network}{Para predecir la probabilidad de crímenes y nuevos ataques terroristas}
 
 \simpleglossarydef{mlalgorithms}{Machine Learning Algorithms}{Para extraer perfiles de perpetradores y mapas gráficos de crímenes}
 
@@ -58,7 +59,7 @@
 
 \simpleglossarydef{anomalydetectionsys}{Anomaly Detection Systems}{Sistemas de Detección de Anomalías, son sistemas con el objetivo de encontrar datos atípicos dentro de un conjunto de datos, típicamente se tiene un entrenamiento previo que muestra el comportamiento típico de los datos para luego encontrar las anomalías}
 
-\glossarydef{som}{SOM}{Self-organizing Maps}{Mapas auto-organizados, son redes neuronales especializadas para el clustering de datos semejantes según una función de distancia, da como resultado un mapa discreto uni- o bi-dimensional}
+\glossarydef{som}{SOM}{Self-organizing Map}{Mapas auto-organizados, son redes neuronales especializadas para el clustering de datos semejantes según una función de distancia, da como resultado un mapa discreto uni- o bi-dimensional}
 
 \glossarydef{svm}{SVM}{Support Vector Machine}{Maquinas de Soporte Vectorial, son modelos de aprendizaje supervisado usados para el problema de clasificación y análisis de regresión}
 
@@ -92,7 +93,7 @@
 
 \simpleglossarydef{mmh}{Maximum Margin Hyperplanes}{Hiperplanos que permiten separar datos en espacios de alta dimensionalidad con un margen asociado para separarlos}
 
-\glossarydef{lstm}{LSTM}{Long Short Term Memory}{Red neuronal recurrent que tiene memoria Largo y Corto Plazo, son un tipo de redes neuronales recurrentes que son capaces de aprender dependencias de largo plazo}
+\glossarydef{lstm}{LSTM}{Long Short Term Memory}{Red neuronal recurrente que tiene memoria Largo y Corto Plazo, son un tipo de redes neuronales recurrentes que son capaces de aprender dependencias de largo plazo}
 
 \glossarydef{bilstm}{Bi-LSTM}{Bidirectional Long Short Term Memory}{Red neuronal LSTM bidireccional, que permite el uso de secuencias de palabras futuras y pasadas para una mejor clasificacion de la actual}
 
@@ -102,9 +103,11 @@
 
 \simpleglossarydef{starspace}{StarSpace}{Es un modelo neuronal de propósito general para el aprendizaje eficiente de embeddings}
 
-\simpleglossarydef{overfitting}{Overfitting}{El modelo esta demasiado acoplado a la entrada por lo que para un modelo predictivo dará resultados solo condicionados para la entrada de entrenamiento, pero tendrá mal desempeño en cualquier otro conjunto de prueba. En modelos de clustering, se vera que la salida esta muy condicionada a la entrada por lo que no tendrá un buen desempeño tampoco}
+\simpleglossarydef{overfitting}{Overfitting}{El modelo esta demasiado acoplado a la entrada por lo que para un modelo predictivo dará resultados solo condicionados para la entrada de entrenamiento, pero tendrá mal desempeño en cualquier otro conjunto de prueba}
 
-\simpleglossarydef{bias}{High Bias}{El modelo esta poco condicionado a la entrada por lo que para un modelo predictivo dará resultados demasiado generales para cualquier conjunto de datos}
+\simpleglossarydef{underfitting}{Underfitting}{El modelo predice pobremente la salida correcta en base a la entrada, de forma que no da buenos resultados para cualquier conjunto de entrenamiento o de pruebas}
+
+\simpleglossarydef{bias}{Bias}{Es la parcialidad de un modelo, donde entre mayor sea peor sera la predicción del modelo respecto a cualquier dato que se le de como entrada}
 
 \simpleglossarydef{datascience}{Data Science}{Es una campo multidisciplinario que usa metodos, procesos, algoritmos y sistemas cientificos para extraer conocimiento y revelaciones de datos estructurados y no estructurados}
 
@@ -113,3 +116,11 @@
 \glossarydef{crisp-dm}{CRISP-DM}{Cross Industry Standard Process for Data Mining}{Proporciona una descripción normalizada del ciclo de vida de un proyecto estándar de análisis de datos. El modelo CRISP-DM cubre las fases de un proyecto, sus tareas respectivas, y las relaciones entre estas tareas}
 
 \simpleglossarydef{corpus}{Corpus}{Es un conjunto grande y estructurado de textos, compuesto principalmente por documentos que contienen terminos (palabras) ordenados}
+
+\glossarydef{roc}{ROC}{Receiver-Operating Characteristic}{\todo[inline]{Pendiente}}
+
+\glossarydef{auc}{AUC}{Area Under the Curve}{\todo[inline]{Pendiente}}
+
+\glossarydef{mlp}{MLP}{Multilayer Perceptrons}{\todo[inline]{Pendiente}}
+
+\glossarydef{dag}{DAG}{Directed Acyclic Graph}{\todo[inline]{Pendiente}}

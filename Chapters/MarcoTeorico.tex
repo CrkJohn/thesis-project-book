@@ -15,7 +15,7 @@ Para obtener una mejor inteligencia se necesito de mejores tecnologías a las qu
 \item Análisis de vínculos (o \gls{linkanalisys} en ingles).
 \item Agentes de software (o \gls{softwareagents} en ingles).
 \item Minería de texto (o \gls{textmining} en ingles).
-\item Redes neuronales (o \gls{neuralnetwork} en ingles).
+\item Redes neuronales (o \gls{ann} en ingles).
 \item Algoritmos de \glsentrylong{machinel} (o \gls{mlalgorithms} en ingles).
 \end{itemize}
 
@@ -137,14 +137,36 @@ Existen dos tipos de \gls{rulebasedsys}, definidos como \gls{deductivesys} y \gl
 
 % ================================================================
 
-\section{Redes Neuronales Artificiales (\glsentrylong{neuralnetwork})} \label{sec:ANN}
-El estudio de redes neuronales artificiales (\glsentrytext{neuralnetwork}) fue inspirado por los intentos de simular los sistemas biológicos de neuronas. El cerebro humano se compone principalmente de células nerviosas llamadas \emph{neuronas}, enlazadas con otras neuronas por medio de hebras de fibra conocidas como \emph{axones}. Los axones son usados para transmitir impulsos nerviosos de una neurona a otra cada vez que las neuronas son estimuladas. Una neurona esta conectada a axones de otras neuronas por medio de \emph{dendritas}, las cuales son extensiones desde el cuerpo de la neurona. El punto de contacto entre una dendrita y un axón se conoce como \emph{sinapsis}. Los neurólogos han descubierto que el cerebro humano aprende por medio de cambiar la fuerza de la conexión sináptica entre las neuronas a través de estimulación repetitiva por el mismo impulso.
+\section{Redes Neuronales Artificiales (\glsentrylong{ann})} \label{sec:ANN}
+El estudio de redes neuronales artificiales (\glsentrytext{ann}) fue inspirado por los intentos de simular los sistemas biológicos de neuronas. El cerebro humano se compone principalmente de células nerviosas llamadas \emph{neuronas}, enlazadas con otras neuronas por medio de hebras de fibra conocidas como \emph{axones}. Los axones son usados para transmitir impulsos nerviosos de una neurona a otra cada vez que las neuronas son estimuladas. Una neurona esta conectada a axones de otras neuronas por medio de \emph{dendritas}, las cuales son extensiones desde el cuerpo de la neurona. El punto de contacto entre una dendrita y un axón se conoce como \emph{sinapsis}. Los neurólogos han descubierto que el cerebro humano aprende por medio de cambiar la fuerza de la conexión sináptica entre las neuronas a través de estimulación repetitiva por el mismo impulso.
 
-De manera análoga a la estructura del cerebro humano, una \gls{neuralnetwork} se compone de una estructura interconectada de nodos y vínculos directos.
+De manera análoga a la estructura del cerebro humano, una \gls{ann} se compone de una estructura interconectada de nodos y vínculos directos.
+
+\subsection{Redes neuronales profundas (\textsl{Deep Feedforward Networks})}
+Una arquitectura muy popular de \glspl{ann} es el caso de las redes \textsl{Deep feedforward} o también conocidas como \gls{mlp} cuyo objetivo es aproximarse a una función $f^{\ast}$. A estos modelos se les llama \textbf{feedforward} debido a que la información fluye de una entrada $\vx$ a través de unas computaciones intermedias usadas para definir $f$, y finalmente dar como salida a $\vy$.
+
+A estas se les llama redes debido a que son típicamente representadas con la composición de varias funciones y así mismo también son asociadas con grafos directos acíclicos (o \gls{dag} en inglés). La composición de funciones puede ser vista como $f(\vx) = f^{(l)} \circ f^{(l-1)} \circ \cdots \circ f^{(1)}(\vx)$, siendo esto análogo a una red \gls{mlp} de $l$ capas, donde a $f^{(1)}$ se le llamaría la primera capa, a $f^{(2)}$ la segunda, y así sucesivamente. La longitud total de la cadena es la \textbf{profundidad} de la red, de ahí viene el nombre de profundas.
+
+Considérese a $d_i$ como la dimensión de la capa $i$-\'esima, cada una de las capas intermedias $f^{(i)}$ son funciones toman como entrada un vector en $\R^{d_{i-1}}$ y da como resultado un vector $\R^{d_{i}}$ que es la entrada para la siguiente capa que pasara a ser $f^{(i)}: \R^{d_{i}} \rightarrow \R^{d_{i+1}}$.
+
+Durante el entrenamiento de estas redes el objetivo final es que $\vy \approx f^{\ast}(\vx)$, el algoritmo de aprendizaje debe decidir como acomodar las capas intermedias $f^{(i)}$ para dar el resultado deseado.
+
+Una representación visual de las capas de una de estas redes se encuentra en la \figureref{fig:deep-feedforward-network}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{Figures/deep-feedforward-network.pdf}
+\decoRule
+\caption[Representación de una \textsl{Deep Feedforward Network}]{Representación de una \textsl{Deep Feedforward Network}. Tomado de \cite{bishop-pattern-recognition}.}
+\label{fig:deep-feedforward-network}
+\end{figure}
+
+Aunque esta es una representación simplificada de este tipo de redes, este libro no tratara de profundizar en los detalles técnicos al ser estos muy amplios (véase \cite{deeplearning} y \cite{bishop-pattern-recognition}).
 
 \subsection{Mapa autoorganizado (\glsentrylong{som})} \label{subsec:SOM}
-\todo[inline]{Hacer una transición mas suave del párrafo anterior a este para introducir los SOM como un modelo que utiliza redes neuronales}
-El objetivo principal de los \gls{som} es de transformar una patrón de entrada $m$--dimensional en un mapa discreto uni-- o bi--dimensional, donde sus principales características es que es un algoritmo que se basa en \gls{unsupervisedl}, es \gls{feedforward}, tiene una sola capa de neuronas donde su propósito es realizar \gls{clustering} y una reducción de dimensionalidad sobre los datos de una forma topológicamente ordenada.
+Las \glspl{som} son otra arquitectura de \glspl{ann} muy populares, sin embargo a diferencia de la arquitectura de las redes \gls{mlp}, esta consta de una sola capa de neuronas, y no tiene un propósito de predicción, por lo que no es necesario aproximar ninguna función $f$ a una salida $\vy$ definida por un conjunto de entrenamiento.
+
+El objetivo principal de los \glspl{som} es de transformar una patrón de entrada $m$--dimensional en un mapa discreto uni-- o bi--dimensional, donde sus principales características es que es un algoritmo que se basa en \gls{unsupervisedl}, es \gls{feedforward}, tiene una sola capa de neuronas donde su propósito es realizar \gls{clustering} y una reducción de dimensionalidad sobre los datos de una forma topológicamente ordenada.
 
 Los \gls{som} tienen tres características distintivas:
 \begin{itemize}
@@ -180,7 +202,7 @@ Finalmente para alcanzar la \emph{adaptación} se realiza una actualización de 
 \label{fig:som-adap-proc}
 \end{figure}
 
-Luego de que el algoritmo de aprendizaje termina de realizar las iteraciones, la salida de este es la matriz de pesos $\mW$. En la \figureref{fig:som-impl-example} se puede apreciar una aproximación del algoritmo con un mapa uni--dimensional tratando de aproximar una función polar con ruido adicionado en un gráfico 2D. Adicionalmente pueden verse los efectos de \gls{bias} y \gls{overfitting}\todo{explicar brevemente que son estos dos} con diferentes cantidades de neuronas en la \figureref{fig:som-impl-example-fitting}.
+Luego de que el algoritmo de aprendizaje termina de realizar las iteraciones, la salida de este es la matriz de pesos $\mW$. En la \figureref{fig:som-impl-example} se puede apreciar una aproximación del algoritmo con un mapa uni--dimensional tratando de aproximar una función polar con ruido adicionado en un gráfico 2D. Adicionalmente pueden verse los efectos de \gls{underfitting} y \gls{overfitting} (véase el Apéndice \ref{appendix:keyconcepts}) con diferentes cantidades de neuronas en la \figureref{fig:som-impl-example-fitting}.
 
 En la \figureref{fig:som-example} se puede ver una aplicación de los \gls{som}, en donde se realiza una clusterizacion de casos de homicidios donde los parámetros son características de los homicidios, según \cite{mena2003investigative} este resultado da una buena aproximación para sospechar de que estos son cometidos por personas distintas o si bien están siendo perpetrados por un mismo individuo o grupo.
 
@@ -229,7 +251,9 @@ Se puede entender a los \gls{mmh} como hiper-planos que ayudan a separar datos e
 \label{fig:svm-hyperplanes}
 \end{figure}
 
-Finalmente, el objetivo final de los \gls{svm} es la búsqueda de un hiper-plano con el mayor margen de decisión. Existen dos tipos de \gls{svm}, el lineal y el no--lineal. El lineal realiza la separación de los datos con su hiper-plano a partir de los datos de entrada en su espacio vectorial original, mientras que el no--lineal consta de realizar una transformación de los espacios de los datos de entrada a uno en que sea linealmente separable (véase como ejemplo la \figureref{fig:svm-nonlinear-transforms}), sin embargo al realizar la transformación, el algoritmo de \gls{svm} se ve afectado por la dimensionalidad de la entrada\todo{explicar por que la dimensionalidad es un problema o puede llegar a serlo}, por lo que existe lo que se conoce como la función \emph{kernel} para remediarlo.
+Finalmente, el objetivo final de los \gls{svm} es la búsqueda de un hiper-plano con el mayor margen de decisión. Existen dos tipos de \gls{svm}, el lineal y el no--lineal. El lineal realiza la separación de los datos con su hiper-plano a partir de los datos de entrada en su espacio vectorial original, mientras que el no--lineal consta de realizar una transformación de los espacios de los datos de entrada a uno en que sea linealmente separable (véase como ejemplo la \figureref{fig:svm-nonlinear-transforms}), sin embargo al realizar la transformación, el algoritmo de \gls{svm} se ve afectado por la dimensionalidad de la entrada, por lo que existe lo que se conoce como la función \emph{kernel} para remediarlo.
+
+Estas limitantes de dimensionalidad ocurren por un problema conocido como la \textbf{maldición de dimensionalidad} (o \textsl{Curse of dimensionality} en inglés), y se manifiesta cuando el numero de dimensiones en los datos es alta. Particularmente se debe tener muy presente que el numero de configuraciones distintas posibles de un conjunto de variables crezcan de manera exponencial a medida que el numero de variables aumenta. Este caso ocurre con los \glspl{svm} cuando se vuelve necesaria la conversión de espacios vectoriales.
 
 \begin{figure}[H]
 \centering

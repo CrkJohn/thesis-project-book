@@ -113,7 +113,7 @@ Existen diferentes variaciones para representar el conteo de términos \textbf{t
   Binario                   & $0, 1$ \\ \hline
   Conteo directo            & $f_{t, d}$ \\ \hline
   Frecuencia de términos    & $f_{t, d} / \sum_{t' \in d}f_{t', d}$ \\ \hline
-  Normalización logarítmica & $1 + \text{log}(f_{f, d})$ \\ \hline
+  Normalización logarítmica & $1 + \text{log}(f_{t, d})$ \\ \hline
 \end{tabular}
 \caption{Variaciones de \textbf{tf}}
 \label{table:tf}
@@ -161,7 +161,7 @@ La regresion logistica hace parte de uno de los algoritmos mas importantes en \g
   \sigma(x) = \frac{1} {1 + \exp(-x)}
 \end{equation}
 
-Equivalentemente, la regresión logística con modelos lineales se calculan como $\sigmoid(\vtheta^{\top} \vx)$ y permite realizar un suavizado de la regresión de forma que mitiga parte de los problemas de \gls{overfitting} y \gls{bias}, como se muestra en la \figureref{fig:logits-example}.
+Equivalentemente, la regresión logística con modelos lineales se calculan como $\sigmoid(\vtheta^{\top} \vx)$ y permite realizar un suavizado de la regresión de forma que mitiga parte de los problemas de \gls{overfitting} y \gls{underfitting}, como se muestra en la \figureref{fig:logits-example}.
 
 \begin{figure}[H]
   \centering
@@ -203,7 +203,7 @@ En el caso para realizar una multi-clasificación, la regresión logística solo
 \label{fig:ovr-algo}
 \end{figure}
 
-La manera en que se entrena cada estimador $i \in \{1, \ldots, C\}$ es por medio de optimizar el valor de la función de predicción $\hat{y}(\vx, \vtheta_i)$, $\vx \in \sX$ (\equationref{eq:linear-regression-training}). Como se muestra en la \equationref{eq:linear-regression-estimation}, $y$ es el valor verdadero de la estimación y $\theta_0$ se le conoce como el \emph{bias} del modelo.
+La manera en que se entrena cada estimador $i \in \{1, \ldots, C\}$ es por medio de optimizar el valor de la función de predicción $\hat{y}(\vx, \vtheta_i)$, $\vx \in \sX$ (\equationref{eq:linear-regression-training}). Como se muestra en la \equationref{eq:linear-regression-estimation}, $y$ es el valor verdadero de la estimación y $\theta_0$ se le conoce como el parámetro de ajuste del modelo.
 
 \begin{equation} \label{eq:linear-regression-training}
   \hat{y}(\vx, \vtheta) = \vtheta^{\top} \vx = \theta_0 + \theta_1 x_1 + \cdots + \theta_n x_n
@@ -261,7 +261,7 @@ La naturaleza recurrente de estas redes viene del hecho de representarse como re
 \label{fig:rnn-classic-simple}
 \end{figure}
 
-Este tipo de redes tiene la característica de recordar salidas y entradas pasadas de datos, de forma que decisiones futuras respecto a una clasificación pueden tener una mejor forma de basarse\todo{ajustar la redaccion de esta frase}. Las redes neuronales (\glspl{neuralnetwork}) típicamente no pueden hacer estas operaciones ya que no tienen incorporada la habilidad de recordar entradas y salidas pasadas, sino que se realiza un entrenamiento con información de entrada y de salida que se conoce con anticipación, de forma que su salida solo se concentra en su entrada inmediata de datos.
+Este tipo de redes tiene la característica de recordar salidas y entradas pasadas de datos, de forma que decisiones futuras respecto a una clasificación pueden tener una mejor forma de basarse\todo{ajustar la redaccion de esta frase}. Las redes neuronales (\glspl{ann}) típicamente no pueden hacer estas operaciones ya que no tienen incorporada la habilidad de recordar entradas y salidas pasadas, sino que se realiza un entrenamiento con información de entrada y de salida que se conoce con anticipación, de forma que su salida solo se concentra en su entrada inmediata de datos.
 
 Por este motivo, las \glspl{rnn} poseen una gran ventaja en situaciones puntuales, tales como el caso expuesto al inicio de esta sección (\gls{namedent}), sin embargo, el modelo clásico de \gls{rnn} es como la arquitectura presentada en la \figureref{fig:rnn-classic}, esta no provee resultados significativos debido a limitantes respecto al nivel de recordación que tienen originalmente.\todo[inline]{creo que hay que ajustar este parrafo porque primero se dice que las RNN son muy buenas y traen grandes ventajas por su capacidad de recordación y luego se termina diciendo que no provee resultados significativos. Por favor ajustar para que sea mas objetivo y no se vea la contradicción}
 

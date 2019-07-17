@@ -59,12 +59,22 @@ La varianza de un estimador disminuye en función de $m$, el numero de muestras 
 En la labor de escoger un mejor estimador nos interesa especialmente como este se comportara a medida que la cantidad de datos de entrenamiento aumenta. En particular nos interesa que a medida que la cantidad de datos aumenta nuestros estimados se aproximan cada vez mas al verdadero valor de los parámetros. Formalmente deseamos:
 
 \begin{equation} \label{eq:consistency}
-  \plim_{m\to\infty} \hat{\vtheta} = \vtheta
+  \plim_{m\to\infty} \hat{\rvtheta} = \rvtheta
 \end{equation}
 
 El símbolo $\plim$ indica convergencia en probabilidad, indicando que para cualquier $\epsilon > 0$ se tiene que $P(|\hat{\rvtheta} - \rvtheta| > \epsilon) \to 0$ cuando $m \to \infty$. La condición descrita en la \equationref{eq:consistency} se le conoce como \textbf{consistencia}.
 
 La consistencia nos asegura que la parcialidad inducida por el estimador se elimina a medida que la cantidad de muestras de datos aumenta. Sin embargo lo contrario no es verdad --- imparcialidad asintótica no implica consistencia.
+
+A medida que la capacidad del modelo aumenta, la parcialidad tiende a disminuir y la varianza tiende a aumentar, dándonos así una curva en forma de U para el error de generalización, tal como se muestra en la \figureref{fig:consistency}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{Figures/consistency.pdf}
+  \decoRule
+  \caption[Consistencia]{Consistencia. Tomado de \cite{deeplearning}.}
+  \label{fig:consistency}
+\end{figure}
 
 \section{Capacidad, \glsentrylong{overfitting} y \glsentrylong{underfitting}}
 \todo[inline]{Por hacer, pagina 107 Deep Learning}

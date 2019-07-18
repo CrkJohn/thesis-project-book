@@ -1,7 +1,70 @@
-\chapter{Conceptos clave} % Main appendix title
+\chapter{Conceptos importantes} % Main appendix title
 \label{appendix:keyconcepts} % For referencing this appendix elsewhere, use \ref{AppendixA}
 
 La mayor parte de este apéndice se basa en contenido expuesto en \cite{deeplearning}.
+
+\section{Capacidad, \glsentrylong{overfitting} y \glsentrylong{underfitting}}
+% \todo[inline]{Por hacer, pagina 107 Deep Learning}
+El reto central de \gls{machinel} es que nuestro algoritmo tenga un buen rendimiento sobre datos nuevos, entradas nunca antes vistas, no solo las entradas con las que entrenamos nuestro modelo. La habilidad tener un buen rendimiento sobre nuevos datos se le llama \textbf{generalización}.
+
+Típicamente cuando entrenamos un modelo de \gls{machinel} debemos acceder a un conjunto de entrenamiento; podemos computar una medida de error sobre el conjunto de entrenamiento, llamado el \textbf{error de entrenamiento}; y reducimos este error de entrenamiento. El \textbf{error de generalización} se define como el valor esperado de error sobre una nueva entrada de datos. Aquí el valor esperado se toma sobre diferentes entradas posibles, tomadas de una distribución de entradas que esperamos que el sistema se encontrara en la practica.
+
+Usualmente el error de generalización de un modelo de \gls{machinel} se estima por su rendimiento en un \textbf{conjunto de prueba} que se obtuvieron de manera separada al conjunto de entrenamiento.
+
+El conjunto de datos de entrenamiento y de prueba son generados por una distribucion de probabilidad sobre los conjuntos de datos llamado el \textbf{proceso de generación de datos} (o \textsl{data-generating process} en inglés).
+
+Por lo general asumimos una serie de suposiciones (llamadas usualmente en inglés como \textsl{i.i.d. assumptions}), y es que una muestra de cada conjunto de datos es \textbf{independiente} una de otra y que los conjuntos de entrenamiento y prueba son \textbf{distribuidos idénticamente} tomados de la misma distribución de probabilidad. Esta suposición nos permite describir el proceso generativo de datos con una distribución de probabilidad sobre una sola muestra. Esta misma distribución es luego usada para generar cualquier muestra de entrenamiento y prueba. Llamamos a esta distribución compartida la \textbf{distribución generadora de datos} (o \textsl{data-generating distribution} en inglés), denotada como $\pdata$.
+
+Cuando usamos una algoritmo de \gls{machinel}, no establecemos los parámetros de antemano para luego tomar muestras de ambos conjuntos de datos. Tomamos muestras del conjunto de entrenamiento, luego ajustamos los parámetros para reducir el error en el conjunto de entrenamiento, y luego tomamos muestras del conjunto de prueba. Bajo este proceso, el valor esperado de error en el conjunto de prueba es igual o mayor al del conjunto de entrenamiento. Los factores que determinan que tan bien un algoritmo de \gls{machinel} se desempeñara son su habilidad para
+\begin{itemize}
+\item Hacer que el error en el conjunto de entrenamiento sea pequeño.
+\item Hacer que la diferencia entre el error de prueba y de entrenamiento sea pequeño.
+\end{itemize}
+
+Estos dos factores corresponden a los dos grandes retos en \gls{machinel}: \textbf{\gls{underfitting}} y \textbf{\gls{overfitting}}. \gls{underfitting} es cuando el modelo no es capaz de obtener un valor de error suficientemente bajo sobre el conjunto de entrenamiento. \gls{overfitting} ocurre cuando la diferencia entre el valor de error del conjunto de entrenamiento y el conjunto de prueba es muy grande.
+
+Podemos controlar si un modelo es mas propenso a hacer \gls{underfitting} u \gls{overfitting} cambiando su \textbf{capacidad}. Informalmente, la capacidad de un modelo es su habilidad de acomodarse a una gran variedad de funciones. Modelos con baja capacidad pueden tener problemas para adaptarse al conjunto de entrenamiento. Modelos con una alta capacidad pueden adaptarse demasiado por memorizar propiedades del conjunto de entrenamiento que no le son útiles con el conjunto de pruebas.
+
+Una forma de controlar la capacidad de nuestro algoritmo de \gls{machinel} es escogiendo su \textbf{espacio de hipótesis}, el conjunto de funciones que el algoritmo de aprendizaje se le es permitido tomar como función solución.
+
+Un ejemplo de esto es regresión lineal, y es que podemos permitir que nuestro algoritmo de aprendizaje en vez de tomar funciones lineales (de grado $p=1$, \equationref{eq:linear-function}), también pueda tomar funciones polinomiales (grado $p > 1$, \equationref{eq:poly-function}).
+
+\begin{equation} \label{eq:linear-function}
+  \hat{y} = b + wx
+\end{equation}
+
+\begin{equation} \label{eq:poly-function}
+  \hat{y} = b + \sum_{i=1}^{p} w_i x^i
+\end{equation}
+
+En este ejemplo, es útil mencionar que existe un teorema que dictamina que para cualquier entero $n \ge 0$ y una lista de $n+1$ puntos en $\R^2$ $(x_0, y_0), \ldots, (x_n, y_n)$, donde $x_0 < x_1 < \cdots < x_n$, existe un polinomio $f$ de grado $n$ tal que $f(x_i) = y_i$ para todo $i$ \cite[pág 15]{kun_2018}. Análogamente los algoritmos con una gran capacidad, existe siempre una función que se adapta perfectamente a los datos de entrenamiento, sin embargo esta función probablemente no sera útil para los datos de prueba. En la practica no siempre es posible obtener una función que se adapte perfectamente a los datos.
+
+Los algoritmos de \gls{machinel} por lo general se desempeñan mejor cuando su capacidad es apropiada para la verdadera complejidad de la tarea que se necesita desarrollar y la cantidad apropiada de datos de entrenamiento que le son provistos.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/capacity-comparison.pdf}
+  \decoRule
+  \caption[Comparación de capacidades]{Comparación de capacidades. Tomado de \cite{deeplearning}.}
+  \label{fig:capacity-comparison}
+\end{figure}
+
+Existen muchas maneras de cambiar la capacidad de un modelo, la capacidad no esta solo determinada por la elección del modelo. El modelo especifica cual familia de funciones se pueden escoger cuando se varían los parámetros para alcanzar un objetivos de entrenamiento. A esto se le llama la \textbf{capacidad representativa} (o \textsl{representational capacity} en inglés) del modelo. En muchos casos encontrar la mejor función dentro de esta familia es un problema difícil de optimización. En la practica, el algoritmo de aprendizaje no encuentra la mejor función, sino una que meramente reduce el error de entrenamiento. Estas limitaciones adicionales, tales como la imperfección del algoritmo de optimización, significa que la \textbf{capacidad efectiva} del algoritmo puede ser menor al de la capacidad representativa.
+
+\subsection{Regularización}
+\todo[inline]{Por hacer}
+
+% ================================================================
+% ================================================================
+
+\section{Hiper-parámetros y conjuntos de Validación}
+\todo[inline]{Por hacer, pagina 117 Deep Learning}
+
+\subsection{Validación cruzada}
+\todo[inline]{Por hacer}
+
+% ================================================================
+% ================================================================
 
 \section{Estimadores, Parcialidad (\glsentrylong{bias}) y Varianza}
 % \todo[inline]{Por hacer, pagina 119 Deep Learning}
@@ -76,17 +139,8 @@ A medida que la capacidad del modelo aumenta, la parcialidad tiende a disminuir 
   \label{fig:consistency}
 \end{figure}
 
-\section{Capacidad, \glsentrylong{overfitting} y \glsentrylong{underfitting}}
-\todo[inline]{Por hacer, pagina 107 Deep Learning}
-
-\subsection{Regularización}
-\todo[inline]{Por hacer}
-
-\section{Hiper-parámetros y conjuntos de Validación}
-\todo[inline]{Por hacer, pagina 117 Deep Learning}
-
-\subsection{Validación cruzada}
-\todo[inline]{Por hacer}
+% ================================================================
+% ================================================================
 
 \section{Curva \glsentryname{roc} y valor \glsentryname{auc}}
 \todo[inline]{Por hacer, usar \cite{Zou2007}, esto se necesitara para los resultados de los experimentos}

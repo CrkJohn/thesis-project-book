@@ -67,7 +67,7 @@ El teorema de ``no free lunch'' nos dice que debemos diseñar nuestro algoritmo 
 
 Aunque una forma de lograr ese objetivo se puede lograr en parte por medio de modificar la capacidad, no es la única forma de lograrlo. El comportamiento de nuestro algoritmo esta fuertemente influenciado no solo por que tan grande hacemos el conjunto de funciones permitido en su espacio hipótesis, sino también la identidad especifica de esas funciones.
 
-Una método popular para realizar un ajuste de forma que se controle el \gls{underfitting} y el \gls{overfitting} es por medio de modificar nuestra función de costo $J$ agregándole un hiper-parámetro $\lambda$ que se establece de antemano sobre el algoritmo de manera \textit{heurística}. Modificamos $J$ de manera que cuando $\lambda = 0$ no se modifique el valor original de $J$, permitiéndonos controlar el nivel de \gls{underfitting} y \gls{overfitting} cambiando el valor de $\lambda$.
+Una método popular para realizar un ajuste de forma que se controle el \gls{underfitting} y el \gls{overfitting} es por medio de modificar nuestra función de costo $J$ agregándole un hiper-parámetro $\lambda$ que se establece de antemano sobre el algoritmo de manera \textit{heurística}. Modificamos $J$ de manera que cuando $\lambda = 0$ no se modifique el valor original de $J$, permitiéndonos controlar el nivel de \gls{underfitting} y \gls{overfitting} con el valor de $\lambda$.
 
 De manera mas general, podemos regularizar un modelo que aprende una función $f(\vx, \vtheta)$ por medio de añadir una penalidad llamada \textbf{regulador} (o \textsl{regularizer} en inglés) a la función de costo $J$. Como ejemplo, téngase una función hipótesis $\hat{f}(\vx, \vtheta) = \vtheta^{\top} \vx$ con parámetros $\vtheta$ y una función objetivo $f(\vx)$ de manera que podemos definir una función de costo que queremos minimizar como:
 \begin{equation}
@@ -81,11 +81,30 @@ Agregando $\lambda$ a la función de costo, la ecuación queda como:
 
 De esta manera penalizamos los valores grandes de $\vtheta$ (cuando $\lambda > 0$) que pueden ocasionar \gls{overfitting} de forma que regularizan el avance del algoritmo de optimización que se usa para minimizar la función de costo. Sin embargo, un valor muy grande en $\lambda$ ocasionara \gls{underfitting}.
 
+\begin{figure}[H]
+  \centering
+  \begin{tabular}{ccc}
+    Underfitting          & Appropriate regularization & Overfitting \\
+    (Excessive $\lambda$) & (Medium $\lambda$)         & ($\lambda \to 0$) \\
+    \includegraphics[width=0.25\textwidth]{Figures/regularization-comparison0.pdf} & %
+    \includegraphics[width=0.25\textwidth]{Figures/regularization-comparison1.pdf} & %
+    \includegraphics[width=0.25\textwidth]{Figures/regularization-comparison2.pdf} \\
+  \end{tabular}
+  \decoRule
+  \caption[Comparación de valores de regularización]{Comparación de valores de regularización. Tomado de \cite{deeplearning}.}
+  \label{fig:regularization-comparison}
+\end{figure}
+
 % ================================================================
 % ================================================================
 
 \section{Hiper-parámetros y conjuntos de Validación}
-\todo[inline]{Por hacer, pagina 117 Deep Learning}
+% \todo[inline]{Por hacer, pagina 117 Deep Learning}
+La mayor parte de los algoritmos de \gls{machinel} tienen hiper-parámetros, que son configuraciones que se pueden usar para controlar el comportamiento del algoritmo. Los valores de los hiper-parámetros no esta controlados por el algoritmo en si mismo.
+
+Algunas veces una configuración se decide poner como un hiper-parámetro que el algoritmo no aprende debido a que la configuración es difícil de optimizar. Es mas común encontrar que la configuración debe ser un hiper-parámetro debido a que no es apropiado ajustarlo con un conjunto de entrenamiento. Esto aplica para todos los hiper-parámetros que controlar la capacidad de un modelo. Si se aprendiera sobre un conjunto de entrenamiento, veríamos que siempre se escogerían hiper-parámetros que llegarían a la capacidad mas alta que sea posible para el modelo, dando como resultado \gls{overfitting}.
+
+Para resolver este problema, necesitamos de un \textbf{conjunto de validación} que el algoritmo de aprendizaje no pueda observar.
 
 \subsection{Validación cruzada}
 \todo[inline]{Por hacer}

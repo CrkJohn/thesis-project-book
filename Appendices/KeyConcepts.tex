@@ -1,7 +1,7 @@
 \chapter{Conceptos importantes} % Main appendix title
 \label{appendix:keyconcepts} % For referencing this appendix elsewhere, use \ref{AppendixA}
 
-La mayor parte de este apéndice se basa en contenido expuesto en \cite{deeplearning}.
+La mayor parte de este apéndice se basa en contenido expuesto en \cite{deeplearning}, y son conceptos que el autor considera pertinentes conocerlos de manera que se comprenda de manera adecuada el mundo del \glsentrylong{machinel}.
 
 \section{Capacidad, \glsentrylong{overfitting} y \glsentrylong{underfitting}}
 % \todo[inline]{Por hacer, pagina 107 Deep Learning}
@@ -74,9 +74,9 @@ De manera mas general, podemos regularizar un modelo que aprende una función $f
   J(\vx, \vtheta) = | \hat{f}(\vx, \vtheta) - f(\vx) |
 \end{equation}
 
-Agregando $\lambda$ a la función de costo, la ecuación queda como:
+Agregando el regulador $\Omega(\vtheta) = \lambda \vtheta^{\top} \vtheta $ a la función de costo, la ecuación queda como:
 \begin{equation}
-  J(\vx, \vtheta) = | \hat{f}(\vx, \vtheta) - f(\vx) | + \lambda \vtheta^{\top} \vtheta
+  J(\vx, \vtheta) = | \hat{f}(\vx, \vtheta) - f(\vx) | + \Omega(\vtheta)
 \end{equation}
 
 De esta manera penalizamos los valores grandes de $\vtheta$ (cuando $\lambda > 0$) que pueden ocasionar \gls{overfitting} de forma que regularizan el avance del algoritmo de optimización que se usa para minimizar la función de costo. Sin embargo, un valor muy grande en $\lambda$ ocasionara \gls{underfitting}.
@@ -188,6 +188,25 @@ A medida que la capacidad del modelo aumenta, la parcialidad tiende a disminuir 
   \caption[Consistencia]{Consistencia. Tomado de \cite{deeplearning}.}
   \label{fig:consistency}
 \end{figure}
+
+% ================================================================
+% ================================================================
+
+\section{Métodos de optimización}
+\todo[inline]{Por hacer, mirar si incluirlo de verdad.}
+
+\subsection{Gradiente descendiente}
+\todo[inline]{Por hacer}
+
+\subsection{Gradiente descendiente estocástica}
+\todo[inline]{Por hacer, pagina 147 y 286 Deep Learning}
+
+\subsection{AdaGrad}
+\todo[inline]{Por hacer, pagina 299 Deep Learning}
+
+\subsection{Adam}
+\todo[inline]{Por hacer, pagina 301 Deep Learning}
+
 
 % ================================================================
 % ================================================================

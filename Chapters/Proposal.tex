@@ -250,6 +250,7 @@ En consecuencia, este modelo tiene como propósito reconocer \gls{namedent} que 
 \todo[inline]{Despues de este parrafo por favor colocar un parrafo pequeño que describa la pregunta de data science que este modelo resuelve, por ejeemplo ¿Cual(es) es(son) lo(s) named entities identificado(s) en un twet?}
 
 \subsubsection{Redes neuronales recurrentes (\glsentrylong{rnn}s)}
+\todo[inline]{Expandir capitulo con contenido de pag 368 de Deep Learning}
 La naturaleza recurrente de estas redes viene del hecho de representarse como redes donde su salida hace parte de la entrada a la siguiente iteración de la red, tal como se aprecia en la \figureref{fig:rnn-classic-simple}.
 
 \begin{figure}[H]
@@ -266,6 +267,7 @@ Este tipo de redes tiene la característica de recordar salidas y entradas pasad
 Por este motivo, las \glspl{rnn} poseen una gran ventaja en situaciones puntuales, tales como el caso expuesto al inicio de esta sección (\gls{namedent}), sin embargo, el modelo clásico de \gls{rnn} es como la arquitectura presentada en la \figureref{fig:rnn-classic}, esta no provee resultados significativos debido a limitantes respecto al nivel de recordación que tienen originalmente.\todo[inline]{creo que hay que ajustar este parrafo porque primero se dice que las RNN son muy buenas y traen grandes ventajas por su capacidad de recordación y luego se termina diciendo que no provee resultados significativos. Por favor ajustar para que sea mas objetivo y no se vea la contradicción}
 
 \subsubsection{Redes neuronales \glsentrylong{lstm}}
+\todo[inline]{Expandir con contenido de pag 397 Deep Learning}
 En la literatura se puede encontrar usualmente el uso de las redes \gls{lstm}, las cuales proveen por medio de una arquitectura mas compleja la posibilidad de tener recordación de largo y corto plazo\todo{Colocar cual es la diferencia con respecto a las RNN, las unas son de corto y las otras de mediano/largo plazo?}, como se muestra en la \figureref{fig:lstm-classic}. Para que estas redes tengan la característica de tener recordación es necesario de una celda de memoria\todo{indicar por favor cual es la celda de memoria (cuales son las funciones, componentes, modulos que la representan) en la figura 6.7}, donde esta es la entrada para la siguiente iteración de la red, junto con la entrada de datos a la red.
 
 Téngase en cuenta que la arquitectura presentada en esta sección hace referencia a la implementación de \gls{lstm} mas utilizada, sin embargo existen muchas mas variaciones de esta con diferentes propiedades que son deseables en diferentes situaciones.
@@ -286,6 +288,9 @@ Téngase en cuenta que la arquitectura presentada en esta sección hace referenc
 \caption[Red \glsentrytext{lstm} clásica]{Red \glsentrytext{lstm} clásica. Tomado de \cite{understanding-lstm}.}
 \label{fig:lstm-classic}
 \end{figure}
+
+\subsubsection{Redes neuronales \glsentrylong{rnn} bidireccionales}
+\todo[inline]{Por hacer, con pag 383 Deep Learning}
 
 \subsubsection{Redes neuronales \glsentrylong{bilstm}}
 En la tarea de etiquetado de secuencias de texto las \gls{bilstm} tienen acceso a muestras de entrada tanto de pasado, presente y futuro por una cierta cantidad de tiempo. El uso de esta característica se puede aprovechar para ir a estados en el futuro (por medio de estados hacia adelante) y en el pasado (por medio de estados hacia atrás) para un momento particular en el tiempo \cite{Huang2015}.

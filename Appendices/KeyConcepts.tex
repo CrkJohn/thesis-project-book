@@ -56,14 +56,14 @@ La teoría de aprendizaje dice que un algoritmo de \gls{machinel} puede generali
 
 \gls{machinel} evita es problema por medio de ofrecer reglas probabilísticas, en vez de ofrecer reglas completamente ciertas que ofrece el razonamiento lógico. \gls{machinel} promete encontrar reglas que son \textit{probablemente} ciertas para la \textit{mayor} parte de los miembros de un conjunto que les concierne.
 
-Desafortunadamente, esto no resuelve el problema completo. Existe un teorema en \gls{machinel} llamado ``No free lunch'' que afirma que, promediando sobre todas las posibles distribuciones generadoras de datos, cualquier algoritmo de clasificación tiene la misma tasa de error cuando clasifica puntos antes no vistos. Esto quiere decir que no existe un algoritmo de \gls{machinel} que es mejor universalmente a los demás.
+Desafortunadamente, esto no resuelve el problema completo. Existe un teorema en \gls{machinel} llamado ``no free lunch'' el cual afirma que, promediando sobre todas las posibles distribuciones generadoras de datos, cualquier algoritmo de clasificación tiene la misma tasa de error cuando clasifica puntos antes no vistos. Esto quiere decir que no existe un algoritmo de \gls{machinel} que es mejor universalmente a los demás.
 
 Sin embargo, esto solo es aplicable cuando se habla del promedio de \textit{todas} las posibles distribuciones generadoras de datos. Si hacemos suposiciones sobre los tipos de distribución de probabilidad que nos encontramos en la vida real, entonces podemos diseñar algoritmos de aprendizaje que se desempeñan mejor sobre esas distribuciones.
 
 Esto significa que el objetivo de la investigación en \gls{machinel} no busca encontrar un algoritmo de aprendizaje universal, sino que el objetivo es encontrar que tipos de distribuciones son relevantes al ``mundo real'' que un agente de \gls{ai} experimenta, y que tipos de algoritmos de \gls{machinel} se desempeñan bien con datos tomados del tipo de distribuciones generadoras de datos que nos interesan.
 
 \subsection{Regularización}
-El teorema de ``no free lunch'' nos dice que debemos diseñar nuestro algoritmo de \gls{machinel} para tener un buen rendimiento una tarea especifica, esto lo logramos por medio de tener una serie de preferencias dentro del algoritmo de aprendizaje, cuando estas preferencias se alinean hacia el objetivo que queremos lograr este tiene un mejor desempeño.
+El teorema de ``no free lunch'' nos dice que debemos diseñar nuestro algoritmo de \gls{machinel} para tener un buen rendimiento en una tarea especifica, esto lo logramos por medio de tener una serie de preferencias dentro del algoritmo de aprendizaje, cuando estas preferencias se alinean hacia el objetivo que queremos lograr este tiene un mejor desempeño.
 
 Aunque una forma de lograr ese objetivo se puede lograr en parte por medio de modificar la capacidad, no es la única forma de lograrlo. El comportamiento de nuestro algoritmo esta fuertemente influenciado no solo por que tan grande hacemos el conjunto de funciones permitido en su espacio hipótesis, sino también la identidad especifica de esas funciones.
 
@@ -106,8 +106,12 @@ Algunas veces una configuración se decide poner como un hiper-parámetro que el
 
 Para resolver este problema, necesitamos de un \textbf{conjunto de validación} que el algoritmo de aprendizaje no pueda observar.
 
+Es importante que el conjunto de pruebas no sea usado para ajustar de ninguna manera los parámetros e hiper-parámetros del modelo, de esta manera la forma en que construimos el conjunto de validación es a partir del conjunto de entrenamiento. Específicamente, separamos los datos de entrenamiento en dos conjuntos disyuntos, uno de estos es para aprender los parámetros del modelo; el otro es nuestro conjunto de validación, usado para estimar nuestro error de generalización durante o después del entrenamiento, permitiendo que lo hiper-parámetros sean ajustados adecuadamente. Después de que la optimización de nuestros hiper-parámetros este completa, podemos estimar el error de generalización de nuestro modelo con el conjunto de pruebas.
+
 \subsection{Validación cruzada}
-\todo[inline]{Por hacer}
+Dividir el conjunto de datos en un conjunto de entrenamiento y pruebas fijo puede ser problemático si resulta que el conjunto de pruebas es pequeño. Un conjunto de pruebas pequeño implica incertidumbre estadística sobre el valor estimado del error de prueba promedio, haciendo difícil decir que un algoritmo A es mejor que el algoritmo B en una tarea especifica.
+
+Cuando el conjunto de datos es muy pequeño, procedimientos alternativos nos permiten utilizar todas las muestras en la estimación del error de prueba promedio, al precio de mayor costo computacional. Estos procedimientos se basan en la idea de repetir las computaciones de entrenamiento y de prueba sobre diferentes subconjuntos escogidos aleatoriamente, o bien divisiones del conjunto de datos original. El procedimiento mas común el de validación cruzada de $k$ partes (conocido como \textsl{$k$-fold cross-validation} en inglés), en donde una partición del conjunto de datos se construye por medio de dividirlo en $k$ subconjuntos disyuntos. El error de prueba se estima por medio de tomar el promedio del error de prueba de todas las $k$ pruebas.
 
 % ================================================================
 % ================================================================
@@ -141,7 +145,7 @@ La parcialidad (o \gls{bias} en inglés) es un estimador definido como:
   \mathrm{bias}(\hat{\vtheta}_m) = \E(\hat{\vtheta}_m) - \vtheta
 \end{equation}
 
-Donde la el valor esperado es sobre los datos (vistos como muestras de una variable aleatoria), donde $\vtheta$ es el valor verdadero de $\vtheta$ usado para definir la distribución que generadora de los datos. Un estimador se dice que es imparcial (o \textsl{unbiased} en inglés) si $\mathrm{bias}(\hat{\vtheta}_m) = \vzero$, lo cual implica que $\E(\hat{\vtheta}_m) = \vtheta$. Un estimador se dice que es \textbf{asintótico imparcial} si $\lim_{m\to\infty}\mathrm{bias}(\hat{\vtheta}_m) = \vzero$.
+Donde el valor esperado es sobre los datos (vistos como muestras de una variable aleatoria), donde $\vtheta$ es el valor verdadero de $\vtheta$ usado para definir la distribución que generadora de los datos. Un estimador se dice que es imparcial (o \textsl{unbiased} en inglés) si $\mathrm{bias}(\hat{\vtheta}_m) = \vzero$, lo cual implica que $\E(\hat{\vtheta}_m) = \vtheta$. Un estimador se dice que es \textbf{asintótico imparcial} si $\lim_{m\to\infty}\mathrm{bias}(\hat{\vtheta}_m) = \vzero$.
 
 Los estimadores imparciales son ciertamente deseables, sin embargo no son siempre los ``mejores'' estimadores.
 
@@ -171,7 +175,7 @@ En la labor de escoger un mejor estimador nos interesa especialmente como este s
   \plim_{m\to\infty} \hat{\rvtheta} = \rvtheta
 \end{equation}
 
-El símbolo $\plim$ indica convergencia en probabilidad, indicando que para cualquier $\epsilon > 0$ se tiene que $P(|\hat{\rvtheta} - \rvtheta| > \epsilon) \to 0$ cuando $m \to \infty$. La condición descrita en la \equationref{eq:consistency} se le conoce como \textbf{consistencia}.
+El símbolo $\plim$ indica convergencia en probabilidad, indicando que para cualquier $\epsilon > 0$ se tiene que $P(|\hat{\rvtheta} - \rvtheta| > \epsilon) \to 0$ cuando $m \to \infty$. La condición descrita en la \equationref{eq:consistency} se le conoce como \textbf{consistencia}. Algunas veces se le llama consistencia débil, cuando se refiere a consistencia fuerte se hace referencia a la convergencia \textbf{casi segura} de $\hat{\rvtheta}$ a $\rvtheta$. La convergencia casi segura de una secuencia de variables aleatorias $\rvx^{(1)}, \rvx^{(2)}, \ldots$ a un valor $\rx$ ocurre cuando $p(\lim_{m\to\infty}\rvx^{m} = \vx) = 1$.
 
 La consistencia nos asegura que la parcialidad inducida por el estimador se elimina a medida que la cantidad de muestras de datos aumenta. Sin embargo lo contrario no es verdad --- imparcialidad asintótica no implica consistencia.
 

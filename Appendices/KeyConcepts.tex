@@ -49,10 +49,37 @@ Los algoritmos de \gls{machinel} por lo general se desempeñan mejor cuando su c
   \label{fig:capacity-comparison}
 \end{figure}
 
-Existen muchas maneras de cambiar la capacidad de un modelo, la capacidad no esta solo determinada por la elección del modelo. El modelo especifica cual familia de funciones se pueden escoger cuando se varían los parámetros para alcanzar un objetivos de entrenamiento. A esto se le llama la \textbf{capacidad representativa} (o \textsl{representational capacity} en inglés) del modelo. En muchos casos encontrar la mejor función dentro de esta familia es un problema difícil de optimización. En la practica, el algoritmo de aprendizaje no encuentra la mejor función, sino una que meramente reduce el error de entrenamiento. Estas limitaciones adicionales, tales como la imperfección del algoritmo de optimización, significa que la \textbf{capacidad efectiva} del algoritmo puede ser menor al de la capacidad representativa.
+Existen muchas maneras de cambiar la capacidad de un modelo, la capacidad no esta solo determinada por la elección del modelo. El modelo especifica cual familia de funciones se pueden escoger cuando se varían los parámetros para alcanzar un objetivo de entrenamiento. A esto se le llama la \textbf{capacidad representativa} (o \textsl{representational capacity} en inglés) del modelo. En muchos casos encontrar la mejor función dentro de esta familia es un problema difícil de optimización. En la practica, el algoritmo de aprendizaje no encuentra la mejor función, sino una que meramente reduce el error de entrenamiento. Estas limitaciones adicionales, tales como la imperfección del algoritmo de optimización, significa que la \textbf{capacidad efectiva} del algoritmo puede ser menor al de la capacidad representativa.
+
+\subsection{Teorema ``No free lunch''}
+La teoría de aprendizaje dice que un algoritmo de \gls{machinel} puede generalizar de manera aceptable a partir de un numero finito de muestras de conjuntos de entrenamiento. Esto parece contradecir algunos principios básicos de la lógica. Inferir reglas generales de un conjunto de muestras limitadas no es lógicamente valido. Para inferir lógicamente una regla para describir cada miembro de un conjunto es necesario tener información de todos los miembros de ese conjunto.
+
+\gls{machinel} evita es problema por medio de ofrecer reglas probabilísticas, en vez de ofrecer reglas completamente ciertas que ofrece el razonamiento lógico. \gls{machinel} promete encontrar reglas que son \textit{probablemente} ciertas para la \textit{mayor} parte de los miembros de un conjunto que les concierne.
+
+Desafortunadamente, esto no resuelve el problema completo. Existe un teorema en \gls{machinel} llamado ``No free lunch'' que afirma que, promediando sobre todas las posibles distribuciones generadoras de datos, cualquier algoritmo de clasificación tiene la misma tasa de error cuando clasifica puntos antes no vistos. Esto quiere decir que no existe un algoritmo de \gls{machinel} que es mejor universalmente a los demás.
+
+Sin embargo, esto solo es aplicable cuando se habla del promedio de \textit{todas} las posibles distribuciones generadoras de datos. Si hacemos suposiciones sobre los tipos de distribución de probabilidad que nos encontramos en la vida real, entonces podemos diseñar algoritmos de aprendizaje que se desempeñan mejor sobre esas distribuciones.
+
+Esto significa que el objetivo de la investigación en \gls{machinel} no busca encontrar un algoritmo de aprendizaje universal, sino que el objetivo es encontrar que tipos de distribuciones son relevantes al ``mundo real'' que un agente de \gls{ai} experimenta, y que tipos de algoritmos de \gls{machinel} se desempeñan bien con datos tomados del tipo de distribuciones generadoras de datos que nos interesan.
 
 \subsection{Regularización}
-\todo[inline]{Por hacer}
+El teorema de ``no free lunch'' nos dice que debemos diseñar nuestro algoritmo de \gls{machinel} para tener un buen rendimiento una tarea especifica, esto lo logramos por medio de tener una serie de preferencias dentro del algoritmo de aprendizaje, cuando estas preferencias se alinean hacia el objetivo que queremos lograr este tiene un mejor desempeño.
+
+Aunque una forma de lograr ese objetivo se puede lograr en parte por medio de modificar la capacidad, no es la única forma de lograrlo. El comportamiento de nuestro algoritmo esta fuertemente influenciado no solo por que tan grande hacemos el conjunto de funciones permitido en su espacio hipótesis, sino también la identidad especifica de esas funciones.
+
+Una método popular para realizar un ajuste de forma que se controle el \gls{underfitting} y el \gls{overfitting} es por medio de modificar nuestra función de costo $J$ agregándole un hiper-parámetro $\lambda$ que se establece de antemano sobre el algoritmo de manera \textit{heurística}. Modificamos $J$ de manera que cuando $\lambda = 0$ no se modifique el valor original de $J$, permitiéndonos controlar el nivel de \gls{underfitting} y \gls{overfitting} cambiando el valor de $\lambda$.
+
+De manera mas general, podemos regularizar un modelo que aprende una función $f(\vx, \vtheta)$ por medio de añadir una penalidad llamada \textbf{regulador} (o \textsl{regularizer} en inglés) a la función de costo $J$. Como ejemplo, téngase una función hipótesis $\hat{f}(\vx, \vtheta) = \vtheta^{\top} \vx$ con parámetros $\vtheta$ y una función objetivo $f(\vx)$ de manera que podemos definir una función de costo que queremos minimizar como:
+\begin{equation}
+  J(\vx, \vtheta) = | \hat{f}(\vx, \vtheta) - f(\vx) |
+\end{equation}
+
+Agregando $\lambda$ a la función de costo, la ecuación queda como:
+\begin{equation}
+  J(\vx, \vtheta) = | \hat{f}(\vx, \vtheta) - f(\vx) | + \lambda \vtheta^{\top} \vtheta
+\end{equation}
+
+De esta manera penalizamos los valores grandes de $\vtheta$ (cuando $\lambda > 0$) que pueden ocasionar \gls{overfitting} de forma que regularizan el avance del algoritmo de optimización que se usa para minimizar la función de costo. Sin embargo, un valor muy grande en $\lambda$ ocasionara \gls{underfitting}.
 
 % ================================================================
 % ================================================================
@@ -71,7 +98,7 @@ Existen muchas maneras de cambiar la capacidad de un modelo, la capacidad no est
 El campo de las estadísticas nos da muchas herramientas para conseguir nuestro objetivo de \gls{machinel} de resolver una tarea no solo con el conjunto de entrenamiento sino que también para generalizar. Conceptos fundamentales como la estimación de puntos, la parcialidad y la varianza son útiles para caracterizar formalmente las nociones de generalidad, \gls{underfitting} y \gls{overfitting}.
 
 \subsection{Estimación de puntos}
-La estimación de puntos es el intento de proveer la única ``mejor'' predicción de alguna cantidad de interés. En general esta cantidad de interés puede ser un único parámetro o un vector de parámetros en algún modelo perimétrico.
+La estimación de puntos es el intento de proveer la única ``mejor'' predicción de alguna cantidad de interés. En general esta cantidad de interés puede ser un único parámetro o un vector de parámetros en algún modelo paramétrico.
 
 Para distinguir estimados de parámetros de su valor real se utiliza la distinción de un parámetro $\vtheta$ con $\hat{\vtheta}$.
 

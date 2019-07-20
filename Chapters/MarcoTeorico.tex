@@ -261,9 +261,44 @@ Este método de sistemas de detección de anomalía también es brevemente trata
 \section{Clustering} \label{subsec:clustering}
 El análisis de clusters agrupa objetos de datos basándose únicamente en la información encontrada en los datos que describen los objetos y sus relaciones. El objetivo es que objetos dentro de un grupo sean similares (o relacionados) el uno al otro, y que sean diferentes (o sin relación) a objetos en otros grupos. Entre mayor sea la similitud dentro de un grupo y entre mayor sea la diferencia entre grupos, sera mejor o mas distintivo el clustering.
 
-Los métodos de clustering se hacen referencia comúnmente en \gls{machinel} como métodos no--supervisados, los cuales se describen en \ref{sec:ML}. Un método de estos se describe en \ref{subsec:SOM} conocidos como mapas autoorganizados.
+Los métodos de clustering se hacen referencia comúnmente en \gls{machinel} como métodos no--supervisados. Un método de estos es el algoritmo de $k$-means y el de mapas autoorganizados que se describen a continuación.
 
 % ================================================================
+
+\subsection{Algoritmo de $k$-means}
+El algoritmo de $k$-means consiste en intentar encontrar $k$ subconjuntos de datos disyuntos tales que la diferencia entre las características de los miembros sea lo mas disimilares. Esto lo logra a partir de definir $k$ \textit{centroides} inicializados aleatoriamente sobre el conjunto de datos. El valor $k$ es puesto de antemano a la ejecución del algoritmo por el usuario. Cada elemento en el conjunto de datos se es asignado el $i$-ésimo centroide mas cercano. Luego se recalculan los centroides a partir de ponderar todos los puntos que fueron asignados a cada centroide. Este proceso se repite hasta que el cambio de posición del centroide sea marginal. Tómese de referencia el Algoritmo~\ref{algo:k-means} y la \figureref{fig:k-means-iterations} donde se pueden ver las iteraciones del algoritmo.
+
+\IncMargin{1em}
+\begin{algorithm}[H]
+  \Entrada{Conjunto de datos $\mX \in \R^{n \times m}$ y valor de $k$}
+  \Salida{Centroides $\mC \in \R^{n \times k}$}
+  
+  Inicialización aleatoria de los $k$ puntos $\mC \in \R^{n \times k}$\;
+  Define vector $\vs \in \Nat^{m}$ representando la asignación de centroides a cada punto de $\mX$\;
+  \Repetir{Ningún centroide cambia (e.g. $\norm{\vc_{t} - \vc_{t-1}} < \epsilon$)}{
+    \ParaTodo{$\vx_i \in \mX$}{
+      $\vs_i \leftarrow \argmin_{j\in\Nat} \norm{\vx_i - \vc_j}$\;
+    }
+
+    \ParaTodo{$\vc_j \in \mC$}{
+      $sz \leftarrow \sum_{i} [ \vs_i = j ]$\;
+      $\vc_j \leftarrow \frac{1}{sz} \sum_{i} \vx_i \cdot [ \vs_i = j ]$\;
+    }
+  }
+  
+  \caption{Algoritmo de $k$-means simplificado.}
+  \label{algo:k-means}
+\end{algorithm}
+\DecMargin{1em}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figures/k-mean-iteration.pdf}
+  \decoRule
+  \caption[Iteraciones del algoritmo de $k$-means]{Iteraciones del algoritmo de $k$-means. Tomado de \cite{tan2005introduction}.}
+  \label{fig:k-means-iterations}
+\end{figure}
+
 % ================================================================
 
 \subsection{Mapa autoorganizado (\glsentrylong{som})} \label{subsec:SOM}
@@ -337,11 +372,6 @@ En la \figureref{fig:som-example} se puede ver una aplicación de los \gls{som},
 \caption[Ejemplo de uso de \glsentrytext{som} en aplicaciones de perfilado]{Ejemplo de uso de \glsentrytext{som} en aplicaciones de perfilado. Tomado de \cite{mena2003investigative}}
 \label{fig:som-example}
 \end{figure}
-
-% ================================================================
-
-\subsection{Algoritmo de $k$-means}
-\todo[inline]{Pendiente}
 
 % ================================================================
 % ================================================================

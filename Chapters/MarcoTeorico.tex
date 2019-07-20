@@ -50,6 +50,140 @@ El segundo tipo principal de \gls{machinel} es el descriptivo o \textbf{aprendiz
 
 Un tercer tipo de aprendizaje de maquina es conocido como \textbf{\gls{reinforcedl}}, el cual es un tipo menos usado. Este es útil cuando se quiere aprender como actuar o comportarse cuando se recibe una recompensa ocasional o una señal de castigo.
 
+% ================================================================
+\section{Minería de datos (\glsentrylong{datamining})} \label{sec:datamining}
+Según \cite{tan2005introduction}, la minería de datos se define como el proceso de descubrir información útil en repositorios grandes de datos. Las técnicas de minería de datos son desplegadas para limpiar grandes bases de datos para encontrar patrones nuevos y útiles que de lo contrario podrían permanecer desconocidos. También ofrecen capacidades para predecir la salida de observaciones futuras, tales como predecir si un cliente nuevo gastara mas de \$100 en una tienda.
+
+No todas las tareas de descubrimiento de información son considerados como \gls{datamining}. Por ejemplo, realizar una consulta de campos individuales usando un sistema de base de datos o encontrar una pagina web por medio de una búsqueda en Internet son tareas relacionadas con \emph{adquisición de información}.
+
+\subsection{Minería de texto (\glsentrylong{textmining})} \label{subsec:NLP}
+Es un subcampo de Inteligencia Artificial conocida como \glsentrylong{nlp}, en donde las herramientas de minería de datos pueden capturar rasgos críticos del contenido de un documento basado en el análisis de sus características lingüísticas.
+
+La mayoría de los crímenes son electrónicos por naturaleza, por lo que se dejan rastros textuales que investigadores pueden seguir y analizar. Estas se enfocan en el descubrimiento de relaciones en texto no--estructurado y pueden ser aplicados al problema de \emph{búsqueda} y \emph{localización de palabras clave}.
+
+% ================================================================
+% ================================================================
+
+\section{Redes Neuronales Artificiales (\glsentrylong{ann})} \label{sec:ANN}
+El estudio de redes neuronales artificiales (\glsentrytext{ann}) fue inspirado por los intentos de simular los sistemas biológicos de neuronas. El cerebro humano se compone principalmente de células nerviosas llamadas \emph{neuronas}, enlazadas con otras neuronas por medio de hebras de fibra conocidas como \emph{axones}. Los axones son usados para transmitir impulsos nerviosos de una neurona a otra cada vez que las neuronas son estimuladas. Una neurona esta conectada a axones de otras neuronas por medio de \emph{dendritas}, las cuales son extensiones desde el cuerpo de la neurona. El punto de contacto entre una dendrita y un axón se conoce como \emph{sinapsis}. Los neurólogos han descubierto que el cerebro humano aprende por medio de cambiar la fuerza de la conexión sináptica entre las neuronas a través de estimulación repetitiva por el mismo impulso.
+
+De manera análoga a la estructura del cerebro humano, una \gls{ann} se compone de una estructura interconectada de nodos y vínculos directos.
+
+% ================================================================
+% ================================================================
+
+\section{Clasificación} \label{subsec:clasification}
+Clasificación es la tarea de asignarle una de varias categorías predefinidas a objetos, y es una tarea que tiene una variedad extensa de aplicaciones. Ejemplos de esto se encuentran la detección de correos no deseados en mensajes de e--mails basándose del encabezado o el cuerpo del mensaje, categorización de células benignas de malignas basándose en los resultados de escaneados MRI o incluso la clasificación de galaxias basado en su forma.
+
+Definido formalmente, clasificación es la tarea de aprender una función objetivo $f$ que mapea cada conjunto de atributos $x$ a una clase predefinida de etiquetas $y$.
+
+La función objetivo también se define informalmente como un \emph{modelo de clasificación}.
+
+% ================================================================
+
+\subsection{Sistemas Basados en Conocimiento (\glsentrylong{kbs})} \label{sec:KBS}
+\todo[inline]{Explicar bien en que consiste la base de conocimiento y el motor de inferencia}
+Según \cite{sajja2010knowledge}, los \gls{kbs} son uno de los mayores miembros de la familia de \gls{ai}. El \gls{kbs} consiste de una \gls{knowledgebase} y un programa de búsqueda llamado \gls{inferenceengine} representado en la \figureref{fig:kbs-arch}. La \gls{knowledgebase} puede ser usado como un repositorio de conocimiento de varias formas.
+
+Existen 5 tipos de \gls{kbs}\todo{Explicar brevemente cada uno de los 5 tipos}, donde uno de ellos es conocido como \gls{expertsystems}, usados como \gls{rulebasedsys}, donde su \gls{knowledgebase} esta dado como reglas y el \gls{inferenceengine} esta dado por algo llamado \gls{workingmemory}, que representa los hechos que se conocen inicialmente del sistema junto con los nuevos hechos que se van dando como inferencia de las reglas.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{Figures/kbs-architecture.png}
+\decoRule
+\caption[Arquitectura \glsentrytext{kbs}]{Arquitectura \glsentrytext{kbs}. Tomado de \cite{sajja2010knowledge} \todo[inline]{Explicar esta figura: Que significa explanation/reasoning, self-learning y User Interface}}
+\label{fig:kbs-arch}
+\end{figure}
+
+Estas reglas pueden resumirse como una colección de condicionales de la forma \textbf{IF/ELSE} que se componen de un \emph{antecedente} y un \emph{consecuente}.
+
+Existen dos tipos de \gls{rulebasedsys}, definidos como \gls{deductivesys} y \gls{reactivesys}, donde el \gls{deductivesys} tiene como objetivo realizar una conclusión en base a los hechos iniciales en la \gls{workingmemory}, por el otro lado se tienen los \gls{reactivesys}, los cuales de igual manera a los \gls{deductivesys}, toman los hechos de la \gls{workingmemory} y realizan sea una acción interactiva con su entorno o bien una modificación de los hechos que se encuentran en la \gls{workingmemory} tal como la adición o eliminación de hechos. Tómese el ejemplo de la \equationref{eq:rbs-example} tomada de \cite{Mendel}, donde \emph{x} es la temperatura y \emph{AC} es aire acondicionado.
+
+\begin{equation} \label{eq:rbs-example}
+  \left\{ \begin{array}{ll}
+            \text{IF x es moderado,} & \text{THEN y = ajustar AC a bajo} \\
+            \text{IF x es alto,}     & \text{THEN y = ajustar AC a moderado a alto} \\
+            \text{IF x es muy alto,} & \text{THEN y = ajustar AC a alto} 
+          \end{array} \right.
+\end{equation}
+
+\subsubsection{Tipos de \glsentrylong{kbs}} \label{ch:kbs-types}
+\todo[inline]{Pendiente}
+
+\subsubsection{\glsentrylong{rulebasedsys}} \label{ch:kbs-rule-based-system}
+\todo[inline]{Por acomodar y expandir}
+
+% ================================================================
+
+\subsection{Maquina de soporte vectorial (\glsentrylong{svm})} \label{sec:SVM}
+\gls{svm} es una técnica de clasificación que tiene sus raíces en la teoría de aprendizaje estadístico que ha mostrado resultados empíricos prometedores en muchas aplicaciones practicas, desde reconocimiento de dígitos escritos a mano a categorización de texto. \gls{svm} también funciona muy bien con datos de alta dimensionalidad. Otro aspecto destacable de esta aproximación es que representa la frontera de decisión usando un subconjunto de las muestras de entrenamiento, conocidos como los \emph{support vectors}.
+
+\subsubsection{Maximum Margin Hyperplanes}
+Se puede entender a los \gls{mmh} como hiper-planos que ayudan a separar datos en un hiper-espacio y que poseen un margen de decisión entre los datos, como ejemplo tómese la \figureref{fig:svm-hyperplanes}, donde el hiper-plano $B_1$ tiene un margen de decisión mas grande que el hiper-plano $B_2$.
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=0.7\textwidth]{Figures/svm-hyperplanes.pdf}
+   \decoRule
+   \caption[\glsentryname{mmh}]{\glsentryname{mmh}. Tomado de \cite{tan2005introduction}}
+   \label{fig:svm-hyperplanes}
+\end{figure}
+
+Finalmente, el objetivo final de los \gls{svm} es la búsqueda de un hiper-plano con el mayor margen de decisión. Existen dos tipos de \gls{svm}, el lineal y el no--lineal. El lineal realiza la separación de los datos con su hiper-plano a partir de los datos de entrada en su espacio vectorial original, mientras que el no--lineal consta de realizar una transformación de los espacios de los datos de entrada a uno en que sea linealmente separable (véase como ejemplo la \figureref{fig:svm-nonlinear-transforms}), sin embargo al realizar la transformación, el algoritmo de \gls{svm} se ve afectado por la dimensionalidad de la entrada, por lo que existe lo que se conoce como la función \emph{kernel} para remediarlo.
+
+Estas limitantes de dimensionalidad ocurren por un problema conocido como la \textbf{maldición de dimensionalidad} (o \textsl{curse of dimensionality} en inglés), y se manifiesta cuando el numero de dimensiones en los datos es alta. Particularmente se debe tener muy presente que el numero de configuraciones distintas posibles de un conjunto de variables crezcan de manera exponencial a medida que el numero de variables aumenta. Este caso ocurre con los \glspl{svm} cuando se vuelve necesaria la conversión de espacios vectoriales.
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=0.95\textwidth]{Figures/svm-nonlinear-transform.pdf}
+   \decoRule
+   \caption[Transformación de espacios en \glsentrylong{svm}]{Transformación de espacios en \glsentrylong{svm}. Tomado de \cite{tan2005introduction}}
+   \label{fig:svm-nonlinear-transforms}
+\end{figure}
+
+\subsubsection{Función Kernel}
+La función polinomial de similaridad, $K$, la cual es calculada en el espacio original de los datos de entrada, se le conoce como la \textbf{función Kernel}. En principio se asegura que la función kernel puede ser expresada siempre como el producto punto entre dos vectores de entrada en algún espacio de alta dimensionalidad, la función de kernel también tiene la particularidad de que el computo de los productos punto con la función toman considerablemente menos tiempo que realizar la transformación de espacios, dejando de lado la transformación, acelerando la tarea de clasificación.
+
+% ================================================================
+
+\subsection{Clasificadores Bayesianos} \label{sec:bayes}
+\todo[inline]{mejorar redacción por que no se entiende}
+En muchas aplicaciones de relaciones entre el conjunto de atributos y la etiqueta es no--determinante. Es decir, la etiqueta de clase de un dato de un conjunto de prueba no puede ser determinado con certeza a pesar de ser un atributo idéntico a los atributos de entrenamiento. Esto puede ser producto de que los datos poseen ruido o la presencia de ciertos factores que afectan la clasificación pero no son incluidos en el análisis. Para esto es crucial el teorema de Bayes, el cual es un principio estadístico que combina el conocimiento previo de las clases con la nueva evidencia que se obtiene de los datos.
+
+\subsubsection{Teorema de Bayes} \label{subsec:bayestheo}
+El teorema de Bayes dice que para un par de variables aleatorias $\rx$ e $\ry$, donde $P(\rx=x \mid \ry=y)$ es la probabilidad de que la variable $\rx$ tome el valor $x$ dado que el valor de la variable $\ry$ es $y$. Se tiene entonces la \equationref{eq:bayestheo}.
+\begin{equation} \label{eq:bayestheo}
+  P(\ry \mid \rx) = \frac{P(\rx \mid \ry) P(\ry)}{P(\rx)}
+\end{equation}
+
+\paragraph{Usando el teorema de Bayes para clasificación}
+Para denotar el problema de clasificación desde una perspectiva estadística se define a $\rx$ como el conjunto de atributos y $\ry$ como el conjunto de etiquetas de clase. Si la etiqueta de clase tiene una relación no--determinante con los atributos, entonces se pueden tomar a $\rx$ y a $\ry$ como variables aleatorias y capturar su relación probabilística con $P(\ry\mid\rx)$, conocida como la probabilidad posterior para $\ry$, dada su probabilidad previa $P(\ry)$.
+
+Durante la fase de entrenamiento, es necesario aprender las probabilidades posteriores $P(\ry\mid\rx)$ para cualquier combinación de $\rx$ y $\ry$ basándose en la información recolectada de los datos de entrenamiento.
+
+Dado que lo que se quiere realizar es una clasificación que represente la probabilidad de que dado un valor de $\rx=x$ este relacionado con que $\ry=y$, se puede reconocer primero que $\rx$ se mantiene constante para lo que son los datos de entrenamiento, y que lo desconocido sea la clasificación $\ry=y$ con probabilidad $P(\ry\mid\rx)$, al conocer esta probabilidad, un valor de prueba $\rx'$ puede ser clasificado por medio de encontrar la clase $\ry'$ que maximice la probabilidad posterior $P(\ry'\mid\rx')$.
+
+\subsubsection{Clasificador Na\"{\i}ve Bayes} \label{subsec:naivebayes}
+Un clasificador de Na\"{\i}ve Bayes estima la probabilidad condicional de las clases por medio de suponer que los atributos son condicionalmente independientes, dado la etiqueta de clasificación $y$. La suposición de independencia condicional se puede dar por la \equationref{eq:bayes-conditional-independence}.
+
+\begin{equation} \label{eq:bayes-conditional-independence}
+  P(\sX\mid\ry=y) = \prod_{i=1}^{d} P(\rx_i\mid\ry=y)
+\end{equation}
+
+Donde cada conjunto de atributos $\sX=\{ x_1, \ldots, x_d \}$ consiste de $d$ atributos.
+\paragraph{Como funciona el clasificador Na\"{\i}ve Bayes}
+Con la suposición de independencia condicional, en vez de computar la probabilidad condicional de clases para cada combinación de $\sX$, solo se debe realizar para establecer la probabilidad condicional de cada $x_i$, dado $\ry$.
+
+Para clasificar un dato de prueba, el clasificador computa la probabilidad posterior para cada clase $\ry$ como se muestra en la \equationref{eq:bayes-classifier}.
+
+\begin{equation} \label{eq:bayes-classifier}
+  P(\ry\mid \sX) = \frac{P(\ry) \prod_{i=1}^{d}P(x_i\mid\ry)}{P(\sX)} \Rightarrow P(\ry) \prod_{i=1}^{d}P(x_i\mid\ry)
+\end{equation}
+
+Puede ignorarse $P(\sX)$ debido a que es un termino constante. Para esto se realiza una normalización de forma que $\sum_{\forall \ry \in \sY} P(\ry\mid \sX) = 1$.
+
+% ================================================================
+
 \subsection{Sistemas de Detección de Anomalías (\glsentrylong{anomalydetectionsys})}
 Existen diferentes aproximaciones para los sistemas de anomalías, sin embargo una similitud entre todos estos sistemas es que se intenta realiza una \emph{detección de desviaciones}, y su tarea es detectar los datos \emph{atípicos} en un sistema \cite{tan2005introduction}.
 
@@ -76,71 +210,6 @@ Si el modelo esta dando como resultado muchos falsos positivos, lo que se debe h
 Este método de sistemas de detección de anomalía también es brevemente tratada en \cite{osint} con una representación de hiper-planos, que es equivalente con este descrito.
 
 % ================================================================
-\section{Minería de datos (\glsentrylong{datamining})} \label{sec:datamining}
-Según \cite{tan2005introduction}, la minería de datos se define como el proceso de descubrir información útil en repositorios grandes de datos. Las técnicas de minería de datos son desplegadas para limpiar grandes bases de datos para encontrar patrones nuevos y útiles que de lo contrario podrían permanecer desconocidos. También ofrecen capacidades para predecir la salida de observaciones futuras, tales como predecir si un cliente nuevo gastara mas de \$100 en una tienda.
-
-No todas las tareas de descubrimiento de información son considerados como \gls{datamining}. Por ejemplo, realizar una consulta de campos individuales usando un sistema de base de datos o encontrar una pagina web por medio de una búsqueda en Internet son tareas relacionadas con \emph{adquisición de información}.
-
-\subsection{Minería de texto (\glsentrylong{textmining})} \label{subsec:NLP}
-Es un subcampo de Inteligencia Artificial conocida como \glsentrylong{nlp}, en donde las herramientas de minería de datos pueden capturar rasgos críticos del contenido de un documento basado en el análisis de sus características lingüísticas.
-
-La mayoría de los crímenes son electrónicos por naturaleza, por lo que se dejan rastros textuales que investigadores pueden seguir y analizar. Estas se enfocan en el descubrimiento de relaciones en texto no--estructurado y pueden ser aplicados al problema de \emph{búsqueda} y \emph{localización de palabras clave}.
-
-\subsection{Clasificación} \label{subsec:clasification}
-Clasificación es la tarea de asignarle una de varias categorías predefinidas a objetos, y es una tarea que tiene una variedad extensa de aplicaciones. Ejemplos de esto se encuentran la detección de correos no deseados en mensajes de e--mails basándose del encabezado o el cuerpo del mensaje, categorización de células benignas de malignas basándose en los resultados de escaneados MRI o incluso la clasificación de galaxias basado en su forma.
-
-Definido formalmente, clasificación es la tarea de aprender una función objetivo $f$ que mapea cada conjunto de atributos $x$ a una clase predefinida de etiquetas $y$.
-
-La función objetivo también se define informalmente como un \emph{modelo de clasificación}.
-
-\subsubsection{Metodologías de clasificación} \label{subsubsec:classmethods}
-Existen muchos métodos para la clasificación de datos no--estructurados, entre los descritos aquí están:
-\begin{itemize}
-\item Clasificador basado en reglas (véase la \sectionref{sec:KBS}).
-\item Redes neuronales artificiales (véase la \sectionref{sec:ANN}).
-\item Maquinas de soporte vectorial (véase la \sectionref{sec:SVM}).
-\item Clasificador de Na\"{\i}ve Bayes (véase la \sectionref{subsec:naivebayes}).
-\end{itemize}
-
-\subsection{Clustering} \label{subsec:clustering}
-El análisis de clusters agrupa objetos de datos basándose únicamente en la información encontrada en los datos que describen los objetos y sus relaciones. El objetivo es que objetos dentro de un grupo sean similares (o relacionados) el uno al otro, y que sean diferentes (o sin relación) a objetos en otros grupos. Entre mayor sea la similitud dentro de un grupo y entre mayor sea la diferencia entre grupos, sera mejor o mas distintivo el clustering.
-
-Los métodos de clustering se hacen referencia comúnmente en \gls{machinel} como métodos no--supervisados, los cuales se describen en \ref{sec:ML}. Un método de estos se describe en \ref{subsec:SOM} conocidos como mapas autoorganizados.
-
-% ================================================================
-
-\section{Sistemas Basados en Conocimiento (\glsentrylong{kbs})} \label{sec:KBS}
-\todo[inline]{Explicar bien en que consiste la base de conocimiento y el motor de inferencia}
-Según \cite{sajja2010knowledge}, los \gls{kbs} son uno de los mayores miembros de la familia de \gls{ai}. El \gls{kbs} consiste de una \gls{knowledgebase} y un programa de búsqueda llamado \gls{inferenceengine} representado en la \figureref{fig:kbs-arch}. La \gls{knowledgebase} puede ser usado como un repositorio de conocimiento de varias formas.
-
-Existen 5 tipos de \gls{kbs}\todo{Explicar brevemente cada uno de los 5 tipos}, donde uno de ellos es conocido como \gls{expertsystems}, usados como \gls{rulebasedsys}, donde su \gls{knowledgebase} esta dado como reglas y el \gls{inferenceengine} esta dado por algo llamado \gls{workingmemory}, que representa los hechos que se conocen inicialmente del sistema junto con los nuevos hechos que se van dando como inferencia de las reglas.
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.4]{Figures/kbs-architecture.png}
-\decoRule
-\caption[Arquitectura \glsentrytext{kbs}]{Arquitectura \glsentrytext{kbs}. Tomado de \cite{sajja2010knowledge} \todo[inline]{Explicar esta figura: Que significa explanation/reasoning, self-learning y User Interface}}
-\label{fig:kbs-arch}
-\end{figure}
-
-Estas reglas pueden resumirse como una colección de condicionales de la forma \textbf{IF/ELSE} que se componen de un \emph{antecedente} y un \emph{consecuente}.
-
-Existen dos tipos de \gls{rulebasedsys}, definidos como \gls{deductivesys} y \gls{reactivesys}, donde el \gls{deductivesys} tiene como objetivo realizar una conclusión en base a los hechos iniciales en la \gls{workingmemory}, por el otro lado se tienen los \gls{reactivesys}, los cuales de igual manera a los \gls{deductivesys}, toman los hechos de la \gls{workingmemory} y realizan sea una acción interactiva con su entorno o bien una modificación de los hechos que se encuentran en la \gls{workingmemory} tal como la adición o eliminación de hechos. Tómese el ejemplo de la \equationref{eq:rbs-example} tomada de \cite{Mendel}, donde \emph{x} es la temperatura y \emph{AC} es aire acondicionado.
-
-\begin{equation} \label{eq:rbs-example}
-  \left\{ \begin{array}{ll}
-            \text{IF x es moderado,} & \text{THEN y = ajustar AC a bajo} \\
-            \text{IF x es alto,}     & \text{THEN y = ajustar AC a moderado a alto} \\
-            \text{IF x es muy alto,} & \text{THEN y = ajustar AC a alto} 
-          \end{array} \right.
-\end{equation}
-
-% ================================================================
-
-\section{Redes Neuronales Artificiales (\glsentrylong{ann})} \label{sec:ANN}
-El estudio de redes neuronales artificiales (\glsentrytext{ann}) fue inspirado por los intentos de simular los sistemas biológicos de neuronas. El cerebro humano se compone principalmente de células nerviosas llamadas \emph{neuronas}, enlazadas con otras neuronas por medio de hebras de fibra conocidas como \emph{axones}. Los axones son usados para transmitir impulsos nerviosos de una neurona a otra cada vez que las neuronas son estimuladas. Una neurona esta conectada a axones de otras neuronas por medio de \emph{dendritas}, las cuales son extensiones desde el cuerpo de la neurona. El punto de contacto entre una dendrita y un axón se conoce como \emph{sinapsis}. Los neurólogos han descubierto que el cerebro humano aprende por medio de cambiar la fuerza de la conexión sináptica entre las neuronas a través de estimulación repetitiva por el mismo impulso.
-
-De manera análoga a la estructura del cerebro humano, una \gls{ann} se compone de una estructura interconectada de nodos y vínculos directos.
 
 \subsection{Redes neuronales profundas (\textsl{Deep Feedforward Networks})}
 Una arquitectura muy popular de \glspl{ann} es el caso de las redes \textsl{Deep feedforward} o también conocidas como \gls{mlp} cuyo objetivo es aproximarse a una función $f^{\ast}$. A estos modelos se les llama \textbf{feedforward} debido a que la información fluye de una entrada $\vx$ a través de unas computaciones intermedias usadas para definir $f$, y finalmente dar como salida a $\vy$.
@@ -162,6 +231,18 @@ Una representación visual de las capas de una de estas redes se encuentra en la
 \end{figure}
 
 Aunque esta es una representación simplificada de este tipo de redes, este libro no tratara de profundizar en los detalles técnicos al ser estos muy amplios (véase \cite{deeplearning} y \cite{bishop-pattern-recognition}).
+
+
+% ================================================================
+% ================================================================
+
+\section{Clustering} \label{subsec:clustering}
+El análisis de clusters agrupa objetos de datos basándose únicamente en la información encontrada en los datos que describen los objetos y sus relaciones. El objetivo es que objetos dentro de un grupo sean similares (o relacionados) el uno al otro, y que sean diferentes (o sin relación) a objetos en otros grupos. Entre mayor sea la similitud dentro de un grupo y entre mayor sea la diferencia entre grupos, sera mejor o mas distintivo el clustering.
+
+Los métodos de clustering se hacen referencia comúnmente en \gls{machinel} como métodos no--supervisados, los cuales se describen en \ref{sec:ML}. Un método de estos se describe en \ref{subsec:SOM} conocidos como mapas autoorganizados.
+
+% ================================================================
+% ================================================================
 
 \subsection{Mapa autoorganizado (\glsentrylong{som})} \label{subsec:SOM}
 Las \glspl{som} son otra arquitectura de \glspl{ann} muy populares, sin embargo a diferencia de la arquitectura de las redes \gls{mlp}, esta consta de una sola capa de neuronas, y no tiene un propósito de predicción, por lo que no es necesario aproximar ninguna función $f$ a una salida $\vy$ definida por un conjunto de entrenamiento.
@@ -195,11 +276,11 @@ Finalmente para alcanzar la \emph{adaptación} se realiza una actualización de 
 \end{equation}
 
 \begin{figure}[H]
-\centering
-\includegraphics[width=0.75\textwidth]{Figures/som-adaptive-proc.pdf}
-\decoRule
-\caption[Proceso de adaptación de \glsentrytext{som}]{Proceso de adaptación de \glsentrytext{som}, (a) uni--dimensional, (b) bi--dimensional. Tomado de \cite{de2006fundamentals}}
-\label{fig:som-adap-proc}
+  \centering
+  \includegraphics[width=0.75\textwidth]{Figures/som-adaptive-proc.pdf}
+  \decoRule
+  \caption[Proceso de adaptación de \glsentrytext{som}]{Proceso de adaptación de \glsentrytext{som}, (a) uni--dimensional, (b) bi--dimensional. Tomado de \cite{de2006fundamentals}}
+  \label{fig:som-adap-proc}
 \end{figure}
 
 Luego de que el algoritmo de aprendizaje termina de realizar las iteraciones, la salida de este es la matriz de pesos $\mW$. En la \figureref{fig:som-impl-example} se puede apreciar una aproximación del algoritmo con un mapa uni--dimensional tratando de aproximar una función polar con ruido adicionado en un gráfico 2D. Adicionalmente pueden verse los efectos de \gls{underfitting} y \gls{overfitting} (véase el Apéndice \ref{appendix:keyconcepts}) con diferentes cantidades de neuronas en la \figureref{fig:som-impl-example-fitting}.
@@ -215,16 +296,16 @@ En la \figureref{fig:som-example} se puede ver una aplicación de los \gls{som},
 \end{figure}
 
 \begin{figure}[H]
-\centering
-\begin{tabular}{ccc}
-\includegraphics[width=0.32\textwidth]{Figures/som-implementation-example10.pdf} & %
-\includegraphics[width=0.32\textwidth]{Figures/som-implementation-example50.pdf} & %
-\includegraphics[width=0.32\textwidth]{Figures/som-implementation-example100.pdf} \\
-  (a) & (b) & (c) \\ [1em]
-\end{tabular}
-\decoRule
-\caption[Comparación de salidas de \glsentrytext{som} uni-dimensional]{Comparación de salidas de \glsentrytext{som} uni-dimensional con (a) 10 neuronas (b) 50 neuronas y (c) 100 neuronas. Implementación propia.}
-\label{fig:som-impl-example-fitting}
+   \centering
+   \begin{tabular}{ccc}
+   \includegraphics[width=0.32\textwidth]{Figures/som-implementation-example10.pdf} & %
+   \includegraphics[width=0.32\textwidth]{Figures/som-implementation-example50.pdf} & %
+   \includegraphics[width=0.32\textwidth]{Figures/som-implementation-example100.pdf} \\
+     (a) & (b) & (c) \\ [1em]
+   \end{tabular}
+   \decoRule
+   \caption[Comparación de salidas de \glsentrytext{som} uni-dimensional]{Comparación de salidas de \glsentrytext{som} uni-dimensional con (a) 10 neuronas (b) 50 neuronas y (c) 100 neuronas. Implementación propia.}
+   \label{fig:som-impl-example-fitting}
 \end{figure}
 
 \begin{figure}[H]
@@ -237,73 +318,8 @@ En la \figureref{fig:som-example} se puede ver una aplicación de los \gls{som},
 
 % ================================================================
 
-\section{Maquina de soporte vectorial (\glsentrylong{svm})} \label{sec:SVM}
-\gls{svm} es una técnica de clasificación que tiene sus raíces en la teoría de aprendizaje estadístico que ha mostrado resultados empíricos prometedores en muchas aplicaciones practicas, desde reconocimiento de dígitos escritos a mano a categorización de texto. \gls{svm} también funciona muy bien con datos de alta dimensionalidad. Otro aspecto destacable de esta aproximación es que representa la frontera de decisión usando un subconjunto de las muestras de entrenamiento, conocidos como los \emph{support vectors}.
-
-\subsection{Maximum Margin Hyperplanes}
-Se puede entender a los \gls{mmh} como hiper-planos que ayudan a separar datos en un hiper-espacio y que poseen un margen de decisión entre los datos, como ejemplo tómese la \figureref{fig:svm-hyperplanes}, donde el hiper-plano $B_1$ tiene un margen de decisión mas grande que el hiper-plano $B_2$.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.7\textwidth]{Figures/svm-hyperplanes.pdf}
-\decoRule
-\caption[\glsentryname{mmh}]{\glsentryname{mmh}. Tomado de \cite{tan2005introduction}}
-\label{fig:svm-hyperplanes}
-\end{figure}
-
-Finalmente, el objetivo final de los \gls{svm} es la búsqueda de un hiper-plano con el mayor margen de decisión. Existen dos tipos de \gls{svm}, el lineal y el no--lineal. El lineal realiza la separación de los datos con su hiper-plano a partir de los datos de entrada en su espacio vectorial original, mientras que el no--lineal consta de realizar una transformación de los espacios de los datos de entrada a uno en que sea linealmente separable (véase como ejemplo la \figureref{fig:svm-nonlinear-transforms}), sin embargo al realizar la transformación, el algoritmo de \gls{svm} se ve afectado por la dimensionalidad de la entrada, por lo que existe lo que se conoce como la función \emph{kernel} para remediarlo.
-
-Estas limitantes de dimensionalidad ocurren por un problema conocido como la \textbf{maldición de dimensionalidad} (o \textsl{Curse of dimensionality} en inglés), y se manifiesta cuando el numero de dimensiones en los datos es alta. Particularmente se debe tener muy presente que el numero de configuraciones distintas posibles de un conjunto de variables crezcan de manera exponencial a medida que el numero de variables aumenta. Este caso ocurre con los \glspl{svm} cuando se vuelve necesaria la conversión de espacios vectoriales.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth]{Figures/svm-nonlinear-transform.pdf}
-\decoRule
-\caption[Transformación de espacios en \glsentrylong{svm}]{Transformación de espacios en \glsentrylong{svm}. Tomado de \cite{tan2005introduction}}
-\label{fig:svm-nonlinear-transforms}
-\end{figure}
-
-\subsection{Función Kernel}
-La función polinomial de similaridad, $K$, la cual es calculada en el espacio original de los datos de entrada, se le conoce como la \textbf{función Kernel}. En principio se asegura que la función kernel puede ser expresada siempre como el producto punto entre dos vectores de entrada en algún espacio de alta dimensionalidad, la función de kernel también tiene la particularidad de que el computo de los productos punto con la función toman considerablemente menos tiempo que realizar la transformación de espacios, dejando de lado la transformación, acelerando la tarea de clasificación.
-
-% ================================================================
-
-\section{Clasificadores Bayesianos} \label{sec:bayes}
-\todo[inline]{mejorar redacción por que no se entiende}
-En muchas aplicaciones de relaciones entre el conjunto de atributos y la etiqueta es no--determinante. Es decir, la etiqueta de clase de un dato de un conjunto de prueba no puede ser determinado con certeza a pesar de ser un atributo idéntico a los atributos de entrenamiento. Esto puede ser producto de que los datos poseen ruido o la presencia de ciertos factores que afectan la clasificación pero no son incluidos en el análisis. Para esto es crucial el teorema de Bayes, el cual es un principio estadístico que combina el conocimiento previo de las clases con la nueva evidencia que se obtiene de los datos.
-
-\subsection{Teorema de Bayes} \label{subsec:bayestheo}
-El teorema de Bayes dice que para un par de variables aleatorias $\rx$ e $\ry$, donde $P(\rx=x \mid \ry=y)$ es la probabilidad de que la variable $\rx$ tome el valor $x$ dado que el valor de la variable $\ry$ es $y$. Se tiene entonces la \equationref{eq:bayestheo}.
-\begin{equation} \label{eq:bayestheo}
-  P(\ry \mid \rx) = \frac{P(\rx \mid \ry) P(\ry)}{P(\rx)}
-\end{equation}
-
-\subsubsection{Usando el teorema de Bayes para clasificación}
-Para denotar el problema de clasificación desde una perspectiva estadística se define a $\rx$ como el conjunto de atributos y $\ry$ como el conjunto de etiquetas de clase. Si la etiqueta de clase tiene una relación no--determinante con los atributos, entonces se pueden tomar a $\rx$ y a $\ry$ como variables aleatorias y capturar su relación probabilística con $P(\ry\mid\rx)$, conocida como la probabilidad posterior para $\ry$, dada su probabilidad previa $P(\ry)$.
-
-Durante la fase de entrenamiento, es necesario aprender las probabilidades posteriores $P(\ry\mid\rx)$ para cualquier combinación de $\rx$ y $\ry$ basándose en la información recolectada de los datos de entrenamiento.
-
-Dado que lo que se quiere realizar es una clasificación que represente la probabilidad de que dado un valor de $\rx=x$ este relacionado con que $\ry=y$, se puede reconocer primero que $\rx$ se mantiene constante para lo que son los datos de entrenamiento, y que lo desconocido sea la clasificación $\ry=y$ con probabilidad $P(\ry\mid\rx)$, al conocer esta probabilidad, un valor de prueba $\rx'$ puede ser clasificado por medio de encontrar la clase $\ry'$ que maximice la probabilidad posterior $P(\ry'\mid\rx')$.
-
-
-\subsection{Clasificador Na\"{\i}ve Bayes} \label{subsec:naivebayes}
-Un clasificador de Na\"{\i}ve Bayes estima la probabilidad condicional de las clases por medio de suponer que los atributos son condicionalmente independientes, dado la etiqueta de clasificación $y$. La suposición de independencia condicional se puede dar por la \equationref{eq:bayes-conditional-independence}.
-
-\begin{equation} \label{eq:bayes-conditional-independence}
-  P(\sX\mid\ry=y) = \prod_{i=1}^{d} P(\rx_i\mid\ry=y)
-\end{equation}
-
-Donde cada conjunto de atributos $\sX=\{ x_1, \ldots, x_d \}$ consiste de $d$ atributos.
-\subsubsection{Como funciona el clasificador Na\"{\i}ve Bayes}
-Con la suposición de independencia condicional, en vez de computar la probabilidad condicional de clases para cada combinación de $\sX$, solo se debe realizar para establecer la probabilidad condicional de cada $x_i$, dado $\ry$.
-
-Para clasificar un dato de prueba, el clasificador computa la probabilidad posterior para cada clase $\ry$ como se muestra en la \equationref{eq:bayes-classifier}.
-
-\begin{equation} \label{eq:bayes-classifier}
-  P(\ry\mid \sX) = \frac{P(\ry) \prod_{i=1}^{d}P(x_i\mid\ry)}{P(\sX)} \Rightarrow P(\ry) \prod_{i=1}^{d}P(x_i\mid\ry)
-\end{equation}
-
-Puede ignorarse $P(\sX)$ debido a que es un termino constante. Para esto se realiza una normalización de forma que $\sum_{\forall \ry \in \sY} P(\ry\mid \sX) = 1$.
+\subsection{Algoritmo de $k$-means}
+\todo[inline]{Pendiente}
 
 % ================================================================
 % ================================================================

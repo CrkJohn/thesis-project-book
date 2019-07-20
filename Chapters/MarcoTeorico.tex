@@ -188,8 +188,9 @@ La función polinomial de similaridad, $K$, la cual es calculada en el espacio o
 % ================================================================
 
 \subsection{Clasificadores Bayesianos} \label{sec:bayes}
-\todo[inline]{mejorar redacción por que no se entiende}
-En muchas aplicaciones de relaciones entre el conjunto de atributos y la etiqueta es no--determinante. Es decir, la etiqueta de clase de un dato de un conjunto de prueba no puede ser determinado con certeza a pesar de ser un atributo idéntico a los atributos de entrenamiento. Esto puede ser producto de que los datos poseen ruido o la presencia de ciertos factores que afectan la clasificación pero no son incluidos en el análisis. Para esto es crucial el teorema de Bayes, el cual es un principio estadístico que combina el conocimiento previo de las clases con la nueva evidencia que se obtiene de los datos.
+En muchas aplicaciones practicas las relaciones entre un conjunto de atributos y una serie de clases son inciertas. Es decir, la clase a la que pertenece un atributo de prueba no es posible predecirlo con completa certeza incluso si el atributo es identico a alguno de entrenamiento. Esta situacion se puede presentar por ruido en el conjunto de datos o bien por factores ajenos que afectan la clasificacion pero que no fueron incluidos en el analisis del problema.
+
+Es por esto que es necesario establecer un modelo que utilice relaciones probabilisticas entre sus atributos y sus clases. Debido a esto es util tener presente el \textbf{teorema de Bayes}, un principio estadistico que combina conocimiento previo con nueva evidencia recolectada a partir de los datos.
 
 \subsubsection{Teorema de Bayes} \label{subsec:bayestheo}
 El teorema de Bayes dice que para un par de variables aleatorias $\rx$ e $\ry$, donde $P(\rx=x \mid \ry=y)$ es la probabilidad de que la variable $\rx$ tome el valor $x$ dado que el valor de la variable $\ry$ es $y$. Se tiene entonces la \equationref{eq:bayestheo}.
@@ -198,30 +199,34 @@ El teorema de Bayes dice que para un par de variables aleatorias $\rx$ e $\ry$, 
 \end{equation}
 
 \paragraph{Usando el teorema de Bayes para clasificación}
-Para denotar el problema de clasificación desde una perspectiva estadística se define a $\rx$ como el conjunto de atributos y $\ry$ como el conjunto de etiquetas de clase. Si la etiqueta de clase tiene una relación no--determinante con los atributos, entonces se pueden tomar a $\rx$ y a $\ry$ como variables aleatorias y capturar su relación probabilística con $P(\ry\mid\rx)$, conocida como la probabilidad posterior para $\ry$, dada su probabilidad previa $P(\ry)$.
+Para denotar el problema de clasificación desde una perspectiva estadística, definimos a $\sX$ y $\sC$ como el conjunto de atributos y el conjunto de etiquetas de clase. Si las etiquetas de clase y los atributos tienen una relación incierta, entonces se puede tomar a $\rx \in \sX$ y $\rc \in \sC$ como variables aleatorias y establecemos a $P(\rc \mid \rx)$ como su relación probabilística de que $\rx$ pertenece a la clase $\rc$.
 
-Durante la fase de entrenamiento, es necesario aprender las probabilidades posteriores $P(\ry\mid\rx)$ para cualquier combinación de $\rx$ y $\ry$ basándose en la información recolectada de los datos de entrenamiento.
+Durante la fase de entrenamiento, es necesario aprender las probabilidades de $P(\rc \mid \rx)$ basándose únicamente en los datos recolectados de los datos de entrenamiento.
 
-Dado que lo que se quiere realizar es una clasificación que represente la probabilidad de que dado un valor de $\rx=x$ este relacionado con que $\ry=y$, se puede reconocer primero que $\rx$ se mantiene constante para lo que son los datos de entrenamiento, y que lo desconocido sea la clasificación $\ry=y$ con probabilidad $P(\ry\mid\rx)$, al conocer esta probabilidad, un valor de prueba $\rx'$ puede ser clasificado por medio de encontrar la clase $\ry'$ que maximice la probabilidad posterior $P(\ry'\mid\rx')$.
+Luego de entrenar el clasificador, la forma en que podemos determinar una clase concreta $c \in \sC$ para un atributo concreto $x \in \sX$ es por medio de encontrar la combinación que nos de una mayor probabilidad de nuestro modelo, dándonos una estimación de la clase con $\hat{c}$, tal como se muestra en la \equationref{eq:bayes-clasification-argmax}.
+
+\begin{equation} \label{eq:bayes-clasification-argmax}
+  \hat{c} = \argmax_{c\in\sC} P(\rc = c \mid \rx = x)
+\end{equation}
 
 \subsubsection{Clasificador Na\"{\i}ve Bayes} \label{subsec:naivebayes}
-Un clasificador de Na\"{\i}ve Bayes estima la probabilidad condicional de las clases por medio de suponer que los atributos son condicionalmente independientes, dado la etiqueta de clasificación $y$. La suposición de independencia condicional se puede dar por la \equationref{eq:bayes-conditional-independence}.
+Un clasificador de Na\"{\i}ve Bayes estima la probabilidad condicional de las clases por medio de suponer que los atributos son condicionalmente independientes \mbox{(e.g. $x_i \bot x_j, \forall i, j$)}, dado la etiqueta de clasificación $c$. La suposición de independencia condicional se puede dar por la \equationref{eq:bayes-conditional-independence}.
 
 \begin{equation} \label{eq:bayes-conditional-independence}
-  P(\sX\mid\ry=y) = \prod_{i=1}^{d} P(\rx_i\mid\ry=y)
+  P(x_i \mid \rc, x_j) = P(x_i \mid \rc), \, i \neq j, \, \forall i, j \in \{1, \ldots, d\}
 \end{equation}
 
 Donde cada conjunto de atributos $\sX=\{ x_1, \ldots, x_d \}$ consiste de $d$ atributos.
 \paragraph{Como funciona el clasificador Na\"{\i}ve Bayes}
-Con la suposición de independencia condicional, en vez de computar la probabilidad condicional de clases para cada combinación de $\sX$, solo se debe realizar para establecer la probabilidad condicional de cada $x_i$, dado $\ry$.
+Con la suposición de independencia condicional, en vez de computar la probabilidad condicional de clases para cada combinación de $\sX$, solo se debe realizar para establecer la probabilidad condicional de cada $x_i$, dado $\rc$.
 
 Para clasificar un dato de prueba, el clasificador computa la probabilidad posterior para cada clase $\ry$ como se muestra en la \equationref{eq:bayes-classifier}.
 
 \begin{equation} \label{eq:bayes-classifier}
-  P(\ry\mid \sX) = \frac{P(\ry) \prod_{i=1}^{d}P(x_i\mid\ry)}{P(\sX)} \Rightarrow P(\ry) \prod_{i=1}^{d}P(x_i\mid\ry)
+  P(\rc\mid \sX) = \frac{P(\rc) \prod_{i=1}^{d}P(x_i\mid\rc)}{P(\sX)} \Rightarrow P(\rc) \prod_{i=1}^{d}P(x_i\mid\rc)
 \end{equation}
 
-Puede ignorarse $P(\sX)$ debido a que es un termino constante. Para esto se realiza una normalización de forma que $\sum_{\forall \ry \in \sY} P(\ry\mid \sX) = 1$.
+Puede ignorarse $P(\sX)$ debido a que es un termino constante. Para esto se realiza una normalización de forma que $\sum_{\forall \rc \in \sC} P(\rc\mid \sX) = 1$.
 
 % ================================================================
 

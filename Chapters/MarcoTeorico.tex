@@ -69,6 +69,47 @@ El estudio de redes neuronales artificiales (\glsentrytext{ann}) fue inspirado p
 
 De manera análoga a la estructura del cerebro humano, una \gls{ann} se compone de una estructura interconectada de nodos y vínculos directos.
 
+\subsection{Redes neuronales profundas (\textsl{Deep Feedforward Networks})}
+Una arquitectura muy popular de \glspl{ann} es el caso de las redes \textsl{Deep feedforward} o también conocidas como \gls{mlp} cuyo objetivo es aproximarse a una función $f^{\ast}$. A estos modelos se les llama \textbf{feedforward} debido a que la información fluye de una entrada $\vx$ a través de unas computaciones intermedias usadas para definir $f$, y finalmente dar como salida a $\vy$.
+
+A estas se les llama redes debido a que son típicamente representadas con la composición de varias funciones y así mismo también son asociadas con grafos directos acíclicos (o \gls{dag} en inglés). La composición de funciones puede ser vista como $f(\vx) = f^{(l)} \circ f^{(l-1)} \circ \cdots \circ f^{(1)}(\vx)$, siendo esto análogo a una red \gls{mlp} de $l$ capas, donde a $f^{(1)}$ se le llamaría la primera capa, a $f^{(2)}$ la segunda, y así sucesivamente. La longitud total de la cadena es la \textbf{profundidad} de la red, de ahí viene el nombre de profundas.
+
+Considérese a $d_i$ como la dimensión de la capa $i$-\'esima, cada una de las capas intermedias $f^{(i)}$ son funciones toman como entrada un vector en $\R^{d_{i-1}}$ y da como resultado un vector $\R^{d_{i}}$ que es la entrada para la siguiente capa que pasara a ser $f^{(i)}: \R^{d_{i}} \rightarrow \R^{d_{i+1}}$.
+
+Durante el entrenamiento de estas redes el objetivo final es que $\vy \approx f^{\ast}(\vx)$, el algoritmo de aprendizaje debe decidir como acomodar las capas intermedias $f^{(i)}$ para dar el resultado deseado.
+
+Una representación visual de las capas de una de estas redes se encuentra en la \figureref{fig:deep-feedforward-network}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{Figures/deep-feedforward-network.pdf}
+\decoRule
+\caption[Representación de una \textsl{Deep Feedforward Network}]{Representación de una \textsl{Deep Feedforward Network}. Tomado de \cite{bishop-pattern-recognition}.}
+\label{fig:deep-feedforward-network}
+\end{figure}
+
+Aunque esta es una representación simplificada de este tipo de redes, este libro no tratara de profundizar en los detalles técnicos al ser estos muy amplios (véase \cite{deeplearning} y \cite{bishop-pattern-recognition}).
+
+\subsection{Redes neuronales recurrentes (\glsentrylong{rnn})}
+\todo[inline]{Expandir capitulo con contenido de pag 368 de Deep Learning}
+La naturaleza recurrente de estas redes viene del hecho de representarse como redes donde su salida hace parte de la entrada a la siguiente iteración de la red, tal como se aprecia en la \figureref{fig:rnn-classic-simple}.
+
+\begin{figure}[H]
+  \centering
+  % \missingfigure{Hacer la arquitectura en yEd}
+  \includegraphics[width=0.8\textwidth]{Figures/RNN-unrolled.png}
+\decoRule
+\caption[Red \glsentrytext{rnn} simplificada]{Red \glsentrytext{rnn} simplificada. Tomado de \cite{understanding-lstm}.}
+\label{fig:rnn-classic-simple}
+\end{figure}
+
+Este tipo de redes tiene la característica de recordar salidas y entradas pasadas de datos, de forma que decisiones futuras respecto a una clasificación pueden tener una mejor forma de basarse\todo{ajustar la redaccion de esta frase}. Las redes neuronales (\glspl{ann}) típicamente no pueden hacer estas operaciones ya que no tienen incorporada la habilidad de recordar entradas y salidas pasadas, sino que se realiza un entrenamiento con información de entrada y de salida que se conoce con anticipación, de forma que su salida solo se concentra en su entrada inmediata de datos.
+
+Por este motivo, las \glspl{rnn} poseen una gran ventaja en situaciones puntuales, tales como el caso expuesto al inicio de esta sección (\gls{namedent}), sin embargo, el modelo clásico de \gls{rnn} es como la arquitectura presentada en la \figureref{fig:rnn-classic}, esta no provee resultados significativos debido a limitantes respecto al nivel de recordación que tienen originalmente.\todo[inline]{creo que hay que ajustar este parrafo porque primero se dice que las RNN son muy buenas y traen grandes ventajas por su capacidad de recordación y luego se termina diciendo que no provee resultados significativos. Por favor ajustar para que sea mas objetivo y no se vea la contradicción}
+
+\subsection{Redes neuronales recurrentes bidireccionales (\glsentrylong{birnn})}
+\todo[inline]{Por hacer, con pag 383 Deep Learning}
+
 % ================================================================
 % ================================================================
 
@@ -208,30 +249,6 @@ De donde para calcular la probabilidad de que una muestra se trata de una anomal
 Si el modelo esta dando como resultado muchos falsos positivos, lo que se debe hacer es reducir $\sigma$.
 
 Este método de sistemas de detección de anomalía también es brevemente tratada en \cite{osint} con una representación de hiper-planos, que es equivalente con este descrito.
-
-% ================================================================
-
-\subsection{Redes neuronales profundas (\textsl{Deep Feedforward Networks})}
-Una arquitectura muy popular de \glspl{ann} es el caso de las redes \textsl{Deep feedforward} o también conocidas como \gls{mlp} cuyo objetivo es aproximarse a una función $f^{\ast}$. A estos modelos se les llama \textbf{feedforward} debido a que la información fluye de una entrada $\vx$ a través de unas computaciones intermedias usadas para definir $f$, y finalmente dar como salida a $\vy$.
-
-A estas se les llama redes debido a que son típicamente representadas con la composición de varias funciones y así mismo también son asociadas con grafos directos acíclicos (o \gls{dag} en inglés). La composición de funciones puede ser vista como $f(\vx) = f^{(l)} \circ f^{(l-1)} \circ \cdots \circ f^{(1)}(\vx)$, siendo esto análogo a una red \gls{mlp} de $l$ capas, donde a $f^{(1)}$ se le llamaría la primera capa, a $f^{(2)}$ la segunda, y así sucesivamente. La longitud total de la cadena es la \textbf{profundidad} de la red, de ahí viene el nombre de profundas.
-
-Considérese a $d_i$ como la dimensión de la capa $i$-\'esima, cada una de las capas intermedias $f^{(i)}$ son funciones toman como entrada un vector en $\R^{d_{i-1}}$ y da como resultado un vector $\R^{d_{i}}$ que es la entrada para la siguiente capa que pasara a ser $f^{(i)}: \R^{d_{i}} \rightarrow \R^{d_{i+1}}$.
-
-Durante el entrenamiento de estas redes el objetivo final es que $\vy \approx f^{\ast}(\vx)$, el algoritmo de aprendizaje debe decidir como acomodar las capas intermedias $f^{(i)}$ para dar el resultado deseado.
-
-Una representación visual de las capas de una de estas redes se encuentra en la \figureref{fig:deep-feedforward-network}.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.6\textwidth]{Figures/deep-feedforward-network.pdf}
-\decoRule
-\caption[Representación de una \textsl{Deep Feedforward Network}]{Representación de una \textsl{Deep Feedforward Network}. Tomado de \cite{bishop-pattern-recognition}.}
-\label{fig:deep-feedforward-network}
-\end{figure}
-
-Aunque esta es una representación simplificada de este tipo de redes, este libro no tratara de profundizar en los detalles técnicos al ser estos muy amplios (véase \cite{deeplearning} y \cite{bishop-pattern-recognition}).
-
 
 % ================================================================
 % ================================================================

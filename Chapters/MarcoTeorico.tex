@@ -210,7 +210,7 @@ Luego de entrenar el clasificador, la forma en que podemos determinar una clase 
 \end{equation}
 
 \subsubsection{Clasificador Na\"{\i}ve Bayes} \label{subsec:naivebayes}
-Un clasificador de Na\"{\i}ve Bayes estima la probabilidad condicional de las clases por medio de suponer que los atributos son condicionalmente independientes \mbox{(e.g. $x_i \bot x_j, \forall i, j$)}, dado la etiqueta de clasificación $c$. La suposición de independencia condicional se puede dar por la \equationref{eq:bayes-conditional-independence}.
+Un clasificador de Na\"{\i}ve Bayes estima la probabilidad condicional de las clases por medio de suponer que los atributos son condicionalmente independientes \mbox{(e.g. $x_i \bot x_j \mid \rc, \forall i, j$)}, dado la etiqueta de clasificación $c$. La suposición de independencia condicional se puede dar por la \equationref{eq:bayes-conditional-independence}.
 
 \begin{equation} \label{eq:bayes-conditional-independence}
   P(x_i \mid \rc, x_j) = P(x_i \mid \rc), \, i \neq j, \, \forall i, j \in \{1, \ldots, d\}
@@ -389,3 +389,6 @@ En la \figureref{fig:som-example} se puede ver una aplicación de los \gls{som},
 
 \subsection{Etiquetado de \glsentrylong{pos}}
 \todo[inline]{Por hacer, pagina 151 Speech and Language Processing \cite{jurafsky-martin}}
+
+\subsection{\glsentrylong{hmm}}
+\todo[inline]{Por hacer, pagina 464 Speech and Language Processing \cite{jurafsky-martin}}

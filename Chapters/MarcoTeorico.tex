@@ -116,9 +116,7 @@ Por este motivo, las \glspl{rnn} poseen una gran ventaja en situaciones puntuale
 \section{Clasificación} \label{subsec:clasification}
 Clasificación es la tarea de asignarle una de varias categorías predefinidas a objetos, y es una tarea que tiene una variedad extensa de aplicaciones. Ejemplos de esto se encuentran la detección de correos no deseados en mensajes de e--mails basándose del encabezado o el cuerpo del mensaje, categorización de células benignas de malignas basándose en los resultados de escaneados MRI o incluso la clasificación de galaxias basado en su forma.
 
-Definido formalmente, clasificación es la tarea de aprender una función objetivo $f$ que mapea cada conjunto de atributos $x$ a una clase predefinida de etiquetas $y$.
-
-La función objetivo también se define informalmente como un \emph{modelo de clasificación}.
+Definido formalmente, clasificación es la tarea de aprender una función objetivo $f$ que mapea cada conjunto de atributos $\vx$ a una clase predefinida de etiquetas $\vy$. La función objetivo también se define informalmente como un \emph{modelo de clasificación}.
 
 % ================================================================
 
@@ -240,14 +238,14 @@ donde $N_k(\vx, \train)$ son los índices de los $k$ vecinos mas cercanos a $\rv
 
 Dada la probabilidad de pertenencia de una clase con la \equationref{eq:prob-knn} se puede entonces estimar cual es la clase a la que pertenece un punto $\vx$ por medio de estimar la clase que maximice la probabilidad que se estimo anteriormente como
 \begin{equation}
-  \hat{y}(\vx) = \argmax_{c} p(y = c \mid \rvx = \vx, \train)
+  \hat{y}(\vx) = \argmax_{c} p(y = c \mid \rvx = \vx, \train, k)
 \end{equation}
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.60\textwidth]{Figures/knn-example.pdf}
   \decoRule
-  \caption[Ejemplo de algoritmo de \textsl{\glsentrylong{knn}}]{Ejemplo de algoritmo de \textsl{\glsentrylong{knn}} en 2-D para $k = 3$, los 3 vecinos mas cercanos a $\vx_1$ tienen etiquetas de $1, 1, 0$, así que se predice la probabilidad $p(p = 1 \mid \rvx = \vx_1, \train, k=3) = 2/3$, Los 3 vecinos mas próximos a $\vx_2$ tienen etiquetas de $0, 0, 0$, por lo que la probabilidad de predicción es $p(y=1 \mid \rvx = \vx_2, \train, k=3) = 0/3$. Basado de \cite{murphymachinel}.}
+  \caption[Ejemplo de algoritmo de \textsl{\glsentrylong{knn}}]{Ejemplo de algoritmo de \textsl{\glsentrylong{knn}} en 2-D para $k = 3$, los 3 vecinos mas cercanos a $\vx_1$ tienen etiquetas de $1, 1, 0$, así que se predice la probabilidad $p(p = 1 \mid \rvx = \vx_1, \train, k=3) = 2/3$ ; Los 3 vecinos mas próximos a $\vx_2$ tienen etiquetas de $0, 0, 0$, por lo que la probabilidad de predicción es $p(y=1 \mid \rvx = \vx_2, \train, k=3) = 0/3$. Basado de \cite{murphymachinel}.}
   \label{fig:knn-example}
 \end{figure}
 
@@ -257,7 +255,7 @@ Tómese como ejemplo la \figureref{fig:knn-comparisons}, en donde se muestra un 
    \centering
    \includegraphics[width=0.9\textwidth]{Figures/knn-comparisons.pdf}
    \decoRule
-   \caption[Comparaciones de \textsl{\glsentrylong{knn}}]{Comparaciones de \textsl{\glsentrylong{knn}}, $k=10, n=2$. (a)~Conjunto de entrenamiento $\train$, (b)~Dibujo de $p(y=1 \mid \rvx, \train)$, (c)~Dibujo de $p(y=2 \mid \rvx, \train)$, (d)~Dibujo de $\hat{y}(\rvx) = \argmax_{c} p(y=c \mid \rvx, \train)$. Tomado de \cite{murphymachinel}.}
+   \caption[Comparaciones de \textsl{\glsentrylong{knn}}]{Comparaciones de \textsl{\glsentrylong{knn}}, $k=10$. (a)~Conjunto de entrenamiento $\train$, (b)~Dibujo de $p(y=1 \mid \rvx, \train)$, (c)~Dibujo de $p(y=2 \mid \rvx, \train)$, (d)~Dibujo de $\hat{y}(\rvx) = \argmax_{c} p(y=c \mid \rvx, \train)$. Tomado de \cite{murphymachinel}.}
    \label{fig:knn-comparisons}
 \end{figure}
 
@@ -294,11 +292,11 @@ Este método de sistemas de detección de anomalía también es brevemente trata
 \section{Clustering} \label{subsec:clustering}
 El análisis de clusters agrupa objetos de datos basándose únicamente en la información encontrada en los datos que describen los objetos y sus relaciones. El objetivo es que objetos dentro de un grupo sean similares (o relacionados) el uno al otro, y que sean diferentes (o sin relación) a objetos en otros grupos. Entre mayor sea la similitud dentro de un grupo y entre mayor sea la diferencia entre grupos, sera mejor o mas distintivo el clustering.
 
-Los métodos de clustering se hacen referencia comúnmente en \gls{machinel} como métodos no--supervisados. Un método de estos es el algoritmo de $k$-means y el de mapas autoorganizados que se describen a continuación.
+Los métodos de clustering se hacen referencia comúnmente en \gls{machinel} como métodos no--supervisados. Unos de estos métodos son el algoritmo de $k$-means y los mapas autoorganizados, se describen en la \sectionref{ch:k-means} y \sectionref{subsec:SOM}.
 
 % ================================================================
 
-\subsection{Algoritmo de $k$-means}
+\subsection{Algoritmo de $k$-means} \label{ch:k-means}
 El algoritmo de $k$-means consiste en intentar encontrar $k$ subconjuntos de datos disyuntos tales que la diferencia entre las características de los miembros sea lo mas disimilares. Esto lo logra a partir de definir $k$ \textit{centroides} inicializados aleatoriamente sobre el conjunto de datos. El valor $k$ es puesto de antemano a la ejecución del algoritmo por el usuario. Cada elemento en el conjunto de datos se es asignado el $i$-ésimo centroide mas cercano. Luego se recalculan los centroides a partir de ponderar todos los puntos que fueron asignados a cada centroide. Este proceso se repite hasta que el cambio de posición del centroide sea marginal. Tómese de referencia el Algoritmo~\ref{algo:k-means} y la \figureref{fig:k-means-iterations} donde se pueden ver las iteraciones del algoritmo.
 
 \IncMargin{1em}
@@ -418,7 +416,7 @@ En la \figureref{fig:som-example} se puede ver una aplicación de los \gls{som},
 
 El procesamiento de lenguaje natural (o \glsentrylong{nlp} en inglés), es el uso de lenguajes humanos, tales como el ingles, francés o español por un computador. Los programas de computador leen y emiten lenguajes especializados diseñados para un análisis eficiente y preciso por otros programas simples. Los lenguajes naturales son por lo general ambiguos y no poseen una definición formal. El procesamiento de lenguaje natural incluye aplicaciones tales como traducción de maquina, en el cual un aprendiz debe leer una sentencia en un lenguaje humano y emitir una sentencia equivalente en otro lenguaje humano. Muchas aplicaciones de \gls{nlp} se basan en modelos de lenguaje que definen una distribución de probabilidad sobre secuencias de palabras, caracteres o bytes en un lenguaje natural.
 
-Para construir un modelo eficiente de lenguaje natural, debemos usar técnicas que son especializadas para el procesamiento de datos secuenciales. Por lo general nos interesa que el lenguaje natural sea representado como secuencias de palabras mas que otras posibles representaciones. Debido a que el numero total de palabras que existen es muy grande, modelos de lenguaje basados en palabras deben operar en espacios de muy alta dimensionalidad y discretamente dispersos.
+Para construir un modelo eficiente de lenguaje natural, debemos usar técnicas que son especializadas para el procesamiento de datos secuenciales. Por lo general nos interesa que el lenguaje natural sea representado como secuencias de palabras mas que otras posibles representaciones. Debido a que el numero total de palabras que existen es muy grande, modelos de lenguaje basados en palabras deben operar en espacios de muy alta dimensionalidad y sean discretamente dispersos.
 
 \subsection{$n$-gramas}
 Un \textbf{modelo de lenguaje} define una distribución de probabilidad sobre secuencias de tokens en un lenguaje natural. Dependiendo de como esta diseñado un modelo, un token puede ser una palabra, un carácter, o incluso un byte. Los tokens siempre son unidades discretas. Los primeros modelos de lenguaje exitosos se basaron en modelos de secuencias de tokens de tamaño fijo llamados $n$-gramas. Un $n$-grama es una secuencia de $n$ tokens.
@@ -443,6 +441,35 @@ El primero es que cuando $P_{n-1}$ es diferente de cero pero $P_n$ es cero, la p
 
 La segunda es que los modelos clásicos de $n$-gramas son particularmente vulnerables a la maldición de dimensionalidad (véase la \sectionref{sec:SVM}), debido a que existen $|\sV|^n$ posibles $n$-gramas, donde $|\sV|$ por lo general es grande.
 
+Entre las grandes utilidades de modelos de lenguajes con $n$-gramas es la de predicción de palabras \cite{jurafsky-martin}. Esto con la determinación de las distribuciones de probabilidad antes mencionada. Formalmente, dada una secuencia ordenada de $k$ \textbf{unigramas} ($n=1$), queremos determinar cual es son los unigramas con mayor probabilidad de ocurrir para formar una secuencia de $k+1$ unigramas que sea consistente con la distribución de probabilidad que determinamos del conjunto de datos. Gran parte de los problemas presentes en el procesamiento de lenguaje natural implican alguna variación de este problema, tales como reconocimiento de voz (o \textsl{speech recognition} en inglés), reconocimiento de escritura a mano (o \textsl{handwriting recognition} en inglés), siendo unos de los mas probable para la predicción con probabilidades (que puede hacerse con ayuda de un estimador de máxima probabilidad, véase el Apéndice~\ref{app:maximum-likelihood}).
+
+Aplicaciones que se también se benefician de estimar la máxima probabilidad de secuencias es la corrección de ortografía (o \textsl{spelling correction} en inglés), en donde queremos determinar que palabra es mas apropiada según su posición y las palabras que están presentes. Otra es la de la traducción de textos (o \textsl{machine translation} en inglés), en donde podemos tener un texto en chino, que si es traducido de palabra por palabra, probablemente no sera gramaticalmente valido, por lo que queremos una configuración (con mas o menos palabras) que sea muy próximo semánticamente a la frase original, pero correcto sintácticamente.
+
+\subsubsection{Suposición de Markov}
+Para calcular la probabilidad de una sentencia completa de $n$-gramas $p(x_1, \ldots, x_n)$ se logra típicamente con la \textbf{regla de la cadena en probabilidad}:
+\begin{equation}
+  p(x_1, \ldots, x_n) = p(x_1)\, p(x_2 \mid x_1)\, p(x_3 \mid x_1^2) \cdots p(x_n \mid x_1^{n-1}) = \prod_{k=1}^{n} p(x_k \mid x_1^{k-1})
+\end{equation}
+
+El modelo de \textbf{bigrama} ($n=2$), aproxima la probabilidad de una palabra dadas todas la palabras anteriores por medio de solo usar la probabilidad de una palabra dada la palabra inmediatamente anterior $p(x_n \mid x_{n-1})$, dándonos así
+\begin{equation} \label{eq:markov-assumption}
+  p(x_n \mid x_1^{n-1}) \approx p(x_n \mid x_{n-1})
+\end{equation}
+
+La condición expuesta en la \equationref{eq:markov-assumption} es conocida como la \textbf{suposición de Markov}. Con esta suposición podemos proceder a establecer la ecuación general de probabilidad condicional de la siguiente palabra en una secuencia como
+\begin{equation}
+  p(x_1^{n}) \approx \prod_{k=1}^{n} p(x_k \mid x_{k-1})
+\end{equation}
+
+Dado que el objetivos que se hablo anteriormente es la de maximizar la probabilidad de la siguiente palabra dada una secuencia de $k$ unigramas, podemos entonces establecerlo con la estimación de máxima probabilidad (\gls{mle}). Sin embargo, para conseguir los estimados probabilidad de los $n$-gramas para el \gls{mle} se realiza un conteo de estos en el \gls{corpus}, normalizándola después para que las cuentas estén en $[0, 1]$.
+
+\subsubsection{Evaluación de modelos de lenguaje}
+\todo[inline]{Por hacer, pagina 43 Speech and Language Processing \cite{jurafsky-martin}}
+
+\paragraph{Perplejidad (\glsentrylong{perplexity})}
+La perplejidad (o \gls{perplexity} en inglés) ...
+
+
 \subsection{Modelos de lenguaje neural (\glsentrylong{nlm})}
 \todo[inline]{Por hacer, pagina 451 Deep Learning}
 
@@ -450,5 +477,5 @@ La segunda es que los modelos clásicos de $n$-gramas son particularmente vulner
 \todo[inline]{Por hacer, pagina 151 Speech and Language Processing \cite{jurafsky-martin}}
 
 \subsection{\glsentrylong{hmm}}
-\todo[inline]{Por hacer, pagina 464 Speech and Language Processing \cite{jurafsky-martin}}
 \todo[inline]{Por hacer, pagina 312 y 603 Machine Learning \cite{murphymachinel}}
+\todo[inline]{Por hacer, pagina 464 Speech and Language Processing \cite{jurafsky-martin}}

@@ -138,9 +138,9 @@ Para realizar el preprocesamiento de cada texto se hacen los siguientes pasos:
 \item Remover todas las \emph{stopwords}, que son palabras que no añaden ningún valor semántico al texto \\ (e.g. \mbox{``las palabras son una forma de expresarnos'' $\rightarrow$ ``palabras forma expresarnos''})
 \end{enumerate}
 
-Luego se realiza un conteo de todas la palabras presentes dentro del \gls{corpus} de donde se sacan las $N$ primeras palabras \todo{Como se define N? explicar por favor} para incluirlas en el \gls{bow}.
+Luego se realiza un conteo de todas la palabras presentes dentro del \gls{corpus} de donde se sacan las $N$ primeras palabras para incluirlas en el \gls{bow}. $N$ es definido heurísticamente por el usuario.
 
-Luego de esto se generan las etiquetas\todo{etiquetas por palabra o por tweet?} (o \emph{tags} en ingles) que se toman directamente de los textos de entrenamiento, de estos también se les realiza un conteo, que servirán para la predicción de las etiquetas según el contenido del texto.\todo{Se realiza un conteo al texto de entrenamiento?}
+Luego de esto se generan las etiquetas (o \emph{tags} en ingles), equivalente a este contexto como los hashtags que se toman directamente de los textos de entrenamiento, de estos también se les realiza un conteo, que servirán para la predicción de las etiquetas según el contenido del texto.\todo{Se realiza un conteo al texto de entrenamiento?}
 
 \subsubsection{Conversión de textos a vectores}
 Para realizar la conversión de textos a vectores y así poder representar un texto como un vector se procede a primera realizar una generación de identificadores para cada palabra de manera como se describió en el inicio de la \sectionref{sec:twitter-prediction}.

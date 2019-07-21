@@ -191,11 +191,11 @@ A medida que la capacidad del modelo aumenta, la parcialidad tiende a disminuir 
 
 % ================================================================
 
-\subsection{Estimación de máxima probabilidad}
+\subsection{Estimación de máxima probabilidad} \label{app:maximum-likelihood}
 % Pagina 128 Deep Learning
 En vez de adivinar si una función se comportara como un buen estimador y luego analizar su parcialidad y su varianza, querríamos tener un principio del cual pudiéramos derivar funciones especificas que son buenos estimadores para modelos diferentes.
 
-Uno de estos principios es el de la estimación de máxima probabilidad (o \textsl{maximum likelihood} en inglés).
+Uno de estos principios es el de la estimación de máxima probabilidad (o \textsl{\glsentrylong{mle}} en inglés).
 
 Considérese un conjunto de $m$ muestras $\sX = \{ \vx^{(1)}, \ldots, \vx^{(m)} \}$ tomadas de manera independiente de una distribucion generadora de datos $\pdata(\rvx)$ verdadera pero desconocida.
 

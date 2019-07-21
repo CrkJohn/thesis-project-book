@@ -201,7 +201,7 @@ Para denotar el problema de clasificación desde una perspectiva estadística, d
 
 Durante la fase de entrenamiento, es necesario aprender las probabilidades de $P(\rc \mid \rx)$ basándose únicamente en los datos recolectados de los datos de entrenamiento.
 
-Luego de entrenar el clasificador, la forma en que podemos determinar una clase concreta $c \in \sC$ para un atributo concreto $x \in \sX$ es por medio de encontrar la combinación que nos de una mayor probabilidad de nuestro modelo, dándonos una estimación de la clase con $\hat{c}$, tal como se muestra en la \equationref{eq:bayes-clasification-argmax}.
+Luego de entrenar el clasificador, la forma en que podemos determinar una clase concreta $c \in \sC$ para un atributo concreto $\vx \in \sX$ es por medio de encontrar la combinación que nos de una mayor probabilidad de nuestro modelo, dándonos una estimación de la clase con $\hat{c}$, tal como se muestra en la \equationref{eq:bayes-clasification-argmax}.
 
 \begin{equation} \label{eq:bayes-clasification-argmax}
   \hat{c} = \argmax_{c\in\sC} P(\rc = c \mid \rx = x)
@@ -228,7 +228,7 @@ Puede ignorarse $P(\sX)$ debido a que es un termino constante. Para esto se real
 
 % ================================================================
 
-\subsection{$k$ vecinos mas cercanos (\glsentrylong{knn})}
+\subsection{Algoritmo de los $k$ vecinos mas cercanos (\glsentrylong{knn})}
 El algoritmo de los $k$ vecinos mas cercanos (o \gls{knn} en inglés) es un algoritmo no-parámetrico que tiene como objetivo encontrar los $k$ elementos mas cercanos en un conjunto de datos de entrenamiento $\train$ a una entrada $\vx$, cuenta cuantos miembros de cada clase están en el conjunto (cada elemento del conjunto ya tiene una clase definida), y retorna una fracción empírica como estimado. Formalmente como
 \begin{equation} \label{eq:prob-knn}
   p(y = c \mid \rvx, \train, k) = \frac{1}{k} \sum_{i \in N_k(\rvx, \train)} [y_i = c]
@@ -433,7 +433,7 @@ Usualmente cuando se entrenan modelos de $n$-gramas, se están entrenando tanto 
   P(x_t \mid x_{t-n+1}, \ldots, x_{t-1}) = \frac{P_n(x_{t-n+1}, \ldots, x_t)}{P_{n-1}(x_{t-n+1}, \ldots, x_{t-1})}
 \end{equation}
 
-por medio de solo tener al menos dos probabilidades calculadas (dos casos base).
+por medio de solo tener al menos dos probabilidades calculadas (dos casos base)\footnote{Al tratarse de una recursión, existe la posibilidad de agilizar el tiempo de computo de este proceso con programación dinámica.}.
 
 Una limitante fundamental de estimación de máxima probabilidad sobre modelos de $n$-gramas es que $P_n$ como es estimado a partir del conteo del conjunto de entrenamiento es muy probable que sea igual a cero en muchos casos, trayendo consigo dos posibles problemas.
 
@@ -446,29 +446,56 @@ Entre las grandes utilidades de modelos de lenguajes con $n$-gramas es la de pre
 Aplicaciones que se también se benefician de estimar la máxima probabilidad de secuencias es la corrección de ortografía (o \textsl{spelling correction} en inglés), en donde queremos determinar que palabra es mas apropiada según su posición y las palabras que están presentes. Otra es la de la traducción de textos (o \textsl{machine translation} en inglés), en donde podemos tener un texto en chino, que si es traducido de palabra por palabra, probablemente no sera gramaticalmente valido, por lo que queremos una configuración (con mas o menos palabras) que sea muy próximo semánticamente a la frase original, pero correcto sintácticamente.
 
 \subsubsection{Suposición de Markov}
-Para calcular la probabilidad de una sentencia completa de $n$-gramas $p(x_1, \ldots, x_n)$ se logra típicamente con la \textbf{regla de la cadena en probabilidad}:
+Para calcular la probabilidad de una sentencia completa de $n$-gramas $P(x_1, \ldots, x_n)$ se logra típicamente con la \textbf{regla de la cadena en probabilidad}:
 \begin{equation}
-  p(x_1, \ldots, x_n) = p(x_1)\, p(x_2 \mid x_1)\, p(x_3 \mid x_1^2) \cdots p(x_n \mid x_1^{n-1}) = \prod_{k=1}^{n} p(x_k \mid x_1^{k-1})
+  P(x_1, \ldots, x_n) = P(x_1)\, P(x_2 \mid x_1)\, P(x_3 \mid x_1^2) \cdots P(x_n \mid x_1^{n-1}) = \prod_{k=1}^{n} P(x_k \mid x_1^{k-1})
 \end{equation}
 
-El modelo de \textbf{bigrama} ($n=2$), aproxima la probabilidad de una palabra dadas todas la palabras anteriores por medio de solo usar la probabilidad de una palabra dada la palabra inmediatamente anterior $p(x_n \mid x_{n-1})$, dándonos así
+El modelo de \textbf{bigrama} ($n=2$), aproxima la probabilidad de una palabra dadas todas la palabras anteriores por medio de solo usar la probabilidad de una palabra dada la palabra inmediatamente anterior $P(x_n \mid x_{n-1})$, dándonos así
 \begin{equation} \label{eq:markov-assumption}
-  p(x_n \mid x_1^{n-1}) \approx p(x_n \mid x_{n-1})
+  P(x_n \mid x_1^{n-1}) \approx P(x_n \mid x_{n-1})
 \end{equation}
 
 La condición expuesta en la \equationref{eq:markov-assumption} es conocida como la \textbf{suposición de Markov}. Con esta suposición podemos proceder a establecer la ecuación general de probabilidad condicional de la siguiente palabra en una secuencia como
 \begin{equation}
-  p(x_1^{n}) \approx \prod_{k=1}^{n} p(x_k \mid x_{k-1})
+  P(x_1^{n}) \approx \prod_{k=1}^{n} P(x_k \mid x_{k-1})
 \end{equation}
 
-Dado que el objetivos que se hablo anteriormente es la de maximizar la probabilidad de la siguiente palabra dada una secuencia de $k$ unigramas, podemos entonces establecerlo con la estimación de máxima probabilidad (\gls{mle}). Sin embargo, para conseguir los estimados probabilidad de los $n$-gramas para el \gls{mle} se realiza un conteo de estos en el \gls{corpus}, normalizándola después para que las cuentas estén en $[0, 1]$.
+Dado que el objetivos que se hablo anteriormente es la de maximizar la probabilidad de la siguiente palabra dada una secuencia de $k$ unigramas, podemos entonces establecerlo con la estimación de máxima probabilidad (\gls{mle}). Sin embargo, para conseguir los estimados probabilidad de los $n$-gramas para el \gls{mle} se realiza un conteo de estos en el \gls{corpus}, normalizándola después para que las cuentas estén en $[0, 1]$ y sea considerada como una probabilidad.
 
-\subsubsection{Evaluación de modelos de lenguaje}
+\subsection{Evaluación de modelos de lenguaje}
 \todo[inline]{Por hacer, pagina 43 Speech and Language Processing \cite{jurafsky-martin}}
+La mejor manera para evaluar un modelo de lenguaje es por medio de incluirla en una aplicación y medir que tanto mejora la aplicación. Este tipo de evaluaciones se les conoce como \textbf{evaluación extrínseca}. Esta es la única manera de saber si una mejora en particular en un componente nos va a ayudar realmente en la tarea que estamos realizando \cite{jurafsky-martin}. Desafortunadamente, ejecutar sistemas \gls{nlp} grandes de esta manera es muy costoso. Por otra parte, tener una métrica que nos ayude a evaluar rápidamente mejoras significativas en un modelo de lenguaje seria deseable. Una métrica de \textbf{evaluación intrínseca} es una que mide la calidad del modelo independiente de la aplicación que se le de.
 
-\paragraph{Perplejidad (\glsentrylong{perplexity})}
-La perplejidad (o \gls{perplexity} en inglés) ...
+Para realizar una evaluación intrínseca sobre un modelo de lenguaje es necesario un conjunto de prueba. El modelo se entrenara con un conjunto de entrenamiento (o \gls{corpus} en este contexto). Si usáramos una muestra de prueba que esta en el conjunto de entrenamiento le estaríamos asignando erróneamente una mayor probabilidad a la que deberíamos estar asignando, provocando una gran inexactitud en la perplejidad.
 
+\subsubsection{Perplejidad (\glsentrylong{perplexity})}
+En la practica no se usa una probabilidad pura como métrica de evaluación para nuestro modelo, sino una variante llamada perplejidad (o \gls{perplexity} en inglés). La \gls{perplexity} de un modelo de lenguaje sobre un conjunto de prueba es la probabilidad inversa del conjunto de prueba, normalizada por el numero de palabras. Para un conjunto de palabras de prueba $\sW = w_1 \, w_2 \, \ldots \, w_N$, tenemos que la \gls{perplexity} se define como
+\begin{equation} \label{eq:perplexity-def}
+  \PP(\sW) = P(w_1 \, \ldots \, w_N)^{\frac{1}{N}} = \sqrt[N]{\prod_{i=1}^{N} \frac{1}{P(w_i \mid w_{i-1})}}
+\end{equation}
+
+El objetivo que queremos para nuestro modelo es que consigamos minimizar la \gls{perplexity}.
+
+\subsection{Generalización y Ceros}
+\todo[inline]{Por haces, pagina 46 Speech and Language Processing \cite{jurafsky-martin}}
+
+\subsubsection{Palabras desconocidas}
+\todo[inline]{Por hacer}
+
+\subsection{Suavizado}
+\todo[inline]{Por hacer, pagina 49 Speech and Language Processing \cite{jurafsky-martin}}
+
+\subsubsection{Suavizado Laplace}
+\todo[inline]{Por hacer}
+
+\subsubsection{Suavizado Add-$k$}
+\todo[inline]{Por hacer}
+
+\subsection{Suavizado Kneser-Ney}
+\todo[inline]{Por hacer, pagina 53 Speech and Language Processing \cite{jurafsky-martin}}
+
+% ================================================================
 
 \subsection{Modelos de lenguaje neural (\glsentrylong{nlm})}
 \todo[inline]{Por hacer, pagina 451 Deep Learning}

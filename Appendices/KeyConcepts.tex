@@ -168,7 +168,7 @@ El error estándar de la media esta dado por:
     
 La varianza de un estimador disminuye en función de $m$, el numero de muestras de nuestro conjunto de datos.
 
-\subsection{Consistencia}
+\subsection{Consistencia} \label{app:consistency}
 En la labor de escoger un mejor estimador nos interesa especialmente como este se comportara a medida que la cantidad de datos de entrenamiento aumenta. En particular nos interesa que a medida que la cantidad de datos aumenta nuestros estimados se aproximan cada vez mas al verdadero valor de los parámetros. Formalmente deseamos:
 
 \begin{equation} \label{eq:consistency}
@@ -195,20 +195,30 @@ A medida que la capacidad del modelo aumenta, la parcialidad tiende a disminuir 
 % Pagina 128 Deep Learning
 En vez de adivinar si una función se comportara como un buen estimador y luego analizar su parcialidad y su varianza, querríamos tener un principio del cual pudiéramos derivar funciones especificas que son buenos estimadores para modelos diferentes.
 
-Uno de estos principios es el de la estimación de máxima probabilidad.
+Uno de estos principios es el de la estimación de máxima probabilidad (o \textsl{maximum likelihood} en inglés).
 
 Considérese un conjunto de $m$ muestras $\sX = \{ \vx^{(1)}, \ldots, \vx^{(m)} \}$ tomadas de manera independiente de una distribucion generadora de datos $\pdata(\rvx)$ verdadera pero desconocida.
 
 Sea además $\pmodel(\rvx; \vtheta)$ una familia paramétrica de distribuciones de probabilidad sobre el mismo espacio que $\vtheta$. O en otras palabras, $\pmodel(\vx; \vtheta)$ mapea cualquier configuración $\vx$ a un numero real que estima la probabilidad verdadera $\pdata(\vx)$.
 
-El estimador de máxima probabilidad para $\vtheta$ es entonces definido como
+El estimador de máxima probabilidad para $\vtheta$ es definido como
 \begin{equation}
-  \vtheta_{ML} = \argmax_{\vtheta} \pmodel(\sX; \vtheta) = \argmax_{\vtheta} \prod_{i=1}^{m} \pmodel(\vx^{(i)}; \vtheta)
+  \vtheta_{\mathrm{ML}} = \argmax_{\vtheta} \pmodel(\sX; \vtheta) = \argmax_{\vtheta} \prod_{i=1}^{m} \pmodel(\vx^{(i)}; \vtheta)
 \end{equation}
 
-\subsubsection{Estimación de máxima probabilidad logarítmica}
-\todo[inline]{Por hacer}
+Debido a que se trata de probabilidades, se generan varios problemas a la hora de utilizarlo. Las probabilidades al estar en un intervalo de $[0, 1]$, al multiplicarse muchas probabilidades eso puede generar un problema llamada \textbf{underflow}, en la que el hecho de que un numero se acerque demasiado al cero provoca que en la representación interna del computador se trunque a $0$ perdiendo una precisión considerable. Como se trata de una maximizaron de valores, hacer una modificación a la función de costo no cambia el valor objetivo, por lo que podemos aplicarle la función logaritmo a la función de costo, de esta manera reducimos considerablemente el problema de underflow, dejando ahora el único problema al que nos enfrentamos conocido como \textbf{overflow}. La ecuación queda como
+\begin{equation}
+  \vtheta_{\mathrm{ML}} = \argmax_{\vtheta} \sum_{i=1}^{m} \log \pmodel(\vx^{(i)}; \vtheta)
+\end{equation}
 
+Pasando el nombre a ser estimación de máxima probabilidad logarítmica (o \textsl{maximum log-likelihood} en inglés).
+
+\subsubsection{Propiedades de estimación de máxima probabilidad}
+Bajo las condiciones apropiadas, el estimador de máxima probabilidad tiene la propiedad de consistencia (véase la \sectionref{app:consistency}), por lo que a medida que el numero de muestras se aproxima a infinito, el estimado de un parámetro converge al verdadero valor, dándonos las siguientes condiciones:
+\begin{itemize}
+\item La distribución verdadera $\pdata$ debe estar en la familia de modelos $\pmodel(\cdot; \vtheta)$.
+  \item La verdadera distribución de $\pdata$ debe corresponder a exactamente un valor para $\vtheta$. De lo contrario, el estimador de máxima probabilidad puede recuperar una distribución $\pdata$ correcta, pero no sera capaz de determinar cual valor de $\vtheta$ es el correcto por el proceso generador de datos.
+\end{itemize}
 
 % ================================================================
 % ================================================================

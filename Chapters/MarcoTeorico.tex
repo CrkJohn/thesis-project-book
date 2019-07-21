@@ -230,6 +230,39 @@ Puede ignorarse $P(\sX)$ debido a que es un termino constante. Para esto se real
 
 % ================================================================
 
+\subsection{$k$ vecinos mas cercanos (\glsentrylong{knn})}
+El algoritmo de los $k$ vecinos mas cercanos (o \gls{knn} en inglés) es un algoritmo no-parámetrico que tiene como objetivo encontrar los $k$ elementos mas cercanos en un conjunto de datos de entrenamiento $\train$ a una entrada $\vx$, cuenta cuantos miembros de cada clase están en el conjunto (cada elemento del conjunto ya tiene una clase definida), y retorna una fracción empírica como estimado. Formalmente como
+\begin{equation} \label{eq:prob-knn}
+  p(y = c \mid \rvx, \train, k) = \frac{1}{k} \sum_{i \in N_k(\rvx, \train)} [y_i = c]
+\end{equation}
+
+donde $N_k(\vx, \train)$ son los índices de los $k$ vecinos mas cercanos a $\rvx$ en $\train$ y $[\mathrm{condition}]$ es el \textbf{indicador}, que toma el valor de $1$ cuando la condición es verdadera y $0$ de lo contrario.
+
+Dada la probabilidad de pertenencia de una clase con la \equationref{eq:prob-knn} se puede entonces estimar cual es la clase a la que pertenece un punto $\vx$ por medio de estimar la clase que maximice la probabilidad que se estimo anteriormente como
+\begin{equation}
+  \hat{y}(\vx) = \argmax_{c} p(y = c \mid \rvx = \vx, \train)
+\end{equation}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.60\textwidth]{Figures/knn-example.pdf}
+  \decoRule
+  \caption[Ejemplo de algoritmo de \textsl{\glsentrylong{knn}}]{Ejemplo de algoritmo de \textsl{\glsentrylong{knn}} en 2-D para $k = 3$, los 3 vecinos mas cercanos a $\vx_1$ tienen etiquetas de $1, 1, 0$, así que se predice la probabilidad $p(p = 1 \mid \rvx = \vx_1, \train, k=3) = 2/3$, Los 3 vecinos mas próximos a $\vx_2$ tienen etiquetas de $0, 0, 0$, por lo que la probabilidad de predicción es $p(y=1 \mid \rvx = \vx_2, \train, k=3) = 0/3$. Basado de \cite{murphymachinel}.}
+  \label{fig:knn-example}
+\end{figure}
+
+Tómese como ejemplo la \figureref{fig:knn-comparisons}, en donde se muestra un conjunto de entrenamiento $\train$, las distribuciones de probabilidad dadas para las clases 1 y 2, como también una gráfica que muestra como se clasifica una muestra dependiendo de su ubicación en el espacio.
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=0.9\textwidth]{Figures/knn-comparisons.pdf}
+   \decoRule
+   \caption[Comparaciones de \textsl{\glsentrylong{knn}}]{Comparaciones de \textsl{\glsentrylong{knn}}. (a)~Conjunto de entrenamiento $\train$, (b)~Dibujo de $p(y=1 \mid \rvx, \train)$, (c)~Dibujo de $p(y=2 \mid \rvx, \train)$, (d)~Dibujo de $\hat{y}(\rvx) = \argmax_{c} p(y=c \mid \rvx, \train)$. Tomado de \cite{murphymachinel}.}
+   \label{fig:knn-comparisons}
+\end{figure}
+
+% ================================================================
+
 \subsection{Sistemas de Detección de Anomalías (\glsentrylong{anomalydetectionsys})}
 Existen diferentes aproximaciones para los sistemas de anomalías, sin embargo una similitud entre todos estos sistemas es que se intenta realiza una \emph{detección de desviaciones}, y su tarea es detectar los datos \emph{atípicos} en un sistema \cite{tan2005introduction}.
 
@@ -271,31 +304,33 @@ El algoritmo de $k$-means consiste en intentar encontrar $k$ subconjuntos de dat
 \IncMargin{1em}
 \begin{algorithm}[H]
   \Entrada{Conjunto de datos $\mX \in \R^{n \times m}$ y valor de $k$}
-  \Salida{Centroides $\mC \in \R^{n \times k}$}
+  \Salida{Centroides $\{ \vmu^{(1)}, \ldots, \vmu^{(k)} \}$}
   
-  Inicialización aleatoria de los $k$ puntos $\mC \in \R^{n \times k}$\;
-  Define vector $\vs \in \Nat^{m}$ representando la asignación de centroides a cada punto de $\mX$\;
-  \Repetir{Ningún centroide cambia (e.g. $\norm{\vc_{t} - \vc_{t-1}} < \epsilon$)}{
+  Inicialización aleatoria de los $k$ puntos $\{ \vmu^{(1)}, \ldots, \vmu^{(k)} \} \,;\, \forall j, \vmu^{(j)} \in \R^{n}$\;
+  Define vector $\vh \in \{1, \ldots, k\}^{m}$ representando la asignación de centroides a cada punto de $\mX$\;
+  \Repetir{Ningún centroide cambia (e.g. $\norm{\vmu_t^{(i)} - \vmu_{t-1}^{(i)}} \approx 0, \forall i$)}{
     \ParaTodo{$\vx_i \in \mX$}{
-      $\vs_i \leftarrow \argmin_{j\in\Nat} \norm{\vx_i - \vc_j}$\;
+      $\vh_i \leftarrow \argmin_{j} \norm{\vx_i - \vmu^{(j)}}$\;
     }
 
-    \ParaTodo{$\vc_j \in \mC$}{
-      $sz \leftarrow \sum_{i} [ \vs_i = j ]$\;
-      $\vc_j \leftarrow \frac{1}{sz} \sum_{i} \vx_i \cdot [ \vs_i = j ]$\;
+    \ParaTodo{$\vmu^{(j)} \in \{ \vmu^{(1)}, \ldots, \vmu^{(k)} \}$}{
+      $sz \leftarrow \sum_{i} [ \vh_i = j ]$\;
+      $\vmu^{(j)} \leftarrow \frac{1}{sz} \sum_{i} \vx_i \cdot [ \vh_i = j ]$\;
     }
   }
   
-  \caption{Algoritmo de $k$-means simplificado.}
+  \caption{$k$-means simplificado.}
   \label{algo:k-means}
 \end{algorithm}
 \DecMargin{1em}
+
+Es útil mencionar que en este algoritmo puede valer la pena ejecutarlo mas de una vez. La inicialización aleatoria de los $k$ centroides puede tener un inicio mas beneficioso para la clusterización de manera que este mejor distribuida una vez se alcanza un estado de convergencia.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.9\textwidth]{Figures/k-mean-iteration.pdf}
   \decoRule
-  \caption[Iteraciones del algoritmo de $k$-means]{Iteraciones del algoritmo de $k$-means, $n = 2$. Tomado de \cite{tan2005introduction}.}
+  \caption[Iteraciones del algoritmo de $k$-means]{Iteraciones del algoritmo de $k$-means, $n = 2, k = 3$, centroides marcados en rojo. Tomado de \cite{tan2005introduction}.}
   \label{fig:k-means-iterations}
 \end{figure}
 
@@ -377,12 +412,36 @@ En la \figureref{fig:som-example} se puede ver una aplicación de los \gls{som},
 % ================================================================
 
 \section{Procesamiento de lenguaje natural (\glsentrylong{nlp})}
-\todo[inline]{Por hacer, pagina 448 Deep Learning}
+% \todo[inline]{Por hacer, pagina 448 Deep Learning}
 \todo[inline]{Por hacer, leer e incluir contenido de Speech and Language Processing \cite{jurafsky-martin}}
 \todo[inline]{Por hacer, adaptar la seccion de propuesta para mencionar esta seccion}
 
+El procesamiento de lenguaje natural (o \glsentrylong{nlp} en inglés), es el uso de lenguajes humanos, tales como el ingles, francés o español por un computador. Los programas de computador leen y emiten lenguajes especializados diseñados para un análisis eficiente y preciso por otros programas simples. Los lenguajes naturales son por lo general ambiguos y no poseen una definición formal. El procesamiento de lenguaje natural incluye aplicaciones tales como traducción de maquina, en el cual un aprendiz debe leer una sentencia en un lenguaje humano y emitir una sentencia equivalente en otro lenguaje humano. Muchas aplicaciones de \gls{nlp} se basan en modelos de lenguaje que definen una distribución de probabilidad sobre secuencias de palabras, caracteres o bytes en un lenguaje natural.
+
+Para construir un modelo eficiente de lenguaje natural, debemos usar técnicas que son especializadas para el procesamiento de datos secuenciales. Por lo general nos interesa que el lenguaje natural sea representado como secuencias de palabras mas que otras posibles representaciones. Debido a que el numero total de palabras que existen es muy grande, modelos de lenguaje basados en palabras deben operar en espacios de muy alta dimensionalidad y discretamente dispersos.
+
 \subsection{$n$-gramas}
-\todo[inline]{Por hacer}
+Un \textbf{modelo de lenguaje} define una distribución de probabilidad sobre secuencias de tokens en un lenguaje natural. Dependiendo de como esta diseñado un modelo, un token puede ser una palabra, un carácter, o incluso un byte. Los tokens siempre son unidades discretas. Los primeros modelos de lenguaje exitosos se basaron en modelos de secuencias de tokens de tamaño fijo llamados $n$-gramas. Un $n$-grama es una secuencia de $n$ tokens.
+
+Modelos que se basan en $n$-gramas definen la probabilidad condicional del $n$-ésimo token dados los $n-1$ tokens anteriores. El modelo usa productos de estas distribuciones condicionales para definir la distribución de probabilidad sobre secuencias mas largas:
+\begin{equation}
+  P(x_1, \ldots, x_\tau) = P(x_1, \ldots, x_{n-1}) \prod_{t = n}^{\tau} P(x_t \mid x_{t-n+1}, \ldots, x_{t-1})
+\end{equation}
+
+Esta descomposición se justifica con la regla de la cadena de probabilidad. La distribución de probabilidad sobre la secuencia inicial $P(x_1, \ldots, x_{n-1})$ puede ser modelado por un modelo diferente con un valor mas pequeño de $n$.
+
+Usualmente cuando se entrenan modelos de $n$-gramas, se están entrenando tanto un modelo de $n$-grama como también un modelo de $(n-1)$-grama simultáneamente. Esto vuelve sencillo el calculo de
+\begin{equation}
+  P(x_t \mid x_{t-n+1}, \ldots, x_{t-1}) = \frac{P_n(x_{t-n+1}, \ldots, x_t)}{P_{n-1}(x_{t-n+1}, \ldots, x_{t-1})}
+\end{equation}
+
+por medio de solo tener al menos dos probabilidades calculadas (dos casos base).
+
+Una limitante fundamental de estimación de máxima probabilidad sobre modelos de $n$-gramas es que $P_n$ como es estimado a partir del conteo del conjunto de entrenamiento es muy probable que sea igual a cero en muchos casos, trayendo consigo dos posibles problemas.
+
+El primero es que cuando $P_{n-1}$ es diferente de cero pero $P_n$ es cero, la probabilidad logarítmica es $-\infty$, una mitigación a este problema que usan muchos modelos de $n$-gramas es realizar un \textbf{suavizado} sobre la distribución de probabilidad, haciendo que la probabilidad de tuplas nunca vistas aumente con la probabilidad de las tuplas mas vistas.
+
+La segunda es que los modelos clásicos de $n$-gramas son particularmente vulnerables a la maldición de dimensionalidad (véase la \sectionref{sec:SVM}), debido a que existen $|\sV|^n$ posibles $n$-gramas, donde $|\sV|$ por lo general es grande.
 
 \subsection{Modelos de lenguaje neural (\glsentrylong{nlm})}
 \todo[inline]{Por hacer, pagina 451 Deep Learning}
@@ -392,3 +451,4 @@ En la \figureref{fig:som-example} se puede ver una aplicación de los \gls{som},
 
 \subsection{\glsentrylong{hmm}}
 \todo[inline]{Por hacer, pagina 464 Speech and Language Processing \cite{jurafsky-martin}}
+\todo[inline]{Por hacer, pagina 312 y 603 Machine Learning \cite{murphymachinel}}

@@ -190,6 +190,27 @@ A medida que la capacidad del modelo aumenta, la parcialidad tiende a disminuir 
 \end{figure}
 
 % ================================================================
+
+\subsection{Estimación de máxima probabilidad}
+% Pagina 128 Deep Learning
+En vez de adivinar si una función se comportara como un buen estimador y luego analizar su parcialidad y su varianza, querríamos tener un principio del cual pudiéramos derivar funciones especificas que son buenos estimadores para modelos diferentes.
+
+Uno de estos principios es el de la estimación de máxima probabilidad.
+
+Considérese un conjunto de $m$ muestras $\sX = \{ \vx^{(1)}, \ldots, \vx^{(m)} \}$ tomadas de manera independiente de una distribucion generadora de datos $\pdata(\rvx)$ verdadera pero desconocida.
+
+Sea además $\pmodel(\rvx; \vtheta)$ una familia paramétrica de distribuciones de probabilidad sobre el mismo espacio que $\vtheta$. O en otras palabras, $\pmodel(\vx; \vtheta)$ mapea cualquier configuración $\vx$ a un numero real que estima la probabilidad verdadera $\pdata(\vx)$.
+
+El estimador de máxima probabilidad para $\vtheta$ es entonces definido como
+\begin{equation}
+  \vtheta_{ML} = \argmax_{\vtheta} \pmodel(\sX; \vtheta) = \argmax_{\vtheta} \prod_{i=1}^{m} \pmodel(\vx^{(i)}; \vtheta)
+\end{equation}
+
+\subsubsection{Estimación de máxima probabilidad logarítmica}
+\todo[inline]{Por hacer}
+
+
+% ================================================================
 % ================================================================
 
 \section{Métodos de optimización}

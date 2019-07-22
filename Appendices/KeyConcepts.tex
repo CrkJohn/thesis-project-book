@@ -5,7 +5,7 @@ La mayor parte de este apéndice se basa en contenido expuesto en \cite{deeplear
 
 \section{Capacidad, \glsentrylong{overfitting} y \glsentrylong{underfitting}}
 % \todo[inline]{Por hacer, pagina 107 Deep Learning}
-El reto central de \gls{machinel} es que nuestro algoritmo tenga un buen rendimiento sobre datos nuevos, entradas nunca antes vistas, no solo las entradas con las que entrenamos nuestro modelo. La habilidad tener un buen rendimiento sobre nuevos datos se le llama \textbf{generalización}.
+El reto central de \gls{machinel} es que nuestro algoritmo tenga un buen rendimiento sobre datos nuevos, entradas nunca antes vistas, no solo las entradas con las que entrenamos nuestro modelo. La habilidad de tener un buen rendimiento sobre nuevos datos se le llama \textbf{generalización}.
 
 Típicamente cuando entrenamos un modelo de \gls{machinel} debemos acceder a un conjunto de entrenamiento; podemos computar una medida de error sobre el conjunto de entrenamiento, llamado el \textbf{error de entrenamiento}; y reducimos este error de entrenamiento. El \textbf{error de generalización} se define como el valor esperado de error sobre una nueva entrada de datos. Aquí el valor esperado se toma sobre diferentes entradas posibles, tomadas de una distribución de entradas que esperamos que el sistema se encontrara en la practica.
 
@@ -37,7 +37,7 @@ Un ejemplo de esto es regresión lineal, y es que podemos permitir que nuestro a
   \hat{y} = b + \sum_{i=1}^{p} w_i x^i
 \end{equation}
 
-En este ejemplo, es útil mencionar que existe un teorema que dictamina que para cualquier entero $n \ge 0$ y una lista de $n+1$ puntos en $\R^2$ $(x_0, y_0), \ldots, (x_n, y_n)$, donde $x_0 < x_1 < \cdots < x_n$, existe un polinomio $f$ de grado $n$ tal que $f(x_i) = y_i$ para todo $i$ \cite[pág 15]{kun_2018}. Análogamente los algoritmos con una gran capacidad, existe siempre una función que se adapta perfectamente a los datos de entrenamiento, sin embargo esta función probablemente no sera útil para los datos de prueba. En la practica no siempre es posible obtener una función que se adapte perfectamente a los datos.
+En este ejemplo, es útil mencionar que existe un teorema que dictamina que para cualquier entero $n \ge 0$ y una lista de $n+1$ puntos en $\R^2$ $(x_0, y_0), \ldots, (x_n, y_n)$, donde $x_0 < x_1 < \cdots < x_n$, existe un polinomio $f$ de grado $n$ tal que $f(x_i) = y_i$ para todo $i$ \cite[pág 15]{kun_2018}. Análogamente a los algoritmos con una gran capacidad, siempre se tiene una función que se adapta perfectamente a los datos de entrenamiento, sin embargo esta función probablemente no sera útil para los datos de prueba. En la practica no siempre es posible obtener una función que se adapte perfectamente a los datos.
 
 Los algoritmos de \gls{machinel} por lo general se desempeñan mejor cuando su capacidad es apropiada para la verdadera complejidad de la tarea que se necesita desarrollar y la cantidad apropiada de datos de entrenamiento que le son provistos.
 
@@ -54,9 +54,9 @@ Existen muchas maneras de cambiar la capacidad de un modelo, la capacidad no est
 \subsection{Teorema ``No free lunch''}
 La teoría de aprendizaje dice que un algoritmo de \gls{machinel} puede generalizar de manera aceptable a partir de un numero finito de muestras de conjuntos de entrenamiento. Esto parece contradecir algunos principios básicos de la lógica. Inferir reglas generales de un conjunto de muestras limitadas no es lógicamente valido. Para inferir lógicamente una regla para describir cada miembro de un conjunto es necesario tener información de todos los miembros de ese conjunto.
 
-\gls{machinel} evita es problema por medio de ofrecer reglas probabilísticas, en vez de ofrecer reglas completamente ciertas que ofrece el razonamiento lógico. \gls{machinel} promete encontrar reglas que son \textit{probablemente} ciertas para la \textit{mayor} parte de los miembros de un conjunto que les concierne.
+\gls{machinel} evita es problema por medio de ofrecer reglas probabilísticas, en vez de ofrecer reglas completamente ciertas como las que ofrece el razonamiento lógico. \gls{machinel} promete encontrar reglas que son \textit{probablemente} ciertas para la \textit{mayor} parte de los miembros de un conjunto que les concierne.
 
-Desafortunadamente, esto no resuelve el problema completo. Existe un teorema en \gls{machinel} llamado ``no free lunch'' el cual afirma que, promediando sobre todas las posibles distribuciones generadoras de datos, cualquier algoritmo de clasificación tiene la misma tasa de error cuando clasifica puntos antes no vistos. Esto quiere decir que no existe un algoritmo de \gls{machinel} que es mejor universalmente a los demás.
+Desafortunadamente, esto no resuelve el problema completo. Existe un teorema llamado ``no free lunch'' el cual afirma que, promediando sobre todas las posibles distribuciones generadoras de datos, cualquier algoritmo de clasificación tiene la misma tasa de error cuando clasifica puntos antes no vistos. Esto quiere decir que no existe un algoritmo de \gls{machinel} que es mejor universalmente a los demás.
 
 Sin embargo, esto solo es aplicable cuando se habla del promedio de \textit{todas} las posibles distribuciones generadoras de datos. Si hacemos suposiciones sobre los tipos de distribución de probabilidad que nos encontramos en la vida real, entonces podemos diseñar algoritmos de aprendizaje que se desempeñan mejor sobre esas distribuciones.
 
@@ -65,16 +65,16 @@ Esto significa que el objetivo de la investigación en \gls{machinel} no busca e
 \subsection{Regularización}
 El teorema de ``no free lunch'' nos dice que debemos diseñar nuestro algoritmo de \gls{machinel} para tener un buen rendimiento en una tarea especifica, esto lo logramos por medio de tener una serie de preferencias dentro del algoritmo de aprendizaje, cuando estas preferencias se alinean hacia el objetivo que queremos lograr este tiene un mejor desempeño.
 
-Aunque una forma de lograr ese objetivo se puede lograr en parte por medio de modificar la capacidad, no es la única forma de lograrlo. El comportamiento de nuestro algoritmo esta fuertemente influenciado no solo por que tan grande hacemos el conjunto de funciones permitido en su espacio hipótesis, sino también la identidad especifica de esas funciones.
+Aunque una forma de lograr ese objetivo se puede conseguir en parte por medio de modificar la capacidad, no es la única forma de lograrlo. El comportamiento de nuestro algoritmo esta fuertemente influenciado no solo por que tan grande hacemos el conjunto de funciones permitido en su espacio hipótesis, sino también la identidad especifica de esas funciones.
 
-Una método popular para realizar un ajuste de forma que se controle el \gls{underfitting} y el \gls{overfitting} es por medio de modificar nuestra función de costo $J$ agregándole un hiper-parámetro $\lambda$ que se establece de antemano sobre el algoritmo de manera \textit{heurística}. Modificamos $J$ de manera que cuando $\lambda = 0$ no se modifique el valor original de $J$, permitiéndonos controlar el nivel de \gls{underfitting} y \gls{overfitting} con el valor de $\lambda$.
+Un método popular para realizar un ajuste de forma que se controle el \gls{underfitting} y el \gls{overfitting} es por medio de modificar nuestra función de costo $J$ agregándole un hiper-parámetro $\lambda$ que se establece de antemano sobre el algoritmo de manera \textit{heurística}. Modificamos $J$ de manera que cuando $\lambda = 0$ no se modifique el valor original de $J$, permitiéndonos controlar el nivel de \gls{underfitting} y \gls{overfitting} con el valor de $\lambda$.
 
 De manera mas general, podemos regularizar un modelo que aprende una función $f(\vx, \vtheta)$ por medio de añadir una penalidad llamada \textbf{regulador} (o \textsl{regularizer} en inglés) a la función de costo $J$. Como ejemplo, téngase una función hipótesis $\hat{f}(\vx, \vtheta) = \vtheta^{\top} \vx$ con parámetros $\vtheta$ y una función objetivo $f(\vx)$ de manera que podemos definir una función de costo que queremos minimizar como:
 \begin{equation}
   J(\vx, \vtheta) = | \hat{f}(\vx, \vtheta) - f(\vx) |
 \end{equation}
 
-Agregando el regulador $\Omega(\vtheta) = \lambda \vtheta^{\top} \vtheta $ a la función de costo, la ecuación queda como:
+Agregando el regulador $\Omega(\vtheta) = \lambda \vtheta^{\top} \vtheta $ a la función de costo, la ecuación resulta ser
 \begin{equation}
   J(\vx, \vtheta) = | \hat{f}(\vx, \vtheta) - f(\vx) | + \Omega(\vtheta)
 \end{equation}
@@ -125,14 +125,14 @@ La estimación de puntos es el intento de proveer la única ``mejor'' predicció
 
 Para distinguir estimados de parámetros de su valor real se utiliza la distinción de un parámetro $\vtheta$ con $\hat{\vtheta}$.
 
-Sea $\{ \vx^{(1)}, \ldots, \vx^{(m)} \}$ un conjunto de $m$ puntos de datos independiente e idénticamente distribuidos. Un \textbf{estimador} o \textbf{estadístico} es cualquier función en base a los datos:
+Sea $\{ \vx^{(1)}, \ldots, \vx^{(m)} \}$ un conjunto de $m$ puntos de datos independientes e idénticamente distribuidos. Un \textbf{estimador} o \textbf{estadístico} es cualquier función en base a los datos:
 \begin{equation}
   \hat{\vtheta}_m = g( \vx^{(1)}, \ldots, \vx^{(m)} )
 \end{equation}
 
 Sin embargo, la definición no requiere que $g$ sea una buena estimación del verdadero $\vtheta$ ni tampoco que la respuesta este en el mismo conjunto de valores validos de $\vtheta$. Esta definición supone una gran flexibilidad para definir un estimador, sin embargo un buen estimador es una función cuya salida sea cercana al verdadero $\vtheta$ que genero los datos de entrenamiento.
 
-Podemos asumir (desde la perspectiva de frecuentista) que el valor verdadero del parámetro $\vtheta$ es fijo pero desconocido, y que $\hat{\vtheta}$ es una estimación en función a los datos.
+Podemos asumir (desde la perspectiva de estadístico frecuentista) que el valor verdadero del parámetro $\vtheta$ es fijo pero desconocido, y que $\hat{\vtheta}$ es una estimación en función a los datos.
 
 \subsubsection{Estimación de funciones}
 La estimación de puntos también puede hacer referencia a la estimación de la relación entre variables entrada y objetivo, nos referimos a estos tipos de estimación de puntos como estimación de funciones.
@@ -145,12 +145,12 @@ La parcialidad (o \gls{bias} en inglés) es un estimador definido como:
   \mathrm{bias}(\hat{\vtheta}_m) = \E(\hat{\vtheta}_m) - \vtheta
 \end{equation}
 
-Donde el valor esperado es sobre los datos (vistos como muestras de una variable aleatoria), donde $\vtheta$ es el valor verdadero de $\vtheta$ usado para definir la distribución que generadora de los datos. Un estimador se dice que es imparcial (o \textsl{unbiased} en inglés) si $\mathrm{bias}(\hat{\vtheta}_m) = \vzero$, lo cual implica que $\E(\hat{\vtheta}_m) = \vtheta$. Un estimador se dice que es \textbf{asintótico imparcial} si $\lim_{m\to\infty}\mathrm{bias}(\hat{\vtheta}_m) = \vzero$.
+Donde el valor esperado es sobre los datos (vistos como muestras de una variable aleatoria), donde $\vtheta$ es el valor verdadero de $\vtheta$ usado para definir la distribución que genera los datos. Un estimador se dice que es imparcial (o \textsl{unbiased} en inglés) si $\mathrm{bias}(\hat{\vtheta}_m) = \vzero$, lo cual implica que $\E(\hat{\vtheta}_m) = \vtheta$. Un estimador se dice que es \textbf{asintótico imparcial} si $\lim_{m\to\infty}\mathrm{bias}(\hat{\vtheta}_m) = \vzero$.
 
 Los estimadores imparciales son ciertamente deseables, sin embargo no son siempre los ``mejores'' estimadores.
 
 \subsection{Varianza y Error Estándar}
-Otra propiedad de un estimador que puede que debamos tener en cuenta es que tanto se espera que van a variar nuestros resultados como función de la muestra de datos.
+Otra propiedad de un estimador que puede que debamos tener en cuenta, es que tanto se espera que van a variar nuestros resultados como función de la muestra de datos.
 
 La \textbf{varianza} de un estimador se define como:
 \begin{equation}
@@ -197,7 +197,7 @@ En vez de adivinar si una función se comportara como un buen estimador y luego 
 
 Uno de estos principios es el de la estimación de máxima probabilidad (o \textsl{\glsentrylong{mle}} en inglés).
 
-Considérese un conjunto de $m$ muestras $\sX = \{ \vx^{(1)}, \ldots, \vx^{(m)} \}$ tomadas de manera independiente de una distribucion generadora de datos $\pdata(\rvx)$ verdadera pero desconocida.
+Considérese un conjunto de $m$ muestras $\sX = \{ \vx^{(1)}, \ldots, \vx^{(m)} \}$ tomadas de manera independiente de una distribución generadora de datos $\pdata(\rvx)$ verdadera pero desconocida.
 
 Sea además $\pmodel(\rvx; \vtheta)$ una familia paramétrica de distribuciones de probabilidad sobre el mismo espacio que $\vtheta$. O en otras palabras, $\pmodel(\vx; \vtheta)$ mapea cualquier configuración $\vx$ a un numero real que estima la probabilidad verdadera $\pdata(\vx)$.
 

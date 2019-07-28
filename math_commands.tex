@@ -12,7 +12,10 @@
 \newcommand{\captiond}{{\em (d)}}
 
 % Highlight a newly defined term
-\newcommand{\newterm}[1]{{\bf #1}}
+\definecolor{projectcolor}{rgb}{0.5, 0.0, 0.0}
+% \reversemarginpar
+\newcommand{\marginterm}[1]{\marginpar{\textcolor{projectcolor}{{\footnotesize {\textrm{#1}}}}}}
+\newcommand{\newterm}[1]{\textbf{#1}\marginterm{#1}}
 
 
 % Figure reference, lower-case.
@@ -467,60 +470,60 @@
 % entries of a token (n-grams)
 % Same font as tensor, without \bm wrapper
 \newcommand{\token}[1]{\mathit{\mathsf{#1}}}
-\def\ga{{\token{a}}}
-\def\gb{{\token{b}}}
-\def\gc{{\token{c}}}
-\def\gd{{\token{d}}}
-\def\ge{{\token{e}}}
-\def\gf{{\token{f}}}
-\def\gg{{\token{g}}}
-\def\gh{{\token{h}}}
-\def\gi{{\token{i}}}
-\def\gj{{\token{j}}}
-\def\gk{{\token{k}}}
-\def\gl{{\token{l}}}
-\def\gm{{\token{m}}}
-\def\gn{{\token{n}}}
-\def\go{{\token{o}}}
-\def\gp{{\token{p}}}
-\def\gq{{\token{q}}}
-\def\gr{{\token{r}}}
-\def\gs{{\token{s}}}
-\def\gt{{\token{t}}}
-\def\gu{{\token{u}}}
-\def\gv{{\token{v}}}
-\def\gw{{\token{w}}}
-\def\gx{{\token{x}}}
-\def\gy{{\token{y}}}
-\def\gz{{\token{z}}}
+\def\tka{{\token{a}}}
+\def\tkb{{\token{b}}}
+\def\tkc{{\token{c}}}
+\def\tkd{{\token{d}}}
+\def\tke{{\token{e}}}
+\def\tkf{{\token{f}}}
+\def\tkg{{\token{g}}}
+\def\tkh{{\token{h}}}
+\def\tki{{\token{i}}}
+\def\tkj{{\token{j}}}
+\def\tkk{{\token{k}}}
+\def\tkl{{\token{l}}}
+\def\tkm{{\token{m}}}
+\def\tkn{{\token{n}}}
+\def\tko{{\token{o}}}
+\def\tkp{{\token{p}}}
+\def\tkq{{\token{q}}}
+\def\tkr{{\token{r}}}
+\def\tks{{\token{s}}}
+\def\tkt{{\token{t}}}
+\def\tku{{\token{u}}}
+\def\tkv{{\token{v}}}
+\def\tkw{{\token{w}}}
+\def\tkx{{\token{x}}}
+\def\tky{{\token{y}}}
+\def\tkz{{\token{z}}}
 
 % tokens in vectorized form
-\def\vga{{\bm{\token{a}}}}
-\def\vgb{{\bm{\token{b}}}}
-\def\vgc{{\bm{\token{c}}}}
-\def\vgd{{\bm{\token{d}}}}
-\def\vge{{\bm{\token{e}}}}
-\def\vgf{{\bm{\token{f}}}}
-\def\vgg{{\bm{\token{g}}}}
-\def\vgh{{\bm{\token{h}}}}
-\def\vgi{{\bm{\token{i}}}}
-\def\vgj{{\bm{\token{j}}}}
-\def\vgk{{\bm{\token{k}}}}
-\def\vgl{{\bm{\token{l}}}}
-\def\vgm{{\bm{\token{m}}}}
-\def\vgn{{\bm{\token{n}}}}
-\def\vgo{{\bm{\token{o}}}}
-\def\vgp{{\bm{\token{p}}}}
-\def\vgq{{\bm{\token{q}}}}
-\def\vgr{{\bm{\token{r}}}}
-\def\vgs{{\bm{\token{s}}}}
-\def\vgt{{\bm{\token{t}}}}
-\def\vgu{{\bm{\token{u}}}}
-\def\vgv{{\bm{\token{v}}}}
-\def\vgw{{\bm{\token{w}}}}
-\def\vgx{{\bm{\token{x}}}}
-\def\vgy{{\bm{\token{y}}}}
-\def\vgz{{\bm{\token{z}}}}
+\def\vtka{{\bm{\token{a}}}}
+\def\vtkb{{\bm{\token{b}}}}
+\def\vtkc{{\bm{\token{c}}}}
+\def\vtkd{{\bm{\token{d}}}}
+\def\vtke{{\bm{\token{e}}}}
+\def\vtkf{{\bm{\token{f}}}}
+\def\vtkg{{\bm{\token{g}}}}
+\def\vtkh{{\bm{\token{h}}}}
+\def\vtki{{\bm{\token{i}}}}
+\def\vtkj{{\bm{\token{j}}}}
+\def\vtkk{{\bm{\token{k}}}}
+\def\vtkl{{\bm{\token{l}}}}
+\def\vtkm{{\bm{\token{m}}}}
+\def\vtkn{{\bm{\token{n}}}}
+\def\vtko{{\bm{\token{o}}}}
+\def\vtkp{{\bm{\token{p}}}}
+\def\vtkq{{\bm{\token{q}}}}
+\def\vtkr{{\bm{\token{r}}}}
+\def\vtks{{\bm{\token{s}}}}
+\def\vtkt{{\bm{\token{t}}}}
+\def\vtku{{\bm{\token{u}}}}
+\def\vtkv{{\bm{\token{v}}}}
+\def\vtkw{{\bm{\token{w}}}}
+\def\vtkx{{\bm{\token{x}}}}
+\def\vtky{{\bm{\token{y}}}}
+\def\vtkz{{\bm{\token{z}}}}
 
 % The true underlying data generating distribution
 \newcommand{\pdata}{p_{\rm{data}}}
@@ -553,7 +556,14 @@
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\standarderror}{\mathrm{SE}}
 \newcommand{\Cov}{\mathrm{Cov}}
+
+% ================================================================
+% Natural Language Processing
 \newcommand{\perplexity}{\mathcal{P}} % Perplexity
+\newcommand{\tokstart}{\mathrm{start}}
+\newcommand{\tokend}{\mathrm{end}}
+
+% ================================================================
 
 % Wolfram Mathworld says $L^2$ is for function spaces and $\ell^2$ is for vectors
 % But then they seem to use $L^2$ for vectors throughout the site, and so does

@@ -5,15 +5,15 @@ La mayor parte de este apéndice se basa en contenido expuesto en \cite{deeplear
 
 \section{Capacidad, \glsentrylong{overfitting} y \glsentrylong{underfitting}}
 % \todo[inline]{Por hacer, pagina 107 Deep Learning}
-El reto central de \gls{machinel} es que nuestro algoritmo tenga un buen rendimiento sobre datos nuevos, entradas nunca antes vistas, no solo las entradas con las que entrenamos nuestro modelo. La habilidad de tener un buen rendimiento sobre nuevos datos se le llama \textbf{generalización}.
+El reto central de \gls{machinel} es que nuestro algoritmo tenga un buen rendimiento sobre datos nuevos, entradas nunca antes vistas, no solo las entradas con las que entrenamos nuestro modelo. La habilidad de tener un buen rendimiento sobre nuevos datos se le llama \newterm{generalización}.
 
-Típicamente cuando entrenamos un modelo de \gls{machinel} debemos acceder a un conjunto de entrenamiento; podemos computar una medida de error sobre el conjunto de entrenamiento, llamado el \textbf{error de entrenamiento}; y reducimos este error de entrenamiento. El \textbf{error de generalización} se define como el valor esperado de error sobre una nueva entrada de datos. Aquí el valor esperado se toma sobre diferentes entradas posibles, tomadas de una distribución de entradas que esperamos que el sistema se encontrara en la practica.
+Típicamente cuando entrenamos un modelo de \gls{machinel} debemos acceder a un conjunto de entrenamiento; podemos computar una medida de error sobre el conjunto de entrenamiento, llamado el \newterm{error de entrenamiento}; y reducimos este error de entrenamiento. El \newterm{error de generalización} se define como el valor esperado de error sobre una nueva entrada de datos. Aquí el valor esperado se toma sobre diferentes entradas posibles, tomadas de una distribución de entradas que esperamos que el sistema se encontrara en la practica.
 
-Usualmente el error de generalización de un modelo de \gls{machinel} se estima por su rendimiento en un \textbf{conjunto de prueba} que se obtuvieron de manera separada al conjunto de entrenamiento.
+Usualmente el error de generalización de un modelo de \gls{machinel} se estima por su rendimiento en un \newterm{conjunto de prueba} que se obtuvieron de manera separada al conjunto de entrenamiento.
 
-El conjunto de datos de entrenamiento y de prueba son generados por una distribucion de probabilidad sobre los conjuntos de datos llamado el \textbf{proceso de generación de datos} (o \textsl{data-generating process} en inglés).
+El conjunto de datos de entrenamiento y de prueba son generados por una distribucion de probabilidad sobre los conjuntos de datos llamado el \newterm{proceso de generación de datos} (o \textsl{data-generating process} en inglés).
 
-Por lo general asumimos una serie de suposiciones (llamadas usualmente en inglés como \textsl{i.i.d. assumptions}), y es que una muestra de cada conjunto de datos es \textbf{independiente} una de otra y que los conjuntos de entrenamiento y prueba son \textbf{distribuidos idénticamente} tomados de la misma distribución de probabilidad. Esta suposición nos permite describir el proceso generativo de datos con una distribución de probabilidad sobre una sola muestra. Esta misma distribución es luego usada para generar cualquier muestra de entrenamiento y prueba. Llamamos a esta distribución compartida la \textbf{distribución generadora de datos} (o \textsl{data-generating distribution} en inglés), denotada como $\pdata$.
+Por lo general asumimos una serie de suposiciones (llamadas usualmente en inglés como \textsl{i.i.d. assumptions}), y es que una muestra de cada conjunto de datos es \newterm{independiente} una de otra y que los conjuntos de entrenamiento y prueba son \newterm{distribuidos idénticamente} tomados de la misma distribución de probabilidad. Esta suposición nos permite describir el proceso generativo de datos con una distribución de probabilidad sobre una sola muestra. Esta misma distribución es luego usada para generar cualquier muestra de entrenamiento y prueba. Llamamos a esta distribución compartida la \newterm{distribución generadora de datos} (o \textsl{data-generating distribution} en inglés), denotada como $\pdata$.
 
 Cuando usamos una algoritmo de \gls{machinel}, no establecemos los parámetros de antemano para luego tomar muestras de ambos conjuntos de datos. Tomamos muestras del conjunto de entrenamiento, luego ajustamos los parámetros para reducir el error en el conjunto de entrenamiento, y luego tomamos muestras del conjunto de prueba. Bajo este proceso, el valor esperado de error en el conjunto de prueba es igual o mayor al del conjunto de entrenamiento. Los factores que determinan que tan bien un algoritmo de \gls{machinel} se desempeñara son su habilidad para
 \begin{itemize}
@@ -21,11 +21,11 @@ Cuando usamos una algoritmo de \gls{machinel}, no establecemos los parámetros d
 \item Hacer que la diferencia entre el error de prueba y de entrenamiento sea pequeño.
 \end{itemize}
 
-Estos dos factores corresponden a los dos grandes retos en \gls{machinel}: \textbf{\gls{underfitting}} y \textbf{\gls{overfitting}}. \gls{underfitting} es cuando el modelo no es capaz de obtener un valor de error suficientemente bajo sobre el conjunto de entrenamiento. \gls{overfitting} ocurre cuando la diferencia entre el valor de error del conjunto de entrenamiento y el conjunto de prueba es muy grande.
+Estos dos factores corresponden a los dos grandes retos en \gls{machinel}: \newterm{\gls{underfitting}} y \newterm{\gls{overfitting}}. \gls{underfitting} es cuando el modelo no es capaz de obtener un valor de error suficientemente bajo sobre el conjunto de entrenamiento. \gls{overfitting} ocurre cuando la diferencia entre el valor de error del conjunto de entrenamiento y el conjunto de prueba es muy grande.
 
-Podemos controlar si un modelo es mas propenso a hacer \gls{underfitting} u \gls{overfitting} cambiando su \textbf{capacidad}. Informalmente, la capacidad de un modelo es su habilidad de acomodarse a una gran variedad de funciones. Modelos con baja capacidad pueden tener problemas para adaptarse al conjunto de entrenamiento. Modelos con una alta capacidad pueden adaptarse demasiado por memorizar propiedades del conjunto de entrenamiento que no le son útiles con el conjunto de pruebas.
+Podemos controlar si un modelo es mas propenso a hacer \gls{underfitting} u \gls{overfitting} cambiando su \newterm{capacidad}. Informalmente, la capacidad de un modelo es su habilidad de acomodarse a una gran variedad de funciones. Modelos con baja capacidad pueden tener problemas para adaptarse al conjunto de entrenamiento. Modelos con una alta capacidad pueden adaptarse demasiado por memorizar propiedades del conjunto de entrenamiento que no le son útiles con el conjunto de pruebas.
 
-Una forma de controlar la capacidad de nuestro algoritmo de \gls{machinel} es escogiendo su \textbf{espacio de hipótesis}, el conjunto de funciones que el algoritmo de aprendizaje se le es permitido tomar como función solución.
+Una forma de controlar la capacidad de nuestro algoritmo de \gls{machinel} es escogiendo su \newterm{espacio de hipótesis}, el conjunto de funciones que el algoritmo de aprendizaje se le es permitido tomar como función solución.
 
 Un ejemplo de esto es regresión lineal, y es que podemos permitir que nuestro algoritmo de aprendizaje en vez de tomar funciones lineales (de grado $p=1$, \equationref{eq:linear-function}), también pueda tomar funciones polinomiales (grado $p > 1$, \equationref{eq:poly-function}).
 
@@ -49,7 +49,7 @@ Los algoritmos de \gls{machinel} por lo general se desempeñan mejor cuando su c
   \label{fig:capacity-comparison}
 \end{figure}
 
-Existen muchas maneras de cambiar la capacidad de un modelo, la capacidad no esta solo determinada por la elección del modelo. El modelo especifica cual familia de funciones se pueden escoger cuando se varían los parámetros para alcanzar un objetivo de entrenamiento. A esto se le llama la \textbf{capacidad representativa} (o \textsl{representational capacity} en inglés) del modelo. En muchos casos encontrar la mejor función dentro de esta familia es un problema difícil de optimización. En la practica, el algoritmo de aprendizaje no encuentra la mejor función, sino una que meramente reduce el error de entrenamiento. Estas limitaciones adicionales, tales como la imperfección del algoritmo de optimización, significa que la \textbf{capacidad efectiva} del algoritmo puede ser menor al de la capacidad representativa.
+Existen muchas maneras de cambiar la capacidad de un modelo, la capacidad no esta solo determinada por la elección del modelo. El modelo especifica cual familia de funciones se pueden escoger cuando se varían los parámetros para alcanzar un objetivo de entrenamiento. A esto se le llama la \newterm{capacidad representativa} (o \textsl{representational capacity} en inglés) del modelo. En muchos casos encontrar la mejor función dentro de esta familia es un problema difícil de optimización. En la practica, el algoritmo de aprendizaje no encuentra la mejor función, sino una que meramente reduce el error de entrenamiento. Estas limitaciones adicionales, tales como la imperfección del algoritmo de optimización, significa que la \newterm{capacidad efectiva} del algoritmo puede ser menor al de la capacidad representativa.
 
 \subsection{Teorema ``No free lunch''}
 La teoría de aprendizaje dice que un algoritmo de \gls{machinel} puede generalizar de manera aceptable a partir de un numero finito de muestras de conjuntos de entrenamiento. Esto parece contradecir algunos principios básicos de la lógica. Inferir reglas generales de un conjunto de muestras limitadas no es lógicamente valido. Para inferir lógicamente una regla para describir cada miembro de un conjunto es necesario tener información de todos los miembros de ese conjunto.
@@ -69,7 +69,7 @@ Aunque una forma de lograr ese objetivo se puede conseguir en parte por medio de
 
 Un método popular para realizar un ajuste de forma que se controle el \gls{underfitting} y el \gls{overfitting} es por medio de modificar nuestra función de costo $J$ agregándole un hiper-parámetro $\lambda$ que se establece de antemano sobre el algoritmo de manera \textit{heurística}. Modificamos $J$ de manera que cuando $\lambda = 0$ no se modifique el valor original de $J$, permitiéndonos controlar el nivel de \gls{underfitting} y \gls{overfitting} con el valor de $\lambda$.
 
-De manera mas general, podemos regularizar un modelo que aprende una función $f(\vx, \vtheta)$ por medio de añadir una penalidad llamada \textbf{regulador} (o \textsl{regularizer} en inglés) a la función de costo $J$. Como ejemplo, téngase una función hipótesis $\hat{f}(\vx, \vtheta) = \vtheta^{\top} \vx$ con parámetros $\vtheta$ y una función objetivo $f(\vx)$ de manera que podemos definir una función de costo que queremos minimizar como:
+De manera mas general, podemos regularizar un modelo que aprende una función $f(\vx, \vtheta)$ por medio de añadir una penalidad llamada \newterm{regulador} (o \textsl{regularizer} en inglés) a la función de costo $J$. Como ejemplo, téngase una función hipótesis $\hat{f}(\vx, \vtheta) = \vtheta^{\top} \vx$ con parámetros $\vtheta$ y una función objetivo $f(\vx)$ de manera que podemos definir una función de costo que queremos minimizar como:
 \begin{equation}
   J(\vx, \vtheta) = | \hat{f}(\vx, \vtheta) - f(\vx) |
 \end{equation}
@@ -104,7 +104,7 @@ La mayor parte de los algoritmos de \gls{machinel} tienen hiper-parámetros, que
 
 Algunas veces una configuración se decide poner como un hiper-parámetro que el algoritmo no aprende debido a que la configuración es difícil de optimizar. Es mas común encontrar que la configuración debe ser un hiper-parámetro debido a que no es apropiado ajustarlo con un conjunto de entrenamiento. Esto aplica para todos los hiper-parámetros que controlar la capacidad de un modelo. Si se aprendiera sobre un conjunto de entrenamiento, veríamos que siempre se escogerían hiper-parámetros que llegarían a la capacidad mas alta que sea posible para el modelo, dando como resultado \gls{overfitting}.
 
-Para resolver este problema, necesitamos de un \textbf{conjunto de validación} que el algoritmo de aprendizaje no pueda observar.
+Para resolver este problema, necesitamos de un \newterm{conjunto de validación} que el algoritmo de aprendizaje no pueda observar.
 
 Es importante que el conjunto de pruebas no sea usado para ajustar de ninguna manera los parámetros e hiper-parámetros del modelo, de esta manera la forma en que construimos el conjunto de validación es a partir del conjunto de entrenamiento. Específicamente, separamos los datos de entrenamiento en dos conjuntos disyuntos, uno de estos es para aprender los parámetros del modelo; el otro es nuestro conjunto de validación, usado para estimar nuestro error de generalización durante o después del entrenamiento, permitiendo que lo hiper-parámetros sean ajustados adecuadamente. Después de que la optimización de nuestros hiper-parámetros este completa, podemos estimar el error de generalización de nuestro modelo con el conjunto de pruebas.
 
@@ -125,7 +125,7 @@ La estimación de puntos es el intento de proveer la única ``mejor'' predicció
 
 Para distinguir estimados de parámetros de su valor real se utiliza la distinción de un parámetro $\vtheta$ con $\hat{\vtheta}$.
 
-Sea $\{ \vx^{(1)}, \ldots, \vx^{(m)} \}$ un conjunto de $m$ puntos de datos independientes e idénticamente distribuidos. Un \textbf{estimador} o \textbf{estadístico} es cualquier función en base a los datos:
+Sea $\{ \vx^{(1)}, \ldots, \vx^{(m)} \}$ un conjunto de $m$ puntos de datos independientes e idénticamente distribuidos. Un \newterm{estimador} o \newterm{estadístico} es cualquier función en base a los datos:
 \begin{equation}
   \hat{\vtheta}_m = g( \vx^{(1)}, \ldots, \vx^{(m)} )
 \end{equation}
@@ -145,19 +145,19 @@ La parcialidad (o \gls{bias} en inglés) es un estimador definido como:
   \mathrm{bias}(\hat{\vtheta}_m) = \E(\hat{\vtheta}_m) - \vtheta
 \end{equation}
 
-Donde el valor esperado es sobre los datos (vistos como muestras de una variable aleatoria), donde $\vtheta$ es el valor verdadero de $\vtheta$ usado para definir la distribución que genera los datos. Un estimador se dice que es imparcial (o \textsl{unbiased} en inglés) si $\mathrm{bias}(\hat{\vtheta}_m) = \vzero$, lo cual implica que $\E(\hat{\vtheta}_m) = \vtheta$. Un estimador se dice que es \textbf{asintótico imparcial} si $\lim_{m\to\infty}\mathrm{bias}(\hat{\vtheta}_m) = \vzero$.
+Donde el valor esperado es sobre los datos (vistos como muestras de una variable aleatoria), donde $\vtheta$ es el valor verdadero de $\vtheta$ usado para definir la distribución que genera los datos. Un estimador se dice que es imparcial (o \textsl{unbiased} en inglés) si $\mathrm{bias}(\hat{\vtheta}_m) = \vzero$, lo cual implica que $\E(\hat{\vtheta}_m) = \vtheta$. Un estimador se dice que es \newterm{asintótico imparcial} si $\lim_{m\to\infty}\mathrm{bias}(\hat{\vtheta}_m) = \vzero$.
 
 Los estimadores imparciales son ciertamente deseables, sin embargo no son siempre los ``mejores'' estimadores.
 
 \subsection{Varianza y Error Estándar}
 Otra propiedad de un estimador que puede que debamos tener en cuenta, es que tanto se espera que van a variar nuestros resultados como función de la muestra de datos.
 
-La \textbf{varianza} de un estimador se define como:
+La \newterm{varianza} de un estimador se define como:
 \begin{equation}
   \Var(\hat{\rvtheta})
 \end{equation}
 
-donde la variable aleatoria $\hat{\rvtheta}$ es el conjunto de entrenamiento. De manera alternativa la raíz cuadrada de la varianza es el \textbf{error estándar}, denotado como $\standarderror(\hat{\rvtheta})$.
+donde la variable aleatoria $\hat{\rvtheta}$ es el conjunto de entrenamiento. De manera alternativa la raíz cuadrada de la varianza es el \newterm{error estándar}, denotado como $\standarderror(\hat{\rvtheta})$.
 
 La varianza (o el error estándar) de un estimador nos provee de una medida de como esperaríamos que el estimado que computamos de los datos variara cuando retomamos una muestra independiente del conjunto de datos. De la misma manera en que nosotros querríamos una parcialidad baja, querríamos también una varianza baja.
 
@@ -175,7 +175,7 @@ En la labor de escoger un mejor estimador nos interesa especialmente como este s
   \plim_{m\to\infty} \hat{\rvtheta} = \rvtheta
 \end{equation}
 
-El símbolo $\plim$ indica convergencia en probabilidad, indicando que para cualquier $\epsilon > 0$ se tiene que $P(|\hat{\rvtheta} - \rvtheta| > \epsilon) \to 0$ cuando $m \to \infty$. La condición descrita en la \equationref{eq:consistency} se le conoce como \textbf{consistencia}. Algunas veces se le llama consistencia débil, cuando se refiere a consistencia fuerte se hace referencia a la convergencia \textbf{casi segura} de $\hat{\rvtheta}$ a $\rvtheta$. La convergencia casi segura de una secuencia de variables aleatorias $\rvx^{(1)}, \rvx^{(2)}, \ldots$ a un valor $\vx$ ocurre cuando $p(\lim_{m\to\infty}\rvx^{(m)} = \vx) = 1$.
+El símbolo $\plim$ indica convergencia en probabilidad, indicando que para cualquier $\epsilon > 0$ se tiene que $P(|\hat{\rvtheta} - \rvtheta| > \epsilon) \to 0$ cuando $m \to \infty$. La condición descrita en la \equationref{eq:consistency} se le conoce como \newterm{consistencia}. Algunas veces se le llama consistencia débil, cuando se refiere a consistencia fuerte se hace referencia a la convergencia \textbf{casi segura} de $\hat{\rvtheta}$ a $\rvtheta$. La convergencia casi segura de una secuencia de variables aleatorias $\rvx^{(1)}, \rvx^{(2)}, \ldots$ a un valor $\vx$ ocurre cuando $p(\lim_{m\to\infty}\rvx^{(m)} = \vx) = 1$.
 
 La consistencia nos asegura que la parcialidad inducida por el estimador se elimina a medida que la cantidad de muestras de datos aumenta. Sin embargo lo contrario no es verdad --- imparcialidad asintótica no implica consistencia.
 
@@ -206,7 +206,7 @@ El estimador de máxima probabilidad para $\vtheta$ es definido como
   \vtheta_{\mathrm{ML}} = \argmax_{\vtheta} \pmodel(\sX; \vtheta) = \argmax_{\vtheta} \prod_{i=1}^{m} \pmodel(\vx^{(i)}; \vtheta)
 \end{equation}
 
-Debido a que se trata de probabilidades, se generan varios problemas a la hora de utilizarlo. Las probabilidades al estar en un intervalo de $[0, 1]$, al multiplicarse muchas probabilidades eso puede generar un problema llamada \textbf{underflow}, en la que el hecho de que un numero se acerque demasiado al cero provoca que en la representación interna del computador se trunque a $0$ perdiendo una precisión considerable. Como se trata de una maximizaron de valores, hacer una modificación a la función de costo no cambia el valor objetivo, por lo que podemos aplicarle la función logaritmo a la función de costo, de esta manera reducimos considerablemente el problema de underflow, dejando ahora el único problema al que nos enfrentamos conocido como \textbf{overflow}. La ecuación queda como
+Debido a que se trata de probabilidades, se generan varios problemas a la hora de utilizarlo. Las probabilidades al estar en un intervalo de $[0, 1]$, al multiplicarse muchas probabilidades eso puede generar un problema llamada \newterm{underflow}, en la que el hecho de que un numero se acerque demasiado al cero provoca que en la representación interna del computador se trunque a $0$ perdiendo una precisión considerable. Como se trata de una maximizaron de valores, hacer una modificación a la función de costo no cambia el valor objetivo, por lo que podemos aplicarle la función logaritmo a la función de costo, de esta manera reducimos considerablemente el problema de underflow, dejando ahora el único problema al que nos enfrentamos conocido como \newterm{overflow}. La ecuación queda como
 \begin{equation}
   \vtheta_{\mathrm{ML}} = \argmax_{\vtheta} \sum_{i=1}^{m} \log \pmodel(\vx^{(i)}; \vtheta)
 \end{equation}

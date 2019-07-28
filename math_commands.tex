@@ -14,8 +14,8 @@
 % Highlight a newly defined term
 \definecolor{projectcolor}{rgb}{0.5, 0.0, 0.0}
 % \reversemarginpar
-\newcommand{\marginterm}[1]{\marginpar{\textcolor{projectcolor}{{\footnotesize {\textrm{#1}}}}}}
-\newcommand{\newterm}[1]{\textbf{#1}\marginterm{#1}}
+\newcommand{\marginterm}[1]{\marginpar{\textcolor{projectcolor}{{\footnotesize {\textrm{\MakeLowercase{#1}}}}}}}
+\newcommand{\newterm}[1]{\marginterm{#1}\textbf{#1}}
 
 
 % Figure reference, lower-case.

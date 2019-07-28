@@ -525,14 +525,39 @@ Existen dos alternativas para tratar el problema de las palabras desconocidas:
 % ================================================================
 
 \subsection{Suavizado}
-\todo[inline]{Por hacer, pagina 49 Speech and Language Processing \cite{jurafsky-martin}}
+% \todo[inline]{Por hacer, pagina 49 Speech and Language Processing \cite{jurafsky-martin}}
+Para evitar que se asignen probabilidades con valor de cero a eventos no vistos, se toma un poco de probabilidad de los eventos mas vistos y se le asigna a los eventos menos o nunca antes vistos. Esta modificación a la metodología clásica se le conoce como \newterm{suavizado} o \newterm{descontado} (\textsl{discounting} en inglés).
 
+\subsubsection{Suavizado Laplace o Suavizado Add-$1$}
+En este método todas los conteos de los tokens en nuestro modelo se aumentara por $1$, haciendo que la probabilidad de estos sea mayor de cero. Sin embargo, este método no tiene un buen rendimiento en general para modelos de $n$-gramas, pero permite establecer una linea base de comparación.
 
-\subsubsection{Suavizado Laplace}
-\todo[inline]{Por hacer}
+Recuérdese la probabilidad para \gls{mle} que esta representada en la \equationref{eq:bigram-prob-computation}. Ahora en este método se establece la probabilidad como
+\begin{equation} \label{eq:laplace-smoothing}
+  P_{\mathrm{Laplace}}(\tkw_n \mid \tkw_{n-1}) = \frac{C(\tkw_{n-1} \, \tkw_n) +1}{C(\tkw_{n-1} + |\sV|)}
+\end{equation}
 
 \subsubsection{Suavizado Add-$k$}
-\todo[inline]{Por hacer}
+Otra alternativa al método original del suavizado Laplace, es el suavizado Add-$k$, y consiste en desplazar un poco menos de las probabilidades de los eventos mas frecuentes a los menos frecuentes por medio de introducir una constante $k$. La nueva formula para calcular las probabilidades esta dada como
+\begin{equation} \label{eq:add-k-smoothing}
+  P_{\mathrm{Add-}k}(\tkw_n \mid \tkw_{n-1}) = \frac{C(\tkw_{n-1} \, \tkw_n) +k}{C(\tkw_{n-1} + k |\sV|)}
+\end{equation}
+
+\subsubsection{Retroceso e interpolación}
+Este método consiste en poder utilizar diferentes alternativas de diferentes valores de $n$ en los $n$-gramas de manera simultanea. Supóngase que se estamos intentando de estimar la probabilidad $P(\tkw_n \mid \tkw_{n-2} \, \tkw_{n-1})$, pero existe al menos un \newterm{trigrama} ($n=3$) que no existe en nuestros datos de entrenamiento, podemos entonces estimar la probabilidad de $P(\tkw_n \mid \tkw_{n-1})$. De manera similar sino tenemos un bigrama podemos retroceder a estimarlo con solo un unigrama como $P(\tkw_n)$.
+
+Formalizándolo, se tiene entonces que en el \newterm{retroceso}, usamos un $n$-grama si existe evidencia suficiente, de lo contrario úsese un $(n-1)$-grama, de lo contrario sígase este procedimiento hasta que sea en el peor caso un unigrama. Es decir, solo se debe realizar un \textsl{back-off} a un $n$-grama de menor orden si existe cero evidencia de un $n$-grama de mayor orden. Mientras que en \newterm{interpolación}, siempre se realiza una mezcla las estimaciones de probabilidad de todos los estimadores de los $n$-gramas.
+
+En una interpolación lineal, se tiene la mezcla de todas la probabilidades de todos los $n$-gramas, $(n-1)$-gramas, ..., bigramas y unigramas por medio de darles un peso $\lambda$ a cada estimación de probabilidad (tómese a $k$ como el mayor numero para $n$ que se quiere tomar, de forma que si queremos solo considerar trigramas, entonces $k=3$):
+\begin{equation}
+  \hat{P}(\tkw_n \mid \tkw_{n-k+1}^{n-1}) = \lambda_1 P(\tkw_n \mid \tkw_{n-k+1}^{n-1}) + \lambda_2 P(\tkw_n \mid \tkw_{n-k+2}^{n-1}) + \cdots + \lambda_k P(\tkw_n)
+\end{equation}
+
+Simplificando la ecuación, nos resulta:
+\begin{equation}
+  \hat{P}(\tkw_n \mid \tkw_{n-k+1}^{n-1}) = \sum_{i=1}^{k-1} \lambda_i P(\tkw_n \mid \tkw_{n-k+i}^{n-1}) + \lambda_k P(\tkw_n)
+\end{equation}
+
+De forma que $\sum_i \lambda_i = 1$. Adicionalmente, para calcular los valores de $\lambda$, se debe considerar a esta como un hiper-parámetro, de forma que es necesario de un \newterm{conjunto de validación} para el calculo.
 
 \subsection{Suavizado Kneser-Ney}
 \todo[inline]{Por hacer, pagina 53 Speech and Language Processing \cite{jurafsky-martin}}

@@ -40,13 +40,13 @@ Es el software que realiza tareas asignadas por el usuario de manera autónoma, 
 De acuerdo con \cite{murphymachinel}, se define como un conjunto de métodos que pueden detectar patrones automáticamente en datos, y luego usar los patrones descubiertos para predecir los datos futuros, o realizar otra clase de toma de decisiones con un grado de incertidumbre, por tal motivo es necesario el uso de teoría de probabilidad, que puede ser aplicada a cualquier tipo de problema que involucra incertidumbre.
 
 \subsection{Tipos de \glsentrylong{machinel}}
-\gls{machinel} esta principalmente dividida en tres tipos. El método predictivo o bien \textbf{aprendizaje supervisado} (\gls{supervisedl}), donde el objetivo es aprender un mapeo de las entradas $\vx$ a las salidas $y$, dado un conjunto de pares de etiquetas de entrada--salida $D = \{(\vx_i, y_i)\}_{i=1}^{N}$. $D$ se le llama el conjunto de entrenamiento y $N$ es el numero de muestras de entrenamiento.
+\gls{machinel} esta principalmente dividida en tres tipos. El método predictivo o bien \textbf{aprendizaje supervisado} (\gls{supervisedl}), donde el objetivo es aprender un mapeo de las entradas $\vx$ a las salidas $y$, dado un conjunto de pares de etiquetas de entrada--salida $\train = \{(\vx_i, y_i)\}_{i=1}^{N}$. $\train$ se le llama el conjunto de entrenamiento y $N$ es el numero de muestras de entrenamiento.
 
-En la forma mas sencilla, cada entrada de entrenamiento $\vx_i$ es un vector $D$--dimensional de números, a estos se le llaman \emph{características} o \emph{atributos}.
+En la forma mas sencilla, cada entrada de entrenamiento $\vx_i$ es un vector $|\train|$--dimensional de números, a estos se le llaman \emph{características} o \emph{atributos}.
 
 De manera similar la forma de la salida puede ser en principio cualquier cosa, pero la mayoría de métodos asumen que $y_i$ es una variable \emph{categórica} o \emph{nominal} de algún conjunto finito, $y_i \in \{1,\ldots,C\}$, o que $y_i$ es un escalar real, $y_i \in \R$. Cuando la variable $y_i$ es categórica, al problema se le reconoce como \textbf{clasificación} o \textbf{reconocimiento de patrones}, y cuando es un valor real se le conoce como un problema de \textbf{regresión}.
 
-El segundo tipo principal de \gls{machinel} es el descriptivo o \textbf{aprendizaje no--supervisado} (\gls{unsupervisedl}), en este solo están disponibles los datos de entrada $D = \{\vx_i\}_{i=1}^{N}$, y la meta es encontrar ``patrones interesantes'' en los datos. Este es un problema mucho menos definido, debido a que no se conocen los tipos de patrones que se quieren encontrar, y no hay una métrica obvia de error (no como aprendizaje supervisado en la que se puede comparar nuestra predicción de $y$ para un $\vx$ con el valor observado).
+El segundo tipo principal de \gls{machinel} es el descriptivo o \textbf{aprendizaje no--supervisado} (\gls{unsupervisedl}), en este solo están disponibles los datos de entrada $\train = \{\vx_i\}_{i=1}^{N}$, y la meta es encontrar ``patrones interesantes'' en los datos. Este es un problema mucho menos definido, debido a que no se conocen los tipos de patrones que se quieren encontrar, y no hay una métrica obvia de error (no como aprendizaje supervisado en la que se puede comparar nuestra predicción de $y$ para un $\vx$ con el valor observado).
 
 Un tercer tipo de aprendizaje de maquina es conocido como \textbf{\gls{reinforcedl}}, el cual es un tipo menos usado. Este es útil cuando se quiere aprender como actuar o comportarse cuando se recibe una recompensa ocasional o una señal de castigo.
 
@@ -147,7 +147,14 @@ Existen dos tipos de \gls{rulebasedsys}, definidos como \gls{deductivesys} y \gl
 \end{equation}
 
 \subsubsection{Tipos de \glsentrylong{kbs}} \label{ch:kbs-types}
-\todo[inline]{Pendiente}
+Los cinco tipos de sistemas basados en conocimiento que existen son:
+\begin{itemize}
+  \item Sistemas expertos (o \textsl{Expert Systems} en inglés)
+  \item Sistemas de manipulación de hipertexto (o \textsl{Hypertext Manipulation Systems} en inglés)
+  \item (o \textsl{CASE Based Systems} en inglés)
+  \item (o \textsl{Database in conjunction with an Intelligent User Interface} en inglés)
+  \item (o \textsl{Intelligent Tutoring Systems} en inglés)
+\end{itemize}
 
 \subsubsection{\glsentrylong{rulebasedsys}} \label{ch:kbs-rule-based-system}
 \todo[inline]{Por acomodar y expandir}
@@ -423,14 +430,14 @@ Un \textbf{modelo de lenguaje} define una distribución de probabilidad sobre se
 
 Modelos que se basan en $n$-gramas definen la probabilidad condicional del $n$-ésimo token dados los $n-1$ tokens anteriores. El modelo usa productos de estas distribuciones condicionales para definir la distribución de probabilidad sobre secuencias mas largas:
 \begin{equation}
-  P(x_1, \ldots, x_\tau) = P(x_1, \ldots, x_{n-1}) \prod_{t = n}^{\tau} P(x_t \mid x_{t-n+1}, \ldots, x_{t-1})
+  P(\gw_1, \ldots, \gw_\tau) = P(\gw_1, \ldots, \gw_{n-1}) \prod_{t = n}^{\tau} P(\gw_t \mid \gw_{t-n+1}, \ldots, \gw_{t-1})
 \end{equation}
 
-Esta descomposición se justifica con la regla de la cadena de probabilidad. La distribución de probabilidad sobre la secuencia inicial $P(x_1, \ldots, x_{n-1})$ puede ser modelado por un modelo diferente con un valor mas pequeño de $n$.
+Esta descomposición se justifica con la regla de la cadena de probabilidad. La distribución de probabilidad sobre la secuencia inicial $P(\gw_1, \ldots, \gw_{n-1})$ puede ser modelado por un modelo diferente con un valor mas pequeño de $n$.
 
 Usualmente cuando se entrenan modelos de $n$-gramas, se están entrenando tanto un modelo de $n$-grama como también un modelo de $(n-1)$-grama simultáneamente. Esto vuelve sencillo el calculo de
 \begin{equation}
-  P(x_t \mid x_{t-n+1}, \ldots, x_{t-1}) = \frac{P_n(x_{t-n+1}, \ldots, x_t)}{P_{n-1}(x_{t-n+1}, \ldots, x_{t-1})}
+  P(\gw_t \mid \gw_{t-n+1}, \ldots, \gw_{t-1}) = \frac{P_n(\gw_{t-n+1}, \ldots, \gw_t)}{P_{n-1}(\gw_{t-n+1}, \ldots, \gw_{t-1})} = \frac{P_n(\gw_{t-n+1}^{t})}{P_{n-1}(\gw_{t-n+1}^{t-1})}
 \end{equation}
 
 por medio de solo tener al menos dos probabilidades calculadas (dos casos base)\footnote{Al tratarse de una recursión, existe la posibilidad de agilizar el tiempo de computo de este proceso con programación dinámica.}.
@@ -446,22 +453,36 @@ Entre las grandes utilidades de modelos de lenguajes con $n$-gramas es la de pre
 Aplicaciones que se también se benefician de estimar la máxima probabilidad de secuencias es la corrección de ortografía (o \textsl{spelling correction} en inglés), en donde queremos determinar que palabra es mas apropiada según su posición y las palabras que están presentes. Otra es la de la traducción de textos (o \textsl{machine translation} en inglés), en donde podemos tener un texto en chino, que si es traducido de palabra por palabra, probablemente no sera gramaticalmente valido, por lo que queremos una configuración (con mas o menos palabras) que sea muy próximo semánticamente a la frase original, pero correcto sintácticamente.
 
 \subsubsection{Suposición de Markov}
-Para calcular la probabilidad de una sentencia completa de $n$-gramas $P(x_1, \ldots, x_n)$ se logra típicamente con la \textbf{regla de la cadena en probabilidad}:
+Para calcular la probabilidad de una sentencia completa de $n$-gramas $P(\gw_1, \ldots, \gw_n)$ se logra típicamente con la \textbf{regla de la cadena en probabilidad}:
 \begin{equation}
-  P(x_1, \ldots, x_n) = P(x_1)\, P(x_2 \mid x_1)\, P(x_3 \mid x_1^2) \cdots P(x_n \mid x_1^{n-1}) = \prod_{k=1}^{n} P(x_k \mid x_1^{k-1})
+  P(\gw_1, \ldots, \gw_n) = P(\gw_1)\, P(\gw_2 \mid \gw_1)\, P(\gw_3 \mid \gw_1^2) \cdots P(\gw_n \mid \gw_1^{n-1}) = \prod_{k=1}^{n} P(\gw_k \mid \gw_1^{k-1})
 \end{equation}
 
-El modelo de \textbf{bigrama} ($n=2$) aproxima la probabilidad de una palabra dadas todas la palabras anteriores  con solo usar la probabilidad de una palabra dada la palabra inmediatamente anterior $P(x_n \mid x_{n-1})$, formalmente definido como
+El modelo de \textbf{bigrama} ($n=2$) aproxima la probabilidad de una palabra dadas todas la palabras anteriores  con solo usar la probabilidad de una palabra dada la palabra inmediatamente anterior $P(\gw_n \mid \gw_{n-1})$, formalmente definido como
+\begin{equation} \label{eq:markov-assumption-bigram}
+  P(\gw_n \mid \gw_1^{n-1}) \approx P(\gw_n \mid \gw_{n-1})
+\end{equation}
+
+Mientras que para un modelo general de $n$-gramas, se define como
 \begin{equation} \label{eq:markov-assumption}
-  P(x_n \mid x_1^{n-1}) \approx P(x_n \mid x_{n-1})
+  P(\gw_n \mid \gw_1^{n-1}) \approx P(\gw_n \mid \gw_{n-N+1}^{n-1})
 \end{equation}
 
-La condición expuesta en la \equationref{eq:markov-assumption} es conocida como la \textbf{suposición de Markov}. Con esta suposición podemos proceder a establecer la ecuación general de probabilidad condicional de la siguiente palabra en una secuencia como
+La condición expuesta en la \equationref{eq:markov-assumption} y la \equationref{eq:markov-assumption-bigram} es conocida como la \textbf{suposición de Markov}. Con esta suposición podemos proceder a establecer la ecuación general de probabilidad condicional de la siguiente palabra (para \textit{bigramas}) en una secuencia como
 \begin{equation}
-  P(x_1^{n}) \approx \prod_{k=1}^{n} P(x_k \mid x_{k-1})
+  P(\gw_1^{n}) \approx \prod_{k=1}^{n} P(\gw_k \mid \gw_{k-1})
 \end{equation}
 
 Dado que el objetivos que se hablo anteriormente es la de maximizar la probabilidad de la siguiente palabra dada una secuencia de $k$ unigramas, podemos entonces establecerlo con la estimación de máxima probabilidad (\gls{mle}). Sin embargo, para conseguir los estimados probabilidad de los $n$-gramas para el \gls{mle} se realiza un conteo de estos en el \gls{corpus}, normalizándola después para que las cuentas estén en $[0, 1]$ y sea considerada como una probabilidad.
+
+Para computar la probabilidad de un bigrama para una palabra $\gy$ dada una palabra anterior $\gx$, la calculamos con el conteo de los bigramas $C(\gx \, \gy)$ y normalizamos por la suma de todos los bigramas que tienen esa misma palabra $\gx$ como primera palabra:
+\begin{equation} \label{eq:bigram-prob-computation}
+  P(\gw_n \mid \gw_{n-1}) = \frac{C( \gw_{n-1} \, \gw_{n})}{ \sum_w C(\gw_{n-1} \, \gw_n) } =^{\ast} \frac{C( \gw_{n-1} \, \gw_{n})}{ C(\gw_{n-1}) }
+\end{equation}
+
+En la \equationref{eq:bigram-prob-computation} la igualdad $=^{\ast}$ es la simplificación de la primera parte, debido a que el conteo de todas la palabras que contienen como inicio la primera palabra debe ser igual al conteo en general de la primera palabra.
+
+Adicional a las palabras establecidas en una secuencia es necesario agregar tokens para indicar el inicio y el final de una secuencia, estos podemos denotarlos como \texttt{<s>} y \texttt{</s>} (según la notación expuesta en \cite{jurafsky-martin}) o bien como $\mathrm{start}$ y $\mathrm{end}$ en otras aplicaciones.
 
 \subsection{Evaluación de modelos de lenguaje}
 \todo[inline]{Por hacer, pagina 43 Speech and Language Processing \cite{jurafsky-martin}}
@@ -470,21 +491,42 @@ La mejor manera para evaluar un modelo de lenguaje es por medio de incluirla en 
 Para realizar una evaluación intrínseca sobre un modelo de lenguaje es necesario un conjunto de prueba. El modelo se entrenara con un conjunto de entrenamiento (o \gls{corpus} en este contexto). Si usáramos una muestra de prueba que esta en el conjunto de entrenamiento le estaríamos asignando erróneamente una mayor probabilidad de la que deberíamos estar asignando, provocando una gran inexactitud en la perplejidad.
 
 \subsubsection{Perplejidad (\glsentrylong{perplexity})}
-En la practica no se usa una probabilidad pura como métrica de evaluación para nuestro modelo, sino una variante llamada perplejidad (o \gls{perplexity} en inglés). La \gls{perplexity} de un modelo de lenguaje sobre un conjunto de prueba es la probabilidad inversa del conjunto de prueba, normalizada por el numero de palabras. Para un conjunto de palabras de prueba $\sW = w_1 \, w_2 \, \ldots \, w_N$, tenemos que la \gls{perplexity} se define como
+En la practica no se usa una probabilidad pura como métrica de evaluación para nuestro modelo, sino una variante llamada perplejidad (o \gls{perplexity} en inglés). La \gls{perplexity} $\perplexity$ de un modelo de lenguaje sobre un conjunto de prueba es la probabilidad inversa del conjunto de prueba, normalizada por el numero de palabras. Para un conjunto de palabras de prueba $\vgw = \gw_1 \, \gw_2 \, \ldots \, \gw_N$, tenemos que la \gls{perplexity} se define como
 \begin{equation} \label{eq:perplexity-def}
-  \PP(\sW) = P(w_1 \, \ldots \, w_N)^{\frac{1}{N}} = \sqrt[N]{\prod_{i=1}^{N} \frac{1}{P(w_i \mid w_{i-1})}}
+  \perplexity(\vgw) = P(\gw_1 \, \ldots \, \gw_N)^{\frac{1}{N}} = \sqrt[N]{\prod_{i=1}^{N} \frac{1}{P(\gw_i \mid \gw_{i-1})}}
 \end{equation}
 
 El objetivo que queremos para nuestro modelo es que consigamos minimizar la \gls{perplexity}. En la \equationref{eq:perplexity-def} la segunda parte de la ecuación es una reorganización de la primera junto con la aplicación de la suposición de Markov.
 
 \subsection{Generalización y Ceros}
-\todo[inline]{Por haces, pagina 46 Speech and Language Processing \cite{jurafsky-martin}}
+% \todo[inline]{Por hacer, pagina 46 Speech and Language Processing \cite{jurafsky-martin}}
+El modelo de $n$-gramas, al igual que muchos otros modelos estadísticos, depende del tamaño del \gls{corpus}. Una implicación de esto es que las probabilidades por lo general codifican hechos específicos de un \gls{corpus} de entrenamiento. Otra implicación es que los $n$-gramas hacen un mejor trabajo a medida que el tamaño $N$ del \gls{corpus} aumenta.
+
+Existe un problema cuando se utilizan los modelos de $n$-gramas a la hora de que querer hacer una tarea de predicción de la siguiente palabra dadas una palabras, y es que esta tarea es muy susceptible al \gls{corpus} de entrenamiento y de prueba sean conjuntos tomados de diferentes lugares. Esto nos ocasiona que las probabilidades que se estimen en el conjunto de pruebas cuando el modelo fue entrenado con el conjunto de entrenamiento nos ocasione probabilidades iguales a $0$, teniendo una \gls{perplexity} de $\infty$.
+
+Existen diferentes recomendaciones para lidiar con estos problemas, una es que cuando se este entrenando nuestro modelo de $n$-gramas se asegure de tener conjunto de entrenamiento y de pruebas que tengan un \textbf{genero} similar a la tarea que intentamos solucionar.
+
+Otra recomendación igualmente importante es que los datos tengan un \textbf{dialecto} apropiado, especialmente cuando se manejan datos de redes sociales o transcritos verbales.
+
+Sin embargo asegurarnos de que se maneje un genero y dialecto apropiado en nuestros datos no es suficiente. Nuestros modelos pueden también sufrir del problema de \textbf{esparcidad} (o \textsl{sparcity} en inglés). Para cualquier $n$-grama que ocurre un numero suficiente de veces, podríamos tener un buen estimado de su probabilidad. Pero debido a que cualquier \gls{corpus} es limitado, algunas sentencias perfectamente aceptables pueden no encontrarse en el. Produciendo $n$-gramas con probabilidad de ocurrir igual a cero cuando no deberían.
 
 \subsubsection{Palabras desconocidas}
-\todo[inline]{Por hacer}
+En unos modelos de lenguaje podemos asumir que se están tratando con todas la posibles combinaciones de $n$-gramas que en un léxico se permiten, dejándonos con un \textbf{vocabulario cerrado} perfectamente valido. Sin embargo existen otros casos en donde tendríamos que lidiar con $n$-gramas que nunca hemos visto antes, que llamaríamos palabras \textbf{desconocidas} o bien palabras \gls{oov}. El porcentaje de palabras \gls{oov} que aparecen en el conjunto de prueba se le conoce como la tasa \gls{oov} (o \textsl{OOV rate} en inglés).
+
+Un sistema de \textbf{vocabulario abierto} es uno en el cual se modelan estas palabras desconocidas en el conjunto de prueba por medio de añadir una pseudo-palabra llamada \texttt{<UNK>}.
+
+Existen dos alternativas para tratar el problema de las palabras desconocidas:
+\begin{itemize}
+\item Escoger un vocabulario de tamaño fijo, luego convertir el problema a vocabulario cerrado reemplazando todas las palabras \gls{oov} al token \texttt{<UNK>} y finalmente estimar las probabilidades de manera habitual.
+  
+\item Si no se tiene un vocabulario fijo de antemano, se crea uno de manera implícita, reemplazando palabras en los datos de entrenamiento por \texttt{<UNK>} basado en sus frecuencias (que ocurren menos de una cantidad especifica de veces, o bien establecer un tamaño fijo para el vocabulario, obtener las $|\sV|$ palabras que mas ocurren y reemplazar todas las demás por \texttt{<UNK>})
+\end{itemize}
+
+% ================================================================
 
 \subsection{Suavizado}
 \todo[inline]{Por hacer, pagina 49 Speech and Language Processing \cite{jurafsky-martin}}
+
 
 \subsubsection{Suavizado Laplace}
 \todo[inline]{Por hacer}

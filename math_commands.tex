@@ -60,6 +60,10 @@
 \newcommand{\valid}{\mathcal{D_{\mathrm{valid}}}}
 \newcommand{\test}{\mathcal{D_{\mathrm{test}}}}
 
+\DeclareFontFamily{OT1}{pzc}{}
+\DeclareFontShape{OT1}{pzc}{m}{it}{<-> s * [1.200] pzcmi7t}{}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
 \def\eps{{\epsilon}}
 
 
@@ -460,6 +464,64 @@
 \def\etY{{\etens{Y}}}
 \def\etZ{{\etens{Z}}}
 
+% entries of a token (n-grams)
+% Same font as tensor, without \bm wrapper
+\newcommand{\token}[1]{\mathit{\mathsf{#1}}}
+\def\ga{{\token{a}}}
+\def\gb{{\token{b}}}
+\def\gc{{\token{c}}}
+\def\gd{{\token{d}}}
+\def\ge{{\token{e}}}
+\def\gf{{\token{f}}}
+\def\gg{{\token{g}}}
+\def\gh{{\token{h}}}
+\def\gi{{\token{i}}}
+\def\gj{{\token{j}}}
+\def\gk{{\token{k}}}
+\def\gl{{\token{l}}}
+\def\gm{{\token{m}}}
+\def\gn{{\token{n}}}
+\def\go{{\token{o}}}
+\def\gp{{\token{p}}}
+\def\gq{{\token{q}}}
+\def\gr{{\token{r}}}
+\def\gs{{\token{s}}}
+\def\gt{{\token{t}}}
+\def\gu{{\token{u}}}
+\def\gv{{\token{v}}}
+\def\gw{{\token{w}}}
+\def\gx{{\token{x}}}
+\def\gy{{\token{y}}}
+\def\gz{{\token{z}}}
+
+% tokens in vectorized form
+\def\vga{{\bm{\token{a}}}}
+\def\vgb{{\bm{\token{b}}}}
+\def\vgc{{\bm{\token{c}}}}
+\def\vgd{{\bm{\token{d}}}}
+\def\vge{{\bm{\token{e}}}}
+\def\vgf{{\bm{\token{f}}}}
+\def\vgg{{\bm{\token{g}}}}
+\def\vgh{{\bm{\token{h}}}}
+\def\vgi{{\bm{\token{i}}}}
+\def\vgj{{\bm{\token{j}}}}
+\def\vgk{{\bm{\token{k}}}}
+\def\vgl{{\bm{\token{l}}}}
+\def\vgm{{\bm{\token{m}}}}
+\def\vgn{{\bm{\token{n}}}}
+\def\vgo{{\bm{\token{o}}}}
+\def\vgp{{\bm{\token{p}}}}
+\def\vgq{{\bm{\token{q}}}}
+\def\vgr{{\bm{\token{r}}}}
+\def\vgs{{\bm{\token{s}}}}
+\def\vgt{{\bm{\token{t}}}}
+\def\vgu{{\bm{\token{u}}}}
+\def\vgv{{\bm{\token{v}}}}
+\def\vgw{{\bm{\token{w}}}}
+\def\vgx{{\bm{\token{x}}}}
+\def\vgy{{\bm{\token{y}}}}
+\def\vgz{{\bm{\token{z}}}}
+
 % The true underlying data generating distribution
 \newcommand{\pdata}{p_{\rm{data}}}
 % The empirical distribution defined by the training set
@@ -491,7 +553,7 @@
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\standarderror}{\mathrm{SE}}
 \newcommand{\Cov}{\mathrm{Cov}}
-\newcommand{\PP}{\mathrm{PP}} % Perplexity
+\newcommand{\perplexity}{\mathcal{P}} % Perplexity
 
 % Wolfram Mathworld says $L^2$ is for function spaces and $\ell^2$ is for vectors
 % But then they seem to use $L^2$ for vectors throughout the site, and so does

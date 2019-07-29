@@ -446,7 +446,7 @@ Una limitante fundamental de estimación de máxima probabilidad sobre modelos d
 
 El primero es que cuando $P_{n-1}$ es diferente de cero pero $P_n$ es cero, la probabilidad logarítmica es $-\infty$, una mitigación a este problema que usan muchos modelos de $n$-gramas es realizar un \newterm{suavizado} sobre la distribución de probabilidad, haciendo que la probabilidad de tuplas nunca vistas aumente con la probabilidad de las tuplas mas vistas.
 
-La segunda es que los modelos clásicos de $n$-gramas son particularmente vulnerables a la maldición de dimensionalidad (véase la \sectionref{sec:SVM}), debido a que existen $|\sV|^n$ posibles $n$-gramas, donde $|\sV|$ por lo general es grande.
+La segunda es que los modelos clásicos de $n$-gramas son particularmente vulnerables a la maldición de dimensionalidad (véase la \sectionref{sec:SVM}), debido a que existen $|\sV|^n$ posibles $n$-gramas, donde $|\sV|$ por lo general es grande. $\sV$ es el vocabulario de palabras.
 
 Entre las grandes utilidades de modelos de lenguajes con $n$-gramas es la de predicción de palabras \cite{jurafsky-martin}. Esto con la determinación de las distribuciones de probabilidad antes mencionada. Formalmente, dada una secuencia ordenada de $k$ \newterm{unigramas} ($n=1$), queremos determinar cual es son los unigramas con mayor probabilidad de ocurrir para formar una secuencia de $k+1$ unigramas que sea consistente con la distribución de probabilidad que determinamos del conjunto de datos. Gran parte los problemas presentes en el procesamiento de lenguaje natural implican alguna variación de este problema. Algunos de estos son reconocimiento de voz (o \textsl{speech recognition} en inglés), reconocimiento de escritura a mano (o \textsl{handwriting recognition} en inglés), siendo estos unos de los mas comunes para la predicción con probabilidades (que puede hacerse con ayuda de un estimador de máxima probabilidad, véase el Apéndice~\ref{app:maximum-likelihood}).
 
@@ -491,7 +491,7 @@ La mejor manera para evaluar un modelo de lenguaje es por medio de incluirla en 
 Para realizar una evaluación intrínseca sobre un modelo de lenguaje es necesario un conjunto de prueba. El modelo se entrenara con un conjunto de entrenamiento (o \gls{corpus} en este contexto). Si usáramos una muestra de prueba que esta en el conjunto de entrenamiento le estaríamos asignando erróneamente una mayor probabilidad de la que deberíamos estar asignando, provocando una gran inexactitud en la perplejidad.
 
 \subsubsection{Perplejidad (\glsentrylong{perplexity})}
-En la practica no se usa una probabilidad pura como métrica de evaluación para nuestro modelo, sino una variante llamada perplejidad (o \gls{perplexity} en inglés). La \gls{perplexity} $\perplexity$ de un modelo de lenguaje sobre un conjunto de prueba es la probabilidad inversa del conjunto de prueba, normalizada por el numero de palabras. Para un conjunto de palabras de prueba $\vtkw = \tkw_1 \, \tkw_2 \, \ldots \, \tkw_N$, tenemos que la \gls{perplexity} se define como
+En la practica no se usa una probabilidad pura como métrica de evaluación para nuestro modelo, sino una variante llamada \newterm{perplejidad} (o \gls{perplexity} en inglés). La \gls{perplexity} $\perplexity$ de un modelo de lenguaje sobre un conjunto de prueba es la probabilidad inversa del conjunto de prueba, normalizada por el numero de palabras. Para un conjunto de palabras de prueba $\vtkw = \tkw_1 \, \tkw_2 \, \ldots \, \tkw_N$, tenemos que la \gls{perplexity} se define como
 \begin{equation} \label{eq:perplexity-def}
   \perplexity(\vtkw) = P(\tkw_1 \, \ldots \, \tkw_N)^{\frac{1}{N}} = \sqrt[N]{\prod_{i=1}^{N} \frac{1}{P(\tkw_i \mid \tkw_{i-1})}}
 \end{equation}
@@ -502,7 +502,7 @@ El objetivo que queremos para nuestro modelo es que consigamos minimizar la \gls
 % \todo[inline]{Por hacer, pagina 46 Speech and Language Processing \cite{jurafsky-martin}}
 El modelo de $n$-gramas, al igual que muchos otros modelos estadísticos, depende del tamaño del \gls{corpus}. Una implicación de esto es que las probabilidades por lo general codifican hechos específicos de un \gls{corpus} de entrenamiento. Otra implicación es que los $n$-gramas hacen un mejor trabajo a medida que el tamaño $N$ del \gls{corpus} aumenta.
 
-Existe un problema cuando se utilizan los modelos de $n$-gramas a la hora de que querer hacer una tarea de predicción de la siguiente palabra dadas una palabras, y es que esta tarea es muy susceptible al \gls{corpus} de entrenamiento y de prueba sean conjuntos tomados de diferentes lugares. Esto nos ocasiona que las probabilidades que se estimen en el conjunto de pruebas cuando el modelo fue entrenado con el conjunto de entrenamiento nos ocasione probabilidades iguales a $0$, teniendo una \gls{perplexity} de $\infty$.
+Existe un problema cuando se utilizan los modelos de $n$-gramas cuando se quiere realizar una tarea de predicción de la siguiente palabra dadas una palabras ya establecidas, y es que esta tarea es muy susceptible a que el \gls{corpus} de entrenamiento y de prueba sean conjuntos tomados de diferentes lugares. Esto nos ocasiona que las probabilidades que se estimen en el conjunto de pruebas cuando el modelo fue entrenado nos ocasione probabilidades iguales a $0$, teniendo una \gls{perplexity} con valor $\infty$.
 
 Existen diferentes recomendaciones para lidiar con estos problemas, una es que cuando se este entrenando nuestro modelo de $n$-gramas se asegure de tener conjunto de entrenamiento y de pruebas que tengan un \newterm{genero} similar a la tarea que intentamos solucionar.
 
@@ -533,19 +533,19 @@ En este método todas los conteos de los tokens en nuestro modelo se aumentara p
 
 Recuérdese la probabilidad para \gls{mle} que esta representada en la \equationref{eq:bigram-prob-computation}. Ahora en este método se establece la probabilidad como
 \begin{equation} \label{eq:laplace-smoothing}
-  P_{\mathrm{Laplace}}(\tkw_n \mid \tkw_{n-1}) = \frac{C(\tkw_{n-1} \, \tkw_n) +1}{C(\tkw_{n-1} + |\sV|)}
+  P_{\mathrm{Laplace}}(\tkw_n \mid \tkw_{n-1}) = \frac{C(\tkw_{n-1} \, \tkw_n) +1}{C(\tkw_{n-1}) + |\sV|}
 \end{equation}
 
 \subsubsection{Suavizado Add-$k$}
 Otra alternativa al método original del suavizado Laplace, es el suavizado Add-$k$, y consiste en desplazar un poco menos de las probabilidades de los eventos mas frecuentes a los menos frecuentes por medio de introducir una constante $k$. La nueva formula para calcular las probabilidades esta dada como
 \begin{equation} \label{eq:add-k-smoothing}
-  P_{\mathrm{Add-}k}(\tkw_n \mid \tkw_{n-1}) = \frac{C(\tkw_{n-1} \, \tkw_n) +k}{C(\tkw_{n-1} + k |\sV|)}
+  P_{\mathrm{Add-}k}(\tkw_n \mid \tkw_{n-1}) = \frac{C(\tkw_{n-1} \, \tkw_n) +k}{C(\tkw_{n-1}) + k |\sV|}
 \end{equation}
 
-\subsubsection{Retroceso e interpolación}
+\subsubsection{Retroceso (\textsl{Back-off}) e interpolación}
 Este método consiste en poder utilizar diferentes alternativas de diferentes valores de $n$ en los $n$-gramas de manera simultanea. Supóngase que se estamos intentando de estimar la probabilidad $P(\tkw_n \mid \tkw_{n-2} \, \tkw_{n-1})$, pero existe al menos un \newterm{trigrama} ($n=3$) que no existe en nuestros datos de entrenamiento, podemos entonces estimar la probabilidad de $P(\tkw_n \mid \tkw_{n-1})$. De manera similar sino tenemos un bigrama podemos retroceder a estimarlo con solo un unigrama como $P(\tkw_n)$.
 
-Formalizándolo, se tiene entonces que en el \newterm{retroceso}, usamos un $n$-grama si existe evidencia suficiente, de lo contrario úsese un $(n-1)$-grama, de lo contrario sígase este procedimiento hasta que sea en el peor caso un unigrama. Es decir, solo se debe realizar un \textsl{back-off} a un $n$-grama de menor orden si existe cero evidencia de un $n$-grama de mayor orden. Mientras que en \newterm{interpolación}, siempre se realiza una mezcla las estimaciones de probabilidad de todos los estimadores de los $n$-gramas.
+Formalizándolo, se tiene entonces que en el \newterm{retroceso}, usamos un $n$-grama si existe evidencia suficiente, de lo contrario úsese un $(n-1)$-grama, de lo contrario sígase este procedimiento hasta que sea en el peor caso un unigrama. Es decir, solo se debe realizar un retroceso a un $n$-grama de menor orden si existe cero evidencia de un $n$-grama de mayor orden. Mientras que en \newterm{interpolación}, siempre se realiza una mezcla las estimaciones de probabilidad de todos los estimadores de los $n$-gramas.
 
 En una interpolación lineal, se tiene la mezcla de todas la probabilidades de todos los $n$-gramas, $(n-1)$-gramas, ..., bigramas y unigramas por medio de darles un peso $\lambda$ a cada estimación de probabilidad (tómese a $k$ como el mayor numero para $n$ que se quiere tomar, de forma que si queremos solo considerar trigramas, entonces $k=3$):
 \begin{equation}
@@ -554,13 +554,75 @@ En una interpolación lineal, se tiene la mezcla de todas la probabilidades de t
 
 Simplificando la ecuación, nos resulta:
 \begin{equation}
-  \hat{P}(\tkw_n \mid \tkw_{n-k+1}^{n-1}) = \sum_{i=1}^{k-1} \lambda_i P(\tkw_n \mid \tkw_{n-k+i}^{n-1}) + \lambda_k P(\tkw_n)
+  \hat{P}(\tkw_n \mid \tkw_{n-k+1}^{n-1}) = \sum_{i=1}^{k} \lambda_i P(\tkw_n \mid \tkw_{n-k+i}^{n-1})
 \end{equation}
 
-De forma que $\sum_i \lambda_i = 1$. Adicionalmente, para calcular los valores de $\lambda$, se debe considerar a esta como un hiper-parámetro, de forma que es necesario de un \newterm{conjunto de validación} para el calculo.
+De forma que $\sum_i \lambda_i = 1$. Adicionalmente, para calcular los valores de $\lambda$, se debe considerar a esta como un \newterm{hiper-parámetro}, de forma que es necesario de un \newterm{conjunto de validación} para el calculo.
 
 \subsection{Suavizado Kneser-Ney}
-\todo[inline]{Por hacer, pagina 53 Speech and Language Processing \cite{jurafsky-martin}}
+% \todo[inline]{Por hacer, pagina 53 Speech and Language Processing \cite{jurafsky-martin}}
+Uno de los métodos de suavizado mas populares y de mejor rendimiento de modelos de $n$-gramas es el algoritmo de Kneser-Ney. Este método tiene sus raíces de un método llamado \newterm{descontado absoluto}.
+
+Si consideramos realiza el conteo promedio de apariciones de cualquier bigrama dentro de un conjunto de entrenamiento y un conjunto de validación, donde ambos conjuntos sean del mismo tamaño y sean además de un tamaño considerable ($N \ge 20 \times 10^6$), tendremos un conteo como el expuesto en el \tableref{table:bigram-train-vs-validation-count}.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{| R{0.2\textwidth} | L{0.2\textwidth} |} \hline
+  \textbf{Conteo de bigramas en conjunto de entrenamiento}          & \textbf{Conteo de bigramas en el conjunto de validación} \\ \hline
+  $0$ & $0.0000270$ \\ \hline
+  $1$ & $0.448$ \\ \hline
+  $2$ & $1.25$ \\ \hline
+  $3$ & $2.24$ \\ \hline
+  $4$ & $3.23$ \\ \hline
+  $5$ & $4.21$ \\ \hline
+  $6$ & $5.23$ \\ \hline
+  $7$ & $6.21$ \\ \hline
+  $8$ & $7.21$ \\ \hline
+  $9$ & $8.26$ \\ \hline
+\end{tabular}
+\caption[Comparación de conteo de bigramas en conjuntos de entrenamiento y validación]{Comparación de conteo de bigramas en conjuntos de entrenamiento y validación. Tomado de \cite{jurafsky-martin}.}
+\label{table:bigram-train-vs-validation-count}
+\end{table}
+
+Considérese que a excepción de los conteos del conjunto de entrenamiento con 0 y 1 repeticiones, se puede decir que todos estos puede tenerse un buen estimado de descontado de aproximadamente $0.75$. El descontado absoluto formaliza esta intuición por medio de substraer un valor descontado fijo $d=0.75$ para cada conteo.
+
+Teniendo esto en cuenta, la ecuación para el descontado absoluto aplicado a bigramas es:
+\begin{equation}
+  P_{\mathrm{Descontado Absoluto}}(\tkw_i \mid \tkw_{i-1}) = \frac{C(\tkw_{i-1} \, \tkw_i) - d}{\sum_{\tkv} C(\tkw_{i-1} \, \tkv)} + \lambda(\tkw_{i-1}) P(\tkw_i)
+\end{equation}
+
+El \newterm{descontado Kneser-Ney} mejora el descontado absoluto por medio de utilizar una manera mas sofisticada de lidiar con la distribución de unigramas de bajo orden. Esto lo logra por medio de introducir $P_{\mathrm{continuation}}$ donde pretende responder la pregunta de ``¿Que tan probable es que $\tkw$ ocurra como una continuación?'', y se basa de el numero de contextos diferentes en los que aparece $\tkw$. Así suponemos que palabras que han aparecido en mas contexto en el pasado son mas probables de ocurrir en algún contexto nuevo también. De esta manera se define a esta formula de continuación como:
+\begin{equation}
+  P_{\mathrm{continuation}}  = \frac{ |\{ \tkv : C(\tkv \, \tkw) > 0 \}| }{ | \{ (\tku^{\prime}, \tkw^{\prime}) : C(\tku^{\prime} \, \tkw^{\prime}) > 0 \} | }
+\end{equation}
+
+La forma final de la ecuación de \newterm{interpolado de Kneser-Ney} para bigramas esta dado como:
+\begin{equation}
+  P_{\mathrm{KN}}(\tkw_i \mid \tkw_{i-1}) = \frac{ \max(C(\tkw_{i-1} \, \tkw_{i}) -d, 0) }{C(\tkw_{i-1})} + \lambda(\tkw_{i-1}) P_{\mathrm{continuation}}(\tkw_i)
+\end{equation}
+
+Donde $\lambda$ es una constante que normaliza para distribuir la masa de probabilidad:
+\begin{equation}
+  \lambda(\tkw_{i-1}) = \frac{d}{ \sum_{\tkv} C(\tkw_{i-1} \, \tkv) } | \{ \tkw : C(\tkw_{i-1} \, \tkw) > 0 \} |
+\end{equation}
+
+Sin embargo, si queremos una forma general de la formula para cualquier $n$-grama, tenemos la siguiente formula recursiva:
+\begin{equation}
+  P_{\mathrm{KN}}(\tkw_i \mid \tkw_{i-n+1}^{i-1}) = \frac{ \max(C_{\mathrm{KN}}(\tkw_{i-n+1}^{i}) -d, 0) }{\sum_\tkv C_{\mathrm{KN}}(\tkw_{i-n+1}^{i-1} \, \tkv)} + \lambda(\tkw_{i-n+1}^{i-1}) P_{\mathrm{KN}}(\tkw_i \mid \tkw_{i-n+2}^{i-1})
+\end{equation}
+
+Donde su caso base es:
+\begin{equation}
+  P_{\mathrm{KN}}(\tkw) = \frac{ \max(C_{\mathrm{KN}}(\tkw) -d, 0) }{\sum_{\tkw^{\prime}} C_{\mathrm{KN}}(\tkw^{\prime})} + \lambda(\eps) \frac{1}{|\sV|}
+\end{equation}
+Donde $\eps$ se considera el token (o en este caso palabra) vació. Y la definición de $C_{\mathrm{KN}}$ es:
+\begin{equation}
+  C_{\mathrm{KN}}(\cdot) = \left\{ \begin{array}{ll}
+            C(\cdot) & \text{para los $n$-gramas de mayor orden} \\
+            C_{\mathrm{continuation}}(\cdot) & \text{para los $n$-gramas de menor orden} \\
+          \end{array} \right.
+\end{equation}
+
 
 % ================================================================
 

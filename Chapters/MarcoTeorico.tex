@@ -425,6 +425,19 @@ El procesamiento de lenguaje natural (o \glsentrylong{nlp} en inglés), es el us
 
 Para construir un modelo eficiente de lenguaje natural, debemos usar técnicas que son especializadas para el procesamiento de datos secuenciales. Por lo general nos interesa que el lenguaje natural sea representado como secuencias de palabras mas que otras posibles representaciones. Debido a que el numero total de palabras que existen es muy grande, modelos de lenguaje basados en palabras deben operar en espacios de muy alta dimensionalidad y son discretamente dispersos.
 
+% ================================================================
+
+\subsection{Representaciones de palabras como vectores} \label{ch:word-representations}
+\todo[inline]{Poner sobre los Bag of Words y TF-IDF aqui y cambiar la seccion de propuesta para mencionar esta seccion}
+
+\subsubsection{\glsentrylong{bow}}
+\todo[inline]{Por hacer}
+
+\subsubsection{\glsentrylong{tfidf}}
+\todo[inline]{Por hacer}
+
+% ================================================================
+
 \subsection{$n$-gramas}
 Un \newterm{modelo de lenguaje} define una distribución de probabilidad sobre secuencias de tokens en un lenguaje natural. Dependiendo de como esta diseñado un modelo, un token puede ser una palabra, un carácter, o incluso un byte. Los tokens siempre son unidades discretas. Los primeros modelos de lenguaje exitosos se basaron en modelos de secuencias de tokens de tamaño fijo llamados $n$-gramas. Un $n$-grama es una secuencia de $n$ tokens.
 
@@ -477,7 +490,7 @@ Dado que el objetivos que se hablo anteriormente es la de maximizar la probabili
 
 Para computar la probabilidad de un bigrama para una palabra $\tky$ dada una palabra anterior $\tkx$, la calculamos con el conteo de los bigramas $C(\tkx \, \tky)$ y normalizamos por la suma de todos los bigramas que tienen esa misma palabra $\tkx$ como primera palabra:
 \begin{equation} \label{eq:bigram-prob-computation}
-  P(\tkw_n \mid \tkw_{n-1}) = \frac{C( \tkw_{n-1} \, \tkw_{n})}{ \sum_w C(\tkw_{n-1} \, \tkw_n) } =^{\ast} \frac{C( \tkw_{n-1} \, \tkw_{n})}{ C(\tkw_{n-1}) }
+  P(\tkw_n \mid \tkw_{n-1}) = \frac{C( \tkw_{n-1} \, \tkw_{n})}{ \sum_\tkw C(\tkw_{n-1} \, \tkw) } =^{\ast} \frac{C( \tkw_{n-1} \, \tkw_{n})}{ C(\tkw_{n-1}) }
 \end{equation}
 
 En la \equationref{eq:bigram-prob-computation} la igualdad $=^{\ast}$ es la simplificación de la primera parte, debido a que el conteo de todas la palabras que contienen como inicio la primera palabra debe ser igual al conteo en general de la primera palabra.
@@ -485,7 +498,7 @@ En la \equationref{eq:bigram-prob-computation} la igualdad $=^{\ast}$ es la simp
 Adicional a las palabras establecidas en una secuencia es necesario agregar tokens para indicar el inicio y el final de una secuencia, estos podemos denotarlos como \texttt{<s>} y \texttt{</s>} (según la notación expuesta en \cite{jurafsky-martin}) o bien como $\tokstart$ y $\tokend$ en otras aplicaciones como también en este libro ahora en adelante.
 
 \subsection{Evaluación de modelos de lenguaje}
-\todo[inline]{Por hacer, pagina 43 Speech and Language Processing \cite{jurafsky-martin}}
+% \todo[inline]{Por hacer, pagina 43 Speech and Language Processing \cite{jurafsky-martin}}
 La mejor manera para evaluar un modelo de lenguaje es por medio de incluirla en una aplicación y medir que tanto mejora su desempeño. Este tipo de evaluaciones se les conoce como \newterm{evaluación extrínseca}. Esta es la única manera de saber si una mejora en particular en un componente nos va a ayudar realmente en la tarea que estamos realizando \cite{jurafsky-martin}. Desafortunadamente, ejecutar sistemas \gls{nlp} grandes de esta manera es muy costoso. Por otra parte, tener una métrica que nos ayude a evaluar rápidamente mejoras significativas en un modelo de lenguaje seria deseable. Una métrica de \newterm{evaluación intrínseca} es una que mide la calidad del modelo independiente de la aplicación que se le de.
 
 Para realizar una evaluación intrínseca sobre un modelo de lenguaje es necesario un conjunto de prueba. El modelo se entrenara con un conjunto de entrenamiento (o \gls{corpus} en este contexto). Si usáramos una muestra de prueba que esta en el conjunto de entrenamiento le estaríamos asignando erróneamente una mayor probabilidad de la que deberíamos estar asignando, provocando una gran inexactitud en la perplejidad.
@@ -615,6 +628,7 @@ Donde su caso base es:
 \begin{equation}
   P_{\mathrm{KN}}(\tkw) = \frac{ \max(C_{\mathrm{KN}}(\tkw) -d, 0) }{\sum_{\tkw^{\prime}} C_{\mathrm{KN}}(\tkw^{\prime})} + \lambda(\eps) \frac{1}{|\sV|}
 \end{equation}
+
 Donde $\eps$ se considera el token (o en este caso palabra) vació. Y la definición de $C_{\mathrm{KN}}$ es:
 \begin{equation}
   C_{\mathrm{KN}}(\cdot) = \left\{ \begin{array}{ll}
@@ -623,11 +637,15 @@ Donde $\eps$ se considera el token (o en este caso palabra) vació. Y la definic
           \end{array} \right.
 \end{equation}
 
-
 % ================================================================
 
 \subsection{Modelos de lenguaje neural (\glsentrylong{nlm})}
-\todo[inline]{Por hacer, pagina 451 Deep Learning}
+% \todo[inline]{Por hacer, pagina 451 Deep Learning}
+Los modelos de lenguaje neural (o \gls{nlm} en inglés), son modelos de lenguaje diseñados para mitigar el problema de la \textit{maldición de dimensionalidad} para el modelado de secuencias de lenguaje natural por medio de utilizar una representación distribuida de palabras. Estos modelos comparten fortalezas estadísticas entre una palabra (y su contexto) a otras palabras similares y contextos.
+
+Algunas veces se les llama a estas representaciones de palabras como \newterm{embeddings de palabras} (o \textsl{word embeddings} en inglés). En esta interpretación, se representan en un espacio de características de dimensión menor al tamaño del vocabulario. En una representación tal como en \gls{bow} (a veces referidos como vectores ``one-hot''), la distancia entre una representación de palabra con cualquier otra tiene una distancia de $\sqrt{2}$. En contraste, las representaciones de palabras en \gls{nlm} pretenden que la distancia entre representaciones de palabras que ocurren en contextos similares sean pequeños. Esto por lo general produce que palabras con significados similares sean consideradas vecinos por su cercanía.
+
+Este tipo de representaciones son particularmente útiles para modelos de redes neuronales, debido a que estas trabajan de manera ``nativa'' con este tipo de representaciones, mientras que un vector \emph{one-hot} no permite crear una diferencia de semántica de las secuencias de texto.
 
 \subsection{Etiquetado de \glsentrylong{pos}}
 \todo[inline]{Por hacer, pagina 151 Speech and Language Processing \cite{jurafsky-martin}}

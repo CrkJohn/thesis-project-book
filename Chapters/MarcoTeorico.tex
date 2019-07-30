@@ -427,18 +427,7 @@ Para construir un modelo eficiente de lenguaje natural, debemos usar técnicas q
 
 % ================================================================
 
-\subsection{Representaciones de palabras como vectores} \label{ch:word-representations}
-\todo[inline]{Poner sobre los Bag of Words y TF-IDF aqui y cambiar la seccion de propuesta para mencionar esta seccion}
-
-\subsubsection{\glsentrylong{bow}}
-\todo[inline]{Por hacer}
-
-\subsubsection{\glsentrylong{tfidf}}
-\todo[inline]{Por hacer}
-
-% ================================================================
-
-\subsection{$n$-gramas}
+\subsection{$n$-gramas} \label{ch:ngrams}
 Un \newterm{modelo de lenguaje} define una distribución de probabilidad sobre secuencias de tokens en un lenguaje natural. Dependiendo de como esta diseñado un modelo, un token puede ser una palabra, un carácter, o incluso un byte. Los tokens siempre son unidades discretas. Los primeros modelos de lenguaje exitosos se basaron en modelos de secuencias de tokens de tamaño fijo llamados $n$-gramas. Un $n$-grama es una secuencia de $n$ tokens.
 
 Modelos que se basan en $n$-gramas definen la probabilidad condicional del $n$-ésimo token dados los $n-1$ tokens anteriores. El modelo usa productos de estas distribuciones condicionales para definir la distribución de probabilidad sobre secuencias mas largas:
@@ -572,7 +561,7 @@ Simplificando la ecuación, nos resulta:
 
 De forma que $\sum_i \lambda_i = 1$. Adicionalmente, para calcular los valores de $\lambda$, se debe considerar a esta como un \newterm{hiper-parámetro}, de forma que es necesario de un \newterm{conjunto de validación} para el calculo.
 
-\subsection{Suavizado Kneser-Ney}
+\subsubsection{Suavizado Kneser-Ney}
 % \todo[inline]{Por hacer, pagina 53 Speech and Language Processing \cite{jurafsky-martin}}
 Uno de los métodos de suavizado mas populares y de mejor rendimiento de modelos de $n$-gramas es el algoritmo de Kneser-Ney. Este método tiene sus raíces de un método llamado \newterm{descontado absoluto}.
 
@@ -639,16 +628,45 @@ Donde $\eps$ se considera el token (o en este caso palabra) vació. Y la definic
 
 % ================================================================
 
-\subsection{Modelos de lenguaje neural (\glsentrylong{nlm})}
+\subsection{Representaciones de palabras como vectores} \label{ch:word-representations}
+% \todo[inline]{Poner sobre los Bag of Words y TF-IDF aqui y cambiar la seccion de propuesta para mencionar esta seccion}
+Por lo general cualquier modelo de \gls{ai}, incluyendo los que se encuentran en \gls{machinel} y \gls{nlp} deben utilizar internamente representaciones escalares, vectores, matrices y tensores. \gls{nlp} por lo tanto debe utilizar algunas de estas para alimentar sus modelos, es por esto que es importante hablar de las diferentes representaciones que se les da a los diferentes elementos fundamentales, tales como los $n$-gramas (véase la \sectionref{ch:ngrams}). Existen diferentes representaciones que se les puede dar a las palabras, todas con usos diferentes, ventajas y desventajas, en particular interés están \glsentrylong{bow}, \glsentrylong{tfidf} y embeddings de palabras.
+
+\subsubsection{\glsentrylong{bow}}
+La representación de vectores \gls{bow} consiste en representar cada palabra dentro de un vocabulario $\sV$ de forma que a cada palabra se le asigna un identificador inversamente proporcional a la cantidad de apariciones dentro de un \gls{corpus}, todos en el intervalo $1, \ldots, |\sV|$. Cada vector se codifica de manera que para la $i$-ésima palabra (según la asignación dada por sus repeticiones) se le da el valor en vector de:
+\begin{center}
+\begin{tabular}{cccccccc}
+           &     & $1$ &           & $i$   &          & $|\sV|$ &  \\
+  $\vw = $ & $[$ & $0$ & $\ldots$  & $1$ & $\ldots$    & $0$ & $]^{\top}$
+\end{tabular}
+\end{center}
+
+De modo que el vector solo tendrá un $1$ en la posición $i$-ésima y ceros en el resto del vector. La notación que se usara para representar este tipo de vectores es con $\ve^{(i)}$, a veces llamado como \newterm{vector estándar base}.
+
+Esta representación permite también codificar un conjunto de palabras presentes dentro de una secuencia $\vtkw\in\sV^{k}$ de $k$ $n$-gramas por medio de realizar la suma vectorial $\vs$ de cada representación, dado como:
+\begin{equation}
+  \vs = \sum_{\tkw_i\in\vtkw} \ve^{(i)}
+\end{equation}
+
+\subsubsection{\glsentrylong{tfidf}}
+\todo[inline]{Por hacer}
+
+\subsubsection{Modelos de lenguaje neural (\glsentrylong{nlm})}
 % \todo[inline]{Por hacer, pagina 451 Deep Learning}
 Los modelos de lenguaje neural (o \gls{nlm} en inglés), son modelos de lenguaje diseñados para mitigar el problema de la \textit{maldición de dimensionalidad} para el modelado de secuencias de lenguaje natural por medio de utilizar una representación distribuida de palabras. Estos modelos comparten fortalezas estadísticas entre una palabra (y su contexto) a otras palabras similares y contextos.
 
-Algunas veces se les llama a estas representaciones de palabras como \newterm{embeddings de palabras} (o \textsl{word embeddings} en inglés). En esta interpretación, se representan en un espacio de características de dimensión menor al tamaño del vocabulario. En una representación tal como en \gls{bow} (a veces referidos como vectores ``one-hot''), la distancia entre una representación de palabra con cualquier otra tiene una distancia de $\sqrt{2}$. En contraste, las representaciones de palabras en \gls{nlm} pretenden que la distancia entre representaciones de palabras que ocurren en contextos similares sean pequeños. Esto por lo general produce que palabras con significados similares sean consideradas vecinos por su cercanía.
+Algunas veces se les llama a estas representaciones de palabras como \newterm{embeddings de palabras} (o \textsl{word embeddings} en inglés). En esta interpretación, se representan en un espacio de características de dimensión menor al tamaño del vocabulario. En una representación tal como en \gls{bow} (a veces referidos como vectores ``one-hot''), la distancia entre una representación de palabra con cualquier otra tiene una distancia de $\sqrt{2}$. En contraste, las representaciones de palabras en \gls{nlm} pretenden que la distancia entre representaciones de palabras que ocurren en contextos similares sea pequeña. Esto por lo general produce que palabras con significados similares sean consideradas vecinos por su cercanía.
 
-Este tipo de representaciones son particularmente útiles para modelos de redes neuronales, debido a que estas trabajan de manera ``nativa'' con vectores en espacios dimensionales moderadamente grandes, mientras que un vector \emph{one-hot} no permite crear una diferencia de semántica de las secuencias de texto. Particularmente es deseable para redes neuronales (particularmente con redes \gls{mlp}) que los vectores de entrada no sean tan grandes debido a que pueden ocasionar \gls{overfitting}, generando la necesidad de adicionar una capa oculta solo con el propósito de reducir la dimensionalidad de esa representación.
+Este tipo de representaciones son particularmente útiles para modelos de redes neuronales, debido a que estas trabajan de manera ``nativa'' con vectores en espacios dimensionales moderadamente grandes, mientras que un vector \emph{one-hot} no permite crear una diferencia de semántica de las secuencias de texto. Particularmente es deseable para redes neuronales (especialmente con redes \gls{mlp}) que los vectores de entrada no sean tan grandes debido a que pueden ocasionar \gls{overfitting}, generando la necesidad de adicionar una capa oculta solo con el propósito de reducir la dimensionalidad de esa representación.
+
+\subsubsection{Similaridad de embeddings de palabras}
+\todo[inline]{Por hacer}
+
+% ================================================================
 
 \subsection{Etiquetado de \glsentrylong{pos}}
 \todo[inline]{Por hacer, pagina 151 Speech and Language Processing \cite{jurafsky-martin}}
+
 
 \subsection{\glsentrylong{hmm}}
 \todo[inline]{Por hacer, pagina 312 y 603 Machine Learning \cite{murphymachinel}}

@@ -641,7 +641,7 @@ La representación de vectores \gls{bow} consiste en representar cada palabra de
 \end{tabular}
 \end{center}
 
-De modo que el vector solo tendrá un $1$ en la posición $i$-ésima y ceros en el resto del vector. La notación que se usara para representar este tipo de vectores es con $\ve^{(i)}$, a veces llamado como \newterm{vector estándar base}.
+De modo que el vector solo tendrá un $1$ en la posición $i$-ésima y ceros en el resto del vector. La notación que se usara para representar este tipo de vectores es con $\ve^{(i)}$, a veces llamado como \newterm{vector base estándar}.
 
 Esta representación permite también codificar un conjunto de palabras presentes dentro de una secuencia $\vtkw\in\sV^{k}$ de $k$ $n$-gramas por medio de realizar la suma vectorial $\vs$ de cada representación, dado como:
 \begin{equation}
@@ -694,7 +694,13 @@ Algunas veces se les llama a estas representaciones de palabras como \newterm{em
 Este tipo de representaciones son particularmente útiles para modelos de redes neuronales, debido a que estas trabajan de manera ``nativa'' con vectores en espacios dimensionales moderadamente grandes, mientras que un vector \emph{one-hot} no permite crear una diferencia de semántica de las secuencias de texto. Particularmente es deseable para redes neuronales (especialmente con redes \gls{mlp}) que los vectores de entrada no sean tan grandes debido a que pueden ocasionar \gls{overfitting}, dificultando optimizar nuestro modelo para que generalice.
 
 \subsubsection{Similaridad de embeddings de palabras}
-\todo[inline]{Por hacer}
+Para definir la similaridad entre dos términos $\tku$ y $\tkv$, es necesario establecer una métrica entre estos de forma que nos den una estimación de su similaridad. La métrica de similaridad mas usada es el coseno del ángulo entre ambos vectores representativos de ambas palabras, representada en la \equationref{eq:cosine-similarity-estimate}.
+
+\begin{equation} \label{eq:cosine-similarity-estimate}
+  \mathrm{similaridad}(\tku, \tkv) = \cos(\theta) = \frac{\vu \times \vv}{\norm{\vu} \norm{\vv}}
+\end{equation}
+
+Donde $\vu$ y $\vv$ son la representación en vector de los términos $\tku$ y $\tkv$ respectivamente. No existe diferencia en el calculo cuando se realiza una estimación de similaridad entre dos documentos de un \gls{corpus} $\train$.
 
 % ================================================================
 

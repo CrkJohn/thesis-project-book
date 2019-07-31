@@ -649,7 +649,41 @@ Esta representación permite también codificar un conjunto de palabras presente
 \end{equation}
 
 \subsubsection{\glsentrylong{tfidf}}
-\todo[inline]{Por hacer}
+Otra representación común en \gls{nlp} es la de \gls{tfidf}, que se divide en dos partes, expresadas en la \equationref{eq:tf-repr}, la \equationref{eq:idf-repr} y la composición de ambas en la \equationref{eq:tfidf-repr}, donde $\train$ es el \gls{corpus} de palabras. Este es un peso asignado consiste en penalizar palabras que ocurren mucho en un documento pero no mucho en el \gls{corpus} o bien de penalizar la palabras que se repiten poco en un documento pero se repiten mucho en el \gls{corpus}, por lo que los puntos medios entre ambos tienen los mayores valores.
+
+\begin{equation} \label{eq:tf-repr}
+  \mathrm{tf}(\tkt, \vtkd) = \text{Frecuencia del $n$-grama $\tkt$ en el documento $\vtkd$}
+\end{equation}
+
+Existen diferentes variaciones para representar el conteo de términos \textbf{tf} de forma normalizada, como se representa en el \tableref{table:tf}.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|} \hline
+  \textbf{Esquema}          & \textbf{Peso de tf} \\ \hline
+  Binario                   & $0, 1$ \\ \hline
+  Conteo directo            & $f_{\tkt, \vtkd}$ \\ \hline
+  Frecuencia de términos    & $f_{\tkt, \vtkd} / \sum_{\tkt' \in \vtkd}f_{\tkt', \vtkd}$ \\ \hline
+  Normalización logarítmica & $1 + \log(f_{\tkt, \vtkd})$ \\ \hline
+\end{tabular}
+\caption{Variaciones de $\mathrm{tf}$}
+\label{table:tf}
+\end{table}
+
+\begin{equation} \label{eq:idf-repr}
+  \mathrm{idf}(\tkt, \train) = \mathrm{log}\Bigg( \frac{N}{|\{\vtkd \in \train : \tkt \in \vtkd\}|} \Bigg) ; N = |\train|
+\end{equation}
+
+\begin{equation} \label{eq:tfidf-repr}
+  \mathrm{tfidf}(\tkt, \vtkd, \train) = \mathrm{tf}(\tkt, \vtkd) \cdot \mathrm{idf}(\tkt, \train)
+\end{equation}
+
+Esta puntuación no se coloca directamente en vectores que irían a representar palabras individuales, sino que representan típicamente a documentos completos que tienen un vocabulario $\sV$ en común. Esta representación es muy utilizada para encontrar similitud entre documentos. Formalmente definimos el vector $\vd$ representativo de un documento $\vtkd$ tomado de un \gls{corpus} $\train$ e $\mathrm{idx}(\cdot)$ como el índice asignado de un termino $\tkt\in\vtkd$ en la siguiente ecuación:
+\begin{equation}
+  \vd = \sum_{\tkt\in\vtkd} \mathrm{tfidf}(\tkt, \vtkd, \train) \ve^{(\mathrm{idx(\tkt)})}
+\end{equation}
+
+El vector $\vd$ esta en $\R^{|\sV|}$, por consecuencia $\ve^{(\cdot)}$ también tiene la misma dimensión en este contexto. También se tiene que $\mathrm{idx}(\cdot)$ concierne a índices dentro de $\train$, por lo que su rango es $\{ 1, \ldots, |\sV| \}$.
 
 \subsubsection{Modelos de lenguaje neural (\glsentrylong{nlm})}
 % \todo[inline]{Por hacer, pagina 451 Deep Learning}
@@ -657,7 +691,7 @@ Los modelos de lenguaje neural (o \gls{nlm} en inglés), son modelos de lenguaje
 
 Algunas veces se les llama a estas representaciones de palabras como \newterm{embeddings de palabras} (o \textsl{word embeddings} en inglés). En esta interpretación, se representan en un espacio de características de dimensión menor al tamaño del vocabulario. En una representación tal como en \gls{bow} (a veces referidos como vectores ``one-hot''), la distancia entre una representación de palabra con cualquier otra tiene una distancia de $\sqrt{2}$. En contraste, las representaciones de palabras en \gls{nlm} pretenden que la distancia entre representaciones de palabras que ocurren en contextos similares sea pequeña. Esto por lo general produce que palabras con significados similares sean consideradas vecinos por su cercanía.
 
-Este tipo de representaciones son particularmente útiles para modelos de redes neuronales, debido a que estas trabajan de manera ``nativa'' con vectores en espacios dimensionales moderadamente grandes, mientras que un vector \emph{one-hot} no permite crear una diferencia de semántica de las secuencias de texto. Particularmente es deseable para redes neuronales (especialmente con redes \gls{mlp}) que los vectores de entrada no sean tan grandes debido a que pueden ocasionar \gls{overfitting}, generando la necesidad de adicionar una capa oculta solo con el propósito de reducir la dimensionalidad de esa representación.
+Este tipo de representaciones son particularmente útiles para modelos de redes neuronales, debido a que estas trabajan de manera ``nativa'' con vectores en espacios dimensionales moderadamente grandes, mientras que un vector \emph{one-hot} no permite crear una diferencia de semántica de las secuencias de texto. Particularmente es deseable para redes neuronales (especialmente con redes \gls{mlp}) que los vectores de entrada no sean tan grandes debido a que pueden ocasionar \gls{overfitting}, dificultando optimizar nuestro modelo para que generalice.
 
 \subsubsection{Similaridad de embeddings de palabras}
 \todo[inline]{Por hacer}

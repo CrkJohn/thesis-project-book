@@ -98,34 +98,7 @@ Así mismo, en la literatura de \gls{nlp} es muy común el uso de diferentes rep
 
 El lugar de donde son tomadas la palabras para representar al \gls{bow} están contenidas en un conjunto de palabras conocido como el \gls{corpus} de palabras, de esa misma manera también es posible tener \gls{corpus} de otros elementos como sentencias de texto (mas de una palabra compuesta), letras individuales, entre otras.
 
-Otra representación común en \gls{nlp} es la de \gls{tfidf}, que se divide en dos partes, expresadas en la \equationref{eq:tf-repr}, la \equationref{eq:idf-repr} y la composición de ambas en la \equationref{eq:tfidf-repr}, donde $D$ es el \gls{corpus} de palabras. Este es un peso asignado consiste en penalizar palabras que ocurren mucho en un documento pero no mucho en el \gls{corpus} o bien de penalizar la palabras que se repiten poco en un documento pero se repiten mucho en el \gls{corpus}, por lo que un punto medio entre ambos es recompensado.
-
-\begin{equation} \label{eq:tf-repr}
-  \text{tf}(t,d) = \text{Frecuencia del termino (o n--grama) } t \text{ en el documento } d
-\end{equation}
-
-Existen diferentes variaciones para representar el conteo de términos \textbf{tf} de forma normalizada, como se representa en el \tableref{table:tf}.
-
-\begin{table}[h!]
-\centering
-\begin{tabular}{|l|l|} \hline
-  \textbf{Esquema}          & \textbf{Peso de tf} \\ \hline
-  Binario                   & $0, 1$ \\ \hline
-  Conteo directo            & $f_{t, d}$ \\ \hline
-  Frecuencia de términos    & $f_{t, d} / \sum_{t' \in d}f_{t', d}$ \\ \hline
-  Normalización logarítmica & $1 + \text{log}(f_{t, d})$ \\ \hline
-\end{tabular}
-\caption{Variaciones de \textbf{tf}}
-\label{table:tf}
-\end{table}
-
-\begin{equation} \label{eq:idf-repr}
-  \text{idf}(t, D) = \text{log}\Bigg( \frac{N}{|\{d \in D : t \in d\}|} \Bigg) ; N = |D|
-\end{equation}
-
-\begin{equation} \label{eq:tfidf-repr}
-  \text{tf-idf}(t, d, D) = \text{tf}(t, d) \cdot \text{idf}(t, D)
-\end{equation}
+\todo[inline]{Actualizar seccion}
 
 \subsubsection{Creación del \glsentrylong{corpus} de palabras}
 Debido a que los textos que se encuentran en Twitter no tienen forma estructurada es necesario realizar un preprocesamiento de cada post recolectado para luego contar la frecuencia de cada palabra dentro del \gls{corpus} y así establecer las primeras $N$ palabras mas usadas que van a componer el \gls{corpus} de palabras.

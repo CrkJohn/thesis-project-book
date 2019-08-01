@@ -48,7 +48,7 @@ De manera similar la forma de la salida puede ser en principio cualquier cosa, p
 
 El segundo tipo principal de \gls{machinel} es el descriptivo o \newterm{aprendizaje no--supervisado} (\gls{unsupervisedl}), en este solo están disponibles los datos de entrada $\train = \{\vx_i\}_{i=1}^{N}$, y la meta es encontrar ``patrones interesantes'' en los datos. Este es un problema mucho menos definido, debido a que no se conocen los tipos de patrones que se quieren encontrar, y no hay una métrica obvia de error (no como aprendizaje supervisado en la que se puede comparar nuestra predicción de $y$ para un $\vx$ con el valor observado).
 
-Un tercer tipo de aprendizaje de maquina es conocido como \newterm{\gls{reinforcedl}}, el cual es un tipo menos usado. Este es útil cuando se quiere aprender como actuar o comportarse cuando se recibe una recompensa ocasional o una señal de castigo.
+Un tercer tipo de aprendizaje de maquina es conocido como \newterm{aprendizaje de refuerzo} (o \gls{reinforcedl}en inglés), el cual es un tipo menos usado. Este es útil cuando se quiere aprender como actuar o comportarse cuando se recibe una recompensa ocasional o una señal de castigo.
 
 % ================================================================
 \section{Minería de datos (\glsentrylong{datamining})} \label{sec:datamining}
@@ -91,8 +91,15 @@ Una representación visual de las capas de una de estas redes se encuentra en la
 Aunque esta es una representación simplificada de este tipo de redes, este libro no tratara de profundizar en los detalles técnicos al ser estos muy amplios (véase \cite{deeplearning} y \cite{bishop-pattern-recognition}).
 
 \subsection{Redes neuronales recurrentes (\glsentrylong{rnn})}
-\todo[inline]{Expandir capitulo con contenido de pag 368 de Deep Learning}
-La naturaleza recurrente de estas redes viene del hecho de representarse como redes donde su salida hace parte de la entrada a la siguiente iteración de la red, tal como se aprecia en la \figureref{fig:rnn-classic-simple}.
+% \todo[inline]{Expandir capitulo con contenido de pag 368 de Deep Learning}
+Las redes neuronales recurrentes (o \gls{rnn} en inglés) son una familia de redes neuronales para el procesamiento de datos secuenciales. Una \gls{rnn} es una red que se especializa para el procesamiento de una secuencia de valores $\vx^{(1)}, \ldots, \vx^{(\tau)}$. La mayoría de redes \gls{rnn} pueden procesar secuencias de longitud variable.
+
+Estas redes utilizan un concepto de \gls{machinel} llamado \newterm{compartido de parámetros} (o \textsl{parameter sharing} en inglés) a través de diferentes partes de un modelo. Esto nos permite extender y aplicar el modelo a muestras de diferentes longitudes y generalizar sobre ellas. Haciendo que el procesamiento de los parámetros sea independiente del orden de la secuencia con los que son dados a la red.
+
+Podemos denotar entonces cada paso de una \gls{rnn} (como se muestras en la \figureref{fig:rnn-classic-simple}) como la aplicación recursiva de la formula:
+\begin{equation}
+  \vh^{(t)} = f(\vh^{(t-1)}; \vtheta)
+\end{equation}
 
 \begin{figure}[H]
   \centering
@@ -103,12 +110,42 @@ La naturaleza recurrente de estas redes viene del hecho de representarse como re
 \label{fig:rnn-classic-simple}
 \end{figure}
 
-Este tipo de redes tiene la característica de recordar salidas y entradas pasadas de datos, de forma que decisiones futuras respecto a una clasificación pueden tener una mejor forma de basarse\todo{ajustar la redaccion de esta frase}. Las redes neuronales (\glspl{ann}) típicamente no pueden hacer estas operaciones ya que no tienen incorporada la habilidad de recordar entradas y salidas pasadas, sino que se realiza un entrenamiento con información de entrada y de salida que se conoce con anticipación, de forma que su salida solo se concentra en su entrada inmediata de datos.
+Donde $\vh^{(t)}$ es el estado del sistema en el instante $t$ que además se le suele denotar con la letra `h' por tratarse de estados ocultos (\textsl{hidden}) en la red. Los parámetros $\vtheta$ no varían por el instante de tiempo en la que se este aplicando la función $f$ (compartido de parámetros).
 
-Por este motivo, las \glspl{rnn} poseen una gran ventaja en situaciones puntuales, tales como el caso expuesto al inicio de esta sección (\gls{namedent}), sin embargo, el modelo clásico de \gls{rnn} es como la arquitectura presentada en la \figureref{fig:rnn-classic}, esta no provee resultados significativos debido a limitantes respecto al nivel de recordación que tienen originalmente.\todo[inline]{creo que hay que ajustar este parrafo porque primero se dice que las RNN son muy buenas y traen grandes ventajas por su capacidad de recordación y luego se termina diciendo que no provee resultados significativos. Por favor ajustar para que sea mas objetivo y no se vea la contradicción}
+Aunque en la aplicación para secuencias sobre la red se agrega el parámetro de entrada $\vx^{(t)}$ como:
+\begin{equation}
+  \vh^{(t)} = f(\vh^{(t-1)}, \vx^{(t)} ; \vtheta) = f(f(\cdots f(\vh^{(0)}, \vx^{(1)}; \vtheta) \cdots ; \vtheta); \vtheta)
+\end{equation}
+
+En base a la \figureref{fig:rnn-classic}, puede observarse el uso de una función $\tanh$, sin embargo las operaciones involucradas antes y después de esta función son importantes, y están dadas por medio de tres matrices particulares, donde la matriz $\mU$ realiza conversión de los parámetros de entrada $\vx^{(t)}$ a las capas ocultas de la red, la matriz $\mW$ que realiza transformaciones entre una iteración de la red a la siguiente iteración, y finalmente la matriz $\mV$ que realiza la transformación de las capas ocultas a la salida ``sin procesar'' $\vo^{(t)}$, que luego pasa a ser el resultado $\hat{\vy}^{(t)}$ con una operación de normalización. El proceso se da como:
+\begin{equation}
+  \va^{(t)} = \vb + \mW \vh^{(t-1)} + \mU \vx^{(t)}
+\end{equation}
+\begin{equation}
+  \vh^{(t)} = \tanh(\va^{(t)})
+\end{equation}
+\begin{equation}
+  \vo^{(t)} = \vc + \mV \vh^{(t)}
+\end{equation}
+\begin{equation} \label{eq:rnn-softmax-output}
+  \hat{\vy}^{(t)} = \softmax(\vo^{(t)})
+\end{equation}
+Los valores de $\vb$ y $\vc$ son valores de ajuste. La función $\softmax$ en la \equationref{eq:rnn-softmax-output} normaliza los valores dados de $\vo^{(t)}$ para estar en el intervalo $[0, 1]$, esto permite tratar las salidas de la red como probabilidades y también para evitar \gls{underfitting} por valores muy grandes.
+
+\begin{figure}[H]
+  \centering
+  % \missingfigure{Hacer la arquitectura en yEd}
+  \includegraphics[width=0.9\textwidth]{Figures/LSTM3-SimpleRNN.png}
+\decoRule
+\caption[Red \glsentrytext{rnn} clásica]{Red \glsentrytext{rnn} clásica. Tomado de \cite{understanding-lstm}.}
+\label{fig:rnn-classic}
+\end{figure}
 
 \subsection{Redes neuronales recurrentes bidireccionales (\glsentrylong{birnn})}
-\todo[inline]{Por hacer, con pag 383 Deep Learning}
+% \todo[inline]{Por hacer, con pag 383 Deep Learning}
+Las redes \gls{rnn} solo toman datos de forma \textsl{feedforward}, es decir, que la información de entrada y de la iteración anterior de la red solo van en una dirección, tomando solo valores del pasado en la secuencia de entrada.
+
+En muchas aplicaciones quisiéramos tener en cuenta toda la secuencia. Es por esto que existen las redes \gls{birnn}. Estas redes consisten en que igual a las redes \gls{rnn} se toma las entradas previas de una secuencia, pero también se agrega otra red \gls{rnn} en el sentido contrario de forma que la secuencia se procesa de final a inicio. Se puede entonces denotar el estado de ambas redes con $\vh^{(t)}$ siendo el estado de la red \gls{rnn} que va de inicio a fin, y $\vg^{(t)}$ como el estado de la red \gls{rnn} que va de fin a inicio, por lo que la salida $\vo^{(t)}$ ahora depende de tanto entradas anteriores como posteriores en la secuencia.
 
 % ================================================================
 % ================================================================
@@ -628,7 +665,7 @@ Donde $\eps$ se considera el token (o en este caso palabra) vació. Y la definic
 
 % ================================================================
 
-\subsection{Representaciones de palabras como vectores} \label{ch:word-representations}
+\subsection{Representaciones de palabras y documentos como vectores} \label{ch:word-representations}
 % \todo[inline]{Poner sobre los Bag of Words y TF-IDF aqui y cambiar la seccion de propuesta para mencionar esta seccion}
 Por lo general cualquier modelo de \gls{ai}, incluyendo los que se encuentran en \gls{machinel} y \gls{nlp} deben utilizar internamente representaciones escalares, vectores, matrices y tensores. \gls{nlp} por lo tanto debe utilizar algunas de estas para alimentar sus modelos, es por esto que es importante hablar de las diferentes representaciones que se les da a los diferentes elementos fundamentales, tales como los $n$-gramas (véase la \sectionref{ch:ngrams}). Existen diferentes representaciones que se les puede dar a las palabras, todas con usos diferentes, ventajas y desventajas, en particular interés están \glsentrylong{bow}, \glsentrylong{tfidf} y embeddings de palabras.
 
@@ -693,7 +730,7 @@ Algunas veces se les llama a estas representaciones de palabras como \newterm{em
 
 Este tipo de representaciones son particularmente útiles para modelos de redes neuronales, debido a que estas trabajan de manera ``nativa'' con vectores en espacios dimensionales moderadamente grandes, mientras que un vector \emph{one-hot} no permite crear una diferencia de semántica de las secuencias de texto. Particularmente es deseable para redes neuronales (especialmente con redes \gls{mlp}) que los vectores de entrada no sean tan grandes debido a que pueden ocasionar \gls{overfitting}, dificultando optimizar nuestro modelo para que generalice.
 
-\subsubsection{Similaridad de embeddings de palabras}
+\subsubsection{Similaridad de embeddings de palabras o documentos}
 Para definir la similaridad entre dos términos $\tku$ y $\tkv$, es necesario establecer una métrica entre estos de forma que nos den una estimación de su similaridad. La métrica de similaridad mas usada es el coseno del ángulo entre ambos vectores representativos de ambas palabras, representada en la \equationref{eq:cosine-similarity-estimate}.
 
 \begin{equation} \label{eq:cosine-similarity-estimate}

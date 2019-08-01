@@ -702,6 +702,7 @@ Existen diferentes variaciones para representar el conteo de términos \textbf{t
   Conteo directo            & $f_{\tkt, \vtkd}$ \\ \hline
   Frecuencia de términos    & $f_{\tkt, \vtkd} / \sum_{\tkt' \in \vtkd}f_{\tkt', \vtkd}$ \\ \hline
   Normalización logarítmica & $1 + \log(f_{\tkt, \vtkd})$ \\ \hline
+  Normalización $k$ doble   & $k + (1 - k) \frac{f_{\tkt, \vtkd}}{\max_{\tkt^{\prime}\in\vtkd} f_{\tkt^{\prime}, \vtkd}}$ \\ \hline
 \end{tabular}
 \caption{Variaciones de $\mathrm{tf}$}
 \label{table:tf}
@@ -710,6 +711,21 @@ Existen diferentes variaciones para representar el conteo de términos \textbf{t
 \begin{equation} \label{eq:idf-repr}
   \mathrm{idf}(\tkt, \train) = \mathrm{log}\Bigg( \frac{N}{|\{\vtkd \in \train : \tkt \in \vtkd\}|} \Bigg) ; N = |\train|
 \end{equation}
+
+Otras variaciones de $\mathrm{idf}$ se encuentran en el \tableref{table:idf}, donde $n_\tkt = |\{\vtkd \in \train : \tkt \in \vtkd\}|$.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|} \hline
+  \textbf{Esquema}          & \textbf{Peso de tf} \\ \hline
+  Unitario                      & $1$ \\ \hline
+  $\mathrm{idf}$ suavizada      & $\log(\frac{N}{1+n_\tkt})$ \\ \hline
+  $\mathrm{idf}$ máxima         & $\log(\frac{\max_{\tkt^{\prime}\in\vtkd}n_{\tkt^{\prime}}}{1+n_\tkt})$ \\ \hline
+  $\mathrm{idf}$ probabilística & $\log(\frac{N - n_\tkt}{n_\tkt})$ \\ \hline
+\end{tabular}
+\caption{Variaciones de $\mathrm{idf}$}
+\label{table:idf}
+\end{table}
 
 \begin{equation} \label{eq:tfidf-repr}
   \mathrm{tfidf}(\tkt, \vtkd, \train) = \mathrm{tf}(\tkt, \vtkd) \cdot \mathrm{idf}(\tkt, \train)

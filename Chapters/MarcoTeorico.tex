@@ -78,7 +78,7 @@ Considérese a $d_i$ como la dimensión de la capa $i$-\'esima, cada una de las 
 
 Durante el entrenamiento de estas redes el objetivo final es que $\vy \approx f^{\ast}(\vx)$, el algoritmo de aprendizaje debe decidir como acomodar las capas intermedias $f^{(i)}$ para dar el resultado deseado.
 
-Una representación visual de las capas de una de estas redes se encuentra en la \figureref{fig:deep-feedforward-network}.
+Una representación visual de las capas de una de estas redes se encuentra en la \cref{fig:deep-feedforward-network}.
 
 \begin{figure}[H]
 \centering
@@ -96,7 +96,7 @@ Las redes neuronales recurrentes (o \gls{rnn} en inglés) son una familia de red
 
 Estas redes utilizan un concepto de \gls{machinel} llamado \newterm{compartido de parámetros} (o \textsl{parameter sharing} en inglés) a través de diferentes partes de un modelo. Esto nos permite extender y aplicar el modelo a muestras de diferentes longitudes y generalizar sobre ellas. Haciendo que el procesamiento de los parámetros sea independiente del orden de la secuencia con los que son dados a la red.
 
-Podemos denotar entonces cada paso de una \gls{rnn} (como se muestras en la \figureref{fig:rnn-classic-simple}) como la aplicación recursiva de la formula:
+Podemos denotar entonces cada paso de una \gls{rnn} (como se muestras en la \cref{fig:rnn-classic-simple}) como la aplicación recursiva de la formula:
 \begin{equation}
   \vh^{(t)} = f(\vh^{(t-1)}; \vtheta)
 \end{equation}
@@ -117,7 +117,7 @@ Aunque en la aplicación para secuencias sobre la red se agrega el parámetro de
   \vh^{(t)} = f(\vh^{(t-1)}, \vx^{(t)} ; \vtheta) = f(f(\cdots f(\vh^{(0)}, \vx^{(1)}; \vtheta) \cdots ; \vtheta); \vtheta)
 \end{equation}
 
-En base a la \figureref{fig:rnn-classic}, puede observarse el uso de una función $\tanh$, sin embargo las operaciones involucradas antes y después de esta función son importantes, y están dadas por medio de tres matrices particulares, donde la matriz $\mU$ realiza conversión de los parámetros de entrada $\vx^{(t)}$ a las capas ocultas de la red, la matriz $\mW$ que realiza transformaciones entre una iteración de la red a la siguiente iteración, y finalmente la matriz $\mV$ que realiza la transformación de las capas ocultas a la salida ``sin procesar'' $\vo^{(t)}$, que luego pasa a ser el resultado $\hat{\vy}^{(t)}$ con una operación de normalización. El proceso se da como:
+En base a la \cref{fig:rnn-classic}, puede observarse el uso de una función $\tanh$, sin embargo las operaciones involucradas antes y después de esta función son importantes, y están dadas por medio de tres matrices particulares, donde la matriz $\mU$ realiza conversión de los parámetros de entrada $\vx^{(t)}$ a las capas ocultas de la red, la matriz $\mW$ que realiza transformaciones entre una iteración de la red a la siguiente iteración, y finalmente la matriz $\mV$ que realiza la transformación de las capas ocultas a la salida ``sin procesar'' $\vo^{(t)}$, que luego pasa a ser el resultado $\hat{\vy}^{(t)}$ con una operación de normalización. El proceso se da como:
 \begin{equation}
   \va^{(t)} = \vb + \mW \vh^{(t-1)} + \mU \vx^{(t)}
 \end{equation}
@@ -130,7 +130,7 @@ En base a la \figureref{fig:rnn-classic}, puede observarse el uso de una funció
 \begin{equation} \label{eq:rnn-softmax-output}
   \hat{\vy}^{(t)} = \softmax(\vo^{(t)})
 \end{equation}
-Los valores de $\vb$ y $\vc$ son valores de ajuste. La función $\softmax$ en la \equationref{eq:rnn-softmax-output} normaliza los valores dados de $\vo^{(t)}$ para estar en el intervalo $[0, 1]$, esto permite tratar las salidas de la red como probabilidades y también para evitar \gls{underfitting} por valores muy grandes.
+Los valores de $\vb$ y $\vc$ son valores de ajuste. La función $\softmax$ en la \cref{eq:rnn-softmax-output} normaliza los valores dados de $\vo^{(t)}$ para estar en el intervalo $[0, 1]$, esto permite tratar las salidas de la red como probabilidades y también para evitar \gls{underfitting} por valores muy grandes.
 
 \begin{figure}[H]
   \centering
@@ -159,7 +159,7 @@ Definido formalmente, clasificación es la tarea de aprender una función objeti
 
 \subsection{Sistemas Basados en Conocimiento (\glsentrylong{kbs})} \label{sec:KBS}
 \todo[inline]{Explicar bien en que consiste la base de conocimiento y el motor de inferencia}
-Según \cite{sajja2010knowledge}, los \gls{kbs} son uno de los mayores miembros de la familia de \gls{ai}. El \gls{kbs} consiste de una \gls{knowledgebase} y un programa de búsqueda llamado \gls{inferenceengine} representado en la \figureref{fig:kbs-arch}. La \gls{knowledgebase} puede ser usado como un repositorio de conocimiento de varias formas.
+Según \cite{sajja2010knowledge}, los \gls{kbs} son uno de los mayores miembros de la familia de \gls{ai}. El \gls{kbs} consiste de una \gls{knowledgebase} y un programa de búsqueda llamado \gls{inferenceengine} representado en la \cref{fig:kbs-arch}. La \gls{knowledgebase} puede ser usado como un repositorio de conocimiento de varias formas.
 
 Existen 5 tipos de \gls{kbs}\todo{Explicar brevemente cada uno de los 5 tipos}, donde uno de ellos es conocido como \gls{expertsystems}, usados como \gls{rulebasedsys}, donde su \gls{knowledgebase} esta dado como reglas y el \gls{inferenceengine} esta dado por algo llamado \gls{workingmemory}, que representa los hechos que se conocen inicialmente del sistema junto con los nuevos hechos que se van dando como inferencia de las reglas.
 
@@ -173,7 +173,7 @@ Existen 5 tipos de \gls{kbs}\todo{Explicar brevemente cada uno de los 5 tipos}, 
 
 Estas reglas pueden resumirse como una colección de condicionales de la forma \textbf{IF/ELSE} que se componen de un \emph{antecedente} y un \emph{consecuente}.
 
-Existen dos tipos de \gls{rulebasedsys}, definidos como \gls{deductivesys} y \gls{reactivesys}, donde el \gls{deductivesys} tiene como objetivo realizar una conclusión en base a los hechos iniciales en la \gls{workingmemory}, por el otro lado se tienen los \gls{reactivesys}, los cuales de igual manera a los \gls{deductivesys}, toman los hechos de la \gls{workingmemory} y realizan sea una acción interactiva con su entorno o bien una modificación de los hechos que se encuentran en la \gls{workingmemory} tal como la adición o eliminación de hechos. Tómese el ejemplo de la \equationref{eq:rbs-example} tomada de \cite{Mendel}, donde \emph{x} es la temperatura y \emph{AC} es aire acondicionado.
+Existen dos tipos de \gls{rulebasedsys}, definidos como \gls{deductivesys} y \gls{reactivesys}, donde el \gls{deductivesys} tiene como objetivo realizar una conclusión en base a los hechos iniciales en la \gls{workingmemory}, por el otro lado se tienen los \gls{reactivesys}, los cuales de igual manera a los \gls{deductivesys}, toman los hechos de la \gls{workingmemory} y realizan sea una acción interactiva con su entorno o bien una modificación de los hechos que se encuentran en la \gls{workingmemory} tal como la adición o eliminación de hechos. Tómese el ejemplo de la \cref{eq:rbs-example} tomada de \cite{Mendel}, donde \emph{x} es la temperatura y \emph{AC} es aire acondicionado.
 
 \begin{equation} \label{eq:rbs-example}
   \left\{ \begin{array}{ll}
@@ -202,7 +202,7 @@ Los cinco tipos de sistemas basados en conocimiento que existen son:
 \gls{svm} es una técnica de clasificación que tiene sus raíces en la teoría de aprendizaje estadístico que ha mostrado resultados empíricos prometedores en muchas aplicaciones practicas, desde reconocimiento de dígitos escritos a mano a categorización de texto. \gls{svm} también funciona muy bien con datos de alta dimensionalidad. Otro aspecto destacable de esta aproximación es que representa la frontera de decisión usando un subconjunto de las muestras de entrenamiento, conocidos como los \emph{support vectors}.
 
 \subsubsection{Maximum Margin Hyperplanes}
-Se puede entender a los \gls{mmh} como hiper-planos que ayudan a separar datos en un hiper-espacio y que poseen un margen de decisión entre los datos, como ejemplo tómese la \figureref{fig:svm-hyperplanes}, donde el hiper-plano $B_1$ tiene un margen de decisión mas grande que el hiper-plano $B_2$.
+Se puede entender a los \gls{mmh} como hiper-planos que ayudan a separar datos en un hiper-espacio y que poseen un margen de decisión entre los datos, como ejemplo tómese la \cref{fig:svm-hyperplanes}, donde el hiper-plano $B_1$ tiene un margen de decisión mas grande que el hiper-plano $B_2$.
 
 \begin{figure}[H]
    \centering
@@ -212,7 +212,7 @@ Se puede entender a los \gls{mmh} como hiper-planos que ayudan a separar datos e
    \label{fig:svm-hyperplanes}
 \end{figure}
 
-Finalmente, el objetivo final de los \gls{svm} es la búsqueda de un hiper-plano con el mayor margen de decisión. Existen dos tipos de \gls{svm}, el lineal y el no--lineal. El lineal realiza la separación de los datos con su hiper-plano a partir de los datos de entrada en su espacio vectorial original, mientras que el no--lineal consta de realizar una transformación de los espacios de los datos de entrada a uno en que sea linealmente separable (véase como ejemplo la \figureref{fig:svm-nonlinear-transforms}), sin embargo al realizar la transformación, el algoritmo de \gls{svm} se ve afectado por la dimensionalidad de la entrada, por lo que existe lo que se conoce como la función \emph{kernel} para remediarlo.
+Finalmente, el objetivo final de los \gls{svm} es la búsqueda de un hiper-plano con el mayor margen de decisión. Existen dos tipos de \gls{svm}, el lineal y el no--lineal. El lineal realiza la separación de los datos con su hiper-plano a partir de los datos de entrada en su espacio vectorial original, mientras que el no--lineal consta de realizar una transformación de los espacios de los datos de entrada a uno en que sea linealmente separable (véase como ejemplo la \cref{fig:svm-nonlinear-transforms}), sin embargo al realizar la transformación, el algoritmo de \gls{svm} se ve afectado por la dimensionalidad de la entrada, por lo que existe lo que se conoce como la función \emph{kernel} para remediarlo.
 
 Estas limitantes de dimensionalidad ocurren por un problema conocido como la \newterm{maldición de dimensionalidad} (o \textsl{curse of dimensionality} en inglés), y se manifiesta cuando el numero de dimensiones en los datos es alta. Particularmente se debe tener muy presente que el numero de configuraciones distintas posibles de un conjunto de variables crezcan de manera exponencial a medida que el numero de variables aumenta. Este caso ocurre con los \glspl{svm} cuando se vuelve necesaria la conversión de espacios vectoriales.
 
@@ -235,7 +235,7 @@ En muchas aplicaciones practicas las relaciones entre un conjunto de atributos y
 Es por esto que es necesario establecer un modelo que utilice relaciones probabilisticas entre sus atributos y sus clases. Debido a esto es util tener presente el \newterm{teorema de Bayes}, un principio estadistico que combina conocimiento previo con nueva evidencia recolectada a partir de los datos.
 
 \subsubsection{Teorema de Bayes} \label{subsec:bayestheo}
-El teorema de Bayes dice que para un par de variables aleatorias $\rx$ e $\ry$, donde $P(\rx=x \mid \ry=y)$ es la probabilidad de que la variable $\rx$ tome el valor $x$ dado que el valor de la variable $\ry$ es $y$. Se tiene entonces la \equationref{eq:bayestheo}.
+El teorema de Bayes dice que para un par de variables aleatorias $\rx$ e $\ry$, donde $P(\rx=x \mid \ry=y)$ es la probabilidad de que la variable $\rx$ tome el valor $x$ dado que el valor de la variable $\ry$ es $y$. Se tiene entonces la \cref{eq:bayestheo}.
 \begin{equation} \label{eq:bayestheo}
   P(\ry \mid \rx) = \frac{P(\rx \mid \ry) P(\ry)}{P(\rx)}
 \end{equation}
@@ -245,14 +245,14 @@ Para denotar el problema de clasificación desde una perspectiva estadística, d
 
 Durante la fase de entrenamiento, es necesario aprender las probabilidades de $P(\rc \mid \rx)$ basándose únicamente en los datos recolectados del conjunto de entrenamiento.
 
-Luego de entrenar el clasificador, la forma en que podemos determinar una clase concreta $c \in \sC$ para un atributo concreto $\vx \in \sX$ es por medio de encontrar la combinación que nos de una mayor probabilidad de nuestro modelo, dándonos una estimación de la clase con $\hat{c}$, tal como se muestra en la \equationref{eq:bayes-clasification-argmax}.
+Luego de entrenar el clasificador, la forma en que podemos determinar una clase concreta $c \in \sC$ para un atributo concreto $\vx \in \sX$ es por medio de encontrar la combinación que nos de una mayor probabilidad de nuestro modelo, dándonos una estimación de la clase con $\hat{c}$, tal como se muestra en la \cref{eq:bayes-clasification-argmax}.
 
 \begin{equation} \label{eq:bayes-clasification-argmax}
   \hat{c} = \argmax_{c\in\sC} P(\rc = c \mid \rx = x)
 \end{equation}
 
 \subsubsection{Clasificador Na\"{\i}ve Bayes} \label{subsec:naivebayes}
-Un clasificador de Na\"{\i}ve Bayes estima la probabilidad condicional de las clases por medio de suponer que los atributos son condicionalmente independientes \mbox{(e.g. $x_i \bot x_j \mid \rc, \forall i, j$)}, dado la etiqueta de clasificación $c$. La suposición de independencia condicional se puede dar por la \equationref{eq:bayes-conditional-independence}.
+Un clasificador de Na\"{\i}ve Bayes estima la probabilidad condicional de las clases por medio de suponer que los atributos son condicionalmente independientes \mbox{(e.g. $x_i \bot x_j \mid \rc, \forall i, j$)}, dado la etiqueta de clasificación $c$. La suposición de independencia condicional se puede dar por la \cref{eq:bayes-conditional-independence}.
 
 \begin{equation} \label{eq:bayes-conditional-independence}
   P(x_i \mid \rc, x_j) = P(x_i \mid \rc), \, i \neq j, \, \forall i, j \in \{1, \ldots, d\}
@@ -262,7 +262,7 @@ Donde cada conjunto de atributos $\sX=\{ x_1, \ldots, x_d \}$ consiste de $d$ at
 \paragraph{Como funciona el clasificador Na\"{\i}ve Bayes}
 Con la suposición de independencia condicional, en vez de computar la probabilidad condicional de clases para cada combinación de $\sX$, solo se debe realizar para establecer la probabilidad condicional de cada $x_i$, dado $\rc$.
 
-Para clasificar un dato de prueba, el clasificador computa la probabilidad posterior para cada clase $\ry$ como se muestra en la \equationref{eq:bayes-classifier}.
+Para clasificar un dato de prueba, el clasificador computa la probabilidad posterior para cada clase $\ry$ como se muestra en la \cref{eq:bayes-classifier}.
 
 \begin{equation} \label{eq:bayes-classifier}
   P(\rc\mid \sX) = \frac{P(\rc) \prod_{i=1}^{d}P(x_i\mid\rc)}{P(\sX)} \Rightarrow P(\rc) \prod_{i=1}^{d}P(x_i\mid\rc)
@@ -280,7 +280,7 @@ El algoritmo de los $k$ vecinos mas cercanos (o \gls{knn} en inglés) es un algo
 
 donde $N_k(\vx, \train)$ son los índices de los $k$ vecinos mas cercanos a $\rvx$ en $\train$ y $[\mathrm{condition}]$ es el \newterm{indicador}, que toma el valor de $1$ cuando la condición es verdadera y $0$ de lo contrario.
 
-Dada la probabilidad de pertenencia de una clase con la \equationref{eq:prob-knn} se puede entonces estimar cual es la clase a la que pertenece un punto $\vx$ por medio de estimar la clase que maximice la probabilidad que se estimo anteriormente como
+Dada la probabilidad de pertenencia de una clase con la \cref{eq:prob-knn} se puede entonces estimar cual es la clase a la que pertenece un punto $\vx$ por medio de estimar la clase que maximice la probabilidad que se estimo anteriormente como
 \begin{equation}
   \hat{y}(\vx) = \argmax_{c} p(y = c \mid \rvx = \vx, \train, k)
 \end{equation}
@@ -293,7 +293,7 @@ Dada la probabilidad de pertenencia de una clase con la \equationref{eq:prob-knn
   \label{fig:knn-example}
 \end{figure}
 
-Tómese como ejemplo la \figureref{fig:knn-comparisons}, en donde se muestra un conjunto de entrenamiento $\train$, las distribuciones de probabilidad dadas para las clases 1 y 2, como también una gráfica que muestra como se clasifica una muestra dependiendo de su ubicación en el espacio.
+Tómese como ejemplo la \cref{fig:knn-comparisons}, en donde se muestra un conjunto de entrenamiento $\train$, las distribuciones de probabilidad dadas para las clases 1 y 2, como también una gráfica que muestra como se clasifica una muestra dependiendo de su ubicación en el espacio.
 
 \begin{figure}[H]
    \centering
@@ -310,7 +310,7 @@ Existen diferentes aproximaciones para los sistemas de anomalías, sin embargo u
 
 Uno de los que se pueden encontrar en la literatura son los sistemas de detección de anomalías basados en realizar un estimado probabilístico con alguna distribución de probabilidad de donde para una serie de características $m$ se trata de estimar una distribución gaussiana $\rmX \sim \mathcal{N}(\mu, \sigma^2)$ que tiene media $\mu$ y varianza $\sigma^2$ por cada característica, por lo que existirán $m$ diferentes distribuciones .
 
-Para estimar cada una las medias y variaciones de cada característica $j$, $\mu$ se estima con la \equationref{eq:anomaly-mu} y $\sigma^2$ se estima con la \equationref{eq:anomaly-sigma}.
+Para estimar cada una las medias y variaciones de cada característica $j$, $\mu$ se estima con la \cref{eq:anomaly-mu} y $\sigma^2$ se estima con la \cref{eq:anomaly-sigma}.
 
 \begin{equation} \label{eq:anomaly-mu}
   \mu_j = \frac{1}{m} \sum_{i=1}^{m} x_j^{(i)}
@@ -320,7 +320,7 @@ Para estimar cada una las medias y variaciones de cada característica $j$, $\mu
   \sigma_j^2 = \frac{1}{m} \sum_{i=1}^{m} (x_j^{(i)} - \mu_j)^2
 \end{equation}
 
-De donde para calcular la probabilidad de que una muestra se trata de una anomalía se calcula la probabilidad $p(x)$, luego de que fueron estimadas las distribuciones de cada característica del conjunto de entrenamiento, por lo que se define un $\epsilon$ de manera heurística, de forma que se determina que una muestra anómala si $p(x) < \epsilon$, la \equationref{eq:anomaly-prob} representa cual es la probabilidad de una muestra $x$ con una distribución gaussiana.
+De donde para calcular la probabilidad de que una muestra se trata de una anomalía se calcula la probabilidad $p(x)$, luego de que fueron estimadas las distribuciones de cada característica del conjunto de entrenamiento, por lo que se define un $\epsilon$ de manera heurística, de forma que se determina que una muestra anómala si $p(x) < \epsilon$, la \cref{eq:anomaly-prob} representa cual es la probabilidad de una muestra $x$ con una distribución gaussiana.
 
 \begin{equation} \label{eq:anomaly-prob}
   p(x) = \prod_{j=1}^{n}p(x_j, \mu_j, \sigma_j^2) = \prod_{j=1}^{n} \frac{1}{\sqrt{2\pi}\sigma_j} \exp\Bigg( - \frac{(x_j-\mu_j)^2}{2\sigma_j^2}\Bigg)
@@ -336,12 +336,12 @@ Este método de sistemas de detección de anomalía también es brevemente trata
 \section{Clustering} \label{subsec:clustering}
 El análisis de clusters agrupa objetos de datos basándose únicamente en la información encontrada en los datos que describen los objetos y sus relaciones. El objetivo es que objetos dentro de un grupo sean similares (o relacionados) el uno al otro, y que sean diferentes (o sin relación) a objetos en otros grupos. Entre mayor sea la similitud dentro de un grupo y entre mayor sea la diferencia entre grupos, sera mejor o mas distintivo el clustering.
 
-Los métodos de clustering se hacen referencia comúnmente en \gls{machinel} como métodos no--supervisados. Unos de estos métodos son el algoritmo de $k$-means y los mapas autoorganizados, se describen en la \sectionref{ch:k-means} y \sectionref{subsec:SOM}.
+Los métodos de clustering se hacen referencia comúnmente en \gls{machinel} como métodos no--supervisados. Unos de estos métodos son el algoritmo de $k$-means y los mapas autoorganizados, se describen en la \cref{ch:k-means} y \cref{subsec:SOM}.
 
 % ================================================================
 
 \subsection{Algoritmo de $k$-means} \label{ch:k-means}
-El algoritmo de $k$-means consiste en intentar encontrar $k$ subconjuntos de datos disyuntos tales que la diferencia entre las características de los miembros sea lo mas disimilares. Esto lo logra a partir de definir $k$ \textit{centroides} inicializados aleatoriamente sobre el conjunto de datos. El valor $k$ es puesto de antemano a la ejecución del algoritmo por el usuario. Cada elemento en el conjunto de datos es asignado al $i$-ésimo centroide mas cercano. Luego se recalculan los centroides a partir de ponderar todos los puntos que fueron asignados a cada centroide. Este proceso se repite hasta que el cambio de posición del centroide sea marginal. Tómese de referencia el Algoritmo~\ref{algo:k-means} y la \figureref{fig:k-means-iterations} donde se pueden ver las iteraciones del algoritmo.
+El algoritmo de $k$-means consiste en intentar encontrar $k$ subconjuntos de datos disyuntos tales que la diferencia entre las características de los miembros sea lo mas disimilares. Esto lo logra a partir de definir $k$ \textit{centroides} inicializados aleatoriamente sobre el conjunto de datos. El valor $k$ es puesto de antemano a la ejecución del algoritmo por el usuario. Cada elemento en el conjunto de datos es asignado al $i$-ésimo centroide mas cercano. Luego se recalculan los centroides a partir de ponderar todos los puntos que fueron asignados a cada centroide. Este proceso se repite hasta que el cambio de posición del centroide sea marginal. Tómese de referencia el Algoritmo~\ref{algo:k-means} y la \cref{fig:k-means-iterations} donde se pueden ver las iteraciones del algoritmo.
 
 \IncMargin{1em}
 \begin{algorithm}[H]
@@ -392,19 +392,19 @@ Los \gls{som} tienen tres características distintivas:
 
 El algoritmo de aprendizaje de \gls{som} parte de primero inicializar los pesos de las $o$ neuronas con pesos aleatorios pequeños de una distribución de probabilidad aleatoria o uniforme, donde cada vector de entrada se define como $\vx = [x_1, \ldots, x_m]^{\top} \in \R^{m}$ y la entrada general de $N$ patrones como $\mX^{m \times N}$, el vector de pesos de la neurona $i$ es $\vw_i = [w_{i1}, \ldots, w_{im}] \in \R^{1 \times m}$, con la matriz de pesos $\mW^{o \times m}$.
 
-Para alcanzar el objetivo de \emph{competencia}, se realiza por cada patrón de entrada $\vx_i$ una comparación con cada uno de los pesos de las $o$ neuronas y se establece la de menor distancia $\norm{\vx}_p$ (típicamente la distancia Euclidiana o equivalentemente la norma $\normltwo$ e.g. $p = 2$), dejando un ganador $\mathrm{winner}$, tal como en la \equationref{eq:som-competition}.
+Para alcanzar el objetivo de \emph{competencia}, se realiza por cada patrón de entrada $\vx_i$ una comparación con cada uno de los pesos de las $o$ neuronas y se establece la de menor distancia $\norm{\vx}_p$ (típicamente la distancia Euclidiana o equivalentemente la norma $\normltwo$ e.g. $p = 2$), dejando un ganador $\mathrm{winner}$, tal como en la \cref{eq:som-competition}.
 \begin{equation} \label{eq:som-competition}
   \mathrm{winner} = \argmin_j \norm{\vx_i - \vw_j}_p ; j \in \{1, \ldots, o \}
 \end{equation}
 
-Luego de establecer la neurona ganadora, se realiza el paso para alcanzar la \emph{cooperación}, que consiste en que por medio de una función kernel $h$ (típicamente una una distribución gaussiana), que permite establecer un área de afectación de las otras neuronas según su ubicación física en el mapa, definidos como $\vr_{\mathrm{winner}}$ y $\vr_j$ que son la ubicación de la neurona ganadora y la neurona vecina $j$, en el cual el grado de afectación de la neurona vecina depende de la distancia $\normltwo$ de la que esta de la neurona ganadora, definido en la \equationref{eq:som-cooperation}.
+Luego de establecer la neurona ganadora, se realiza el paso para alcanzar la \emph{cooperación}, que consiste en que por medio de una función kernel $h$ (típicamente una una distribución gaussiana), que permite establecer un área de afectación de las otras neuronas según su ubicación física en el mapa, definidos como $\vr_{\mathrm{winner}}$ y $\vr_j$ que son la ubicación de la neurona ganadora y la neurona vecina $j$, en el cual el grado de afectación de la neurona vecina depende de la distancia $\normltwo$ de la que esta de la neurona ganadora, definido en la \cref{eq:som-cooperation}.
 \begin{equation} \label{eq:som-cooperation}
   h_{j, \mathrm{winner}}(t) = \exp\Bigg(\frac{- \norm{\vr_j - \vr_{\mathrm{winner}}}^2}{ 2 \sigma(t)^2}\Bigg)
 \end{equation}
 
 Parte importante del proceso de convergencia del \gls{som} es que a medida que avanzan las iteraciones $t$ del algoritmo el área de afectación se va reduciendo como parte del proceso de adaptación, por lo que definimos $\sigma(t) = \sigma_0 \exp(-t / \tau_1)$, donde $\tau_1$ es una constante heurística y $\sigma_0$ la dimensión del mapa \gls{som}.
 
-Finalmente para alcanzar la \emph{adaptación} se realiza una actualización de los pesos de la matriz $\mW$ en base a la influencia de área $\sigma(t)$ y de una tasa de aprendizaje $\lr(t) = \lr_0 \exp(-t/ \tau_2)$, donde $\tau_2$ es otra constante heurística y $\lr_0$ es una constante de aprendizaje inicial, que debe ser $0 \le \lr_0 \le 1$, la actualización se describe por la \equationref{eq:som-adaptation} y el proceso puede ser visto gráficamente en la \figureref{fig:som-adap-proc}, tanto de forma uni-- como bi--dimensional.
+Finalmente para alcanzar la \emph{adaptación} se realiza una actualización de los pesos de la matriz $\mW$ en base a la influencia de área $\sigma(t)$ y de una tasa de aprendizaje $\lr(t) = \lr_0 \exp(-t/ \tau_2)$, donde $\tau_2$ es otra constante heurística y $\lr_0$ es una constante de aprendizaje inicial, que debe ser $0 \le \lr_0 \le 1$, la actualización se describe por la \cref{eq:som-adaptation} y el proceso puede ser visto gráficamente en la \cref{fig:som-adap-proc}, tanto de forma uni-- como bi--dimensional.
 \begin{equation} \label{eq:som-adaptation}
   \vw_j(t+1) = \vw_j(t) + \lr(t) h_{j, \mathrm{winner}}(t)\Big[\vx_i-\vw_j(t)\Big]
 \end{equation}
@@ -417,9 +417,9 @@ Finalmente para alcanzar la \emph{adaptación} se realiza una actualización de 
   \label{fig:som-adap-proc}
 \end{figure}
 
-Luego de que el algoritmo de aprendizaje termina de realizar las iteraciones, la salida de este es la matriz de pesos $\mW$. En la \figureref{fig:som-impl-example} se puede apreciar una aproximación del algoritmo con un mapa uni--dimensional tratando de aproximar una función polar con ruido adicionado en un gráfico 2D. Adicionalmente pueden verse los efectos de \gls{underfitting} y \gls{overfitting} (véase el Apéndice \ref{appendix:keyconcepts}) con diferentes cantidades de neuronas en la \figureref{fig:som-impl-example-fitting}.
+Luego de que el algoritmo de aprendizaje termina de realizar las iteraciones, la salida de este es la matriz de pesos $\mW$. En la \cref{fig:som-impl-example} se puede apreciar una aproximación del algoritmo con un mapa uni--dimensional tratando de aproximar una función polar con ruido adicionado en un gráfico 2D. Adicionalmente pueden verse los efectos de \gls{underfitting} y \gls{overfitting} (véase el Apéndice \ref{appendix:keyconcepts}) con diferentes cantidades de neuronas en la \cref{fig:som-impl-example-fitting}.
 
-En la \figureref{fig:som-example} se puede ver una aplicación de los \gls{som}, en donde se realiza una clusterizacion de casos de homicidios donde los parámetros son características de los homicidios, según \cite{mena2003investigative} este resultado da una buena aproximación para sospechar de que estos son cometidos por personas distintas o si bien están siendo perpetrados por un mismo individuo o grupo.
+En la \cref{fig:som-example} se puede ver una aplicación de los \gls{som}, en donde se realiza una clusterizacion de casos de homicidios donde los parámetros son características de los homicidios, según \cite{mena2003investigative} este resultado da una buena aproximación para sospechar de que estos son cometidos por personas distintas o si bien están siendo perpetrados por un mismo individuo o grupo.
 
 \begin{figure}[H]
 \centering
@@ -485,7 +485,7 @@ Una limitante fundamental de estimación de máxima probabilidad sobre modelos d
 
 El primero es que cuando $P_{n-1}$ es diferente de cero pero $P_n$ es cero, la probabilidad logarítmica es $-\infty$, una mitigación a este problema que usan muchos modelos de $n$-gramas es realizar un \newterm{suavizado} sobre la distribución de probabilidad, haciendo que la probabilidad de tuplas nunca vistas aumente con la probabilidad de las tuplas mas vistas.
 
-La segunda es que los modelos clásicos de $n$-gramas son particularmente vulnerables a la maldición de dimensionalidad (véase la \sectionref{sec:SVM}), debido a que existen $|\sV|^n$ posibles $n$-gramas, donde $|\sV|$ por lo general es grande. $\sV$ es el vocabulario de palabras.
+La segunda es que los modelos clásicos de $n$-gramas son particularmente vulnerables a la maldición de dimensionalidad (véase la \cref{sec:SVM}), debido a que existen $|\sV|^n$ posibles $n$-gramas, donde $|\sV|$ por lo general es grande. $\sV$ es el vocabulario de palabras.
 
 Entre las grandes utilidades de modelos de lenguajes con $n$-gramas es la de predicción de palabras \cite{jurafsky-martin}. Esto con la determinación de las distribuciones de probabilidad antes mencionada. Formalmente, dada una secuencia ordenada de $k$ \newterm{unigramas} ($n=1$), queremos determinar cual es son los unigramas con mayor probabilidad de ocurrir para formar una secuencia de $k+1$ unigramas que sea consistente con la distribución de probabilidad que determinamos del conjunto de datos. Gran parte los problemas presentes en el procesamiento de lenguaje natural implican alguna variación de este problema. Algunos de estos son reconocimiento de voz (o \textsl{speech recognition} en inglés), reconocimiento de escritura a mano (o \textsl{handwriting recognition} en inglés), siendo estos unos de los mas comunes para la predicción con probabilidades (que puede hacerse con ayuda de un estimador de máxima probabilidad, véase el Apéndice~\ref{app:maximum-likelihood}).
 
@@ -507,7 +507,7 @@ Mientras que para un modelo general de $n$-gramas, se define como
   P(\tkw_n \mid \tkw_1^{n-1}) \approx P(\tkw_n \mid \tkw_{n-N+1}^{n-1})
 \end{equation}
 
-La condición expuesta en la \equationref{eq:markov-assumption} y la \equationref{eq:markov-assumption-bigram} es conocida como la \newterm{suposición de Markov}. Con esta suposición podemos proceder a establecer la ecuación general de probabilidad condicional de la siguiente palabra (para \textit{bigramas}) en una secuencia como
+La condición expuesta en la \cref{eq:markov-assumption} y la \cref{eq:markov-assumption-bigram} es conocida como la \newterm{suposición de Markov}. Con esta suposición podemos proceder a establecer la ecuación general de probabilidad condicional de la siguiente palabra (para \textit{bigramas}) en una secuencia como
 \begin{equation}
   P(\tkw_1^{n}) \approx \prod_{k=1}^{n} P(\tkw_k \mid \tkw_{k-1})
 \end{equation}
@@ -519,7 +519,7 @@ Para computar la probabilidad de un bigrama para una palabra $\tky$ dada una pal
   P(\tkw_n \mid \tkw_{n-1}) = \frac{C( \tkw_{n-1} \, \tkw_{n})}{ \sum_\tkw C(\tkw_{n-1} \, \tkw) } =^{\ast} \frac{C( \tkw_{n-1} \, \tkw_{n})}{ C(\tkw_{n-1}) }
 \end{equation}
 
-En la \equationref{eq:bigram-prob-computation} la igualdad $=^{\ast}$ es la simplificación de la primera parte, debido a que el conteo de todas la palabras que contienen como inicio la primera palabra debe ser igual al conteo en general de la primera palabra.
+En la \cref{eq:bigram-prob-computation} la igualdad $=^{\ast}$ es la simplificación de la primera parte, debido a que el conteo de todas la palabras que contienen como inicio la primera palabra debe ser igual al conteo en general de la primera palabra.
 
 Adicional a las palabras establecidas en una secuencia es necesario agregar tokens para indicar el inicio y el final de una secuencia, estos podemos denotarlos como \texttt{<s>} y \texttt{</s>} (según la notación expuesta en \cite{jurafsky-martin}) o bien como $\tokstart$ y $\tokend$ en otras aplicaciones como también en este libro ahora en adelante.
 
@@ -535,7 +535,7 @@ En la practica no se usa una probabilidad pura como métrica de evaluación para
   \perplexity(\vtkw) = P(\tkw_1 \, \ldots \, \tkw_N)^{\frac{1}{N}} = \sqrt[N]{\prod_{i=1}^{N} \frac{1}{P(\tkw_i \mid \tkw_{i-1})}}
 \end{equation}
 
-El objetivo que queremos para nuestro modelo es que consigamos minimizar la \gls{perplexity}. En la \equationref{eq:perplexity-def} la segunda parte de la ecuación es una reorganización de la primera junto con la aplicación de la suposición de Markov.
+El objetivo que queremos para nuestro modelo es que consigamos minimizar la \gls{perplexity}. En la \cref{eq:perplexity-def} la segunda parte de la ecuación es una reorganización de la primera junto con la aplicación de la suposición de Markov.
 
 \subsection{Generalización y Ceros}
 % \todo[inline]{Por hacer, pagina 46 Speech and Language Processing \cite{jurafsky-martin}}
@@ -570,7 +570,7 @@ Para evitar que se asignen probabilidades con valor de cero a eventos no vistos,
 \subsubsection{Suavizado Laplace o Suavizado Add-$1$}
 En este método todas los conteos de los tokens en nuestro modelo se aumentara por $1$, haciendo que la probabilidad de estos sea mayor de cero. Sin embargo, este método no tiene un buen rendimiento en general para modelos de $n$-gramas, pero permite establecer una linea base de comparación.
 
-Recuérdese la probabilidad para \gls{mle} que esta representada en la \equationref{eq:bigram-prob-computation}. Ahora en este método se establece la probabilidad como
+Recuérdese la probabilidad para \gls{mle} que esta representada en la \cref{eq:bigram-prob-computation}. Ahora en este método se establece la probabilidad como
 \begin{equation} \label{eq:laplace-smoothing}
   P_{\mathrm{Laplace}}(\tkw_n \mid \tkw_{n-1}) = \frac{C(\tkw_{n-1} \, \tkw_n) +1}{C(\tkw_{n-1}) + |\sV|}
 \end{equation}
@@ -602,7 +602,7 @@ De forma que $\sum_i \lambda_i = 1$. Adicionalmente, para calcular los valores d
 % \todo[inline]{Por hacer, pagina 53 Speech and Language Processing \cite{jurafsky-martin}}
 Uno de los métodos de suavizado mas populares y de mejor rendimiento de modelos de $n$-gramas es el algoritmo de Kneser-Ney. Este método tiene sus raíces de un método llamado \newterm{descontado absoluto}.
 
-Si consideramos realiza el conteo promedio de apariciones de cualquier bigrama dentro de un conjunto de entrenamiento y un conjunto de validación, donde ambos conjuntos sean del mismo tamaño y sean además de un tamaño considerable ($N \ge 20 \times 10^6$), tendremos un conteo como el expuesto en el \tableref{table:bigram-train-vs-validation-count}.
+Si consideramos realiza el conteo promedio de apariciones de cualquier bigrama dentro de un conjunto de entrenamiento y un conjunto de validación, donde ambos conjuntos sean del mismo tamaño y sean además de un tamaño considerable ($N \ge 20 \times 10^6$), tendremos un conteo como el expuesto en el \cref{table:bigram-train-vs-validation-count}.
 
 \begin{table}[h!]
 \centering
@@ -667,7 +667,7 @@ Donde $\eps$ se considera el token (o en este caso palabra) vació. Y la definic
 
 \subsection{Representaciones de palabras y documentos como vectores} \label{ch:word-representations}
 % \todo[inline]{Poner sobre los Bag of Words y TF-IDF aqui y cambiar la seccion de propuesta para mencionar esta seccion}
-Por lo general cualquier modelo de \gls{ai}, incluyendo los que se encuentran en \gls{machinel} y \gls{nlp} deben utilizar internamente representaciones escalares, vectores, matrices y tensores. \gls{nlp} por lo tanto debe utilizar algunas de estas para alimentar sus modelos, es por esto que es importante hablar de las diferentes representaciones que se les da a los diferentes elementos fundamentales, tales como los $n$-gramas (véase la \sectionref{ch:ngrams}). Existen diferentes representaciones que se les puede dar a las palabras, todas con usos diferentes, ventajas y desventajas, en particular interés están \glsentrylong{bow}, \glsentrylong{tfidf} y embeddings de palabras.
+Por lo general cualquier modelo de \gls{ai}, incluyendo los que se encuentran en \gls{machinel} y \gls{nlp} deben utilizar internamente representaciones escalares, vectores, matrices y tensores. \gls{nlp} por lo tanto debe utilizar algunas de estas para alimentar sus modelos, es por esto que es importante hablar de las diferentes representaciones que se les da a los diferentes elementos fundamentales, tales como los $n$-gramas (véase la \cref{ch:ngrams}). Existen diferentes representaciones que se les puede dar a las palabras, todas con usos diferentes, ventajas y desventajas, en particular interés están \glsentrylong{bow}, \glsentrylong{tfidf} y embeddings de palabras.
 
 \subsubsection{\glsentrylong{bow}}
 La representación de vectores \gls{bow} consiste en representar cada palabra dentro de un vocabulario $\sV$ de forma que a cada palabra se le asigna un identificador inversamente proporcional a la cantidad de apariciones dentro de un \gls{corpus}, todos en el intervalo $1, \ldots, |\sV|$. Cada vector se codifica de manera que para la $i$-ésima palabra (según la asignación dada por sus repeticiones) se le da el valor en vector de:
@@ -686,13 +686,13 @@ Esta representación permite también codificar un conjunto de palabras presente
 \end{equation}
 
 \subsubsection{\glsentrylong{tfidf}}
-Otra representación común en \gls{nlp} es la de \gls{tfidf}, que se divide en dos partes, expresadas en la \equationref{eq:tf-repr}, la \equationref{eq:idf-repr} y la composición de ambas en la \equationref{eq:tfidf-repr}, donde $\train$ es el \gls{corpus} de palabras. Este es un peso asignado consiste en penalizar palabras que ocurren mucho en un documento pero no mucho en el \gls{corpus} o bien de penalizar la palabras que se repiten poco en un documento pero se repiten mucho en el \gls{corpus}, por lo que los puntos medios entre ambos tienen los mayores valores.
+Otra representación común en \gls{nlp} es la de \gls{tfidf}, que se divide en dos partes, expresadas en la \cref{eq:tf-repr}, la \cref{eq:idf-repr} y la composición de ambas en la \cref{eq:tfidf-repr}, donde $\train$ es el \gls{corpus} de palabras. Este es un peso asignado consiste en penalizar palabras que ocurren mucho en un documento pero no mucho en el \gls{corpus} o bien de penalizar la palabras que se repiten poco en un documento pero se repiten mucho en el \gls{corpus}, por lo que los puntos medios entre ambos tienen los mayores valores.
 
 \begin{equation} \label{eq:tf-repr}
   \mathrm{tf}(\tkt, \vtkd) = \text{Frecuencia del $n$-grama $\tkt$ en el documento $\vtkd$}
 \end{equation}
 
-Existen diferentes variaciones para representar el conteo de términos \textbf{tf} de forma normalizada, como se representa en el \tableref{table:tf}.
+Existen diferentes variaciones para representar el conteo de términos \textbf{tf} de forma normalizada, como se representa en el \cref{table:tf}.
 
 \begin{table}[h!]
 \centering
@@ -712,7 +712,7 @@ Existen diferentes variaciones para representar el conteo de términos \textbf{t
   \mathrm{idf}(\tkt, \train) = \mathrm{log}\Bigg( \frac{N}{|\{\vtkd \in \train : \tkt \in \vtkd\}|} \Bigg) ; N = |\train|
 \end{equation}
 
-Otras variaciones de $\mathrm{idf}$ se encuentran en el \tableref{table:idf}, donde $n_\tkt = |\{\vtkd \in \train : \tkt \in \vtkd\}|$.
+Otras variaciones de $\mathrm{idf}$ se encuentran en el \cref{table:idf}, donde $n_\tkt = |\{\vtkd \in \train : \tkt \in \vtkd\}|$.
 
 \begin{table}[h!]
 \centering
@@ -747,7 +747,7 @@ Algunas veces se les llama a estas representaciones de palabras como \newterm{em
 Este tipo de representaciones son particularmente útiles para modelos de redes neuronales, debido a que estas trabajan de manera ``nativa'' con vectores en espacios dimensionales moderadamente grandes, mientras que un vector \emph{one-hot} no permite crear una diferencia de semántica de las secuencias de texto. Particularmente es deseable para redes neuronales (especialmente con redes \gls{mlp}) que los vectores de entrada no sean tan grandes debido a que pueden ocasionar \gls{overfitting}, dificultando optimizar nuestro modelo para que generalice.
 
 \subsubsection{Similaridad de embeddings de palabras o documentos}
-Para definir la similaridad entre dos términos $\tku$ y $\tkv$, es necesario establecer una métrica entre estos de forma que nos den una estimación de su similaridad. La métrica de similaridad mas usada es el coseno del ángulo entre ambos vectores representativos de ambas palabras, representada en la \equationref{eq:cosine-similarity-estimate}.
+Para definir la similaridad entre dos términos $\tku$ y $\tkv$, es necesario establecer una métrica entre estos de forma que nos den una estimación de su similaridad. La métrica de similaridad mas usada es el coseno del ángulo entre ambos vectores representativos de ambas palabras, representada en la \cref{eq:cosine-similarity-estimate}.
 
 \begin{equation} \label{eq:cosine-similarity-estimate}
   \mathrm{similaridad}(\tku, \tkv) = \cos(\theta) = \frac{\vu \times \vv}{\norm{\vu} \norm{\vv}}

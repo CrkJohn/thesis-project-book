@@ -27,7 +27,7 @@ Podemos controlar si un modelo es mas propenso a hacer \gls{underfitting} u \gls
 
 Una forma de controlar la capacidad de nuestro algoritmo de \gls{machinel} es escogiendo su \newterm{espacio de hipótesis}, el conjunto de funciones que el algoritmo de aprendizaje se le es permitido tomar como función solución.
 
-Un ejemplo de esto es regresión lineal, y es que podemos permitir que nuestro algoritmo de aprendizaje en vez de tomar funciones lineales (de grado $p=1$, \equationref{eq:linear-function}), también pueda tomar funciones polinomiales (grado $p > 1$, \equationref{eq:poly-function}).
+Un ejemplo de esto es regresión lineal, y es que podemos permitir que nuestro algoritmo de aprendizaje en vez de tomar funciones lineales (de grado $p=1$, \cref{eq:linear-function}), también pueda tomar funciones polinomiales (grado $p > 1$, \cref{eq:poly-function}).
 
 \begin{equation} \label{eq:linear-function}
   \hat{y} = b + wx
@@ -175,11 +175,11 @@ En la labor de escoger un mejor estimador nos interesa especialmente como este s
   \plim_{m\to\infty} \hat{\rvtheta} = \rvtheta
 \end{equation}
 
-El símbolo $\plim$ indica convergencia en probabilidad, indicando que para cualquier $\epsilon > 0$ se tiene que $P(|\hat{\rvtheta} - \rvtheta| > \epsilon) \to 0$ cuando $m \to \infty$. La condición descrita en la \equationref{eq:consistency} se le conoce como \newterm{consistencia}. Algunas veces se le llama consistencia débil, cuando se refiere a consistencia fuerte se hace referencia a la convergencia \textbf{casi segura} de $\hat{\rvtheta}$ a $\rvtheta$. La convergencia casi segura de una secuencia de variables aleatorias $\rvx^{(1)}, \rvx^{(2)}, \ldots$ a un valor $\vx$ ocurre cuando $p(\lim_{m\to\infty}\rvx^{(m)} = \vx) = 1$.
+El símbolo $\plim$ indica convergencia en probabilidad, indicando que para cualquier $\epsilon > 0$ se tiene que $P(|\hat{\rvtheta} - \rvtheta| > \epsilon) \to 0$ cuando $m \to \infty$. La condición descrita en la \cref{eq:consistency} se le conoce como \newterm{consistencia}. Algunas veces se le llama consistencia débil, cuando se refiere a consistencia fuerte se hace referencia a la convergencia \textbf{casi segura} de $\hat{\rvtheta}$ a $\rvtheta$. La convergencia casi segura de una secuencia de variables aleatorias $\rvx^{(1)}, \rvx^{(2)}, \ldots$ a un valor $\vx$ ocurre cuando $p(\lim_{m\to\infty}\rvx^{(m)} = \vx) = 1$.
 
 La consistencia nos asegura que la parcialidad inducida por el estimador se elimina a medida que la cantidad de muestras de datos aumenta. Sin embargo lo contrario no es verdad --- imparcialidad asintótica no implica consistencia.
 
-A medida que la capacidad del modelo aumenta, la parcialidad tiende a disminuir y la varianza tiende a aumentar, dándonos así una curva en forma de U para el error de generalización, tal como se muestra en la \figureref{fig:consistency}.
+A medida que la capacidad del modelo aumenta, la parcialidad tiende a disminuir y la varianza tiende a aumentar, dándonos así una curva en forma de U para el error de generalización, tal como se muestra en la \cref{fig:consistency}.
 
 \begin{figure}[H]
   \centering
@@ -214,7 +214,7 @@ Debido a que se trata de probabilidades, se generan varios problemas a la hora d
 Pasando el nombre a ser estimación de máxima probabilidad logarítmica (o \textsl{maximum log-likelihood} en inglés).
 
 \subsubsection{Propiedades de estimación de máxima probabilidad}
-Bajo las condiciones apropiadas, el estimador de máxima probabilidad tiene la propiedad de consistencia (véase la \sectionref{app:consistency}), por lo que a medida que el numero de muestras se aproxima a infinito, el estimado de un parámetro converge al verdadero valor, dándonos las siguientes condiciones:
+Bajo las condiciones apropiadas, el estimador de máxima probabilidad tiene la propiedad de consistencia (véase el \cref{app:consistency}), por lo que a medida que el numero de muestras se aproxima a infinito, el estimado de un parámetro converge al verdadero valor, dándonos las siguientes condiciones:
 \begin{itemize}
 \item La distribución verdadera $\pdata$ debe estar en la familia de modelos $\pmodel(\cdot; \vtheta)$.
 \item La verdadera distribución de $\pdata$ debe corresponder a exactamente un valor para $\vtheta$. De lo contrario, el estimador de máxima probabilidad puede recuperar una distribución $\pdata$ correcta, pero no sera capaz de determinar cual valor de $\vtheta$ es el correcto por el proceso generador de datos.
